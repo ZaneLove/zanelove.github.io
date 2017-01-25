@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zanelove.github.io/"/>
-  <updated>2017-01-25T03:26:42.000Z</updated>
+  <updated>2017-01-25T02:44:51.000Z</updated>
   <id>http://zanelove.github.io/</id>
   
   <author>
@@ -14,22 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>codeTest</title>
-    <link href="http://zanelove.github.io/2017/01/25/codeTest/"/>
-    <id>http://zanelove.github.io/2017/01/25/codeTest/</id>
-    <published>2017-01-25T03:17:12.000Z</published>
-    <updated>2017-01-25T03:26:42.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>Hexo Command</title>
