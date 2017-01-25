@@ -104,16 +104,16 @@
 
 
 
-<meta name="description" content="123public class static main(String[] arge)&amp;#123;	System.out.of(&quot;Zane&apos;Blog&quot;);&amp;#125;">
+<meta name="description" content="12345678910111213141516171819202122class Person	include ActiveModel::Conversion	include ActiveModel::Validations		validates_presence_of :name		attr_accessor :name		def initialize(attributes = &amp;#123;&amp;#">
 <meta property="og:type" content="article">
 <meta property="og:title" content="codeTest">
 <meta property="og:url" content="http://zanelove.github.io/2017/01/25/codeTest/index.html">
 <meta property="og:site_name" content="Zane'Blog">
-<meta property="og:description" content="123public class static main(String[] arge)&amp;#123;	System.out.of(&quot;Zane&apos;Blog&quot;);&amp;#125;">
-<meta property="og:updated_time" content="2017-01-25T03:19:54.000Z">
+<meta property="og:description" content="12345678910111213141516171819202122class Person	include ActiveModel::Conversion	include ActiveModel::Validations		validates_presence_of :name		attr_accessor :name		def initialize(attributes = &amp;#123;&amp;#">
+<meta property="og:updated_time" content="2017-01-25T03:26:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="codeTest">
-<meta name="twitter:description" content="123public class static main(String[] arge)&amp;#123;	System.out.of(&quot;Zane&apos;Blog&quot;);&amp;#125;">
+<meta name="twitter:description" content="12345678910111213141516171819202122class Person	include ActiveModel::Conversion	include ActiveModel::Validations		validates_presence_of :name		attr_accessor :name		def initialize(attributes = &amp;#123;&amp;#">
 
 
 
@@ -386,7 +386,7 @@
       
 
       
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public class static main(String[] arge)&#123;</div><div class="line">	System.out.of(<span class="string">"Zane'Blog"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">class Person</div><div class="line">	include ActiveModel::Conversion</div><div class="line">	include ActiveModel::Validations</div><div class="line">	</div><div class="line">	validates_presence_of :name</div><div class="line">	</div><div class="line">	attr_accessor :name</div><div class="line">	</div><div class="line">	def initialize(attributes = &#123;&#125;)</div><div class="line">		@name = attributes[:name]</div><div class="line">	end</div><div class="line">	</div><div class="line">	def persist</div><div class="line">		@persisted = <span class="literal">true</span></div><div class="line">	end</div><div class="line">	</div><div class="line">	def persisted?</div><div class="line">		@persisted</div><div class="line">	end</div><div class="line">	</div><div class="line">	person1 = Person.new(:name =&gt; <span class="string">"matz"</span>)</div><div class="line">	p person1.valid?</div></pre></td></tr></table></figure>
       
     </div>
 
