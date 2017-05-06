@@ -104,16 +104,45 @@
 
 
 
-<meta name="description" content="记录当下，谱写未来">
+<meta name="description" content="对程序员而言，最好的简历就是个人博客和GitHub.
+
+一、瞧瞧兵器
+博客框架：Hexo 3，这是一款能快速、简洁且高效的博客框架，支持Markdown编辑，自动渲染出漂亮的静态页面。
+前端主题：Next，效果参考:http://zanelove.github.io
+域名购买：类似万网的平台都可以，你可以选购自己名字的域名，一年几十元左右，两杯咖啡的钱。
+SSL：CloudFlare
+
+二、抄起">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo从0到1">
 <meta property="og:url" content="http://zanelove.github.io/2017/04/25/Hexo从0到1/index.html">
 <meta property="og:site_name" content="Zane'Blog">
-<meta property="og:description" content="记录当下，谱写未来">
-<meta property="og:updated_time" content="2017-04-25T12:52:11.000Z">
+<meta property="og:description" content="对程序员而言，最好的简历就是个人博客和GitHub.
+
+一、瞧瞧兵器
+博客框架：Hexo 3，这是一款能快速、简洁且高效的博客框架，支持Markdown编辑，自动渲染出漂亮的静态页面。
+前端主题：Next，效果参考:http://zanelove.github.io
+域名购买：类似万网的平台都可以，你可以选购自己名字的域名，一年几十元左右，两杯咖啡的钱。
+SSL：CloudFlare
+
+二、抄起">
+<meta property="og:image" content="http://img.blog.csdn.net/20151219124835978">
+<meta property="og:image" content="http://img.blog.csdn.net/20151219143049859">
+<meta property="og:image" content="http://img.blog.csdn.net/20151219150213597">
+<meta property="og:image" content="http://img.blog.csdn.net/20151219153039062">
+<meta property="og:updated_time" content="2017-05-06T09:19:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo从0到1">
-<meta name="twitter:description" content="记录当下，谱写未来">
+<meta name="twitter:description" content="对程序员而言，最好的简历就是个人博客和GitHub.
+
+一、瞧瞧兵器
+博客框架：Hexo 3，这是一款能快速、简洁且高效的博客框架，支持Markdown编辑，自动渲染出漂亮的静态页面。
+前端主题：Next，效果参考:http://zanelove.github.io
+域名购买：类似万网的平台都可以，你可以选购自己名字的域名，一年几十元左右，两杯咖啡的钱。
+SSL：CloudFlare
+
+二、抄起">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20151219124835978">
 
 
 
@@ -418,7 +447,135 @@
       
 
       
-        
+        <blockquote>
+<p>对程序员而言，最好的简历就是个人博客和GitHub.</p>
+</blockquote>
+<h2 id="一、瞧瞧兵器"><a href="#一、瞧瞧兵器" class="headerlink" title="一、瞧瞧兵器"></a>一、瞧瞧兵器</h2><ul>
+<li>博客框架：<a href="https://hexo.io/" target="_blank" rel="external">Hexo 3</a>，这是一款能快速、简洁且高效的博客框架，支持Markdown编辑，自动渲染出漂亮的静态页面。</li>
+<li>前端主题：<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">Next</a>，效果参考:<a href="http://zanelove.github.io">http://zanelove.github.io</a></li>
+<li>域名购买：类似万网的平台都可以，你可以选购自己名字的域名，一年几十元左右，两杯咖啡的钱。</li>
+<li>SSL：CloudFlare</li>
+</ul>
+<h2 id="二、抄起家伙"><a href="#二、抄起家伙" class="headerlink" title="二、抄起家伙"></a>二、抄起家伙</h2><p>###1、GitHub Pages<br>在不购买服务器的前提下，我们的网站需要挂在GitHub Pages上！</p>
+<ol>
+<li><p>需要拥有一个<a href="https://github.com/" target="_blank" rel="external">GitHub账号</a></p>
+</li>
+<li><p>进入<a href="https://pages.github.com/" target="_blank" rel="external">GitHub Pages</a>，按照上面所说的步骤一步一步做，完成后就能在浏览器上打开像<a href="http://zanelove.github.io">http://zanelove.github.io</a>的网站了。</p>
+</li>
+</ol>
+<ul>
+<li><p>注意：(第二步Git命令需做修改)</p>
+<p>  命令修改前：</p>
+<p>  <img src="http://img.blog.csdn.net/20151219124835978" alt="命令修改前"></p>
+<p>  命令修改后：</p>
+<blockquote>
+<p>$ git clone git@github.com:username/username.github.io.git</p>
+</blockquote>
+</li>
+</ul>
+<p>至此，我们已经利用GitHub Pages搭建好了个人博客雏形了。下面要做的，就是个性化了。</p>
+<p>###2、安装Hexo博客框架<br>经过上面步骤，我们已经拥有了一个初步域名：<a href="http://username.github.io" target="_blank" rel="external">http://username.github.io</a> 和 一个免费网络空间了，下面我们需要把空白的博客丰富起来。放心，不需要你手写一大堆html、css文件，也不用找jQuery来实现酷炫的页面效果。Hexo是一款博客框架，它会帮我们搭建。</p>
+<ol>
+<li><p>安装Hexo</p>
+<p> 1.1 前提：</p>
+<p> 安装 Hexo 相当简单。然而在安装前，您必须检查电脑中是否已安装下列应用程序：</p>
+<ul>
+<li><a href="http://nodejs.org/" target="_blank" rel="external">Node.js</a></li>
+<li><p><a href="http://git-scm.com/" target="_blank" rel="external">Git</a></p>
+<p>如果您的电脑中已经安装上述必备程序，那么恭喜您！接下来只需要使用 npm 即可完成 Hexo 的安装。</p>
+<blockquote>
+<p>$ npm install -g hexo-cli</p>
+</blockquote>
+<p>1.2 注意：</p>
+<p>如何使用npm命令，你只需要在任意位置点击鼠标右键，选择Git bash即可！</p>
+<p>如果，你出现了以下的问题，如图：</p>
+<p><img src="http://img.blog.csdn.net/20151219143049859" alt=""></p>
+<p>请您放心，这不是问题，这是正常的现象！到此为止，Git、Node.js和Hexo就都安装成功了！</p>
+</li>
+</ul>
+</li>
+<li><p>GitHub管理</p>
+<p> 为了让自己未来的博客和代码处在git管理之下，我们要把刚刚在Github上博客项目拉到本地。首先，在本地创建文件夹，名字任意，进入该文件夹，把项目代码clone下来。</p>
+<blockquote>
+<p>$ git clone git@github.com:username/username.github.io.git</p>
+</blockquote>
+<p> 好了，此时会在您创建的目录下自动创建子文件夹username.github.io,那里就是我们博客的代码，以后的操作都在git的管理之下了，此时默认的branch为master。</p>
+</li>
+<li><p>初始化Hexo</p>
+<p> 在目录下执行以下指令(在该目录内点击鼠标右键，选择Git bash)，Hexo 将会自动在目标文件夹建立网站所需要的所有文件。</p>
+<blockquote>
+<p>$ hexo init</p>
+</blockquote>
+<p> 或者不在该目录下执行，而是任意地方执行该命令，但必须指定目录。</p>
+<blockquote>
+<p>$ hexo init</p>
+</blockquote>
+<p> 接下来，就是安装依赖包：</p>
+<blockquote>
+<p>$ npm install</p>
+</blockquote>
+<p> 最后，本地查看：现在我们已经搭建起本地的hexo博客了，执行以下命令(在您创建的目录下)，然后到浏览器输入localhost:4000看看。</p>
+<blockquote>
+<p>$ hexo generate</p>
+<p>$ hexo server</p>
+</blockquote>
+</li>
+<li><p>熟悉Hexo</p>
+<p> 新建完成后，指定文件夹的目录如下：</p>
+<p> <img src="http://img.blog.csdn.net/20151219150213597" alt=""></p>
+<ul>
+<li><p>_config.yml文件，是整体的配置文件，很多基础配置、插件配置等都需要在里面进行。要注意的是，该文件格式要求极为严格，缺少一个空格都会导致运行错误。小提示：不要用Tab缩进，用两个空格符。</p>
+</li>
+<li><p>package.json文件，应用程序的信息。<a href="http://embeddedjs.com/" target="_blank" rel="external">EJS</a>, <a href="http://learnboost.github.io/stylus/" target="_blank" rel="external">Stylus</a> 和 <a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="external">Markdown renderer</a> 已默认安装，您可以自由移除。</p>
+<p><img src="http://img.blog.csdn.net/20151219153039062" alt=""></p>
+</li>
+<li><p>scaffolds文件夹，<a href="https://hexo.io/zh-cn/docs/writing.html" target="_blank" rel="external">模版</a>文件夹。当您新建文章时，Hexo 会根据 scaffold 来建立文件。</p>
+</li>
+<li><p>source文件夹，资源文件夹是存放用户资源的地方。除 posts 文件夹之外，开头命名为 (下划线)的文件 / 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。</p>
+</li>
+<li><p>themes文件夹，<a href="https://hexo.io/zh-cn/docs/themes.html" target="_blank" rel="external">主题</a>文件夹。Hexo 会根据主题来生成静态页面。</p>
+</li>
+<li><p>ayout，包括draft(草稿)、page(页面)、post(文章)。这个就是三种文件的基本格式，其中post是你发表的文章，会显示在你的网站里，一篇post会包括title标题、date日期、tags标签等信息；draft是草稿，只有你在本地能看到，必须要publish后才能成为post，draft和post差别是date，因为draft没有发表，所以不需要指定日期。page是一个页面，对应一个新的html页面，比如<a href="http://wingjay.com/2015/12/06/说一说博客/" target="_blank" rel="external">博客内容展示页</a>是一个页面，<a href="http://wingjay.com/guestbook/" target="_blank" rel="external">留言本</a>也是一个页面。</p>
+</li>
+<li><p>public文件夹，这个文件夹是最终会发布到网站上的真实内容。怎么理解呢？我们可以把public文件夹当作是真正的被用户看到的，而其他的source、themes等都是为public服务的。Hexo里有一个很重要的指令hexo generate，这个指令就是利用所有代码里的配置信息、source里写的文章、themes里的样式，共同生成最终的静态html文件，存入public文件夹内。在我们执行了发布指令hexo deploy后，就会把public的内容部署到GitHub Pages上。当用户在访问我们的博客时，他们会看到public里生成的html文件。这个概念非常重要，即代码和真实静态页面是独立的。</p>
+</li>
+<li><p>generate和deploy，generate会把我们的配置、文章和主题结合起来生成一堆酷炫的html静态文件放在public里面。但此时用户还看不到本地public文件里的页面，我们必须用后一个指令deploy才能把静态文件部署到GitHub Pages上。不过，在部署前，需要配置让它自动部署到我们前面创建的Github项目中。</p>
+</li>
+<li><p>deploy相关配置。为了能够让项目自动把public文件夹的内容部署到GitHub项目中，我们可以按<a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">部署文档</a>进行配置，其中选择的branch为master。此后，每次运行deploy后，项目就会自动把public文件夹内容全部覆盖到当前的GitHub项目master分支上。</p>
+</li>
+<li><p>代码和静态文件分开管理。根据上面知道，每次部署后，public文件内容会覆盖掉项目整个master分支。这样可以实现网站静态文件的版本控制，但是，仔细对比这个master分支，我们会发现里面只剩下静态文件了，我们的代码比如source、themes统统没有了，这就导致无法对代码进行版本管理了。这意味着我换一台电脑，我就再也找不到代码了，只剩下一堆之前编译出来的静态文件。所以，为了对代码也进行版本控制，我们创建一个新的分支：code，然后在这个分支里进行代码控制，master里则保存部署的新的静态文件。大家可以自行比对这两个branch的内容差异。</p>
+</li>
+</ul>
+</li>
+<li><p>配置Hexo</p>
+<p> 详情请参考<a href="https://hexo.io/zh-cn/docs/themes.html" target="_blank" rel="external">配置文档</a></p>
+</li>
+<li><p>部署Hexo</p>
+<p> 1.1 编辑_config.yml(在跟目录下)。在部署时，要把下面的username都换成你的账号名。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">     type: git</div><div class="line">     repository: https://github.com/username/username.github.io.git</div><div class="line">     branch: master</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>   1.2 执行下列指令即可完成部署。</p>
+<blockquote>
+<p>$ hexo generate</p>
+<p>$ hexo deploy</p>
+</blockquote>
+<p>   <strong>注意：</strong>有些新用户需要设置 ssh，否则上述命令会失败。ssh 的介绍和设置方法请看<a href="https://help.github.com/articles/generating-ssh-keys" target="_blank" rel="external">官方教程</a>，不用担心，很简单。</p>
+<p>   <strong>记住：</strong>每次修改本地文件后，需要hexo generate才能保存，需要hexo deploy才能部署到git上去。每次使用命令时，都要在您创建的目录下。</p>
+<p>   <strong>Okay，</strong>我们的博客已经完全搭建起来了，在浏览器访问username.github.io就能看到你的成就了！</p>
+<p>###3、配置NexT主题</p>
+<p>Hexo主题非常多，可以参考丰富多彩的<a href="https://hexo.io/themes/" target="_blank" rel="external">Hexo主题</a>，本文选Next为主题，样式参考<a href="http://zanelove.github.io/">我的博客</a>。</p>
+<p>进入配置阶段，最好的文档还是NexT主题的官方文档，简单得不能再细致了。</p>
+<p>下面我还是提几点注意：</p>
+<ul>
+<li><p>第三方评论系统。评论系统很重要，你可以与读者进行更多交流，配置也简单，建议采用<a href="https://disqus.com/" target="_blank" rel="external">DISQUS</a>，更国际化一点的<a href="http://theme-next.iissnan.com/third-party-services.html#DISUQS" target="_blank" rel="external">配置</a>见此。另外，前期建议开启不登陆评论，即在<a href="https://disqus.com/" target="_blank" rel="external">Disqus</a>的Comment Rule里允许Guest comment。</p>
+</li>
+<li><p>创建留言板。熟悉page的创建与使用，<a href="http://www.arao.me/2015/hexo-next-theme-optimize-base/#为你的hexo网站NexT主题增加留言页" target="_blank" rel="external">参考这里</a>。</p>
+</li>
+<li><p>给自己博客做SEO。有好的SEO便于搜索引擎索引你的网站，随着以后读者增多，他们可以更好搜索到你的网站，<a href="http://www.arao.me/2015/hexo-next-theme-optimize-seo/" target="_blank" rel="external">具体方法见此</a>。</p>
+</li>
+</ul>
+
       
     </div>
 
@@ -530,8 +687,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -647,6 +813,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、瞧瞧兵器"><span class="nav-number">1.</span> <span class="nav-text">一、瞧瞧兵器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、抄起家伙"><span class="nav-number">2.</span> <span class="nav-text">二、抄起家伙</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
