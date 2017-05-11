@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zanelove.github.io/"/>
-  <updated>2017-05-06T09:33:37.000Z</updated>
+  <updated>2017-05-11T14:09:39.000Z</updated>
   <id>http://zanelove.github.io/</id>
   
   <author>
@@ -16,11 +16,34 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Activity的生命周期全面分析</title>
+    <link href="http://zanelove.github.io/2017/05/11/Activity%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%85%A8%E9%9D%A2%E5%88%86%E6%9E%90/"/>
+    <id>http://zanelove.github.io/2017/05/11/Activity的生命周期全面分析/</id>
+    <published>2017-05-11T14:06:04.000Z</published>
+    <updated>2017-05-11T14:09:39.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;没错，我们可以选择躺在地上赖着不动：反正我的起点低，反正我家庭不如别人家，有无数个“反正”等着你，但是没有人会看你一眼，每个人都在前行；当别人在飞翔，你依然躺在地上，恐怕你一生的时间都只能用来数伤口了.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;本
+    
+    </summary>
+    
+      <category term="Android" scheme="http://zanelove.github.io/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="http://zanelove.github.io/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Hexo从0到1</title>
     <link href="http://zanelove.github.io/2017/04/25/Hexo%E4%BB%8E0%E5%88%B01/"/>
     <id>http://zanelove.github.io/2017/04/25/Hexo从0到1/</id>
     <published>2017-04-25T12:13:40.000Z</published>
-    <updated>2017-05-06T09:33:37.000Z</updated>
+    <updated>2017-05-06T13:15:10.000Z</updated>
     
     <summary type="html">
     
