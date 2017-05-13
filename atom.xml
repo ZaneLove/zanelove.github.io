@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zanelove.github.io/"/>
-  <updated>2017-05-11T14:14:56.000Z</updated>
+  <updated>2017-05-13T01:20:01.000Z</updated>
   <id>http://zanelove.github.io/</id>
   
   <author>
@@ -14,6 +14,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>IntentFilter的匹配规则</title>
+    <link href="http://zanelove.github.io/2017/05/13/IntentFilter%E7%9A%84%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99/"/>
+    <id>http://zanelove.github.io/2017/05/13/IntentFilter的匹配规则/</id>
+    <published>2017-05-13T01:18:01.000Z</published>
+    <updated>2017-05-13T01:20:01.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;“当下”稍纵即逝，刚刚说出的话立刻就成了过去，很多要说的话却还在未来；活在当下是一个悖论，对时间掐头去尾后，你会发现几乎什么都不会剩下.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;启动Activity分为两种，显示调用和隐式调用。二者的区别简单来说
+    
+    </summary>
+    
+      <category term="Android" scheme="http://zanelove.github.io/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="http://zanelove.github.io/tags/Android/"/>
+    
+  </entry>
   
   <entry>
     <title>Activity的启动模式</title>
