@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zanelove.github.io/"/>
-  <updated>2017-05-13T01:20:01.000Z</updated>
+  <updated>2017-05-13T01:21:41.000Z</updated>
   <id>http://zanelove.github.io/</id>
   
   <author>
@@ -20,14 +20,14 @@
     <link href="http://zanelove.github.io/2017/05/13/IntentFilter%E7%9A%84%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99/"/>
     <id>http://zanelove.github.io/2017/05/13/IntentFilter的匹配规则/</id>
     <published>2017-05-13T01:18:01.000Z</published>
-    <updated>2017-05-13T01:20:01.000Z</updated>
+    <updated>2017-05-13T01:21:41.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;“当下”稍纵即逝，刚刚说出的话立刻就成了过去，很多要说的话却还在未来；活在当下是一个悖论，对时间掐头去尾后，你会发现几乎什么都不会剩下.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;启动Activity分为两种，显示调用和隐式调用。二者的区别简单来说
+&lt;p&gt;启动Activity分为两种，显示调用和隐式调用。二者的区别简单来说就是：&lt;strong&gt;显示调用需要明确地指定被启动对象的组价信息，包括包名和类名；而隐式调用则不需要明确指定组件信息&lt;/strong&gt;。原则上来说，一个Intent不应该既是显示调用又是隐式调用，如果二者共存的话以显示调用为主。显示调用很简单，这里主要介绍隐式调用。隐式调用需要Intent能够匹配目标组件的IntentFilter中所设置的过滤信息，如果不匹配将无法启动目标Activity。IntentFilter中的过滤信息有action、category、data。&lt;/p&gt;
     
     </summary>
     
@@ -67,14 +67,14 @@
     <link href="http://zanelove.github.io/2017/05/11/Activity%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%85%A8%E9%9D%A2%E5%88%86%E6%9E%90/"/>
     <id>http://zanelove.github.io/2017/05/11/Activity的生命周期全面分析/</id>
     <published>2017-05-11T14:06:04.000Z</published>
-    <updated>2017-05-11T14:09:39.000Z</updated>
+    <updated>2017-05-13T01:22:07.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;没错，我们可以选择躺在地上赖着不动：反正我的起点低，反正我家庭不如别人家，有无数个“反正”等着你，但是没有人会看你一眼，每个人都在前行；当别人在飞翔，你依然躺在地上，恐怕你一生的时间都只能用来数伤口了.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;本
+&lt;p&gt;本节将Activity的生命周期分为两部分内容，一部分是正常情况下的生命周期，另一部分是异常情况下的生命周期。所谓正常情况下的生命周期，是指在有用户参与的情况下，Activity所经过的生命周期的改变；而异常情况下的生命周期是指Activity被系统回收或者由于当前设备的Configuration发生改变从而导致Activity被销毁重建，异常情况下的生命周期的关注点和正常情况下略有不同。&lt;/p&gt;
     
     </summary>
     

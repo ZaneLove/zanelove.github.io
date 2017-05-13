@@ -122,7 +122,7 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20151223163337864">
 <meta property="og:image" content="http://img.blog.csdn.net/20151223202051300">
 <meta property="og:image" content="http://img.blog.csdn.net/20151224093107325">
-<meta property="og:updated_time" content="2017-05-11T14:09:39.000Z">
+<meta property="og:updated_time" content="2017-05-13T01:22:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Activity的生命周期全面分析">
 <meta name="twitter:description" content="没错，我们可以选择躺在地上赖着不动：反正我的起点低，反正我家庭不如别人家，有无数个“反正”等着你，但是没有人会看你一眼，每个人都在前行；当别人在飞翔，你依然躺在地上，恐怕你一生的时间都只能用来数伤口了.
@@ -437,6 +437,7 @@
 <p>没错，我们可以选择躺在地上赖着不动：反正我的起点低，反正我家庭不如别人家，有无数个“反正”等着你，但是没有人会看你一眼，每个人都在前行；当别人在飞翔，你依然躺在地上，恐怕你一生的时间都只能用来数伤口了.</p>
 </blockquote>
 <p>本节将Activity的生命周期分为两部分内容，一部分是正常情况下的生命周期，另一部分是异常情况下的生命周期。所谓正常情况下的生命周期，是指在有用户参与的情况下，Activity所经过的生命周期的改变；而异常情况下的生命周期是指Activity被系统回收或者由于当前设备的Configuration发生改变从而导致Activity被销毁重建，异常情况下的生命周期的关注点和正常情况下略有不同。</p>
+<a id="more"></a>
 <p>##1. 正常情况下的生命周期分析</p>
 <p>在正常情况下，Activity会经历如下生命周期。</p>
 <p>（1）onCreate：表示Activity正在被创建，这是生命周期的第一个方法。在这个方法中，可以<strong>做一些初始化操作</strong>，比如调用setContentView方法去加载界面布局资源、初始化Activity所需数据等。（只可能调用一次）</p>
