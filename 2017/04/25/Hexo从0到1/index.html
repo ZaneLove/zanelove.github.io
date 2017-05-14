@@ -126,7 +126,7 @@ SSL：CloudFlare">
 <meta property="og:image" content="http://img.blog.csdn.net/20151219143049859">
 <meta property="og:image" content="http://img.blog.csdn.net/20151219150213597">
 <meta property="og:image" content="http://img.blog.csdn.net/20151219153039062">
-<meta property="og:updated_time" content="2017-05-14T02:59:24.000Z">
+<meta property="og:updated_time" content="2017-05-14T03:36:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo从0到1">
 <meta name="twitter:description" content="对程序员而言，最好的简历就是个人博客和GitHub.
@@ -451,7 +451,7 @@ SSL：CloudFlare">
 <li>SSL：CloudFlare</li>
 </ul>
 <a id="more"></a>
-<h2 id="二、抄起家伙"><a href="#二、抄起家伙" class="headerlink" title="二、抄起家伙"></a>二、抄起家伙</h2><h3 id="1、GitHub-Pages"><a href="#1、GitHub-Pages" class="headerlink" title="1、GitHub Pages"></a>1、GitHub Pages</h3><p>在不购买服务器的前提下，我们的网站需要挂在GitHub Pages上！</p>
+<h2 id="二、抄起家伙"><a href="#二、抄起家伙" class="headerlink" title="二、抄起家伙"></a>二、抄起家伙</h2><h3 id="GitHub-Pages"><a href="#GitHub-Pages" class="headerlink" title="GitHub Pages"></a>GitHub Pages</h3><p>在不购买服务器的前提下，我们的网站需要挂在GitHub Pages上！</p>
 <ol>
 <li><p>需要拥有一个<a href="https://github.com/" target="_blank" rel="external">GitHub账号</a></p>
 </li>
@@ -469,9 +469,8 @@ SSL：CloudFlare">
 </li>
 </ul>
 <p>至此，我们已经利用GitHub Pages搭建好了个人博客雏形了。下面要做的，就是个性化了。</p>
-<h3 id="2、安装Hexo博客框架"><a href="#2、安装Hexo博客框架" class="headerlink" title="2、安装Hexo博客框架"></a>2、安装Hexo博客框架</h3><p>经过上面步骤，我们已经拥有了一个初步域名：<a href="http://username.github.io" target="_blank" rel="external">http://username.github.io</a> 和 一个免费网络空间了，下面我们需要把空白的博客丰富起来。放心，不需要你手写一大堆html、css文件，也不用找jQuery来实现酷炫的页面效果。Hexo是一款博客框架，它会帮我们搭建。</p>
-<p><strong>1.安装Hexo</strong></p>
-<p>1.1 前提：</p>
+<h3 id="安装Hexo博客框架"><a href="#安装Hexo博客框架" class="headerlink" title="安装Hexo博客框架"></a>安装Hexo博客框架</h3><p>经过上面步骤，我们已经拥有了一个初步域名：<a href="http://username.github.io" target="_blank" rel="external">http://username.github.io</a> 和 一个免费网络空间了，下面我们需要把空白的博客丰富起来。放心，不需要你手写一大堆html、css文件，也不用找jQuery来实现酷炫的页面效果。Hexo是一款博客框架，它会帮我们搭建。</p>
+<h4 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h4><p>1.1 前提：</p>
 <p>安装 Hexo 相当简单。然而在安装前，您必须检查电脑中是否已安装下列应用程序：</p>
 <ul>
 <li><a href="http://nodejs.org/" target="_blank" rel="external">Node.js</a></li>
@@ -486,42 +485,38 @@ SSL：CloudFlare">
 <p>如果，你出现了以下的问题，如图：</p>
 <p><img src="http://img.blog.csdn.net/20151219143049859" alt=""></p>
 <p>请您放心，这不是问题，这是正常的现象！到此为止，Git、Node.js和Hexo就都安装成功了！</p>
-<ol>
-<li><p>GitHub管理</p>
-<p> 为了让自己未来的博客和代码处在git管理之下，我们要把刚刚在Github上博客项目拉到本地。首先，在本地创建文件夹，名字任意，进入该文件夹，把项目代码clone下来。</p>
+<h4 id="GitHub管理"><a href="#GitHub管理" class="headerlink" title="GitHub管理"></a>GitHub管理</h4><p>为了让自己未来的博客和代码处在git管理之下，我们要把刚刚在Github上博客项目拉到本地。首先，在本地创建文件夹，名字任意，进入该文件夹，把项目代码clone下来。</p>
 <blockquote>
 <p>$ git clone git@github.com:username/username.github.io.git</p>
 </blockquote>
-<p> 好了，此时会在您创建的目录下自动创建子文件夹username.github.io,那里就是我们博客的代码，以后的操作都在git的管理之下了，此时默认的branch为master。</p>
-</li>
-<li><p>初始化Hexo</p>
-<p> 在目录下执行以下指令(在该目录内点击鼠标右键，选择Git bash)，Hexo 将会自动在目标文件夹建立网站所需要的所有文件。</p>
+<p>好了，此时会在您创建的目录下自动创建子文件夹username.github.io,那里就是我们博客的代码，以后的操作都在git的管理之下了，此时默认的branch为master。</p>
+<h4 id="初始化Hexo"><a href="#初始化Hexo" class="headerlink" title="初始化Hexo"></a>初始化Hexo</h4><p>在目录下执行以下指令(在该目录内点击鼠标右键，选择Git bash)，Hexo 将会自动在目标文件夹建立网站所需要的所有文件。</p>
 <blockquote>
 <p>$ hexo init</p>
 </blockquote>
-<p> 或者不在该目录下执行，而是任意地方执行该命令，但必须指定目录。</p>
+<p>或者不在该目录下执行，而是任意地方执行该命令，但必须指定目录。</p>
 <blockquote>
 <p>$ hexo init</p>
 </blockquote>
-<p> 接下来，就是安装依赖包：</p>
+<p>接下来，就是安装依赖包：</p>
 <blockquote>
 <p>$ npm install</p>
 </blockquote>
-<p> 最后，本地查看：现在我们已经搭建起本地的hexo博客了，执行以下命令(在您创建的目录下)，然后到浏览器输入localhost:4000看看。</p>
+<p>最后，本地查看：现在我们已经搭建起本地的hexo博客了，执行以下命令(在您创建的目录下)，然后到浏览器输入localhost:4000看看。</p>
 <blockquote>
 <p>$ hexo generate</p>
 <p>$ hexo server</p>
 </blockquote>
-</li>
-<li><p>熟悉Hexo</p>
-<p> 新建完成后，指定文件夹的目录如下：</p>
-<p> <img src="http://img.blog.csdn.net/20151219150213597" alt=""></p>
+<h4 id="熟悉Hexo"><a href="#熟悉Hexo" class="headerlink" title="熟悉Hexo"></a>熟悉Hexo</h4><p>新建完成后，指定文件夹的目录如下：</p>
+<p><img src="http://img.blog.csdn.net/20151219150213597" alt=""></p>
 <ul>
 <li><p>_config.yml文件，是整体的配置文件，很多基础配置、插件配置等都需要在里面进行。要注意的是，该文件格式要求极为严格，缺少一个空格都会导致运行错误。小提示：不要用Tab缩进，用两个空格符。</p>
 </li>
 <li><p>package.json文件，应用程序的信息。<a href="http://embeddedjs.com/" target="_blank" rel="external">EJS</a>, <a href="http://learnboost.github.io/stylus/" target="_blank" rel="external">Stylus</a> 和 <a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="external">Markdown renderer</a> 已默认安装，您可以自由移除。</p>
-<p><img src="http://img.blog.csdn.net/20151219153039062" alt=""></p>
 </li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20151219153039062" alt=""></p>
+<ul>
 <li><p>scaffolds文件夹，<a href="https://hexo.io/zh-cn/docs/writing.html" target="_blank" rel="external">模版</a>文件夹。当您新建文章时，Hexo 会根据 scaffold 来建立文件。</p>
 </li>
 <li><p>source文件夹，资源文件夹是存放用户资源的地方。除 posts 文件夹之外，开头命名为 (下划线)的文件 / 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。</p>
@@ -539,24 +534,18 @@ SSL：CloudFlare">
 <li><p>代码和静态文件分开管理。根据上面知道，每次部署后，public文件内容会覆盖掉项目整个master分支。这样可以实现网站静态文件的版本控制，但是，仔细对比这个master分支，我们会发现里面只剩下静态文件了，我们的代码比如source、themes统统没有了，这就导致无法对代码进行版本管理了。这意味着我换一台电脑，我就再也找不到代码了，只剩下一堆之前编译出来的静态文件。所以，为了对代码也进行版本控制，我们创建一个新的分支：code，然后在这个分支里进行代码控制，master里则保存部署的新的静态文件。大家可以自行比对这两个branch的内容差异。</p>
 </li>
 </ul>
-</li>
-<li><p>配置Hexo</p>
-<p> 详情请参考<a href="https://hexo.io/zh-cn/docs/themes.html" target="_blank" rel="external">配置文档</a></p>
-</li>
-<li><p>部署Hexo</p>
-<p> 1.1 编辑_config.yml(在跟目录下)。在部署时，要把下面的username都换成你的账号名。</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">     type: git</div><div class="line">     repository: https://github.com/username/username.github.io.git</div><div class="line">     branch: master</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>   1.2 执行下列指令即可完成部署。</p>
+<h4 id="配置Hexo"><a href="#配置Hexo" class="headerlink" title="配置Hexo"></a>配置Hexo</h4><p>详情请参考<a href="https://hexo.io/zh-cn/docs/themes.html" target="_blank" rel="external">配置文档</a></p>
+<h4 id="部署Hexo"><a href="#部署Hexo" class="headerlink" title="部署Hexo"></a>部署Hexo</h4><p>1.1 编辑_config.yml(在跟目录下)。在部署时，要把下面的username都换成你的账号名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repository: https://github.com/username/username.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
+<p>1.2 执行下列指令即可完成部署。</p>
 <blockquote>
 <p>$ hexo generate</p>
 <p>$ hexo deploy</p>
 </blockquote>
-<p>   <strong>注意：</strong>有些新用户需要设置 ssh，否则上述命令会失败。ssh 的介绍和设置方法请看<a href="https://help.github.com/articles/generating-ssh-keys" target="_blank" rel="external">官方教程</a>，不用担心，很简单。</p>
-<p>   <strong>记住：</strong>每次修改本地文件后，需要hexo generate才能保存，需要hexo deploy才能部署到git上去。每次使用命令时，都要在您创建的目录下。</p>
-<p>   <strong>Okay，</strong>我们的博客已经完全搭建起来了，在浏览器访问username.github.io就能看到你的成就了！</p>
-<h3 id="3、配置NexT主题"><a href="#3、配置NexT主题" class="headerlink" title="3、配置NexT主题"></a>3、配置NexT主题</h3><p>Hexo主题非常多，可以参考丰富多彩的<a href="https://hexo.io/themes/" target="_blank" rel="external">Hexo主题</a>，本文选Next为主题，样式参考<a href="http://zanelove.github.io/">我的博客</a>。</p>
+<p><strong>注意：</strong>有些新用户需要设置 ssh，否则上述命令会失败。ssh 的介绍和设置方法请看<a href="https://help.github.com/articles/generating-ssh-keys" target="_blank" rel="external">官方教程</a>，不用担心，很简单。</p>
+<p><strong>记住：</strong>每次修改本地文件后，需要hexo generate才能保存，需要hexo deploy才能部署到git上去。每次使用命令时，都要在您创建的目录下。</p>
+<p><strong>Okay，</strong>我们的博客已经完全搭建起来了，在浏览器访问username.github.io就能看到你的成就了！</p>
+<h3 id="配置NexT主题"><a href="#配置NexT主题" class="headerlink" title="配置NexT主题"></a>配置NexT主题</h3><p>Hexo主题非常多，可以参考丰富多彩的<a href="https://hexo.io/themes/" target="_blank" rel="external">Hexo主题</a>，本文选Next为主题，样式参考<a href="http://zanelove.github.io/">我的博客</a>。</p>
 <p>进入配置阶段，最好的文档还是NexT主题的官方文档，简单得不能再细致了。</p>
 <p>下面我还是提几点注意：</p>
 <ul>
@@ -819,7 +808,7 @@ SSL：CloudFlare">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、瞧瞧兵器"><span class="nav-number">1.</span> <span class="nav-text">一、瞧瞧兵器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、抄起家伙"><span class="nav-number">2.</span> <span class="nav-text">二、抄起家伙</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、GitHub-Pages"><span class="nav-number">2.1.</span> <span class="nav-text">1、GitHub Pages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、安装Hexo博客框架"><span class="nav-number">2.2.</span> <span class="nav-text">2、安装Hexo博客框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、配置NexT主题"><span class="nav-number">2.3.</span> <span class="nav-text">3、配置NexT主题</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、瞧瞧兵器"><span class="nav-number">1.</span> <span class="nav-text">一、瞧瞧兵器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、抄起家伙"><span class="nav-number">2.</span> <span class="nav-text">二、抄起家伙</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub-Pages"><span class="nav-number">2.1.</span> <span class="nav-text">GitHub Pages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Hexo博客框架"><span class="nav-number">2.2.</span> <span class="nav-text">安装Hexo博客框架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Hexo"><span class="nav-number">2.2.1.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GitHub管理"><span class="nav-number">2.2.2.</span> <span class="nav-text">GitHub管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化Hexo"><span class="nav-number">2.2.3.</span> <span class="nav-text">初始化Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#熟悉Hexo"><span class="nav-number">2.2.4.</span> <span class="nav-text">熟悉Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置Hexo"><span class="nav-number">2.2.5.</span> <span class="nav-text">配置Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#部署Hexo"><span class="nav-number">2.2.6.</span> <span class="nav-text">部署Hexo</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置NexT主题"><span class="nav-number">2.3.</span> <span class="nav-text">配置NexT主题</span></a></li></ol></li></ol></div>
             
 
           </div>
