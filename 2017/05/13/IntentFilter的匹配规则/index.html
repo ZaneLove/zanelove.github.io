@@ -120,7 +120,7 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20151227165601469">
 <meta property="og:image" content="http://img.blog.csdn.net/20151227173150509">
 <meta property="og:image" content="http://img.blog.csdn.net/20151227174044927">
-<meta property="og:updated_time" content="2017-05-14T03:09:54.000Z">
+<meta property="og:updated_time" content="2017-05-14T03:11:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IntentFilter的匹配规则">
 <meta name="twitter:description" content="“当下”稍纵即逝，刚刚说出的话立刻就成了过去，很多要说的话却还在未来；活在当下是一个悖论，对时间掐头去尾后，你会发现几乎什么都不会剩下.
@@ -468,7 +468,7 @@
 <p> <img src="http://img.blog.csdn.net/20151227165601469" alt=""></p>
 <p> 这种规则指定了媒体类型为所有类型的图片，那么Intent中的mimeType属性值必须为“image/<em>”才能匹配，这种情况下虽然过滤规则没有指定URI，但是却有默认值，<em>*URI的默认值为content和file。也就是说，虽然没有指定URI，但是Intent中的URI部分的scheme必须为content或者file才能匹配</em></em>。</p>
 <p> 为了匹配（1）中规范，Intent可以这样写：</p>
-<p> intent.setDataAndType(Uri.parse(“file://abc”,”image/png”));</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">intent.setDataAndType(Uri.parse(“file://abc”,”image/png”));</div></pre></td></tr></table></figure>
 <p> <strong>注意，如果要为Intent指定完整的data，必须要调用setDataAndType方法</strong>，不能先调用setData方法再调用setType方法，因为这两个方法彼此会清除对方的值，这个看源码就很好理解，比如setData方法：</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public Intent setData(Uri data) &#123;</div><div class="line">    mData = data;</div><div class="line">    mType = null;</div><div class="line">    return this;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p> 可以发现，setData会把mimeType设置成null，同理setType会把URI设置成null。</p>
