@@ -122,7 +122,7 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20151223163337864">
 <meta property="og:image" content="http://img.blog.csdn.net/20151223202051300">
 <meta property="og:image" content="http://img.blog.csdn.net/20151224093107325">
-<meta property="og:updated_time" content="2017-05-14T03:00:30.000Z">
+<meta property="og:updated_time" content="2017-05-14T03:19:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Activity的生命周期全面分析">
 <meta name="twitter:description" content="没错，我们可以选择躺在地上赖着不动：反正我的起点低，反正我家庭不如别人家，有无数个“反正”等着你，但是没有人会看你一眼，每个人都在前行；当别人在飞翔，你依然躺在地上，恐怕你一生的时间都只能用来数伤口了.
@@ -470,55 +470,10 @@
 <p><img src="http://img.blog.csdn.net/20151223151423736" alt=""></p>
 <p>到底是不是我所说的：“旧Activity先调用onPause，然后新Activity再启动”。我们通过例子验证一下！</p>
 <p><strong>MainActivity.java</strong></p>
-<pre><code>public class MainActivity extends Activity {
-
-    private static final String TAG = &quot;MainActivity&quot;;
-
-    //省略
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.e(TAG,&quot;onPause&quot;);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.e(TAG,&quot;onStop&quot;);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.e(TAG,&quot;onDestroy&quot;);
-    }
-}
-</code></pre><p><strong>SecondActivity.java</strong></p>
-<pre><code>public class SecondActivity extends Activity{
-
-    private static final String TAG = &quot;SecondActivity&quot;;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Log.e(TAG, &quot;onCreate&quot;);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.e(TAG, &quot;onStart&quot;);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.e(TAG, &quot;onResume&quot;);
-    }
-}
-</code></pre><p>大伙来看一下log，是不是和上面分析的一样一样的，如图1-2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public class MainActivity extends Activity &#123;</div><div class="line"></div><div class="line">	private static final String TAG = &quot;MainActivity&quot;;</div><div class="line"></div><div class="line">	//省略</div><div class="line"></div><div class="line">	@Override</div><div class="line">	protected void onPause() &#123;</div><div class="line">		super.onPause();</div><div class="line">		Log.e(TAG,&quot;onPause&quot;);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	protected void onStop() &#123;</div><div class="line">		super.onStop();</div><div class="line">		Log.e(TAG,&quot;onStop&quot;);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	protected void onDestroy() &#123;</div><div class="line">		super.onDestroy();</div><div class="line">	   	Log.e(TAG,&quot;onDestroy&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>SecondActivity.java</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">public class SecondActivity extends Activity&#123;</div><div class="line"></div><div class="line">	private static final String TAG = &quot;SecondActivity&quot;;</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">		super.onCreate(savedInstanceState);</div><div class="line">		setContentView(R.layout.activity_main);</div><div class="line">		Log.e(TAG, &quot;onCreate&quot;);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	protected void onStart() &#123;</div><div class="line">		super.onStart();</div><div class="line">		Log.e(TAG, &quot;onStart&quot;);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	protected void onResume() &#123;</div><div class="line">		super.onResume();</div><div class="line">		Log.e(TAG, &quot;onResume&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>大伙来看一下log，是不是和上面分析的一样一样的，如图1-2：</p>
 <p><img src="http://img.blog.csdn.net/20151223163024848" alt=""></p>
 <p>扩展一下，那如果在MainActivity类中加入了一行调用finish()方法的代码呢？来看log：</p>
 <p><img src="http://img.blog.csdn.net/20151223163337864" alt=""></p>
