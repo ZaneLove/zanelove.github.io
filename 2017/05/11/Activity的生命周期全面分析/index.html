@@ -122,7 +122,7 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20151223163337864">
 <meta property="og:image" content="http://img.blog.csdn.net/20151223202051300">
 <meta property="og:image" content="http://img.blog.csdn.net/20151224093107325">
-<meta property="og:updated_time" content="2017-05-13T01:22:07.000Z">
+<meta property="og:updated_time" content="2017-05-14T03:00:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Activity的生命周期全面分析">
 <meta name="twitter:description" content="没错，我们可以选择躺在地上赖着不动：反正我的起点低，反正我家庭不如别人家，有无数个“反正”等着你，但是没有人会看你一眼，每个人都在前行；当别人在飞翔，你依然躺在地上，恐怕你一生的时间都只能用来数伤口了.
@@ -438,8 +438,7 @@
 </blockquote>
 <p>本节将Activity的生命周期分为两部分内容，一部分是正常情况下的生命周期，另一部分是异常情况下的生命周期。所谓正常情况下的生命周期，是指在有用户参与的情况下，Activity所经过的生命周期的改变；而异常情况下的生命周期是指Activity被系统回收或者由于当前设备的Configuration发生改变从而导致Activity被销毁重建，异常情况下的生命周期的关注点和正常情况下略有不同。</p>
 <a id="more"></a>
-<p>##1. 正常情况下的生命周期分析</p>
-<p>在正常情况下，Activity会经历如下生命周期。</p>
+<h2 id="1-正常情况下的生命周期分析"><a href="#1-正常情况下的生命周期分析" class="headerlink" title="1. 正常情况下的生命周期分析"></a>1. 正常情况下的生命周期分析</h2><p>在正常情况下，Activity会经历如下生命周期。</p>
 <p>（1）onCreate：表示Activity正在被创建，这是生命周期的第一个方法。在这个方法中，可以<strong>做一些初始化操作</strong>，比如调用setContentView方法去加载界面布局资源、初始化Activity所需数据等。（只可能调用一次）</p>
 <p>（2）onRestart：表示Activity正在重新启动。一般情况下，当<strong>当前Activity从不可见重新变为可见状态时，onRestart方法就会被调用</strong>。这种情形一般是用户行为所导致的，比如用户按Home键切换到桌面或者用户打开了一个新的Activity，这时当前的Activity就会暂停，也就是onPause和onStop方法被执行了，接着用户又回到了这个Activity，就会出现这种情况。<strong>（该方法可调用一次以上）</strong></p>
 <p>（3）onStart：表示Activity正在被启动，即将开始，这时<strong>Activity已经可见（显示）了，但是没有出现在前台</strong>，还无法和用户交互。这个时候其实可以理解为Activity已经显示出来了，但是我们还看不到。<strong>（该方法可调用一次以上）</strong></p>
@@ -525,10 +524,8 @@
 <p><img src="http://img.blog.csdn.net/20151223163337864" alt=""></p>
 <p>一切如此这般！</p>
 <p>Android官方文档对onPause方法的解释有这么一句话：不能在onPause方法中做重要级的操作，因为必须在onPause方法执行完成以后新Activity才能Resume，从这一点也能间接证明我们的结论。通过分析这个问题，我们知道onPause方法和onStop方法都不能执行耗时的操作，尤其是onPause方法，这也意味着，我们应当尽量在onStop方法中做操作，从而使得新Activity尽快显示出来并切换到前台。</p>
-<p>##2. 异常情况下的生命周期分析</p>
-<p>我们知道，Activity除了受用户操作所导致的正常的生命周期方法调度以外，还有一些异常情况，比如当资源相关的系统配置发生改变以及系统内存不足时，Activity就可能被kill。下面我们具体分析这两种情况。</p>
-<p>###2.1 情况1：资源相关的系统配置发生改变导致Activity被kill并重新创建</p>
-<p>那么这种情况比如说：当前Activity处于竖屏状态，如果突然旋转屏幕，由于系统配置发生了改变，在默认情况下，Activity就会被销毁并且重新创建，当然我们也可以阻止系统重新创建我们的Activity。</p>
+<h2 id="2-异常情况下的生命周期分析"><a href="#2-异常情况下的生命周期分析" class="headerlink" title="2. 异常情况下的生命周期分析"></a>2. 异常情况下的生命周期分析</h2><p>我们知道，Activity除了受用户操作所导致的正常的生命周期方法调度以外，还有一些异常情况，比如当资源相关的系统配置发生改变以及系统内存不足时，Activity就可能被kill。下面我们具体分析这两种情况。</p>
+<h3 id="2-1-情况1：资源相关的系统配置发生改变导致Activity被kill并重新创建"><a href="#2-1-情况1：资源相关的系统配置发生改变导致Activity被kill并重新创建" class="headerlink" title="2.1 情况1：资源相关的系统配置发生改变导致Activity被kill并重新创建"></a>2.1 情况1：资源相关的系统配置发生改变导致Activity被kill并重新创建</h3><p>那么这种情况比如说：当前Activity处于竖屏状态，如果突然旋转屏幕，由于系统配置发生了改变，在默认情况下，Activity就会被销毁并且重新创建，当然我们也可以阻止系统重新创建我们的Activity。</p>
 <p>在默认情况下，如果我们的Activity不做特殊处理，那么当系统配置发生改变后，Activity就会被销毁并重新创建，其生命周期如图1-3所示：</p>
 <p><img src="http://img.blog.csdn.net/20151223202051300" alt=""></p>
 <p>当系统配置发送改变后，Activity会被销毁，其onPause、onStop、onDestory均会被调用，同时由于Activity是在异常情况下终止的，系统会调用onSaveInstanceState来保存当前Activity的状态。<strong>这个方法的调用时机是在onStop之前，它和onPause没有既定的时序关系，它既可能在onPause之前调用，也可能在onPause之后调用。需要强调的一点是，这个方法只有出现在Activity被异常终止的情况下，正常情况下系统不会回调这个方法。</strong>当Activity被重新创建后，系统会调用onRestoreInstanceState，并且把Activity销毁时onSaveInstanceState方法所保存的Bundle对象作为参数同时传递给onRestoreInstanceState合onCreate方法。因此，我们通过这两个方法来判断Activity是否被重建了（判断Bundle是否为空，只需要在onCreate方法中进行判断即可，因为一旦onRestoreInstanceState被调用其Bundle值一定不为Null，这也是onRestoreInstanceState方法和onCreate方法的区别！但官方文档建议是采用onRestoreInstanceState去恢复数据），如果被重建了，那么我们就可以取出之前保存的数据并恢复，<strong>从时序上来说，onRestoreInstanceState的调用时机在onStart之后。</strong></p>
@@ -539,8 +536,7 @@
 <p>android:configChanges=”orientation|screenSize|keyboardHidden”//如果想指定多个值，可以用“|”连接起来</p>
 <p>这样的话，Activity不会重新创建，并且也不会调用onSaveInstanceState和onRestoreInstanceState方法来存储和恢复数据，取而代之的是系统调用了Activity的onConfigurationChanged方法，这个时候我们就可以做一些自己的特殊处理了。</p>
 <p><img src="http://img.blog.csdn.net/20151224093107325" alt=""></p>
-<p>###2.2 情况2：资源内存不足导致低优先级的Activity被kill</p>
-<p><strong>Activity按照优先级从高到底，可以分为如下三种情况：</strong></p>
+<h3 id="2-2-情况2：资源内存不足导致低优先级的Activity被kill"><a href="#2-2-情况2：资源内存不足导致低优先级的Activity被kill" class="headerlink" title="2.2 情况2：资源内存不足导致低优先级的Activity被kill"></a>2.2 情况2：资源内存不足导致低优先级的Activity被kill</h3><p><strong>Activity按照优先级从高到底，可以分为如下三种情况：</strong></p>
 <p>（1）前台Activity —— 正在和用户交互的Activity，优先级最高。</p>
 <p>（2）可见但非前台Activity —— 比如Activity中弹出了一个对话框，导致Activity可见但是位于后台无法和用户直接交互。</p>
 <p>（3）后台Activity —— 已经被暂停的Activity，比如执行了onStop，优先级最低。</p>
@@ -667,8 +663,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -784,6 +789,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-正常情况下的生命周期分析"><span class="nav-number">1.</span> <span class="nav-text">1. 正常情况下的生命周期分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-异常情况下的生命周期分析"><span class="nav-number">2.</span> <span class="nav-text">2. 异常情况下的生命周期分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-情况1：资源相关的系统配置发生改变导致Activity被kill并重新创建"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 情况1：资源相关的系统配置发生改变导致Activity被kill并重新创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-情况2：资源内存不足导致低优先级的Activity被kill"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 情况2：资源内存不足导致低优先级的Activity被kill</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
