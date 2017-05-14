@@ -120,7 +120,7 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20151227165601469">
 <meta property="og:image" content="http://img.blog.csdn.net/20151227173150509">
 <meta property="og:image" content="http://img.blog.csdn.net/20151227174044927">
-<meta property="og:updated_time" content="2017-05-14T03:05:30.000Z">
+<meta property="og:updated_time" content="2017-05-14T03:09:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IntentFilter的匹配规则">
 <meta name="twitter:description" content="“当下”稍纵即逝，刚刚说出的话立刻就成了过去，很多要说的话却还在未来；活在当下是一个悖论，对时间掐头去尾后，你会发现几乎什么都不会剩下.
@@ -470,26 +470,26 @@
 <p> 为了匹配（1）中规范，Intent可以这样写：</p>
 <p> intent.setDataAndType(Uri.parse(“file://abc”,”image/png”));</p>
 <p> <strong>注意，如果要为Intent指定完整的data，必须要调用setDataAndType方法</strong>，不能先调用setData方法再调用setType方法，因为这两个方法彼此会清除对方的值，这个看源码就很好理解，比如setData方法：</p>
- <figure class="highlight plain"><figcaption><span>Intent setData(Uri data) &#123;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">    mData = data;</div><div class="line">    mType = null;</div><div class="line">    return this;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public Intent setData(Uri data) &#123;</div><div class="line">    mData = data;</div><div class="line">    mType = null;</div><div class="line">    return this;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p> 可以发现，setData会把mimeType设置成null，同理setType会把URI设置成null。</p>
 <p> （2）如下过滤规则：</p>
 <p> <img src="http://img.blog.csdn.net/20151227173150509" alt=""></p>
 <p> 这种规则指定了两组data规则，且每个data指定了完整的属性值，既有URI又有mimeType。</p>
 <p> 为了匹配（2）中规则，Intent可以这样写：</p>
-<p> intent.setDataAndType(Uri.parse(“<a href="http://abc&quot;),&quot;video/mpeg" target="_blank" rel="external">http://abc&quot;),&quot;video/mpeg</a>“);</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">intent.setDataAndType(Uri.parse(&quot;http://abc&quot;),&quot;video/mpeg&quot;);</div></pre></td></tr></table></figure>
 <p> or</p>
-<p> intent.setDataAndType(Uri.parse(“<a href="http://abc&quot;),&quot;audio/mpeg" target="_blank" rel="external">http://abc&quot;),&quot;audio/mpeg</a>“);</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">intent.setDataAndType(Uri.parse(&quot;http://abc&quot;),&quot;audio/mpeg&quot;);</div></pre></td></tr></table></figure>
 <p> 关于data还有一个特殊情况需要说明一下，这也是它和action不同的地方，如下两种特殊的写法，它们的作用是一样的：</p>
 <p> <img src="http://img.blog.csdn.net/20151227174044927" alt=""></p>
 <p> 至此IntentFilter的过滤规则都讲解了一遍！</p>
 <p> 到这，我要把本节前面给出的第一个intent-filter示例讲解一下，给它一个完整匹配它的Intent：</p>
- <figure class="highlight plain"><figcaption><span>intent = new Intent("com.zanelove.intentfilter.c");</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">intent.addCategory(&quot;com.zanelove.category.c&quot;);</div><div class="line">intent.setDataAndType(Uri.parse(&quot;file://abc&quot;),&quot;text/plain&quot;);</div><div class="line">startActivity(intent);</div></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Intent intent = new Intent(&quot;com.zanelove.intentfilter.c&quot;);</div><div class="line">intent.addCategory(&quot;com.zanelove.category.c&quot;);</div><div class="line">intent.setDataAndType(Uri.parse(&quot;file://abc&quot;),&quot;text/plain&quot;);</div><div class="line">startActivity(intent);</div></pre></td></tr></table></figure>
 <p> 还记得URI的scheme是有默认值（content，file）的吗？如果把上面的intent.setDataAndType(Uri.parse(“file://abc”),”text/plain”)改成intent.setDataAndType(Uri.parse(“<a href="http://abc&quot;),&quot;text/plain&quot;)，打开Activity的时候就会报错，提示无法找到Activity。另外一点，intent-filter的匹配规则对于Service和BroadcastReceiver也是同样的道理，不过系统对于Service的建议是尽量使用显示调用方式来启动服务。" target="_blank" rel="external">http://abc&quot;),&quot;text/plain&quot;)，打开Activity的时候就会报错，提示无法找到Activity。另外一点，intent-filter的匹配规则对于Service和BroadcastReceiver也是同样的道理，不过系统对于Service的建议是尽量使用显示调用方式来启动服务。</a></p>
 <p> 最后，当我们通过隐式方法启动一个Activity的时候，可以做一些判断，看是否有Activity能够匹配我们的隐式Intent，防止报错。判断方法两种：采用PackageManager的resolveActivity方法或者Intent的resolveActivity方法，如果它们找不到匹配的Activity就会返回null，这样通过判断返回值就可以避免报错。另外，PackageManager还提供了queryIntentActivities方法，这个方法和resolveActivity方法不同的是：它不是返回最佳匹配的Activity信息而是返回所有成功匹配的Activity信息。我们可以看下queryIntentActivities和resolveActivity方法的原型：</p>
- <figure class="highlight plain"><figcaption><span>abstract List<resolveinfo> queryIntentActivities(Intent intent, int flags);</resolveinfo></span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public abstract ResuloveInfo resolveActivity(Intent intent, int flags);</div></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public abstract List&lt;ResolveInfo&gt; queryIntentActivities(Intent intent, int flags);</div><div class="line"></div><div class="line">public abstract ResuloveInfo resolveActivity(Intent intent, int flags);</div></pre></td></tr></table></figure>
 <p> 上述两个方法的第一个参数比较好理解，第二个参数需要注意，我们要使用<strong>MATCH_DEFAULT_ONLY</strong>这个标记位，这个标记位的含义是仅仅匹配那些intent-filter中声明了这个category的Activity。使用这个标记位的意义在于，只要上述两个方法不返回null，那么startActivity一定可以成功。如果不用这个标记位，就可以把intent-filter中category不含DEFAULT的那些Activity给匹配出来，从而导致startActivity可能失败。<strong>因为不含DEFAULT这个category的Activity是无法接收隐式Intent的</strong>。</p>
 <p> 在action和category中，有一类action和category比较重要，它们是：</p>
- <figure class="highlight plain"><figcaption><span>andorid:name="android.intent.action.MAIN"/></span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;category android:name=&quot;android.intent.category.LAUNCHER&quot;/&gt;</div></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;action andorid:name=&quot;android.intent.action.MAIN&quot;/&gt;</div><div class="line"></div><div class="line">&lt;category android:name=&quot;android.intent.category.LAUNCHER&quot;/&gt;</div></pre></td></tr></table></figure>
 <p> 这二者共同作用是用来标明这个一个入口Activity并且会出现在系统的应用列表中，少了任何一个都没有实际意义。</p>
 <p> 针对Service和BroadcastReceiver，PackageManager同样提供了类似的方法去获取成功匹配的组件信息。</p>
 </li>
