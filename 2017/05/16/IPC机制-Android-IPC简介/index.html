@@ -86,12 +86,10 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Android," />
 
 
 
-
-  
 
 
   <link rel="alternate" href="/atom.xml" title="Zane'Blog" type="application/atom+xml" />
@@ -106,16 +104,22 @@
 
 
 
-<meta name="description" content="记录当下，谱写未来">
-<meta property="og:type" content="website">
-<meta property="og:title" content="分类">
-<meta property="og:url" content="http://zanelove.github.io/categories/index.html">
+<meta name="description" content="失败之事十有八九，成与败的区别，就在于如何面对这十有八九的失败，被失败打败的，成了失败者，把失败打败的，成了成功者
+
+IPC（Inter-Process Communication），含义为进程间通信或者跨进程通信，是指两个进程之间进行数据交换的过程。那么，什么是进程又什么是线程？按照操作系统中的描述，线程是CPU调度的最小单元，同时线程是一种有限的系统资源；而进程一般是指一个执行单元，在PC和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IPC机制-Android IPC简介">
+<meta property="og:url" content="http://zanelove.github.io/2017/05/16/IPC机制-Android-IPC简介/index.html">
 <meta property="og:site_name" content="Zane'Blog">
-<meta property="og:description" content="记录当下，谱写未来">
-<meta property="og:updated_time" content="2017-01-24T05:20:08.000Z">
+<meta property="og:description" content="失败之事十有八九，成与败的区别，就在于如何面对这十有八九的失败，被失败打败的，成了失败者，把失败打败的，成了成功者
+
+IPC（Inter-Process Communication），含义为进程间通信或者跨进程通信，是指两个进程之间进行数据交换的过程。那么，什么是进程又什么是线程？按照操作系统中的描述，线程是CPU调度的最小单元，同时线程是一种有限的系统资源；而进程一般是指一个执行单元，在PC和">
+<meta property="og:updated_time" content="2017-05-16T14:25:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="分类">
-<meta name="twitter:description" content="记录当下，谱写未来">
+<meta name="twitter:title" content="IPC机制-Android IPC简介">
+<meta name="twitter:description" content="失败之事十有八九，成与败的区别，就在于如何面对这十有八九的失败，被失败打败的，成了失败者，把失败打败的，成了成功者
+
+IPC（Inter-Process Communication），含义为进程间通信或者跨进程通信，是指两个进程之间进行数据交换的过程。那么，什么是进程又什么是线程？按照操作系统中的描述，线程是CPU调度的最小单元，同时线程是一种有限的系统资源；而进程一般是指一个执行单元，在PC和">
 
 
 
@@ -143,19 +147,13 @@
 
 
 
-  <link rel="canonical" href="http://zanelove.github.io/categories/"/>
+  <link rel="canonical" href="http://zanelove.github.io/2017/05/16/IPC机制-Android-IPC简介/"/>
 
 
 
 
 
-  <title>
-  
-
-  
-    分类 | Zane'Blog
-  
-</title>
+  <title> IPC机制-Android IPC简介 | Zane'Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -186,7 +184,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -299,25 +297,217 @@
             
 
   <div id="posts" class="posts-expand">
-  <header class="post-header">
+    
 
-	<h2 class="post-title" itemprop="name headline">分类</h2>
+  
 
+  
+  
+  
 
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://zanelove.github.io/2017/05/16/IPC机制-Android-IPC简介/">
 
-</header>
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Zane">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zane'Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zane'Blog" src="">
+    </span>
+  </span>
 
     
-    
-      <div class="category-all-page">
-        <div class="category-all-title">
-            目前共计 2 个分类
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                IPC机制-Android IPC简介
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-16T22:23:51+08:00">
+                2017-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/16/IPC机制-Android-IPC简介/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/16/IPC机制-Android-IPC简介/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/05/16/IPC机制-Android-IPC简介/" class="leancloud_visitors" data-flag-title="IPC机制-Android IPC简介">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
         </div>
-        <div class="category-all">
-          <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">2</span></li></ul>
-        </div>
-      </div>
+      </header>
     
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>失败之事十有八九，成与败的区别，就在于如何面对这十有八九的失败，被失败打败的，成了失败者，把失败打败的，成了成功者</p>
+</blockquote>
+<p>IPC（Inter-Process Communication），含义为进程间通信或者跨进程通信，是指两个进程之间进行数据交换的过程。那么，什么是进程又什么是线程？按照操作系统中的描述，线程是CPU调度的最小单元，同时线程是一种有限的系统资源；而进程一般是指一个执行单元，在PC和移动设备上指一个程序或者一个应用。一个进程可以包含多个线程，因此进程和线程是包含与被包含的关系。当然，最简单的情况下，一个进程中可以只有一个线程，即主线程（Android中称为UI线程），在UI线程中才能操作界面元素。很多时候，一个进程中需要执行大量的耗时的任务，如果这些任务放在主线程中去执行就会造成界面无法响应（ANR，Application Not Responding – 应用无响应）。解决这个问题就需要用到线程，把一些耗时的任务放在线程（除UI线程）中即可。</p>
+<a id="more"></a>
+<p>IPC不是Android中所独有的，任何一个操作系统都需要有相应的IPC机制。对于Android来说，它是一种基于Linux内核的移动操作系统，它的进程间通信方式并不能完全继承自Linux，相反，它有自己的进程间通信方式。在Android中最具有特色的进程间通信方式就是Binder了，通过Binder可以轻松地实现进程间通信。除了Binder，Android还支持Socket，通过Socket也可以实现任意两个终端之间的通信，当然同一个设备上的两个进程通过Socket通信自然也是可以的。</p>
+<p>说到IPC的使用场景就必须提到多进程，只有面对多进程这种场景下，才需要考虑进程间通信。如果只有一个进程在运行，又何谈多进程呢？多进程的情况分两种：第一种情况是一个应用因为某些原因自身需要采用多进程模式来实现，比如有些模块由于特殊原因需要运行在单独的进程中，又或者为了加大一个应用可使用的内存所以需要通过多进程来获取多份内存空间。另一种情况是当前应用需要向其他应用获取数据，由于是两个应用，所以必须采用跨进程的方式来获取所需的数据，甚至我们通过系统提供的ContentProvider去查询数据的时候，其实也是一种进程间通信，只不过通信细节被系统屏蔽了，我们无法感知而已。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat.jpeg" alt="Zane WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpeg" alt="Zane Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/16/IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL/" rel="next" title="IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL">
+                <i class="fa fa-chevron-left"></i> IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
           
@@ -326,6 +516,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/05/16/IPC机制-Android-IPC简介/"
+           data-title="IPC机制-Android IPC简介" data-url="http://zanelove.github.io/2017/05/16/IPC机制-Android-IPC简介/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -561,6 +759,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 
