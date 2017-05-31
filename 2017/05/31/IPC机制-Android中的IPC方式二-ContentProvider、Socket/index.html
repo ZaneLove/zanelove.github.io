@@ -117,7 +117,7 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20160302195846702">
 <meta property="og:image" content="http://img.blog.csdn.net/20160305212303211">
 <meta property="og:image" content="http://img.blog.csdn.net/20160306215124047">
-<meta property="og:updated_time" content="2017-05-31T12:05:00.000Z">
+<meta property="og:updated_time" content="2017-05-31T12:09:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IPC机制-Android中的IPC方式二-ContentProvider、Socket">
 <meta name="twitter:description" content="我们生活在这个孤独的蓝色星球，无论经历怎样的欢欣与苦痛，在这世界上你永远不是孤身一人，有爱、有梦、有朋友，还有这么美好的世界！
@@ -433,6 +433,7 @@
 </blockquote>
 <p>本节继续讲解Android中的IPC方式，在上一节<a href="http://zanelove.github.io/2017/05/16/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%B8%80-Bundle%E3%80%81%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E3%80%81Messenger%E3%80%81AIDL/">IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL</a>当中我们已经讲解了如何使用Bundle、文件共享、Messenger以及AIDL来完成跨进程间通信，未阅读该节的读者，不妨进去瞧瞧。</p>
 <p>那么，接下来我将继续为大家讲解上节未完成的内容。</p>
+<a id="more"></a>
 <h2 id="使用ContentProvider"><a href="#使用ContentProvider" class="headerlink" title="使用ContentProvider"></a>使用ContentProvider</h2><p>ContentProvider是Android中提供的专门用于不同应用间进行数据共享的方式，从这一点来看，它天生就适合进程间通信。和Messenger一样，ContentProvider的底层实现同样也是Binder，由此可见，Binder在Android系统中是何等的重要。</p>
 <p>ContentProvider虽然使用起来很简单，但它的细节还是相当多，比如CRUD操作，防止SQL注入和权限控制等。在本节中，不对ContentProvider的使用细节以及工作机制进行详细分析，在这里只介绍采用ContentProvider进行跨进程通信的主要流程，至于使用细节和内部工作机制请阅读。</p>
 <p>系统预置了许多ContentProvider，比如通讯录信息，日程表信息等，要跨进程访问这些信息，只需要通过ContentProvider的query、update、insert和delete方法即可。接下来，我们实现一个自定义的ContentProvider，并演示如何在其他应用中获取ContentProvider中的数据从而实现进程间通信这一目的。</p>

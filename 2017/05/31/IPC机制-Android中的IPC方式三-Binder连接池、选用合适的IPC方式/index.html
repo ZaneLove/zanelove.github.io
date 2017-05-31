@@ -117,7 +117,7 @@ Binder连接池就IPC机制系列中，我们介绍了不同的IPC方式，不�
 <meta property="og:image" content="http://img.blog.csdn.net/20160309105839820">
 <meta property="og:image" content="http://img.blog.csdn.net/20160309130956461">
 <meta property="og:image" content="http://img.blog.csdn.net/20160307190104961">
-<meta property="og:updated_time" content="2017-05-31T12:07:21.000Z">
+<meta property="og:updated_time" content="2017-05-31T12:09:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IPC机制-Android中的IPC方式三-Binder连接池、选用合适的IPC方式">
 <meta name="twitter:description" content="有人说，一个男人变老的两大标志是不断后退的发际线和不断增长的腰围；其实，一个人真正变老的标志是，他觉得人生一眼望得到头，不会再有改变，于是放弃了学习，放弃了提升自己
@@ -432,6 +432,7 @@ Binder连接池就IPC机制系列中，我们介绍了不同的IPC方式，不�
 <p>有人说，一个男人变老的两大标志是不断后退的发际线和不断增长的腰围；其实，一个人真正变老的标志是，他觉得人生一眼望得到头，不会再有改变，于是放弃了学习，放弃了提升自己</p>
 </blockquote>
 <h2 id="Binder连接池"><a href="#Binder连接池" class="headerlink" title="Binder连接池"></a>Binder连接池</h2><p>就IPC机制系列中，我们介绍了不同的IPC方式，不同的IPC方式有不同的特点和适用场景。在该节中我们再次介绍一下AIDL，原因是AIDL是一种最常见的进程间通信方式，是日常开发中涉及进程间通信时的首选，所以我们需要额外强调一下它。</p>
+<a id="more"></a>
 <p>如何使用AIDL在<a href="http://zanelove.github.io/2017/05/16/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%B8%80-Bundle%E3%80%81%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E3%80%81Messenger%E3%80%81AIDL/">IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL</a>中进行了介绍，这里再回顾一下大致的流程：首先，创建一个Service和一个AIDL接口；接着，创建一个类继承自AIDL接口中的Stub类并实现其抽象方法，在Service的onBind方法中返回这个类的对象，然后客户端就可以绑定服务端的Service，建立连接后就可以访问远程服务端的方法了。</p>
 <p>上述过程就是典型的AIDL的使用流程。这本没什么问题，但是现在考虑一种情况：公司的项目越来越庞大了，现在有10个不同的业务模块都需要使用AIDL来进行进程间通信，那我们该怎么办呢？也许你会说：“就按照AIDL的实现方式一个个来嘛”，这也不是不可以，但是用这种方法的话，首先我们需要创建10个Service，这好像有点多哈！如果有100个地方需要用到AIDL呢？那你就得先创建100个Service咯？到这里，我们应该明白问题所在了。随着AIDL数量的增加，我们不能无限制地增加Service，Service是四大组件之一，本身就是一种系统资源。而且开启太多的Service会使得我们的应用看起来很重量级，因为正在运行的Service可以在应用详情页看到，当我们的应用详情显示有10个服务正在运行时，这看起来不是件好事。针对上述问题，需要减少Service的数量， 将所有的AIDL放在同一个Service中去管理。</p>
 <p>在这种模式下，整个工作机制是这样的：每个业务模块创建自己的AIDL接口并实现此接口，这个时候不同业务模块之间是不能有耦合的，所有实现细节我们要单独开来，然后向服务端提供自己的唯一标识和其对应的Binder对象；对于服务端来说，只需要一个Service就可以了，服务端提供一个queryBinder接口方法，这个接口方法能够根据业务模块的特征来返回相应的Binder对象给它们，不同的业务模块拿到所需的Binder对象后就可以进行远程方法调用了。由此可见，Binder连接池的主要作用就是将每个业务模块的Binder请求统一转发到远程Service中去执行，从而避免了重复创建Service的过程，它的工作原理如图：</p>

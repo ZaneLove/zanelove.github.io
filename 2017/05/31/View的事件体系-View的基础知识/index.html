@@ -116,7 +116,7 @@
 虽然说View不属于四大组件，但是它的作用堪比四大组件，甚至比Receiver和Provider的重要性都要大。在Android中，Activity承担着可视化的功能，同时Android系">
 <meta property="og:image" content="http://img.blog.csdn.net/20160316202434516">
 <meta property="og:image" content="http://img.blog.csdn.net/20160322205838021">
-<meta property="og:updated_time" content="2017-05-31T12:05:37.000Z">
+<meta property="og:updated_time" content="2017-05-31T12:09:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="View的事件体系-View的基础知识">
 <meta name="twitter:description" content="If you lose your way, you ‘ll go against the wind from all the wrong directions. 如果失去了方向，那么所有方向吹过了的都是逆风
@@ -431,6 +431,7 @@
 <p>If you lose your way, you ‘ll go against the wind from all the wrong directions. 如果失去了方向，那么所有方向吹过了的都是逆风</p>
 </blockquote>
 <p>虽然说View不属于四大组件，但是它的作用堪比四大组件，甚至比Receiver和Provider的重要性都要大。在Android中，Activity承担着可视化的功能，同时Android系统提供了很多基础控件，常见的有Button、TextView、CheckBox等。很多时候仅仅使用系统提供的控件是不能满足需求的，因此我们就需要能够根据需求进行新控件的定义，而控件的自定义就需要对Android的View的体系有深入的理解，只有这样才能写出完美的<strong>自定义控件</strong>。同时Android手机属于移动设备，移动设备的一个特点就是用户可以直接通过屏幕来进行一系列操作，一个典型的场景就是屏幕的滑动，用户可以通过滑动来切换到不同的界面。很多情况下我们的应用都需要支持滑动操作，当处于不同层级的View都可以响应用户的滑动操作时，就会带来一个问题，那就是<strong>滑动冲突</strong>。如何解决该问题，就需要读者对 <strong>View的事件分发机制</strong> 有一定的了解。上述内容就是接下来我要和大伙一起探讨的内容。</p>
+<a id="more"></a>
 <h2 id="View的基础知识"><a href="#View的基础知识" class="headerlink" title="View的基础知识"></a>View的基础知识</h2><p>这里主要介绍View的一些基础知识，从而为更好地介绍后续的内容做铺垫。主要介绍的内容有：View的位置参数、MotionEvent和TouchSlop对象、VelocityTracker、GestureDetector和Scroller对象，通过对这些基础知识的介绍，可以方便大伙理解更复杂的内容。</p>
 <h3 id="一、什么是View"><a href="#一、什么是View" class="headerlink" title="一、什么是View"></a>一、什么是View</h3><p>在介绍View的基础知识之前，首先要知道到底什么是View。<strong>View是Android中所有控件的基类</strong>，不管是简单的Button和TextView还是复杂的RelativeLayout或者ListView，它们的共同基类都是View。所以说，<strong>View是一种界面层的控件的一种抽象，它代表了一个控件。除了Viwe，还有ViewGroup，从名字来看，它可以翻译为控件组，言外之意是ViewGroup内部包含了许多个控件，即一组View。在Android的设计中，ViewGroup也继承了View，这就意味着View本身就可以是单个控件也可以是由多个控件组成的一组控件</strong>，通过这种关系就形成了View树的结构，这和Web前端中的DOM树的概念是相似的。根据这个概念，我们知道，Button显示是一个View，而比如 <strong>LinearLayout（五大布局之一；分别为LinearLayout、RelativeLayout、TableLayout、FrameLayout、AbsoluteLayou）不但是一个View而且还是一个ViewGroup，而ViewGroup内部是可以有子View的，这个子View同样还可以是ViewGroup，依次类推。</strong></p>
 <h3 id="二、View的位置参数"><a href="#二、View的位置参数" class="headerlink" title="二、View的位置参数"></a>二、View的位置参数</h3><p>View的位置主要由它的四个顶点来决定，分别对应于View的四个属性：top、left、right、bottom，其中top是左上角纵坐标，left是左上角横坐标，right是右下角横坐标，bottom是右下角纵坐标。<strong>需要注意的是，这些坐标都是相对于View的父容器来说的，因此它是一种相对坐标。在Android中，x轴和y轴的正方向为右和下，不仅仅是Android，大部分显示系统都是按照这个标准来定义坐标系的。</strong></p>

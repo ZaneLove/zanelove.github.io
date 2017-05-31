@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zanelove.github.io/"/>
-  <updated>2017-05-31T12:05:00.000Z</updated>
+  <updated>2017-05-31T12:09:57.000Z</updated>
   <id>http://zanelove.github.io/</id>
   
   <author>
@@ -20,14 +20,15 @@
     <link href="http://zanelove.github.io/2017/05/31/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%BA%8C-ContentProvider%E3%80%81Socket/"/>
     <id>http://zanelove.github.io/2017/05/31/IPC机制-Android中的IPC方式二-ContentProvider、Socket/</id>
     <published>2017-05-31T12:03:50.000Z</published>
-    <updated>2017-05-31T12:05:00.000Z</updated>
+    <updated>2017-05-31T12:09:57.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;我们生活在这个孤独的蓝色星球，无论经历怎样的欢欣与苦痛，在这世界上你永远不是孤身一人，有爱、有梦、有朋友，还有这么美好的世界！&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;本节继续讲解Android中的IPC方式，在上一节&lt;a href=&quot;http:
+&lt;p&gt;本节继续讲解Android中的IPC方式，在上一节&lt;a href=&quot;http://zanelove.github.io/2017/05/16/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%B8%80-Bundle%E3%80%81%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E3%80%81Messenger%E3%80%81AIDL/&quot;&gt;IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL&lt;/a&gt;当中我们已经讲解了如何使用Bundle、文件共享、Messenger以及AIDL来完成跨进程间通信，未阅读该节的读者，不妨进去瞧瞧。&lt;/p&gt;
+&lt;p&gt;那么，接下来我将继续为大家讲解上节未完成的内容。&lt;/p&gt;
     
     </summary>
     
@@ -43,14 +44,14 @@
     <link href="http://zanelove.github.io/2017/05/31/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%B8%89-Binder%E8%BF%9E%E6%8E%A5%E6%B1%A0%E3%80%81%E9%80%89%E7%94%A8%E5%90%88%E9%80%82%E7%9A%84IPC%E6%96%B9%E5%BC%8F/"/>
     <id>http://zanelove.github.io/2017/05/31/IPC机制-Android中的IPC方式三-Binder连接池、选用合适的IPC方式/</id>
     <published>2017-05-31T12:00:59.000Z</published>
-    <updated>2017-05-31T12:07:21.000Z</updated>
+    <updated>2017-05-31T12:09:46.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;有人说，一个男人变老的两大标志是不断后退的发际线和不断增长的腰围；其实，一个人真正变老的标志是，他觉得人生一眼望得到头，不会再有改变，于是放弃了学习，放弃了提升自己&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;Binder连接池&quot;&gt;&lt;a h
+&lt;h2 id=&quot;Binder连接池&quot;&gt;&lt;a href=&quot;#Binder连接池&quot; class=&quot;headerlink&quot; title=&quot;Binder连接池&quot;&gt;&lt;/a&gt;Binder连接池&lt;/h2&gt;&lt;p&gt;就IPC机制系列中，我们介绍了不同的IPC方式，不同的IPC方式有不同的特点和适用场景。在该节中我们再次介绍一下AIDL，原因是AIDL是一种最常见的进程间通信方式，是日常开发中涉及进程间通信时的首选，所以我们需要额外强调一下它。&lt;/p&gt;
     
     </summary>
     
@@ -66,14 +67,14 @@
     <link href="http://zanelove.github.io/2017/05/31/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     <id>http://zanelove.github.io/2017/05/31/View的事件体系-View的基础知识/</id>
     <published>2017-05-31T11:58:45.000Z</published>
-    <updated>2017-05-31T12:05:37.000Z</updated>
+    <updated>2017-05-31T12:09:17.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;If you lose your way, you ‘ll go against the wind from all the wrong directions. 如果失去了方向，那么所有方向吹过了的都是逆风&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p
+&lt;p&gt;虽然说View不属于四大组件，但是它的作用堪比四大组件，甚至比Receiver和Provider的重要性都要大。在Android中，Activity承担着可视化的功能，同时Android系统提供了很多基础控件，常见的有Button、TextView、CheckBox等。很多时候仅仅使用系统提供的控件是不能满足需求的，因此我们就需要能够根据需求进行新控件的定义，而控件的自定义就需要对Android的View的体系有深入的理解，只有这样才能写出完美的&lt;strong&gt;自定义控件&lt;/strong&gt;。同时Android手机属于移动设备，移动设备的一个特点就是用户可以直接通过屏幕来进行一系列操作，一个典型的场景就是屏幕的滑动，用户可以通过滑动来切换到不同的界面。很多情况下我们的应用都需要支持滑动操作，当处于不同层级的View都可以响应用户的滑动操作时，就会带来一个问题，那就是&lt;strong&gt;滑动冲突&lt;/strong&gt;。如何解决该问题，就需要读者对 &lt;strong&gt;View的事件分发机制&lt;/strong&gt; 有一定的了解。上述内容就是接下来我要和大伙一起探讨的内容。&lt;/p&gt;
     
     </summary>
     
