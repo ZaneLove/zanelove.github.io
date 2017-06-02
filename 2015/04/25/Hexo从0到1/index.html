@@ -126,7 +126,15 @@ SSL：CloudFlare">
 <meta property="og:image" content="http://img.blog.csdn.net/20151219143049859">
 <meta property="og:image" content="http://img.blog.csdn.net/20151219150213597">
 <meta property="og:image" content="http://img.blog.csdn.net/20151219153039062">
-<meta property="og:updated_time" content="2017-06-01T14:05:41.000Z">
+<meta property="og:image" content="http://img.blog.csdn.net/20151220110524959">
+<meta property="og:image" content="http://img.blog.csdn.net/20160122123251840">
+<meta property="og:image" content="http://img.blog.csdn.net/20160122112455291">
+<meta property="og:image" content="http://img.blog.csdn.net/20151219190231209">
+<meta property="og:image" content="http://img.blog.csdn.net/20151219190644759">
+<meta property="og:image" content="http://img.blog.csdn.net/20151219190820977">
+<meta property="og:image" content="http://img.blog.csdn.net/20151219191418372">
+<meta property="og:image" content="http://img.blog.csdn.net/20151219191332725">
+<meta property="og:updated_time" content="2017-06-02T12:23:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo从0到1">
 <meta name="twitter:description" content="对程序员而言，最好的简历就是个人博客和GitHub.
@@ -556,6 +564,105 @@ SSL：CloudFlare">
 <li><p>给自己博客做SEO。有好的SEO便于搜索引擎索引你的网站，随着以后读者增多，他们可以更好搜索到你的网站，<a href="http://www.arao.me/2015/hexo-next-theme-optimize-seo/" target="_blank" rel="external">具体方法见此</a>。</p>
 </li>
 </ul>
+<h3 id="专属域名"><a href="#专属域名" class="headerlink" title="专属域名"></a>专属域名</h3><h4 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h4><p>速速前往万网或相关域名购买网站，按自己名字挑选一个闪闪发光的个人域名吧！</p>
+<h4 id="域名解析-1"><a href="#域名解析-1" class="headerlink" title="域名解析_1"></a>域名解析_1</h4><p>以购买的域名wingjay.com为例，我们希望在访问这个域名时能自动进入Github Pages，所以我们要在万网建立一个CNAME纪录来帮我们做一个域名跳转：wingjay.com -&gt; wingjay.github.io，www.wingjay.com -&gt; wingjay.github.io。添加方法<a href="http://www.sudu.cn/service/detail/1/0/0/3/10036.html" target="_blank" rel="external">参考</a>这里，添加后可以看到两条记录：</p>
+<p><img src="http://img.blog.csdn.net/20151220110524959" alt=""></p>
+<p>然后万网会在世界各地的DNS服务器上添加这两条记录，当用户访问wingjay.com时会自动去访问wingjay.github.io。</p>
+<h4 id="域名解析-2"><a href="#域名解析-2" class="headerlink" title="域名解析_2"></a>域名解析_2</h4><p>但是，此时并不能成功访问，因为Github Pages是有限制的，它不允许任意域名都跳转过来，而是只限制一个域名，而且这个域名必须声明在CNAME文件中。</p>
+<p>所以，我们需要添加一个CNAME文件到项目的master中才行，<a href="https://help.github.com/articles/adding-a-cname-file-to-your-repository/" target="_blank" rel="external">参考这里</a>。读者可以<a href="https://github.com/wingjay/wingjay.github.io/blob/master/CNAME" target="_blank" rel="external">参考本人的CNAME文件内容</a>。</p>
+<p>不过，对于Hexo 3，这里有一个坑要注意：大家应该还记得上文说的，master分支里的内容都是自动生成的，而且会完全覆盖之前的内容。如果我们直接创建一个新文件CNAME，填好域名。但会发现在下一次部署后这个文件就消失了。不用惊讶，因为hexo并不会自动生成CNAME文件，所以在部署时被覆盖删除了。</p>
+<p>所以，我们就需要这个CNAME工具<a href="https://github.com/leecrossley/hexo-generator-cname" target="_blank" rel="external">hexo-generator-cname</a>，这时会自动在public里生成一个CNAME文件，把你的域名加进去再部署一下吧！</p>
+<h4 id="HTTP-gt-HTTPS"><a href="#HTTP-gt-HTTPS" class="headerlink" title="HTTP -&gt; HTTPS"></a>HTTP -&gt; HTTPS</h4><p>HTTPS是安全版的HTTP协议，它在http协议与TCP之间加入SSL层，采用端口443，不仅会对传输数据加密，还会进行身份验证。当然个人博客并没有强制性要求采用该协议，这也只是本人的好奇而为。</p>
+<p>目前Github Pages已经支持https了，但是不支持自定义证书。不过我们可以利用<a href="https://www.cloudflare.com/" target="_blank" rel="external">CloudFlare</a>来实现。具体实现可以<a href="https://www.benburwell.com/posts/configuring-cloudflare-universal-ssl/" target="_blank" rel="external">参考这里</a>。</p>
+<p>说明：po主网站的https正处在申请中</p>
+<h3 id="多说评论"><a href="#多说评论" class="headerlink" title="多说评论"></a>多说评论</h3><p>使用多说前需要先在<a href="http://duoshuo.com/" target="_blank" rel="external">多说</a>创建一个站点。具体步骤如下：</p>
+<ul>
+<li>登录后在首页选择 “我要安装”。</li>
+<li>创建站点，填写站点相关信息。（注意：多说域名这一栏填写的即是你的duoshuo_shortname）</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20160122123251840" alt=""></p>
+<ul>
+<li>编辑站点的_config.yml，添加duoshuo_shortname字段，设置如下:（注意：不是主题的_config.yml文件）</li>
+</ul>
+<blockquote>
+<p>duoshuo_shortname: your-duoshuo-shortname</p>
+</blockquote>
+<p>（注意：duoshuo_shortname: 你的多说二级域名要去掉.duoshuo.com 部分，如：duoshuo_shortname: zanelove-comment）</p>
+<ul>
+<li>创建站点成功之后，即可获取代码，将代码粘帖到您网页代码与间的任意位置。如果您的网站使用模板，请粘帖到模板代码中。（本人使用的是Next主题，因此本人将代码复制到themes\next\layout_partials\duoshuo-hot-articles.swig文件当中的模板代码中），如：（如果使用下面的代码，只需要替换模板代码即可）</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20160122112455291" alt=""></p>
+<h3 id="RSS订阅"><a href="#RSS订阅" class="headerlink" title="RSS订阅"></a>RSS订阅</h3><p>编辑 主题配置文件，将 rss 字段设置为：</p>
+<ul>
+<li><p>rss: false，这将会禁用Feed链接。</p>
+</li>
+<li><p>rss:，当值为空的时候，默认会使用站点的 Feed 链接。在此之前需要使用 <a href="https://github.com/hexojs/hexo-generator-feed" target="_blank" rel="external">hexo-generator-feed</a> 插件生成 Feed。</p>
+</li>
+</ul>
+<p>依照 hexo-generator-feed 插件的安装说明进行 Feed 生成：</p>
+<blockquote>
+<p>$ npm install hexo-generator-feed –save</p>
+</blockquote>
+<p>当配件配置完毕后，主题将自动显示 Feed 链接；同时在<strong>主题配置文件</strong>中添加如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">feed:</div><div class="line">  type: atom</div><div class="line">  path: atom.xml</div><div class="line">  limit: 20</div><div class="line">  hub:</div><div class="line">rss: http://your-feed-url，指定特定的链接地址，适用于已经烧制过 Feed 的情形。</div></pre></td></tr></table></figure>
+<h3 id="总结一些Bug"><a href="#总结一些Bug" class="headerlink" title="总结一些Bug"></a>总结一些Bug</h3><ul>
+<li>有童鞋反应右键菜单中没有git bash选项，可以进入开始菜单找到git bash，然后通过cd进入相应目录执行命令。</li>
+<li>在github部署完成之后，马上访问可能出现404错误，这是正常的，（最多）等待十分钟左右就可以访问了。如果还不行，那很可能是 github 发送给你的验证邮件你没有打开看，据多方反映，验证后就没问题了。</li>
+<li>如果在hexo d之后出现fatal: ‘username.github.io’ does not appear to be a git repository，一是检查 repo 的名字是否合乎规范、是否含有大写字母、config.yml 中的 deploy 配置是否正确，二是把 git bash 关掉，重新打开再执行命令。</li>
+<li>有的童鞋可能不是 IT 界的，或者对shell 命令不太了解。在要求输入密码时，你输入之后密码是不显示的，这是为了安全，并非是你没输上。</li>
+<li>出现乱码的，不要使用 windows 中的「记事本」打开并编辑文件，推荐使用 sublime text，很简单。如果已经在「记事本」中编辑过，需要使用 sublime text 转码为「utf8」。</li>
+<li>安装 hexo 时卡在那儿不动，很可能是网络不给力，能全局 break wall 就好了。</li>
+<li>遇到什么其他的问题，不妨删除.deploy 和db.json 再重新生成试一试。</li>
+<li>执行命令：npm install -g hexo，报错如下：</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20151219190231209" alt=""></p>
+<p>莫非是因为被墙了？换国内镜像源试试。</p>
+<blockquote>
+<p>$ npm config set registry=”<a href="http://registry.cnpmjs.org" target="_blank" rel="external">http://registry.cnpmjs.org</a>“</p>
+</blockquote>
+<p>然后再次执行下面的命令，成功！</p>
+<blockquote>
+<p>npm install -g hexo</p>
+</blockquote>
+<ul>
+<li>执行命令：hexo d，报错如下：</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20151219190644759" alt=""></p>
+<p>执行命令：npm install hexo-deployer-git –save，再次执行hexo d，如果再次报错：</p>
+<p><img src="http://img.blog.csdn.net/20151219190820977" alt=""></p>
+<p>估计必须要在GitHub上配置SSH，然后才可以上传文件。</p>
+<p><strong>配置SSH：</strong></p>
+<p>1、设置Git的user.name和user.email</p>
+<p>在第一次使用Git时，你需要告诉你的协同开发者，你是谁以及你的邮箱，在你提交的时候，Git需要这两个信息。具体通过以下命令设置：</p>
+<blockquote>
+<p>$ git config –global user.name “voidking”</p>
+<p>$ git config –global user.email “voidking@qq.com”</p>
+</blockquote>
+<p>需要注意的是，这里的name随意，邮箱是你的联系邮箱，与github完全无关。</p>
+<p>查看配置命令：</p>
+<blockquote>
+<p>$ git config –list</p>
+</blockquote>
+<p>2、生成SSH密钥</p>
+<blockquote>
+<p>$ ssh-keygen -t rsa -C “您的邮箱”</p>
+</blockquote>
+<p>按3个回车，密码为空。</p>
+<p><img src="http://img.blog.csdn.net/20151219191418372" alt=""></p>
+<p>在C:\Users\Administrator.ssh下，得到两个文件id_rsa和id_rsa.pub。需要注意的是，命令中的-C参数，后面跟的内容是注释。也就是说，内容随意，与github完全无关。</p>
+<p>3、在GitHub上添加SSH密钥</p>
+<p>打开id_rsa.pub，复制全文。<a href="https://github.com/settings/ssh" target="_blank" rel="external">https://github.com/settings/ssh</a> ，Add SSH key，粘贴进去。</p>
+<p>4、测试</p>
+<blockquote>
+<p>$ ssh git@github.com</p>
+</blockquote>
+<p>出现提示信息：</p>
+<p><img src="http://img.blog.csdn.net/20151219191332725" alt=""></p>
+<p>5、再次部署</p>
+<blockquote>
+<p>hexo d</p>
+</blockquote>
+<p>根据提示输入用户名和密码，等待一会儿便成功了！</p>
 
       
     </div>
@@ -808,7 +915,7 @@ SSL：CloudFlare">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、瞧瞧兵器"><span class="nav-number">1.</span> <span class="nav-text">一、瞧瞧兵器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、抄起家伙"><span class="nav-number">2.</span> <span class="nav-text">二、抄起家伙</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub-Pages"><span class="nav-number">2.1.</span> <span class="nav-text">GitHub Pages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Hexo博客框架"><span class="nav-number">2.2.</span> <span class="nav-text">安装Hexo博客框架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Hexo"><span class="nav-number">2.2.1.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GitHub管理"><span class="nav-number">2.2.2.</span> <span class="nav-text">GitHub管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化Hexo"><span class="nav-number">2.2.3.</span> <span class="nav-text">初始化Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#熟悉Hexo"><span class="nav-number">2.2.4.</span> <span class="nav-text">熟悉Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置Hexo"><span class="nav-number">2.2.5.</span> <span class="nav-text">配置Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#部署Hexo"><span class="nav-number">2.2.6.</span> <span class="nav-text">部署Hexo</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置NexT主题"><span class="nav-number">2.3.</span> <span class="nav-text">配置NexT主题</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、瞧瞧兵器"><span class="nav-number">1.</span> <span class="nav-text">一、瞧瞧兵器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、抄起家伙"><span class="nav-number">2.</span> <span class="nav-text">二、抄起家伙</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub-Pages"><span class="nav-number">2.1.</span> <span class="nav-text">GitHub Pages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Hexo博客框架"><span class="nav-number">2.2.</span> <span class="nav-text">安装Hexo博客框架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Hexo"><span class="nav-number">2.2.1.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GitHub管理"><span class="nav-number">2.2.2.</span> <span class="nav-text">GitHub管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化Hexo"><span class="nav-number">2.2.3.</span> <span class="nav-text">初始化Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#熟悉Hexo"><span class="nav-number">2.2.4.</span> <span class="nav-text">熟悉Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置Hexo"><span class="nav-number">2.2.5.</span> <span class="nav-text">配置Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#部署Hexo"><span class="nav-number">2.2.6.</span> <span class="nav-text">部署Hexo</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置NexT主题"><span class="nav-number">2.3.</span> <span class="nav-text">配置NexT主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#专属域名"><span class="nav-number">2.4.</span> <span class="nav-text">专属域名</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#购买域名"><span class="nav-number">2.4.1.</span> <span class="nav-text">购买域名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#域名解析-1"><span class="nav-number">2.4.2.</span> <span class="nav-text">域名解析_1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#域名解析-2"><span class="nav-number">2.4.3.</span> <span class="nav-text">域名解析_2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP-gt-HTTPS"><span class="nav-number">2.4.4.</span> <span class="nav-text">HTTP -> HTTPS</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多说评论"><span class="nav-number">2.5.</span> <span class="nav-text">多说评论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RSS订阅"><span class="nav-number">2.6.</span> <span class="nav-text">RSS订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结一些Bug"><span class="nav-number">2.7.</span> <span class="nav-text">总结一些Bug</span></a></li></ol></li></ol></div>
             
 
           </div>
