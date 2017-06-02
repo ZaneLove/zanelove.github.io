@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo," />
+  <meta name="keywords" content="Android," />
 
 
 
@@ -104,39 +104,29 @@
 
 
 
-<meta name="description" content="对程序员而言，最好的简历就是个人博客和GitHub.
+<meta name="description" content="世界如此之大，做一个什么样的自己完全取决于你的选择
 
-一、瞧瞧兵器
-博客框架：Hexo 3，这是一款能快速、简洁且高效的博客框架，支持Markdown编辑，自动渲染出漂亮的静态页面。
-前端主题：Next，效果参考:http://zanelove.github.io
-域名购买：类似万网的平台都可以，你可以选购自己名字的域名，一年几十元左右，两杯咖啡的钱。
-SSL：CloudFlare">
+通过给四大组件指定android:process属性，我们可以轻易地开启多进程模式，这看起来很简单，但是实际使用过程中却暗藏杀机，有时候我们通过多进程得到的好处甚至都不足以弥补使用多进程所带来的代码层面的负面影响。
+开启多进程模式首先，在Android中使用多进程只有一种方法，那就是通过给四大组件（Activity、Service、Recei">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo从0到1">
-<meta property="og:url" content="http://zanelove.github.io/2015/04/25/Hexo从0到1/index.html">
+<meta property="og:title" content="IPC机制-Android中的多进程模式">
+<meta property="og:url" content="http://zanelove.github.io/2015/06/04/IPC机制-Android中的多进程模式/index.html">
 <meta property="og:site_name" content="Zane'Blog">
-<meta property="og:description" content="对程序员而言，最好的简历就是个人博客和GitHub.
+<meta property="og:description" content="世界如此之大，做一个什么样的自己完全取决于你的选择
 
-一、瞧瞧兵器
-博客框架：Hexo 3，这是一款能快速、简洁且高效的博客框架，支持Markdown编辑，自动渲染出漂亮的静态页面。
-前端主题：Next，效果参考:http://zanelove.github.io
-域名购买：类似万网的平台都可以，你可以选购自己名字的域名，一年几十元左右，两杯咖啡的钱。
-SSL：CloudFlare">
-<meta property="og:image" content="http://img.blog.csdn.net/20151219124835978">
-<meta property="og:image" content="http://img.blog.csdn.net/20151219143049859">
-<meta property="og:image" content="http://img.blog.csdn.net/20151219150213597">
-<meta property="og:image" content="http://img.blog.csdn.net/20151219153039062">
-<meta property="og:updated_time" content="2017-06-01T14:05:41.000Z">
+通过给四大组件指定android:process属性，我们可以轻易地开启多进程模式，这看起来很简单，但是实际使用过程中却暗藏杀机，有时候我们通过多进程得到的好处甚至都不足以弥补使用多进程所带来的代码层面的负面影响。
+开启多进程模式首先，在Android中使用多进程只有一种方法，那就是通过给四大组件（Activity、Service、Recei">
+<meta property="og:image" content="http://img.blog.csdn.net/20160112130725566">
+<meta property="og:image" content="http://img.blog.csdn.net/20160112150814530">
+<meta property="og:image" content="http://img.blog.csdn.net/20160112165045733">
+<meta property="og:updated_time" content="2017-06-02T11:27:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo从0到1">
-<meta name="twitter:description" content="对程序员而言，最好的简历就是个人博客和GitHub.
+<meta name="twitter:title" content="IPC机制-Android中的多进程模式">
+<meta name="twitter:description" content="世界如此之大，做一个什么样的自己完全取决于你的选择
 
-一、瞧瞧兵器
-博客框架：Hexo 3，这是一款能快速、简洁且高效的博客框架，支持Markdown编辑，自动渲染出漂亮的静态页面。
-前端主题：Next，效果参考:http://zanelove.github.io
-域名购买：类似万网的平台都可以，你可以选购自己名字的域名，一年几十元左右，两杯咖啡的钱。
-SSL：CloudFlare">
-<meta name="twitter:image" content="http://img.blog.csdn.net/20151219124835978">
+通过给四大组件指定android:process属性，我们可以轻易地开启多进程模式，这看起来很简单，但是实际使用过程中却暗藏杀机，有时候我们通过多进程得到的好处甚至都不足以弥补使用多进程所带来的代码层面的负面影响。
+开启多进程模式首先，在Android中使用多进程只有一种方法，那就是通过给四大组件（Activity、Service、Recei">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20160112130725566">
 
 
 
@@ -164,13 +154,13 @@ SSL：CloudFlare">
 
 
 
-  <link rel="canonical" href="http://zanelove.github.io/2015/04/25/Hexo从0到1/"/>
+  <link rel="canonical" href="http://zanelove.github.io/2015/06/04/IPC机制-Android中的多进程模式/"/>
 
 
 
 
 
-  <title> Hexo从0到1 | Zane'Blog </title>
+  <title> IPC机制-Android中的多进程模式 | Zane'Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -323,7 +313,7 @@ SSL：CloudFlare">
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://zanelove.github.io/2015/04/25/Hexo从0到1/">
+  <link itemprop="mainEntityOfPage" href="http://zanelove.github.io/2015/06/04/IPC机制-Android中的多进程模式/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Zane">
@@ -347,7 +337,7 @@ SSL：CloudFlare">
             
             
               
-                Hexo从0到1
+                IPC机制-Android中的多进程模式
               
             
           </h1>
@@ -362,8 +352,8 @@ SSL：CloudFlare">
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-04-25T20:13:40+08:00">
-                2015-04-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-04T22:19:00+08:00">
+                2015-06-04
               </time>
             
 
@@ -385,8 +375,8 @@ SSL：CloudFlare">
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
                   </a>
                 </span>
 
@@ -403,8 +393,8 @@ SSL：CloudFlare">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2015/04/25/Hexo从0到1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/25/Hexo从0到1/" itemprop="commentCount"></span>
+                <a href="/2015/06/04/IPC机制-Android中的多进程模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/04/IPC机制-Android中的多进程模式/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -414,7 +404,7 @@ SSL：CloudFlare">
 
           
           
-             <span id="/2015/04/25/Hexo从0到1/" class="leancloud_visitors" data-flag-title="Hexo从0到1">
+             <span id="/2015/06/04/IPC机制-Android中的多进程模式/" class="leancloud_visitors" data-flag-title="IPC机制-Android中的多进程模式">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -442,120 +432,45 @@ SSL：CloudFlare">
 
       
         <blockquote>
-<p>对程序员而言，最好的简历就是个人博客和GitHub.</p>
+<p>世界如此之大，做一个什么样的自己完全取决于你的选择</p>
 </blockquote>
-<h2 id="一、瞧瞧兵器"><a href="#一、瞧瞧兵器" class="headerlink" title="一、瞧瞧兵器"></a>一、瞧瞧兵器</h2><ul>
-<li>博客框架：<a href="https://hexo.io/" target="_blank" rel="external">Hexo 3</a>，这是一款能快速、简洁且高效的博客框架，支持Markdown编辑，自动渲染出漂亮的静态页面。</li>
-<li>前端主题：<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">Next</a>，效果参考:<a href="http://zanelove.github.io">http://zanelove.github.io</a></li>
-<li>域名购买：类似万网的平台都可以，你可以选购自己名字的域名，一年几十元左右，两杯咖啡的钱。</li>
-<li>SSL：CloudFlare</li>
-</ul>
+<p>通过给四大组件指定android:process属性，我们可以轻易地开启多进程模式，这看起来很简单，但是实际使用过程中却暗藏杀机，有时候我们通过多进程得到的好处甚至都不足以弥补使用多进程所带来的代码层面的负面影响。</p>
+<h2 id="开启多进程模式"><a href="#开启多进程模式" class="headerlink" title="开启多进程模式"></a>开启多进程模式</h2><p>首先，<strong>在Android中使用多进程只有一种方法，那就是通过给四大组件（Activity、Service、Receiver、ContentProvider）在AndroidMenifest.xml中指定android:process属性</strong>，除此之外没有其他办法，也就是说我们无法给一个进程或一个实体类指定其运行时所在的进程。<strong>其实还有另一种非常规的多进程方法，那就是通过JNI在native层去fork一个新的进程。</strong></p>
 <a id="more"></a>
-<h2 id="二、抄起家伙"><a href="#二、抄起家伙" class="headerlink" title="二、抄起家伙"></a>二、抄起家伙</h2><h3 id="GitHub-Pages"><a href="#GitHub-Pages" class="headerlink" title="GitHub Pages"></a>GitHub Pages</h3><p>在不购买服务器的前提下，我们的网站需要挂在GitHub Pages上！</p>
-<ol>
-<li><p>需要拥有一个<a href="https://github.com/" target="_blank" rel="external">GitHub账号</a></p>
-</li>
-<li><p>进入<a href="https://pages.github.com/" target="_blank" rel="external">GitHub Pages</a>，按照上面所说的步骤一步一步做，完成后就能在浏览器上打开像<a href="http://zanelove.github.io">http://zanelove.github.io</a>的网站了。</p>
-</li>
-</ol>
+<p>code示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;activity</div><div class="line">    android:name=&quot;com.zaenlove.androiddemo2.MainActivity&quot;</div><div class="line">    android:configChanges=&quot;orientation|screenSize&quot;&gt;</div><div class="line">    &lt;intent-filter&gt;</div><div class="line">        &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;</div><div class="line">        &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;</div><div class="line">    &lt;/intent-filter&gt;</div><div class="line">&lt;/activity&gt;</div><div class="line">&lt;activity</div><div class="line">    android:name=&quot;com.zaenlove.androiddemo2.SecondActivity&quot;</div><div class="line">    android:configChanges=&quot;screenLayout&quot;</div><div class="line">    android:process=&quot;:remote&quot;/&gt;</div><div class="line">&lt;activity</div><div class="line">    android:name=&quot;com.zaenlove.androiddemo2.ThirdActivity&quot;</div><div class="line">    android:configChanges=&quot;screenLayout&quot;</div><div class="line">    android:process=&quot;com.zanelove.remote&quot;/&gt;</div></pre></td></tr></table></figure>
+<p>上面的示例分别为SecondActivity和ThirdActivity指定了process属性，并且它们的属性值不同，这意味着当前应用又增加了两个新进程。假设当前应用的包名为“com.zaenlove.androiddemo2”，当SecondActivity启动时，系统会为它创建一个单独的进程，进程名为“com.zaenlove.androiddemo2:remote”；当ThirdActivity启动时，系统会为它创建一个单独的进程，进程名为“com.zanelove.remote”。<strong>同时入口Activity是MainActivity，没有为它指定process属性，那么它运行在默认进程中，默认进程的进程名是包名。</strong></p>
+<p>下面我们看一下运行效果，进程列表中存在3个进程，进程id分别为2577、2655、2683：</p>
+<p><img src="http://img.blog.csdn.net/20160112130725566" alt=""></p>
+<p>是不是很简单，这只是开始，实际使用中多进程是有很多问题需要处理的。</p>
+<p>除了在Eclipse的DDMS视图中查看进程信息，还可以用shell来查看，命令为：adb shell ps或者adb shell ps| grep com.zaenlove.androiddemo2。其中com.zaenlove.androiddemo2是包名。</p>
+<p>值得注意的是，SecondActivity和ThirdActivity的android:process属性分别为“:remote”和“com.zanelove.remote”，那么这两种方式有何区别？区别有两方面：<br><strong>首先</strong>，“:”的含义是指要在当前的进程名前面附加上当前的包名，这只是一种简写的方法，对于SecondActivity来说，它完整的进程名为com.zaenlove.androiddemo2:remote，而对于ThirdActivity中的声明方式，它是一种完整的命名方式，不会附加包名信息；<strong>其次</strong>，进程名以“:”开头的进程属于当前应用的私有进程，其他应用的组件不可以和它跑在同一个进程中，而进程名不以“:”开头的进程属于全局进程，其他应用通过ShareUID方式可以和它跑在同一个进程中。</p>
+<p>Android系统会为每个应用分配一个唯一的UID，具有相同的UID的应用才能共享数据。这里要说明的是，两个应用通过ShareUID跑在同一个进程中是有要求的，需要这两个应用有相同的ShareUID并且签名相同才可以。在这种情况下，它们可以互相访问对方的私有数据，比如data目录、组件信息等，不管它们是否跑在同一个进程中。而如果是同一个进程中，那么除了能共享data目录、组件信息，还可以共享内存数据，或者说它们看起来就像是一个应用的两个部分。</p>
+<h2 id="多进程模式的运行机制"><a href="#多进程模式的运行机制" class="headerlink" title="多进程模式的运行机制"></a>多进程模式的运行机制</h2><p>大部分人都认为开启多进程是很简单的事情，只需要给四大组件指定android:process属性即可。实则暗藏杀机，下面举个例子，其中SecondActivity通过指定android:process属性从而使其运行在一个独立的进程中，这里做一些改动，新建一个类（UserManager）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public class UserManager &#123;</div><div class="line">    public static int sUserid = 1;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后在MainActivity的onCreate中把sUserId重新赋值为2，打印出这个静态变量的值后再启动SecondActivity，在SecondActivity中我们再打印一下是sUserId的值。按照正常的逻辑，静态变量是可以在所有的地方共享的，并且一处修改处处都会同步，我们看一下运行的结果：</p>
+<p><img src="http://img.blog.csdn.net/20160112150814530" alt=""></p>
+<p>此时此刻，我的内心是崩溃的！这结果和我想象的完全不一样，看到这里，大家应该明白了这就是多进程所带来的问题，多进程绝非只是仅仅指定一个android:process属性那么简单！</p>
+<p>上述问题出现的原因是SecondActivity运行在一个单独的进程中，我们知道Android为每一个应用分配了一个独立的虚拟机，或者说为每个进程都分配了一个独立的虚拟机，不同的虚拟机在内存分配上有不同的地址空间，这就导致在不同的虚拟机中访问同一个类的对象会产生多份副本。回到刚刚的例子当中，在进程com.zaenlove.androiddemo2和进程com.zaenlove.androiddemo2:remote中都存在一个UserManger类，并且这两个类是互不干扰的，在一个进程中修改sUserId的值只会影响当前进程，对其他进程不会造成任何影响，这样我们就可以理解为什么MainActivity中修改了sUserId的值，但是在SecondActivity中sUserId的值却没有发送改变这个现象了。</p>
+<p>所有运行在不同进程中的四大组件，只要它们之间需要通过内存来共享数据，都会共享失败，这也是多进程所带来的主要影响。</p>
+<p>一般来说，使用多进程会造成如下几个方面的问题：</p>
 <ul>
-<li><p>注意：(第二步Git命令需做修改)</p>
-<p>  命令修改前：</p>
-<p>  <img src="http://img.blog.csdn.net/20151219124835978" alt="命令修改前"></p>
-<p>  命令修改后：</p>
-<blockquote>
-<p>$ git clone git@github.com:username/username.github.io.git</p>
-</blockquote>
-</li>
+<li>静态成员和单例模式完全失效。</li>
+<li>线程同步机制完全失效。</li>
+<li>SharedPreferences的可靠性下降。</li>
+<li>Application会多次创建。</li>
 </ul>
-<p>至此，我们已经利用GitHub Pages搭建好了个人博客雏形了。下面要做的，就是个性化了。</p>
-<h3 id="安装Hexo博客框架"><a href="#安装Hexo博客框架" class="headerlink" title="安装Hexo博客框架"></a>安装Hexo博客框架</h3><p>经过上面步骤，我们已经拥有了一个初步域名：<a href="http://username.github.io" target="_blank" rel="external">http://username.github.io</a> 和 一个免费网络空间了，下面我们需要把空白的博客丰富起来。放心，不需要你手写一大堆html、css文件，也不用找jQuery来实现酷炫的页面效果。Hexo是一款博客框架，它会帮我们搭建。</p>
-<h4 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h4><p>1.1 前提：</p>
-<p>安装 Hexo 相当简单。然而在安装前，您必须检查电脑中是否已安装下列应用程序：</p>
-<ul>
-<li><a href="http://nodejs.org/" target="_blank" rel="external">Node.js</a></li>
-<li><a href="http://git-scm.com/" target="_blank" rel="external">Git</a></li>
-</ul>
-<p>如果您的电脑中已经安装上述必备程序，那么恭喜您！接下来只需要使用 npm 即可完成 Hexo 的安装。</p>
-<blockquote>
-<p>$ npm install -g hexo-cli</p>
-</blockquote>
-<p>1.2 注意：</p>
-<p>如何使用npm命令，你只需要在任意位置点击鼠标右键，选择Git bash即可！</p>
-<p>如果，你出现了以下的问题，如图：</p>
-<p><img src="http://img.blog.csdn.net/20151219143049859" alt=""></p>
-<p>请您放心，这不是问题，这是正常的现象！到此为止，Git、Node.js和Hexo就都安装成功了！</p>
-<h4 id="GitHub管理"><a href="#GitHub管理" class="headerlink" title="GitHub管理"></a>GitHub管理</h4><p>为了让自己未来的博客和代码处在git管理之下，我们要把刚刚在Github上博客项目拉到本地。首先，在本地创建文件夹，名字任意，进入该文件夹，把项目代码clone下来。</p>
-<blockquote>
-<p>$ git clone git@github.com:username/username.github.io.git</p>
-</blockquote>
-<p>好了，此时会在您创建的目录下自动创建子文件夹username.github.io,那里就是我们博客的代码，以后的操作都在git的管理之下了，此时默认的branch为master。</p>
-<h4 id="初始化Hexo"><a href="#初始化Hexo" class="headerlink" title="初始化Hexo"></a>初始化Hexo</h4><p>在目录下执行以下指令(在该目录内点击鼠标右键，选择Git bash)，Hexo 将会自动在目标文件夹建立网站所需要的所有文件。</p>
-<blockquote>
-<p>$ hexo init</p>
-</blockquote>
-<p>或者不在该目录下执行，而是任意地方执行该命令，但必须指定目录。</p>
-<blockquote>
-<p>$ hexo init</p>
-</blockquote>
-<p>接下来，就是安装依赖包：</p>
-<blockquote>
-<p>$ npm install</p>
-</blockquote>
-<p>最后，本地查看：现在我们已经搭建起本地的hexo博客了，执行以下命令(在您创建的目录下)，然后到浏览器输入localhost:4000看看。</p>
-<blockquote>
-<p>$ hexo generate</p>
-<p>$ hexo server</p>
-</blockquote>
-<h4 id="熟悉Hexo"><a href="#熟悉Hexo" class="headerlink" title="熟悉Hexo"></a>熟悉Hexo</h4><p>新建完成后，指定文件夹的目录如下：</p>
-<p><img src="http://img.blog.csdn.net/20151219150213597" alt=""></p>
-<ul>
-<li><p>_config.yml文件，是整体的配置文件，很多基础配置、插件配置等都需要在里面进行。要注意的是，该文件格式要求极为严格，缺少一个空格都会导致运行错误。小提示：不要用Tab缩进，用两个空格符。</p>
-</li>
-<li><p>package.json文件，应用程序的信息。<a href="http://embeddedjs.com/" target="_blank" rel="external">EJS</a>, <a href="http://learnboost.github.io/stylus/" target="_blank" rel="external">Stylus</a> 和 <a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="external">Markdown renderer</a> 已默认安装，您可以自由移除。</p>
-</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20151219153039062" alt=""></p>
-<ul>
-<li><p>scaffolds文件夹，<a href="https://hexo.io/zh-cn/docs/writing.html" target="_blank" rel="external">模版</a>文件夹。当您新建文章时，Hexo 会根据 scaffold 来建立文件。</p>
-</li>
-<li><p>source文件夹，资源文件夹是存放用户资源的地方。除 posts 文件夹之外，开头命名为 (下划线)的文件 / 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。</p>
-</li>
-<li><p>themes文件夹，<a href="https://hexo.io/zh-cn/docs/themes.html" target="_blank" rel="external">主题</a>文件夹。Hexo 会根据主题来生成静态页面。</p>
-</li>
-<li><p>ayout，包括draft(草稿)、page(页面)、post(文章)。这个就是三种文件的基本格式，其中post是你发表的文章，会显示在你的网站里，一篇post会包括title标题、date日期、tags标签等信息；draft是草稿，只有你在本地能看到，必须要publish后才能成为post，draft和post差别是date，因为draft没有发表，所以不需要指定日期。page是一个页面，对应一个新的html页面，比如<a href="http://wingjay.com/2015/12/06/说一说博客/" target="_blank" rel="external">博客内容展示页</a>是一个页面，<a href="http://wingjay.com/guestbook/" target="_blank" rel="external">留言本</a>也是一个页面。</p>
-</li>
-<li><p>public文件夹，这个文件夹是最终会发布到网站上的真实内容。怎么理解呢？我们可以把public文件夹当作是真正的被用户看到的，而其他的source、themes等都是为public服务的。Hexo里有一个很重要的指令hexo generate，这个指令就是利用所有代码里的配置信息、source里写的文章、themes里的样式，共同生成最终的静态html文件，存入public文件夹内。在我们执行了发布指令hexo deploy后，就会把public的内容部署到GitHub Pages上。当用户在访问我们的博客时，他们会看到public里生成的html文件。这个概念非常重要，即代码和真实静态页面是独立的。</p>
-</li>
-<li><p>generate和deploy，generate会把我们的配置、文章和主题结合起来生成一堆酷炫的html静态文件放在public里面。但此时用户还看不到本地public文件里的页面，我们必须用后一个指令deploy才能把静态文件部署到GitHub Pages上。不过，在部署前，需要配置让它自动部署到我们前面创建的Github项目中。</p>
-</li>
-<li><p>deploy相关配置。为了能够让项目自动把public文件夹的内容部署到GitHub项目中，我们可以按<a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">部署文档</a>进行配置，其中选择的branch为master。此后，每次运行deploy后，项目就会自动把public文件夹内容全部覆盖到当前的GitHub项目master分支上。</p>
-</li>
-<li><p>代码和静态文件分开管理。根据上面知道，每次部署后，public文件内容会覆盖掉项目整个master分支。这样可以实现网站静态文件的版本控制，但是，仔细对比这个master分支，我们会发现里面只剩下静态文件了，我们的代码比如source、themes统统没有了，这就导致无法对代码进行版本管理了。这意味着我换一台电脑，我就再也找不到代码了，只剩下一堆之前编译出来的静态文件。所以，为了对代码也进行版本控制，我们创建一个新的分支：code，然后在这个分支里进行代码控制，master里则保存部署的新的静态文件。大家可以自行比对这两个branch的内容差异。</p>
-</li>
-</ul>
-<h4 id="配置Hexo"><a href="#配置Hexo" class="headerlink" title="配置Hexo"></a>配置Hexo</h4><p>详情请参考<a href="https://hexo.io/zh-cn/docs/themes.html" target="_blank" rel="external">配置文档</a></p>
-<h4 id="部署Hexo"><a href="#部署Hexo" class="headerlink" title="部署Hexo"></a>部署Hexo</h4><p>1.1 编辑_config.yml(在跟目录下)。在部署时，要把下面的username都换成你的账号名。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repository: https://github.com/username/username.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
-<p>1.2 执行下列指令即可完成部署。</p>
-<blockquote>
-<p>$ hexo generate</p>
-<p>$ hexo deploy</p>
-</blockquote>
-<p><strong>注意：</strong>有些新用户需要设置 ssh，否则上述命令会失败。ssh 的介绍和设置方法请看<a href="https://help.github.com/articles/generating-ssh-keys" target="_blank" rel="external">官方教程</a>，不用担心，很简单。</p>
-<p><strong>记住：</strong>每次修改本地文件后，需要hexo generate才能保存，需要hexo deploy才能部署到git上去。每次使用命令时，都要在您创建的目录下。</p>
-<p><strong>Okay，</strong>我们的博客已经完全搭建起来了，在浏览器访问username.github.io就能看到你的成就了！</p>
-<h3 id="配置NexT主题"><a href="#配置NexT主题" class="headerlink" title="配置NexT主题"></a>配置NexT主题</h3><p>Hexo主题非常多，可以参考丰富多彩的<a href="https://hexo.io/themes/" target="_blank" rel="external">Hexo主题</a>，本文选Next为主题，样式参考<a href="http://zanelove.github.io/">我的博客</a>。</p>
-<p>进入配置阶段，最好的文档还是NexT主题的官方文档，简单得不能再细致了。</p>
-<p>下面我还是提几点注意：</p>
-<ul>
-<li><p>第三方评论系统。评论系统很重要，你可以与读者进行更多交流，配置也简单，建议采用<a href="https://disqus.com/" target="_blank" rel="external">DISQUS</a>，更国际化一点的<a href="http://theme-next.iissnan.com/third-party-services.html#DISUQS" target="_blank" rel="external">配置</a>见此。另外，前期建议开启不登陆评论，即在<a href="https://disqus.com/" target="_blank" rel="external">Disqus</a>的Comment Rule里允许Guest comment。</p>
-</li>
-<li><p>创建留言板。熟悉page的创建与使用，<a href="http://www.arao.me/2015/hexo-next-theme-optimize-base/#为你的hexo网站NexT主题增加留言页" target="_blank" rel="external">参考这里</a>。</p>
-</li>
-<li><p>给自己博客做SEO。有好的SEO便于搜索引擎索引你的网站，随着以后读者增多，他们可以更好搜索到你的网站，<a href="http://www.arao.me/2015/hexo-next-theme-optimize-seo/" target="_blank" rel="external">具体方法见此</a>。</p>
-</li>
-</ul>
+<p>分析以上问题：</p>
+<p>第一个问题已经在上面分析完了，这里就不再累述！</p>
+<p>第二个问题和第一个问题一样，既然都不在同一块内存了，那么不管是锁对象还是锁全局类都无法保证线程同步，因为不同的进程，锁的不是同一个对象。</p>
+<p>第三个问题是因为SharedPreferences不支持两个进程同时去执行写操作，否则会导致一定几率的数据丢失，因为SharedPreferences底层是通过读/写XML文件来实现的，并发写显然是可能出问题的，甚至并发读/写都有可能出问题。</p>
+<p>第四个问题是当一个组件跑在一个新的进程中的时候，由于系统要在创建新的进程同时分配独立的虚拟机，所以这个过程其实就是启动了一个应用的过程。因此，相当于系统又把这个应用重新启动了一遍，那么自然就会重新创建新的Application。我们也可以这样理解，运行在同一个进程中的组件是属于同一个虚拟机和同一个Application的，同理，运行在不同进程的组件是属于两个不同的虚拟机和Application的。</p>
+<p>下面我们来做一个测试，首先在Application的onCreate方法中打印出当前进程的名字，然后连续启动三个同一个应用内但属于不同进程的Activity，按照期望，Application的onCreate应该执行三次并打印出三次进程名不同的log，代码如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">public class MyApplication extends Application&#123;</div><div class="line">    @Override</div><div class="line">    public void onCreate() &#123;</div><div class="line">        super.onCreate();</div><div class="line">        String processName = getProcessName(getApplicationContext(), android.os.Process.myPid());</div><div class="line">        Log.e(&quot;MyApplication--&gt;&quot;,  processName);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String getProcessName(Context cxt, int pid) &#123;</div><div class="line">        ActivityManager am = (ActivityManager) cxt</div><div class="line">                .getSystemService(Context.ACTIVITY_SERVICE);</div><div class="line">        List&lt;RunningAppProcessInfo&gt; runningApps = am.getRunningAppProcesses();</div><div class="line">        if (runningApps == null) &#123;</div><div class="line">            return null;</div><div class="line">        &#125;</div><div class="line">        for (RunningAppProcessInfo procInfo : runningApps) &#123;</div><div class="line">            if (procInfo.pid == pid) &#123;</div><div class="line">                return procInfo.processName;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return null;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>记得在清单文件中的Application标签中添加：android:name=”.MyApplication”</p>
+<p><img src="http://img.blog.csdn.net/20160112165045733" alt=""></p>
+<p>可以看出，Application执行了三次onCreate，并且每次的进程名称和进程id都不一样，它们的进程名和我们为Activity指定的android:process属性一致。这也就证实了在多进程模式中，不同进程的组件的确会拥有独立的虚拟机、Application以及内存空间，因此在实际开发中我们要特别注意。</p>
+<p>以上我们分析了多进程所带来的问题，为了解决问题，系统提供了很多跨进程通信方法，虽然说不能直接共享内存，但是通过跨进程通信我们还是可以实现数据交互。实现跨进程通信的方式有很多，比如通过Intent来传递数据，共享文件和SharedPreferences，基于Binder的Messenger和AIDL以及Socket等。</p>
 
       
     </div>
@@ -600,7 +515,7 @@ SSL：CloudFlare">
       
         <div class="post-tags">
           
-            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+            <a href="/tags/Android/" rel="tag"># Android</a>
           
         </div>
       
@@ -609,8 +524,8 @@ SSL：CloudFlare">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/04/25/hexoCommand/" rel="next" title="Hexo Command">
-                <i class="fa fa-chevron-left"></i> Hexo Command
+              <a href="/2015/05/29/IPC机制-Android-IPC简介/" rel="next" title="IPC机制-Android IPC简介">
+                <i class="fa fa-chevron-left"></i> IPC机制-Android IPC简介
               </a>
             
           </div>
@@ -619,8 +534,8 @@ SSL：CloudFlare">
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/05/11/Activity的生命周期全面分析/" rel="prev" title="Activity的生命周期全面分析">
-                Activity的生命周期全面分析 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/06/10/IPC机制-IPC基础概念介绍/" rel="prev" title="IPC机制-IPC基础概念介绍">
+                IPC机制-IPC基础概念介绍 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -647,8 +562,8 @@ SSL：CloudFlare">
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/04/25/Hexo从0到1/"
-           data-title="Hexo从0到1" data-url="http://zanelove.github.io/2015/04/25/Hexo从0到1/">
+      <div class="ds-thread" data-thread-key="2015/06/04/IPC机制-Android中的多进程模式/"
+           data-title="IPC机制-Android中的多进程模式" data-url="http://zanelove.github.io/2015/06/04/IPC机制-Android中的多进程模式/">
       </div>
     
   </div>
@@ -808,7 +723,7 @@ SSL：CloudFlare">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、瞧瞧兵器"><span class="nav-number">1.</span> <span class="nav-text">一、瞧瞧兵器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、抄起家伙"><span class="nav-number">2.</span> <span class="nav-text">二、抄起家伙</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub-Pages"><span class="nav-number">2.1.</span> <span class="nav-text">GitHub Pages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Hexo博客框架"><span class="nav-number">2.2.</span> <span class="nav-text">安装Hexo博客框架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Hexo"><span class="nav-number">2.2.1.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GitHub管理"><span class="nav-number">2.2.2.</span> <span class="nav-text">GitHub管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化Hexo"><span class="nav-number">2.2.3.</span> <span class="nav-text">初始化Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#熟悉Hexo"><span class="nav-number">2.2.4.</span> <span class="nav-text">熟悉Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置Hexo"><span class="nav-number">2.2.5.</span> <span class="nav-text">配置Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#部署Hexo"><span class="nav-number">2.2.6.</span> <span class="nav-text">部署Hexo</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置NexT主题"><span class="nav-number">2.3.</span> <span class="nav-text">配置NexT主题</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开启多进程模式"><span class="nav-number">1.</span> <span class="nav-text">开启多进程模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多进程模式的运行机制"><span class="nav-number">2.</span> <span class="nav-text">多进程模式的运行机制</span></a></li></ol></div>
             
 
           </div>

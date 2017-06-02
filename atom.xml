@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zanelove.github.io/"/>
-  <updated>2017-06-01T14:05:18.000Z</updated>
+  <updated>2017-06-02T11:31:40.000Z</updated>
   <id>http://zanelove.github.io/</id>
   
   <author>
@@ -17,10 +17,10 @@
   
   <entry>
     <title>View的事件体系-View的滑动</title>
-    <link href="http://zanelove.github.io/2017/06/01/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E6%BB%91%E5%8A%A8/"/>
-    <id>http://zanelove.github.io/2017/06/01/View的事件体系-View的滑动/</id>
-    <published>2017-06-01T14:00:54.000Z</published>
-    <updated>2017-06-01T14:05:18.000Z</updated>
+    <link href="http://zanelove.github.io/2015/07/10/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E6%BB%91%E5%8A%A8/"/>
+    <id>http://zanelove.github.io/2015/07/10/View的事件体系-View的滑动/</id>
+    <published>2015-07-10T14:00:54.000Z</published>
+    <updated>2017-06-02T11:31:40.000Z</updated>
     
     <summary type="html">
     
@@ -39,11 +39,57 @@
   </entry>
   
   <entry>
+    <title>View的事件体系-View的基础知识</title>
+    <link href="http://zanelove.github.io/2015/07/04/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <id>http://zanelove.github.io/2015/07/04/View的事件体系-View的基础知识/</id>
+    <published>2015-07-04T11:58:45.000Z</published>
+    <updated>2017-06-02T11:31:16.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;If you lose your way, you ‘ll go against the wind from all the wrong directions. 如果失去了方向，那么所有方向吹过了的都是逆风&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;虽然说View不属于四大组件，但是它的作用堪比四大组件，甚至比Receiver和Provider的重要性都要大。在Android中，Activity承担着可视化的功能，同时Android系统提供了很多基础控件，常见的有Button、TextView、CheckBox等。很多时候仅仅使用系统提供的控件是不能满足需求的，因此我们就需要能够根据需求进行新控件的定义，而控件的自定义就需要对Android的View的体系有深入的理解，只有这样才能写出完美的&lt;strong&gt;自定义控件&lt;/strong&gt;。同时Android手机属于移动设备，移动设备的一个特点就是用户可以直接通过屏幕来进行一系列操作，一个典型的场景就是屏幕的滑动，用户可以通过滑动来切换到不同的界面。很多情况下我们的应用都需要支持滑动操作，当处于不同层级的View都可以响应用户的滑动操作时，就会带来一个问题，那就是&lt;strong&gt;滑动冲突&lt;/strong&gt;。如何解决该问题，就需要读者对 &lt;strong&gt;View的事件分发机制&lt;/strong&gt; 有一定的了解。上述内容就是接下来我要和大伙一起探讨的内容。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://zanelove.github.io/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="http://zanelove.github.io/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IPC机制-Android中的IPC方式三-Binder连接池、选用合适的IPC方式</title>
+    <link href="http://zanelove.github.io/2015/06/28/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%B8%89-Binder%E8%BF%9E%E6%8E%A5%E6%B1%A0%E3%80%81%E9%80%89%E7%94%A8%E5%90%88%E9%80%82%E7%9A%84IPC%E6%96%B9%E5%BC%8F/"/>
+    <id>http://zanelove.github.io/2015/06/28/IPC机制-Android中的IPC方式三-Binder连接池、选用合适的IPC方式/</id>
+    <published>2015-06-28T12:00:59.000Z</published>
+    <updated>2017-06-02T11:29:46.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;有人说，一个男人变老的两大标志是不断后退的发际线和不断增长的腰围；其实，一个人真正变老的标志是，他觉得人生一眼望得到头，不会再有改变，于是放弃了学习，放弃了提升自己&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;Binder连接池&quot;&gt;&lt;a href=&quot;#Binder连接池&quot; class=&quot;headerlink&quot; title=&quot;Binder连接池&quot;&gt;&lt;/a&gt;Binder连接池&lt;/h2&gt;&lt;p&gt;就IPC机制系列中，我们介绍了不同的IPC方式，不同的IPC方式有不同的特点和适用场景。在该节中我们再次介绍一下AIDL，原因是AIDL是一种最常见的进程间通信方式，是日常开发中涉及进程间通信时的首选，所以我们需要额外强调一下它。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://zanelove.github.io/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="http://zanelove.github.io/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
     <title>IPC机制-Android中的IPC方式二-ContentProvider、Socket</title>
-    <link href="http://zanelove.github.io/2017/05/31/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%BA%8C-ContentProvider%E3%80%81Socket/"/>
-    <id>http://zanelove.github.io/2017/05/31/IPC机制-Android中的IPC方式二-ContentProvider、Socket/</id>
-    <published>2017-05-31T12:03:50.000Z</published>
-    <updated>2017-05-31T12:09:57.000Z</updated>
+    <link href="http://zanelove.github.io/2015/06/22/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%BA%8C-ContentProvider%E3%80%81Socket/"/>
+    <id>http://zanelove.github.io/2015/06/22/IPC机制-Android中的IPC方式二-ContentProvider、Socket/</id>
+    <published>2015-06-22T12:03:50.000Z</published>
+    <updated>2017-06-02T11:29:28.000Z</updated>
     
     <summary type="html">
     
@@ -63,80 +109,11 @@
   </entry>
   
   <entry>
-    <title>IPC机制-Android中的IPC方式三-Binder连接池、选用合适的IPC方式</title>
-    <link href="http://zanelove.github.io/2017/05/31/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%B8%89-Binder%E8%BF%9E%E6%8E%A5%E6%B1%A0%E3%80%81%E9%80%89%E7%94%A8%E5%90%88%E9%80%82%E7%9A%84IPC%E6%96%B9%E5%BC%8F/"/>
-    <id>http://zanelove.github.io/2017/05/31/IPC机制-Android中的IPC方式三-Binder连接池、选用合适的IPC方式/</id>
-    <published>2017-05-31T12:00:59.000Z</published>
-    <updated>2017-05-31T12:09:46.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;有人说，一个男人变老的两大标志是不断后退的发际线和不断增长的腰围；其实，一个人真正变老的标志是，他觉得人生一眼望得到头，不会再有改变，于是放弃了学习，放弃了提升自己&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;Binder连接池&quot;&gt;&lt;a href=&quot;#Binder连接池&quot; class=&quot;headerlink&quot; title=&quot;Binder连接池&quot;&gt;&lt;/a&gt;Binder连接池&lt;/h2&gt;&lt;p&gt;就IPC机制系列中，我们介绍了不同的IPC方式，不同的IPC方式有不同的特点和适用场景。在该节中我们再次介绍一下AIDL，原因是AIDL是一种最常见的进程间通信方式，是日常开发中涉及进程间通信时的首选，所以我们需要额外强调一下它。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="http://zanelove.github.io/categories/Android/"/>
-    
-    
-      <category term="Android" scheme="http://zanelove.github.io/tags/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>View的事件体系-View的基础知识</title>
-    <link href="http://zanelove.github.io/2017/05/31/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    <id>http://zanelove.github.io/2017/05/31/View的事件体系-View的基础知识/</id>
-    <published>2017-05-31T11:58:45.000Z</published>
-    <updated>2017-05-31T12:09:17.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;If you lose your way, you ‘ll go against the wind from all the wrong directions. 如果失去了方向，那么所有方向吹过了的都是逆风&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;虽然说View不属于四大组件，但是它的作用堪比四大组件，甚至比Receiver和Provider的重要性都要大。在Android中，Activity承担着可视化的功能，同时Android系统提供了很多基础控件，常见的有Button、TextView、CheckBox等。很多时候仅仅使用系统提供的控件是不能满足需求的，因此我们就需要能够根据需求进行新控件的定义，而控件的自定义就需要对Android的View的体系有深入的理解，只有这样才能写出完美的&lt;strong&gt;自定义控件&lt;/strong&gt;。同时Android手机属于移动设备，移动设备的一个特点就是用户可以直接通过屏幕来进行一系列操作，一个典型的场景就是屏幕的滑动，用户可以通过滑动来切换到不同的界面。很多情况下我们的应用都需要支持滑动操作，当处于不同层级的View都可以响应用户的滑动操作时，就会带来一个问题，那就是&lt;strong&gt;滑动冲突&lt;/strong&gt;。如何解决该问题，就需要读者对 &lt;strong&gt;View的事件分发机制&lt;/strong&gt; 有一定的了解。上述内容就是接下来我要和大伙一起探讨的内容。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="http://zanelove.github.io/categories/Android/"/>
-    
-    
-      <category term="Android" scheme="http://zanelove.github.io/tags/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IPC机制-Android IPC简介</title>
-    <link href="http://zanelove.github.io/2017/05/16/IPC%E6%9C%BA%E5%88%B6-Android-IPC%E7%AE%80%E4%BB%8B/"/>
-    <id>http://zanelove.github.io/2017/05/16/IPC机制-Android-IPC简介/</id>
-    <published>2017-05-16T14:23:51.000Z</published>
-    <updated>2017-05-31T12:06:49.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;失败之事十有八九，成与败的区别，就在于如何面对这十有八九的失败，被失败打败的，成了失败者，把失败打败的，成了成功者&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;IPC（Inter-Process Communication），含义为进程间通信或者跨进程通信，是指两个进程之间进行数据交换的过程。那么，什么是进程又什么是线程？按照操作系统中的描述，线程是CPU调度的最小单元，同时线程是一种有限的系统资源；而进程一般是指一个执行单元，在PC和移动设备上指一个程序或者一个应用。一个进程可以包含多个线程，因此进程和线程是包含与被包含的关系。当然，最简单的情况下，一个进程中可以只有一个线程，即主线程（Android中称为UI线程），在UI线程中才能操作界面元素。很多时候，一个进程中需要执行大量的耗时的任务，如果这些任务放在主线程中去执行就会造成界面无法响应（ANR，Application Not Responding – 应用无响应）。解决这个问题就需要用到线程，把一些耗时的任务放在线程（除UI线程）中即可。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="http://zanelove.github.io/categories/Android/"/>
-    
-    
-      <category term="Android" scheme="http://zanelove.github.io/tags/Android/"/>
-    
-  </entry>
-  
-  <entry>
     <title>IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL</title>
-    <link href="http://zanelove.github.io/2017/05/16/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%B8%80-Bundle%E3%80%81%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E3%80%81Messenger%E3%80%81AIDL/"/>
-    <id>http://zanelove.github.io/2017/05/16/IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL/</id>
-    <published>2017-05-16T14:21:13.000Z</published>
-    <updated>2017-05-31T12:05:47.000Z</updated>
+    <link href="http://zanelove.github.io/2015/06/16/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%B8%80-Bundle%E3%80%81%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E3%80%81Messenger%E3%80%81AIDL/"/>
+    <id>http://zanelove.github.io/2015/06/16/IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL/</id>
+    <published>2015-06-16T14:21:13.000Z</published>
+    <updated>2017-06-02T11:29:09.000Z</updated>
     
     <summary type="html">
     
@@ -155,11 +132,34 @@
   </entry>
   
   <entry>
+    <title>IPC机制-IPC基础概念介绍</title>
+    <link href="http://zanelove.github.io/2015/06/10/IPC%E6%9C%BA%E5%88%B6-IPC%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D/"/>
+    <id>http://zanelove.github.io/2015/06/10/IPC机制-IPC基础概念介绍/</id>
+    <published>2015-06-10T14:15:46.000Z</published>
+    <updated>2017-06-02T11:28:08.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;真正的成功，是点亮更多人的人生&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;本节主要介绍IPC中的一些基础概念，主要包含三个方面的内容：Serializable接口、Parcelable接口以及Binder，只有熟悉了这三个方面的内容后，才能更好地理解跨进程通信的各种方式。Serializable和Parcelable接口可以完成对象的序列化过程，当我们需要通过Intent和Binder传递对象时就需要使用Serializable或Parcelable。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://zanelove.github.io/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="http://zanelove.github.io/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
     <title>IPC机制-Android中的多进程模式</title>
-    <link href="http://zanelove.github.io/2017/05/16/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84%E5%A4%9A%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F/"/>
-    <id>http://zanelove.github.io/2017/05/16/IPC机制-Android中的多进程模式/</id>
-    <published>2017-05-16T14:19:00.000Z</published>
-    <updated>2017-05-31T12:06:58.000Z</updated>
+    <link href="http://zanelove.github.io/2015/06/04/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84%E5%A4%9A%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://zanelove.github.io/2015/06/04/IPC机制-Android中的多进程模式/</id>
+    <published>2015-06-04T14:19:00.000Z</published>
+    <updated>2017-06-02T11:27:20.000Z</updated>
     
     <summary type="html">
     
@@ -179,18 +179,18 @@
   </entry>
   
   <entry>
-    <title>IPC机制-IPC基础概念介绍</title>
-    <link href="http://zanelove.github.io/2017/05/16/IPC%E6%9C%BA%E5%88%B6-IPC%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D/"/>
-    <id>http://zanelove.github.io/2017/05/16/IPC机制-IPC基础概念介绍/</id>
-    <published>2017-05-16T14:15:46.000Z</published>
-    <updated>2017-05-31T12:05:56.000Z</updated>
+    <title>IPC机制-Android IPC简介</title>
+    <link href="http://zanelove.github.io/2015/05/29/IPC%E6%9C%BA%E5%88%B6-Android-IPC%E7%AE%80%E4%BB%8B/"/>
+    <id>http://zanelove.github.io/2015/05/29/IPC机制-Android-IPC简介/</id>
+    <published>2015-05-29T14:23:51.000Z</published>
+    <updated>2017-06-02T11:25:29.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;真正的成功，是点亮更多人的人生&lt;/p&gt;
+&lt;p&gt;失败之事十有八九，成与败的区别，就在于如何面对这十有八九的失败，被失败打败的，成了失败者，把失败打败的，成了成功者&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;本节主要介绍IPC中的一些基础概念，主要包含三个方面的内容：Serializable接口、Parcelable接口以及Binder，只有熟悉了这三个方面的内容后，才能更好地理解跨进程通信的各种方式。Serializable和Parcelable接口可以完成对象的序列化过程，当我们需要通过Intent和Binder传递对象时就需要使用Serializable或Parcelable。&lt;/p&gt;
+&lt;p&gt;IPC（Inter-Process Communication），含义为进程间通信或者跨进程通信，是指两个进程之间进行数据交换的过程。那么，什么是进程又什么是线程？按照操作系统中的描述，线程是CPU调度的最小单元，同时线程是一种有限的系统资源；而进程一般是指一个执行单元，在PC和移动设备上指一个程序或者一个应用。一个进程可以包含多个线程，因此进程和线程是包含与被包含的关系。当然，最简单的情况下，一个进程中可以只有一个线程，即主线程（Android中称为UI线程），在UI线程中才能操作界面元素。很多时候，一个进程中需要执行大量的耗时的任务，如果这些任务放在主线程中去执行就会造成界面无法响应（ANR，Application Not Responding – 应用无响应）。解决这个问题就需要用到线程，把一些耗时的任务放在线程（除UI线程）中即可。&lt;/p&gt;
     
     </summary>
     
@@ -203,10 +203,10 @@
   
   <entry>
     <title>IntentFilter的匹配规则</title>
-    <link href="http://zanelove.github.io/2017/05/13/IntentFilter%E7%9A%84%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99/"/>
-    <id>http://zanelove.github.io/2017/05/13/IntentFilter的匹配规则/</id>
-    <published>2017-05-13T01:18:01.000Z</published>
-    <updated>2017-05-14T03:28:08.000Z</updated>
+    <link href="http://zanelove.github.io/2015/05/23/IntentFilter%E7%9A%84%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99/"/>
+    <id>http://zanelove.github.io/2015/05/23/IntentFilter的匹配规则/</id>
+    <published>2015-05-23T01:18:01.000Z</published>
+    <updated>2017-06-02T11:25:59.000Z</updated>
     
     <summary type="html">
     
@@ -226,10 +226,10 @@
   
   <entry>
     <title>Activity的启动模式</title>
-    <link href="http://zanelove.github.io/2017/05/11/Activity%E7%9A%84%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/"/>
-    <id>http://zanelove.github.io/2017/05/11/Activity的启动模式/</id>
-    <published>2017-05-11T14:12:58.000Z</published>
-    <updated>2017-05-14T03:24:58.000Z</updated>
+    <link href="http://zanelove.github.io/2015/05/17/Activity%E7%9A%84%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://zanelove.github.io/2015/05/17/Activity的启动模式/</id>
+    <published>2015-05-17T14:12:58.000Z</published>
+    <updated>2017-06-02T11:24:27.000Z</updated>
     
     <summary type="html">
     
@@ -249,10 +249,10 @@
   
   <entry>
     <title>Activity的生命周期全面分析</title>
-    <link href="http://zanelove.github.io/2017/05/11/Activity%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%85%A8%E9%9D%A2%E5%88%86%E6%9E%90/"/>
-    <id>http://zanelove.github.io/2017/05/11/Activity的生命周期全面分析/</id>
-    <published>2017-05-11T14:06:04.000Z</published>
-    <updated>2017-05-14T03:21:24.000Z</updated>
+    <link href="http://zanelove.github.io/2015/05/11/Activity%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%85%A8%E9%9D%A2%E5%88%86%E6%9E%90/"/>
+    <id>http://zanelove.github.io/2015/05/11/Activity的生命周期全面分析/</id>
+    <published>2015-05-11T14:06:04.000Z</published>
+    <updated>2017-06-02T11:22:59.000Z</updated>
     
     <summary type="html">
     
@@ -267,28 +267,6 @@
     
     
       <category term="Android" scheme="http://zanelove.github.io/tags/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hexo Command</title>
-    <link href="http://zanelove.github.io/2015/04/26/hexoCommand/"/>
-    <id>http://zanelove.github.io/2015/04/26/hexoCommand/</id>
-    <published>2015-04-26T09:25:10.000Z</published>
-    <updated>2017-06-01T14:06:35.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Hexo" scheme="http://zanelove.github.io/categories/Hexo/"/>
-    
-    
-      <category term="Hexo" scheme="http://zanelove.github.io/tags/Hexo/"/>
     
   </entry>
   
@@ -310,6 +288,28 @@
 &lt;li&gt;域名购买：类似万网的平台都可以，你可以选购自己名字的域名，一年几十元左右，两杯咖啡的钱。&lt;/li&gt;
 &lt;li&gt;SSL：CloudFlare&lt;/li&gt;
 &lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="Hexo" scheme="http://zanelove.github.io/categories/Hexo/"/>
+    
+    
+      <category term="Hexo" scheme="http://zanelove.github.io/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo Command</title>
+    <link href="http://zanelove.github.io/2015/04/25/hexoCommand/"/>
+    <id>http://zanelove.github.io/2015/04/25/hexoCommand/</id>
+    <published>2015-04-25T09:25:10.000Z</published>
+    <updated>2017-06-02T11:19:25.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     

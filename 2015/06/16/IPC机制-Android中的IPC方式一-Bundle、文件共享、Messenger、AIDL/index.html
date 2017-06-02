@@ -1,0 +1,1138 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Zane'Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="每一段往上的路都是辛苦的，我们也都有累到想休息的时候，但如果我们就此停下来，甚至往回走，我们就永远到不了山顶了
+
+本节开始详细分析各种跨进程通信（IPC）方式。具体方式有很多，比如可以通过在Intent中附加extras来传递信息（使用Bundle），或者通过共享文件来共享数据，还可以采用Binder方式来跨进程通信，另外，ContentProvider天生就是支持跨进程访问的，因此我们也可以采">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL">
+<meta property="og:url" content="http://zanelove.github.io/2015/06/16/IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL/index.html">
+<meta property="og:site_name" content="Zane'Blog">
+<meta property="og:description" content="每一段往上的路都是辛苦的，我们也都有累到想休息的时候，但如果我们就此停下来，甚至往回走，我们就永远到不了山顶了
+
+本节开始详细分析各种跨进程通信（IPC）方式。具体方式有很多，比如可以通过在Intent中附加extras来传递信息（使用Bundle），或者通过共享文件来共享数据，还可以采用Binder方式来跨进程通信，另外，ContentProvider天生就是支持跨进程访问的，因此我们也可以采">
+<meta property="og:image" content="http://img.blog.csdn.net/20160214153121368">
+<meta property="og:image" content="http://img.blog.csdn.net/20160214214609449">
+<meta property="og:image" content="http://img.blog.csdn.net/20160214214622215">
+<meta property="og:image" content="http://img.blog.csdn.net/20160215102446701">
+<meta property="og:image" content="http://img.blog.csdn.net/20160215132312928">
+<meta property="og:image" content="http://img.blog.csdn.net/20160215134819231">
+<meta property="og:image" content="http://img.blog.csdn.net/20160226134219443">
+<meta property="og:image" content="http://img.blog.csdn.net/20160225141622041">
+<meta property="og:image" content="http://img.blog.csdn.net/20160226144824957">
+<meta property="og:image" content="http://img.blog.csdn.net/20160226154014339">
+<meta property="og:image" content="http://img.blog.csdn.net/20160226154305069">
+<meta property="og:image" content="http://img.blog.csdn.net/20160228151537645">
+<meta property="og:image" content="http://img.blog.csdn.net/20160228211545117">
+<meta property="og:updated_time" content="2017-06-02T11:29:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL">
+<meta name="twitter:description" content="每一段往上的路都是辛苦的，我们也都有累到想休息的时候，但如果我们就此停下来，甚至往回走，我们就永远到不了山顶了
+
+本节开始详细分析各种跨进程通信（IPC）方式。具体方式有很多，比如可以通过在Intent中附加extras来传递信息（使用Bundle），或者通过共享文件来共享数据，还可以采用Binder方式来跨进程通信，另外，ContentProvider天生就是支持跨进程访问的，因此我们也可以采">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20160214153121368">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zanelove.github.io/2015/06/16/IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL/"/>
+
+
+
+
+
+  <title> IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL | Zane'Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d73c1385ff615e566b07b11dac991e9c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Zane'Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">定目标，定执行</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://zanelove.github.io/2015/06/16/IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Zane">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zane'Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zane'Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-16T22:21:13+08:00">
+                2015-06-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/06/16/IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/16/IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/06/16/IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL/" class="leancloud_visitors" data-flag-title="IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>每一段往上的路都是辛苦的，我们也都有累到想休息的时候，但如果我们就此停下来，甚至往回走，我们就永远到不了山顶了</p>
+</blockquote>
+<p>本节开始详细分析各种跨进程通信（IPC）方式。具体方式有很多，比如可以通过在Intent中附加extras来传递信息（使用Bundle），或者通过共享文件来共享数据，还可以采用Binder方式来跨进程通信，另外，ContentProvider天生就是支持跨进程访问的，因此我们也可以采用它来进行IPC。另外，通过网络通信也是可以实现数据传递的，所以Socket也可以实现IPC。下面会一一进行展开。</p>
+<a id="more"></a>
+<h2 id="使用Bundle"><a href="#使用Bundle" class="headerlink" title="使用Bundle"></a>使用Bundle</h2><p>四大组件中的三大组件（Activity、Service、BroadcastReceiver）都是支持在Intent中传递Bundle数据的，由于Bundle实现了Parcelable接口，所以它可以方便地在不同的进程间传输。基于这一点，当我们在一个进程中启动另一个进程的Activity、Service、Receiver，我们就可以在Bundle中附加我们需要传输给远程进程的信息并通过Intent发送出去。当然，我们传输的数据必须能够被序列化，比如基本类型、实现了Parcelable接口的对象、实现了Serializable接口的对象以及一些Android支持的特殊对象，具体内容可以参看Bundle这个类，就可以看到所有它支持的类型。Bundle不支持的类型我们无法通过它在进程间传递数据。这是一种最简单的进程间通信方式。</p>
+<p><strong>解决Bundle不支持携带的数据进行跨进程通信的问题？</strong></p>
+<p>除了直接传递数据这种典型的使用场景，它还有一种特殊的使用场景。比如A进程正在进行一个计算，计算完成之后它要启动B进程的一个组件并把计算结果传递给B进程，可是遗憾的是这个计算结果不支持放入Bundle中，因此无法通过Intent来传递，这个时候如果我们用其他IPC方式就会略显复杂。可以考虑如下方式：我们通过Intent启动进程B的一个Service组件（比如IntentService），让Service也运行在B进程中，所以目标组件就可以不用跨进程方式来获取计算结果（可以使用SharedPreferences等方式）了，这样一来就轻松解决了跨进程的问题。这种方式的核心思想在于将原来需要在A进程的计算任务转移到B进程的后台Service中去执行，这样就成功地避免了进程间通信问题，而且只用了很小的代价。</p>
+<h2 id="使用文件共享"><a href="#使用文件共享" class="headerlink" title="使用文件共享"></a>使用文件共享</h2><p>共享文件也是一种不错的进程间通信方式，两个进程通过读/写同一个文件来交换数据，比如A进程把数据写入文件，B进程通过读取这个文件来获取数据。在Windows中，一个文件如果被加了排斥锁将会导致其他线程无法对其他进行访问，包括读和写，而由于Android系统基于Linux，使得其并发读/写文件可以没有限制地进行，甚至两个线程同时对同一个文件进行写操作都是允许的，尽管这可能会出现问题。通过文件交换数据，除了可以交换一些文本信息外，我们还可以序列化一个对象到文件系统中的同时从另一个进程中恢复这个对象，下面就展示这种使用方式。</p>
+<p>我们在MainActivity的onResume方法中序列化一个User对象到sd卡上的一个文件里，然后在SecondActivity的onResume中去反序列化，我们期望在SecondActivity中能够正确地恢复User对象的值。代码如下：</p>
+<p><strong>MainActivity：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">//序列化User对象    </div><div class="line">private void persistToFile()&#123;</div><div class="line"></div><div class="line">    new Thread(new Runnable()&#123;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void run() &#123;</div><div class="line">            User user = new User(1,&quot;hello world&quot;,false);</div><div class="line">            File dir = new File(MyConstants.ANDROIDDEMO_2_PATH);</div><div class="line">            if(!dir.exists()) &#123;</div><div class="line">                dir.mkdirs();</div><div class="line">            &#125;</div><div class="line">            File cachedFile = new File(MyConstants.CACHE_FILE_PATH);</div><div class="line">            ObjectOutputStream objectOutputStream = null;</div><div class="line">            try &#123;</div><div class="line">                objectOutputStream = new ObjectOutputStream(new FileOutputStream(cachedFile));</div><div class="line">                objectOutputStream.writeObject(user);</div><div class="line">                Log.e(TAG, &quot;persist user:&quot;+user);</div><div class="line">            &#125; catch (IOException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125; finally &#123;</div><div class="line">                MyUtils.close(objectOutputStream);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;).start();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>SecondActivity：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">//反序列化User</div><div class="line">private void recoverFromFile()&#123;</div><div class="line"></div><div class="line">    new Thread(new Runnable()&#123;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void run() &#123;</div><div class="line">            User user = null;</div><div class="line">            File cachedFile = new File(MyConstants.CACHE_FILE_PATH);</div><div class="line">            if(cachedFile.exists()) &#123;</div><div class="line">                ObjectInputStream objectInputStream = null;</div><div class="line">                try &#123;</div><div class="line">                    objectInputStream = new ObjectInputStream(new FileInputStream(cachedFile));</div><div class="line">                    user = (User) objectInputStream.readObject();</div><div class="line">                    Log.e(TAG, &quot;recover user:&quot;+user);</div><div class="line">                &#125; catch (IOException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125; catch (ClassNotFoundException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125; finally &#123;</div><div class="line">                    MyUtils.close(objectInputStream);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;).start();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>User：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">public class User implements Parcelable, Serializable &#123;</div><div class="line"></div><div class="line">    private static final long serialVersionUID = 519067123721295773L;</div><div class="line"></div><div class="line">    public int userId;</div><div class="line">    public String userName;</div><div class="line">    public boolean isMale;</div><div class="line"></div><div class="line">    public Book book;</div><div class="line"></div><div class="line">    public User() &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public User(int userId, String userName, boolean isMale) &#123;</div><div class="line">        this.userId = userId;</div><div class="line">        this.userName = userName;</div><div class="line">        this.isMale = isMale;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int describeContents() &#123;</div><div class="line">        return 0;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void writeToParcel(Parcel out, int flags) &#123;</div><div class="line">        out.writeInt(userId);</div><div class="line">        out.writeString(userName);</div><div class="line">        out.writeInt(isMale ? 1 : 0);</div><div class="line">        out.writeParcelable(book, 0);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static final Parcelable.Creator&lt;User&gt; CREATOR = new Parcelable.Creator&lt;User&gt;() &#123;</div><div class="line">        public User createFromParcel(Parcel in) &#123;</div><div class="line">            return new User(in);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public User[] newArray(int size) &#123;</div><div class="line">            return new User[size];</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    private User(Parcel in) &#123;</div><div class="line">        userId = in.readInt();</div><div class="line">        userName = in.readString();</div><div class="line">        isMale = in.readInt() == 1;</div><div class="line">        book = in.readParcelable(Thread.currentThread().getContextClassLoader());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public String toString() &#123;</div><div class="line">        return &quot;User:&#123;userId:&quot;+userId+&quot;, userName:&quot;+userName+&quot;, isMale:&quot;+isMale+&quot;&#125;, with child:&#123;&quot;+book+&quot;&#125;&quot;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>MyConstants：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public class MyConstants &#123;</div><div class="line"></div><div class="line">    public static final String ANDROIDDEMO_2_PATH = Environment</div><div class="line">            .getExternalStorageDirectory().getPath()</div><div class="line">            + &quot;/androiddemo2/&quot;;</div><div class="line"></div><div class="line">    public static final String CACHE_FILE_PATH = ANDROIDDEMO_2_PATH + &quot;usercache&quot;;</div><div class="line"></div><div class="line">    public static final int MSG_FROM_CLIENT = 0;</div><div class="line">    public static final int MSG_FROM_SERVICE = 1;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>MyUtils：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public class MyUtils &#123;</div><div class="line"></div><div class="line">    public static void close(Closeable closeable) &#123;</div><div class="line">        try &#123;</div><div class="line">            if (closeable != null) &#123;</div><div class="line">                closeable.close();</div><div class="line">            &#125;</div><div class="line">        &#125; catch (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>下面看一下log，很显然，在SecondActivity中成功地从文件中恢复了之前存储的User对象的内容，这里之所以说内容，是因为反序列化得到的对象只是在内容上和序列化之前的对象是一样的，但它们本质上还是两个对象。</p>
+<p><img src="http://img.blog.csdn.net/20160214153121368" alt=""></p>
+<p>通过文件共享这种方式来共享数据对文件格式是没有具体要求的，只要读/写双方约定数据格式即可。不过通过文件共享的方法也是有局限性的，比如并发读/写的问题，像上面的那个例子，如果并发读/写，那么我们读出的内容就有可能不是最新的，如果是并发写的话那就更严重了。<strong>因此我们要尽量避免并发写这种情况的发生或者考虑使用线程同步来限制多个线程的写操作</strong>。通过上面的分析，可以知道，<strong>文件共享方式适合在对数据同步要求不高的进程之间进行通信，并且要妥善处理并发读/写的问题</strong>。</p>
+<p>当然，SharedPreferences是个特例，众所周知，SharedPreferences是Android中提供的轻量级存储方案，它通过键值对的方式来存储数据，在底层实现上它采用XML文件来存储键值对，每个应用的SharedPreferences文件都可以在当前包所在的data目录下查看到。<strong>从本质上来说，SharedPreferences也属于文件的一种，但是由于系统对它的读/写有一定的缓存策略，即在内存中会有一份SharedPreferences文件的缓存</strong>，因此在多进程模式下，系统对它的读/写就变得不可靠，当面对高并发的读/写访问，SharedPreferences有很大几率会丢失数据，因此，<strong>不建议在进程间通信中使用SharedPreferences</strong>。</p>
+<h2 id="使用Messenger"><a href="#使用Messenger" class="headerlink" title="使用Messenger"></a>使用Messenger</h2><p>Messenger可以翻译为信使，顾名思义，通过它可以在不同进程中传递Message对象，在Message中放入我们需要传递的数据，就可以轻松地实现数据的进程间传递了。Messenger是一种轻量级的IPC方案，它的底层实现是AIDL，为什么这么说呢？我们大致看一下Messenger这个类的构造方法就知道了。下面是Messenger的两个构造方法，从构造方法的实现上我们可以明显看出AIDL的痕迹，不管是IMessenger还是Stub.asInterface，这种使用方法都表明它的底层是AIDL。</p>
+<p><img src="http://img.blog.csdn.net/20160214214609449" alt=""><br><img src="http://img.blog.csdn.net/20160214214622215" alt=""></p>
+<p>Messenger的使用方法很简单，它对象AIDL做了封装，Messenger实现了Parcelable接口，使得我们可以更简便地进行进程间通信。同时，由于它一次处理一个请求，因此在服务端我们不用考虑线程同步的问题，这是因为服务端中不存在并发执行的情形。实现一个Messenger有如下几个步骤，分为服务端和客户端。</p>
+<h3 id="服务端进程"><a href="#服务端进程" class="headerlink" title="服务端进程"></a>服务端进程</h3><p>首先，我们需要在服务端创建一个Service来处理客户端的连接请求，同时创建一个Handler并通过它来创建一个Messenger对象，然后在Service的onBind方法中返回这个Messenger对象底层的Binder即可。</p>
+<h3 id="客户端进程"><a href="#客户端进程" class="headerlink" title="客户端进程"></a>客户端进程</h3><p>客户端进程中，首先要绑定服务端的Service，绑定成功后用服务端返回的IBinder对象创建一个Messenger，通过这个Messenger就可以向服务端发送消息了，发消息类型为Message对象。如果需要服务端能够响应客户端，就和服务端一样，需要创建一个Handler并创建一个新的Messenger，并把这个Messenger对象通过Message的replyTo参数传递给服务端，服务端通过这个replyTo参数就可以回应客户端。</p>
+<p>下面来看一个简单点的例子，在这个例子当中服务端无法回应客户端：</p>
+<p>首先看服务端的代码，可以看到MessengerHandler用来处理客户端发送的消息，并从消息中取出客户端发来的文本消息。而mMessenger是一个Messenger对象，它和MessengerHandler相关联，并在onBind方法中返回它里面的Binder对象，可以看出，这里Messenger的作用是将客户端发送的消息传递给MessengerHandler处理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">public class MessengerService extends Service &#123;</div><div class="line"></div><div class="line">    public static final String TAG = &quot;MessengerService&quot;;</div><div class="line"></div><div class="line">    private static class MessengerHandler extends Handler &#123;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void handleMessage(Message msg) &#123;</div><div class="line">            switch(msg.what) &#123;</div><div class="line">            case MyConstants.MSG_FROM_CLIENT :</div><div class="line">                Log.e(TAG, &quot;receive msg from client:&quot;+msg.getData().getString(&quot;msg&quot;));</div><div class="line">                break;</div><div class="line"></div><div class="line">            default:</div><div class="line">                super.handleMessage(msg);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private final Messenger mMessenger = new Messenger(new MessengerHandler());</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public IBinder onBind(Intent intent) &#123;</div><div class="line">        return mMessenger.getBinder();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接下来再看看客户端的实现，客户端的实现也比较简单，首先需要绑定远程进程的MessengerService，绑定成功后，根据服务端返回的binder对象创建Messenger对象并使用此对象向服务端发送消息。下面的代码在Bundle中向服务端发送了一句话，在上面的服务端代码中会打印出这句话。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">public class MessengerActivity extends Activity&#123;</div><div class="line"></div><div class="line">    private Messenger mService;</div><div class="line"></div><div class="line">    private ServiceConnection mConnection = new ServiceConnection()&#123;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onServiceConnected(ComponentName name, IBinder service) &#123;</div><div class="line">            mService = new Messenger(service);</div><div class="line">            Message msg = Message.obtain(null, MyConstants.MSG_FROM_CLIENT);</div><div class="line">            Bundle data = new Bundle();</div><div class="line">            data.putString(&quot;msg&quot;, &quot;hello, this is client.&quot;);</div><div class="line">            msg.setData(data);</div><div class="line">            try &#123;</div><div class="line">                mService.send(msg);</div><div class="line">            &#125; catch (RemoteException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onServiceDisconnected(ComponentName name) &#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        Intent intent = new Intent(this, MessengerService.class);</div><div class="line">        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onDestroy() &#123;</div><div class="line">        unbindService(mConnection);</div><div class="line">        super.onDestroy();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后，注册Service让其运行在单独的进程中，以及注册Activity：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;activity </div><div class="line">    android:name=&quot;.messenger.MessengerActivity&quot;</div><div class="line">    android:label=&quot;@string/app_name&quot; &gt;</div><div class="line"></div><div class="line">    &lt;intent-filter&gt;</div><div class="line">        &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;</div><div class="line">        &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;</div><div class="line">    &lt;/intent-filter&gt;</div><div class="line">&lt;/activity&gt;</div><div class="line"></div><div class="line">&lt;service </div><div class="line">    android:name=&quot;.messenger.MessengerService&quot;</div><div class="line">    android:process=&quot;:remote&quot;/&gt;</div></pre></td></tr></table></figure>
+<p>最后，运行程序，查看log：</p>
+<p><img src="http://img.blog.csdn.net/20160215102446701" alt=""></p>
+<p>通过上面的例子可以看出，在Messenger中进行数据传递必须将数据放入Message中，而Messenger和Message都实现了Parcelable接口，因此可以跨进程传输。简单来说，Message中所支持的数据类型都是Messenger所支持的传输类型。实际上，通过messenger来传输Message，Message中能使用的载体只有what、arg1、arg2、Bundle以及replyTo。Message中的另一个字段object在同一个进程中是很实用的，但是在进程间通信的时候，在Android2.2以前object字段不支持跨进程传输，即便是2.2以后，也仅仅是系统提供的实现了Parcelable接口的对象才能通过它来传输。这就意味着我们自定义的Parcelable对象是无法通过object字段来传输，这也导致了object字段的实用性大大降低，所幸我们还有Bundle，Bundle中可以支持大量的数据类型。</p>
+<p>上面的例子演示了如果在服务端接收客户端中发送的消息。下面就介绍如何实现服务端回应客户端这种效果。</p>
+<p>首先看服务端的修改，服务端只需要修改MessengerHandler，当收到消息后，会立即回复一条消息给客户端。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">private static class MessengerHandler extends Handler &#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void handleMessage(Message msg) &#123;</div><div class="line">        switch(msg.what) &#123;</div><div class="line">        case MyConstants.MSG_FROM_CLIENT :</div><div class="line">            Log.e(TAG, &quot;receive msg from client:&quot;+msg.getData().getString(&quot;msg&quot;));</div><div class="line"></div><div class="line">            //回应客户端</div><div class="line">            Messenger client = msg.replyTo;</div><div class="line">            Message replyMessage = Message.obtain(null, MyConstants.MSG_FROM_SERVICE);</div><div class="line">            Bundle bundle = new Bundle();</div><div class="line">            bundle.putString(&quot;reply&quot;, &quot;ok, Nice...&quot;);</div><div class="line">            replyMessage.setData(bundle);</div><div class="line">            try &#123;</div><div class="line">                client.send(replyMessage);</div><div class="line">            &#125; catch (RemoteException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">            break;</div><div class="line"></div><div class="line">        default:</div><div class="line">            super.handleMessage(msg);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接着再看客户端的修改，为了接收服务端的回复，客户端也需要准备一个接收消息的Messenger和Handler，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">private Messenger mGetReplyMessenger = new Messenger(new MessengerHandler());</div><div class="line"></div><div class="line">private static class MessengerHandler extends Handler &#123;</div><div class="line">    @Override</div><div class="line">    public void handleMessage(Message msg) &#123;</div><div class="line">        switch(msg.what) &#123;</div><div class="line">        case MyConstants.MSG_FROM_SERVICE:</div><div class="line">            Log.e(TAG,&quot;receive msg from Service:&quot;+msg.getData().getString(&quot;reply&quot;));</div><div class="line">            break;</div><div class="line"></div><div class="line">        default:</div><div class="line">            super.handleMessage(msg);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>除了上述修改，还有很关键的一点，当客户端发送消息的时候，需要把接收服务端回复的Messenger通过Message的replyTo参数传递给服务端，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">private ServiceConnection mConnection = new ServiceConnection()&#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onServiceConnected(ComponentName name, IBinder service) &#123;</div><div class="line"></div><div class="line">        mService = new Messenger(service);</div><div class="line">        Message msg = Message.obtain(null, MyConstants.MSG_FROM_CLIENT);</div><div class="line">        Bundle data = new Bundle();</div><div class="line">        data.putString(&quot;msg&quot;, &quot;hello, this is client.&quot;);</div><div class="line">        msg.setData(data);</div><div class="line">        //通过Message的replyTo参数传递给服务端，用于回应</div><div class="line">        msg.replyTo = mGetReplyMessenger;</div><div class="line"></div><div class="line">        try &#123;</div><div class="line">            mService.send(msg);</div><div class="line">        &#125; catch (RemoteException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onServiceDisconnected(ComponentName name) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>我们再运行程序，查看log：</p>
+<p><img src="http://img.blog.csdn.net/20160215132312928" alt=""></p>
+<p>到这里，已经把采用Messenger进行进程间通信的方法都介绍完了，下面给出一张Messenger的工作原理图以方便更好的理解Messenger：</p>
+<p><img src="http://img.blog.csdn.net/20160215134819231" alt=""></p>
+<p>以上的示例有很多读者也许会有很多异议，怎么都是针对同一个应用的，有没有针对不同应用的？<strong>其实同一个应用的不同组件，如果它们运行在不同进程中，那么和它们分别属于两个应用没有本质区别！</strong></p>
+<h2 id="使用AIDL"><a href="#使用AIDL" class="headerlink" title="使用AIDL"></a>使用AIDL</h2><p><strong>Messenger的局限性：</strong></p>
+<p>以上介绍了如何使用Messenger来进行进程间通信的方法，可以发现，<strong>Messenger是以串行的方式处理客户端发来的消息</strong>，如果大量的消息同时发送到服务端，服务端仍然只是一个个处理，如果有大量的并发请求，那么用Messenger就不太合适了。<strong>同时，Messenger的作用主要是为了传递消息，很多时候我们可能需要跨进程调用服务端的方法，这种情形用Messenger就无法实现了，但是我们可以使用AIDL来实现跨进程的方法调用。AIDL也是Messenger的底层实现，因此Messenger本质上也是AIDL，只不过系统为我们做了封装从而方便上层的调用而已</strong>。在上节中，我们介绍了Binder的概念，相信大家对Binder也有一定的了解，在Binder的基础上我们可以更加容易的理解AIDL。这里先介绍使用AIDL来进行进程间通信的流程，分为服务端和客户端两个方面。</p>
+<h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><p>服务端首先要创建一个Service用来监听客户端的连接请求，然后创建一个AIDL文件，将暴露给客户端的接口在这个AIDL文件中声明，最后在Service中实现这个AIDL接口即可。</p>
+<h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><p>客户端所要做的事情稍微简单一些，首先需要绑定服务端的Service，绑定成功后，将服务端返回的Binder对象转成AIDL接口所属的类型，接着就可以调用AIDL中的方法了。</p>
+<p>其实AIDL的实现过程远不止这么简单，接下来会对其中的细节和难点进行详细介绍，并完善我们在Binder那一节所提供的实例。</p>
+<h3 id="AIDL接口的创建"><a href="#AIDL接口的创建" class="headerlink" title="AIDL接口的创建"></a>AIDL接口的创建</h3><p>首先看AIDL接口的创建，如下所示，我们创建了一个后缀为AIDL的文件，在里面声明了一个接口和两个接口方法。</p>
+<p><strong>IBookManager.aidl：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">package com.zaenlove.androiddemo2.aidl;</div><div class="line">import com.zaenlove.androiddemo2.aidl.Book;</div><div class="line"></div><div class="line">interface IBookManager &#123;</div><div class="line">    List&lt;Book&gt; getBookList();</div><div class="line">    void addBook(in Book book);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在AIDL文件中，并不是所有的数据类型都是可以使用的，那么AIDL文件到底支持哪些数据类型呢？如下所示：</p>
+<ul>
+<li><p>基本数据类型（int、long、char、boolean、double等）；</p>
+</li>
+<li><p>String和CharSequence；</p>
+</li>
+<li><p>List：只支持ArrayList，里面每个元素都必须能够被AIDL支持；</p>
+</li>
+<li><p>Map：只支持HashMap，里面每个元素都必须能够被AIDL支持；</p>
+</li>
+<li><p>Parcelable：所有实现了Parcelable接口的对象；</p>
+</li>
+<li><p>AIDL：所有的AIDL接口本身也可以在AIDL文件中声明。</p>
+</li>
+</ul>
+<p>以上6中数据类型就是AIDL所支持的所有类型，<strong>其中自定义的Parcelable对象和AIDL对象必须要显式import进来，不管它们是否和当前的AIDL文件位于同一个包内</strong>。比如IBookManager.aidl这个文件，里面用到了Book这个类，这个类实现了Parcelable接口并且和IBookManager位于同一个包中，但是遵守AIDL的规范，我们仍然需要显式地import进来：import com.zaenlove.androiddemo2.aidl.Book。</p>
+<p>另外一个需要注意的地方是，<strong>如果AIDL文件中用到了自定义的Parcelable对象，那么必须新建一个和它同名的AIDL文件，并在其中声明它为Parcelable类型</strong>。如在IBookManager.aidl文件中，我们用到了Book这个类，所以，我们必须要创建Book.aidl文件，然后在里面添加如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">package com.zaenlove.androiddemo2.aidl;</div><div class="line">parcelable Book;</div></pre></td></tr></table></figure>
+<p>除此之外，AIDL中除了基本数据类型，<strong>其他类型的参数必须标上方向：in、out或者inout，in表示输入型参数，out表示输出型参数，inout表示输入输出型参数</strong>；如IBookManager.aidl文件中的void addBook(in Book book)。我们要根据实际需要去指定参数类型，不能一概使用out或者inout，因为这在底层实现是有开销的。<strong>最后AIDL接口中只支持方法，不支持声明静态常量，这一点区别于传统的接口</strong>。</p>
+<p><strong>为了方便AIDL的开发，建议把所有和AIDL相关的类和文件全部放入同一个包中</strong>，这样做的好处，就是当客户端是另一个应用的时候，你可以直接把整个包复制到客户端工程中。<strong>需要注意的是，AIDL的包结构在服务端和客户端要保持一致，否则运行会出错，这是因为客户端需要反序列化服务端中和AIDL接口相关的所有类，如果类的完整路径不一样的话，就无法成功反序列化，程序也就无法正常运行</strong>。这里我把所有示例都放在同一个工程中进行，但是读者要理解，一个工程和两个工程的多进程本质是一样的，两个工程的情况，除了需要复制AIDL接口所相关的包到客户端，其他完全一样。</p>
+<p><img src="http://img.blog.csdn.net/20160226134219443" alt=""></p>
+<h3 id="远程服务端Service的实现"><a href="#远程服务端Service的实现" class="headerlink" title="远程服务端Service的实现"></a>远程服务端Service的实现</h3><p>接下来实现这个接口，我们创建一个Service，称为BookManagerService，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 远程服务端的实现</div><div class="line"> * @author Zane</div><div class="line"> *</div><div class="line"> */</div><div class="line">public class BookManagerService extends Service &#123;</div><div class="line"></div><div class="line">    private CopyOnWriteArrayList&lt;Book&gt; mBookList = new CopyOnWriteArrayList&lt;Book&gt;();</div><div class="line"></div><div class="line">    private Binder mBinder = new IBookManager.Stub() &#123;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public List&lt;Book&gt; getBookList() throws RemoteException &#123;</div><div class="line">            return mBookList;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void addBook(Book book) throws RemoteException &#123;</div><div class="line">            mBookList.add(book);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public IBinder onBind(Intent intent) &#123;</div><div class="line">        return mBinder;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onCreate() &#123;</div><div class="line">        super.onCreate();</div><div class="line">        mBookList.add(new Book(1,&quot;Android&quot;));</div><div class="line">        mBookList.add(new Book(2,&quot;Ios&quot;));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面是一个服务端Service的典型实现，首先在onCreate中初始化添加了两本图书的信息，然后创建了一个Binder对象（IBookManger.aidl 和 Book.java文件在上一节讲Binder时已经创建）并在OnBind中返回它，这个对象继承自IBookManager.Stub并实现了它内部的AIDL方法，这个过程是因为：</p>
+<p>这个Stub就是一个Binder类，当客户端和服务端都位于同一个进程时，方法调用不会走跨进程的transact过程，而当两者位于不同进程时，方法调用需要走transact过程，这个逻辑由Stub的内部代理类Proxy来完成。</p>
+<p>这里主要看getBookList和addBook两个AIDL方法的实现，这里采用了CopyOnWriteArrayList，这个CopyOnWriteArrayList支持并发读/写。在前面我们提到，AIDL方法是在服务端的Binder线程池中执行的，因此当多个客户端同时连接的时候，会存在多个线程同时访问的情形，所以我们要在AIDL方法中处理线程同步，而我们这里直接使用CopyOnWriteArrayList来进行自动的线程同步。</p>
+<p>在上面我写到，<strong>AIDL中能够使用的List只有ArrayList，但是我们这里却使用了CopyOnWriteArrayList（注意它不是直接继承自ArrayList），为什么能够正常工作呢？这是因为AIDL中所支持的是抽象的List，而List只是一个接口，因此虽然服务端返回的是CopyOnWriteArrayList，但是在Binder中会按照List的规范去访问数据并最终形成一个新的ArrayList传递给客户端。所以，我们在服务端采用CopyOnWriteArrayList是完全可以的</strong>。和此类似的还有ConcurrentHashMap。</p>
+<p>接下来就是在清单文件中注册Service，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;service </div><div class="line">        android:name=&quot;.aidl.service.BookManagerService&quot;</div><div class="line">        android:process=&quot;:remote&quot;/&gt;</div></pre></td></tr></table></figure>
+<p>注意BookManagerService是运行在独立进程中的，它和客户端的Activity不在同一个进程中，这样就构成了进程间通信的场景。</p>
+<h3 id="客户端的实现"><a href="#客户端的实现" class="headerlink" title="客户端的实现"></a>客户端的实现</h3><p>首先绑定远程服务，绑定成功后将服务端返回的Binder对象转成AIDL接口，然后就可以通过这个接口去调用服务端的远程方法了，代码如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 客户端的实现</div><div class="line"> * @author Zane</div><div class="line"> *</div><div class="line"> */</div><div class="line">public class BookManagerActivity extends Activity &#123;</div><div class="line"></div><div class="line">    private ServiceConnection mConnection = new ServiceConnection()&#123;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onServiceConnected(ComponentName name, IBinder service) &#123;</div><div class="line">            //将服务端返回的Binder对象转成AIDL接口</div><div class="line">            IBookManager bookManager = IBookManager.Stub.asInterface(service);</div><div class="line">            try &#123;</div><div class="line">                //调用服务端的远程方法</div><div class="line">                List&lt;Book&gt; list = bookManager.getBookList();</div><div class="line">                Log.e(&quot;---&gt;&quot;,&quot;query book list, list type:&quot;+list.getClass().getCanonicalName());</div><div class="line">                Log.e(&quot;---&gt;&quot;,&quot;query book list:&quot;+list.toString());</div><div class="line">            &#125; catch (RemoteException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onServiceDisconnected(ComponentName name) &#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_book_manager);</div><div class="line"></div><div class="line">        //绑定远程服务</div><div class="line">        Intent intent = new Intent(this,BookManagerService.class);</div><div class="line">        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    protected void onDestroy() &#123;</div><div class="line">        unbindService(mConnection);</div><div class="line">        super.onDestroy();</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>绑定成功后，会通过bookManager去调用getBookList方法，然后打印出来所获取的图书信息。需要注意的是，服务端的方法有可能需要很久才能执行完毕，这个时候下面的代码就会导致ANR，这一点需要注意哦~，后面会再介绍这种情况，现在之所以这样写是让读者更好地了解AIDL的实现步骤。</p>
+<p>记得在清单文件中注册Activity，运行程序，log如下所示：</p>
+<p><img src="http://img.blog.csdn.net/20160225141622041" alt=""></p>
+<p>可以发现，虽然我们在服务端返回的是CopyOnWriteArrayList类型，但是客户端收到的仍然是ArrayList类型，这也证实了上面所做的分析。</p>
+<p>接下来，我们再调用另外一个接口addBook，在客户端给服务端添加一本书，然后在获取一次，看程序是否能正常运行。在上面的代码onServiceConnected方法中做如下改动：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public void onServiceConnected(ComponentName name, IBinder service) &#123;</div><div class="line">    IBookManager bookManager = IBookManager.Stub.asInterface(service);</div><div class="line">    try &#123;</div><div class="line"></div><div class="line">        List&lt;Book&gt; list = bookManager.getBookList();</div><div class="line">        Log.e(&quot;---&gt;&quot;,&quot;query book list:&quot;+list.toString());</div><div class="line"></div><div class="line">        //添加图书</div><div class="line">        Book newBook = new Book(3,&quot;JavaScript&quot;);</div><div class="line">        bookManager.addBook(newBook);</div><div class="line"></div><div class="line">        //获取图书</div><div class="line">        List&lt;Book&gt; newLists = bookManager.getBookList();</div><div class="line">        Log.e(&quot;---&gt;&quot;,&quot;add book list:&quot;+newLists.toString());</div><div class="line">    &#125; catch (RemoteException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行程序，log如下所示：</p>
+<p><img src="http://img.blog.csdn.net/20160226144824957" alt=""></p>
+<p>现在我们考虑一种情况，假设有一种需求：用户不想时不时地去查询图书列表了，太累了，于是，他去问图书馆，“当有新书时能不能把书的信息告诉我呢？”。这是典型的观察者模式，下面我们就来模拟这种情形。首先，需要提供一个AIDL接口，每个用户都需要实现这个接口并且向图书馆申请新书的提醒功能，当然用户也可以随时取消这种提醒。创建一个IOnNewBookArrivedListener.aidl文件，我们所期望的情况是：当服务端有新书到来时，就会通知每一个已经申请提醒功能的用户。从程序上来说就是调用所有IOnNewBOOKArrivedListener对象中的onNewBookArrived方法，并把新书的对象通过参数传递给客户端，代码如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">package com.zaenlove.androiddemo2.aidl;</div><div class="line">import com.zaenlove.androiddemo2.aidl.Book;</div><div class="line"></div><div class="line">interface IOnNewBookArrivedListener&#123;</div><div class="line">    void onNewBookArrived(in Book newBook);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>除了要新加一个AIDL接口，还需要在原有的接口中添加两个新方法，代码如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">package com.zaenlove.androiddemo2.aidl;</div><div class="line">import com.zaenlove.androiddemo2.aidl.Book;</div><div class="line">import com.zaenlove.androiddemo2.aidl.IOnNewBookArrivedListener;</div><div class="line"></div><div class="line">interface IBookManager &#123;</div><div class="line">    List&lt;Book&gt; getBookList();</div><div class="line">    void addBook(in Book book);</div><div class="line"></div><div class="line">    void registerListener(IOnNewBookArrivedListener listener);</div><div class="line">    void unregisterListener(IOnNewBookArrivedListener unlistener);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接着在IBookManager.Stub中实现这两个方法，同时在BookManagerService中还开启一个线程，每隔5s就向书库中加一本新书并通知所有感兴趣的用户，整个代码如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div></pre></td><td class="code"><pre><div class="line">public class BookManagerService extends Service &#123;</div><div class="line"></div><div class="line">    private AtomicBoolean mIsServiceDestoryed = new AtomicBoolean(false);</div><div class="line"></div><div class="line">    private CopyOnWriteArrayList&lt;Book&gt; mBookList = new CopyOnWriteArrayList&lt;Book&gt;();</div><div class="line">    private CopyOnWriteArrayList&lt;IOnNewBookArrivedListener&gt; mListenerList = new CopyOnWriteArrayList&lt;IOnNewBookArrivedListener&gt;();</div><div class="line"></div><div class="line">    private Binder mBinder = new IBookManager.Stub() &#123;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public List&lt;Book&gt; getBookList() throws RemoteException &#123;</div><div class="line">            return mBookList;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void addBook(Book book) throws RemoteException &#123;</div><div class="line">            mBookList.add(book);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void registerListener(IOnNewBookArrivedListener listener)</div><div class="line">                throws RemoteException &#123;</div><div class="line"></div><div class="line">            if(!mListenerList.contains(listener)) &#123;</div><div class="line">                mListenerList.add(listener);</div><div class="line">            &#125;else &#123;</div><div class="line">                Log.e(&quot;----&gt;&quot;,&quot;already exists.&quot;);</div><div class="line">            &#125;</div><div class="line">            Log.e(&quot;----&gt;&quot;, &quot;registerListener, size:&quot;+mListenerList.size());</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void unregisterListener(IOnNewBookArrivedListener unlistener)</div><div class="line">                throws RemoteException &#123;</div><div class="line"></div><div class="line">            if(mListenerList.contains(unlistener)) &#123;</div><div class="line">                mListenerList.remove(unlistener);</div><div class="line">                Log.e(&quot;----&gt;&quot;,&quot;unregister Listener succeed.&quot;);</div><div class="line">            &#125;else &#123;</div><div class="line">                Log.e(&quot;----&gt;&quot;,&quot;not found, can not unregister.&quot;);</div><div class="line">            &#125;</div><div class="line">            Log.e(&quot;----&gt;&quot;, &quot;unregisterListener, current size:&quot;+mListenerList.size());</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public IBinder onBind(Intent intent) &#123;</div><div class="line">        return mBinder;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onCreate() &#123;</div><div class="line">        super.onCreate();</div><div class="line">        mBookList.add(new Book(1,&quot;Android&quot;));</div><div class="line">        mBookList.add(new Book(2,&quot;Ios&quot;));</div><div class="line"></div><div class="line">        new Thread(new ServiceWorker()).start();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private class ServiceWorker implements Runnable&#123;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void run() &#123;</div><div class="line">            while(!mIsServiceDestoryed.get()) &#123;</div><div class="line">                try &#123;</div><div class="line">                    Thread.sleep(5000);</div><div class="line">                &#125; catch (InterruptedException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">                int bookId = mBookList.size() + 1;</div><div class="line">                Book newBook = new Book(bookId,&quot;new Book#&quot;+bookId);</div><div class="line">                try &#123;</div><div class="line">                    //新书信息通知</div><div class="line">                    onNewBookArrived(newBook);</div><div class="line">                &#125; catch (RemoteException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    public void onNewBookArrived(Book newBook) throws RemoteException &#123;</div><div class="line">        mBookList.add(newBook);</div><div class="line">        Log.e(&quot;----&gt;&quot;,&quot;onNewBookArrived, notify listeners:&quot;+mListenerList.size());</div><div class="line">        for(IOnNewBookArrivedListener listener : mListenerList) &#123;</div><div class="line">            Log.e(&quot;----&gt;&quot;,&quot;onNewBookArrived, notify listeners:&quot;+listener);</div><div class="line">            listener.onNewBookArrived(newBook);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onDestroy() &#123;</div><div class="line">        mIsServiceDestoryed.set(true);</div><div class="line">        super.onDestroy();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后，我们还需要修改一下客户端的代码，主要由两个方面：首先客户端要注册IOnNewBookArrivedListener到远程服务端，这样当有新书时服务端才能通知当前客户端，同时我们要在Activity退出时解除这个注册；另一方面，当有新书时，服务端会回调客户端的IOnNewBOOKArrivedListener对象中的onNewBookArrived方法，但是这个方法是在客户端的Binder线程池中执行的，因此，为了便于进行UI操作，我们需要有一个Handler可以将其切换到客户端的主线程中去执行。代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line">public class BookManagerActivity extends Activity &#123;</div><div class="line"></div><div class="line">    private static final int MESSAGE_NEW_BOOK_ARRIVED = 1;</div><div class="line"></div><div class="line">    private IBookManager mRemoteBookManager;</div><div class="line"></div><div class="line">    private Handler mHandler = new Handler()&#123;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void handleMessage(Message msg) &#123;</div><div class="line">            switch(msg.what) &#123;</div><div class="line">            case MESSAGE_NEW_BOOK_ARRIVED:</div><div class="line">                Log.e(&quot;----&gt;&quot;,&quot;receive new book :&quot;+msg.obj);</div><div class="line">                break;</div><div class="line">                default:</div><div class="line">                    super.handleMessage(msg);</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    private ServiceConnection mConnection = new ServiceConnection()&#123;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onServiceConnected(ComponentName name, IBinder service) &#123;</div><div class="line">            IBookManager bookManager = IBookManager.Stub.asInterface(service);</div><div class="line">            try &#123;</div><div class="line">                mRemoteBookManager = bookManager;</div><div class="line"></div><div class="line">                List&lt;Book&gt; list = bookManager.getBookList();</div><div class="line">                Log.e(&quot;-----&gt;&quot;,&quot;query book list, list type:&quot;+list.getClass().getCanonicalName());</div><div class="line">                Book newBook = new Book(3,&quot;HTML5&quot;);</div><div class="line">                bookManager.addBook(newBook);</div><div class="line">                Log.e(&quot;-----&gt;&quot;,&quot;add book:&quot;+newBook.toString());</div><div class="line">                List&lt;Book&gt; newLists = bookManager.getBookList();</div><div class="line">                Log.e(&quot;-----&gt;&quot;,&quot;query book list:&quot;+newLists.toString());</div><div class="line"></div><div class="line">                //注册新书信息通知</div><div class="line">                bookManager.registerListener(mOnNewBookArrivedListener);</div><div class="line">            &#125; catch (RemoteException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onServiceDisconnected(ComponentName name) &#123;</div><div class="line">            mRemoteBookManager = null;</div><div class="line">            Log.e(&quot;----&gt;&quot;,&quot;binder died.&quot;);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_book_manager);</div><div class="line"></div><div class="line">        //绑定远程服务</div><div class="line">        Intent intent = new Intent(this,BookManagerService.class);</div><div class="line">        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private IOnNewBookArrivedListener mOnNewBookArrivedListener = new IOnNewBookArrivedListener.Stub() &#123;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onNewBookArrived(Book newBook) throws RemoteException &#123;</div><div class="line">            mHandler.obtainMessage(MESSAGE_NEW_BOOK_ARRIVED, newBook).sendToTarget();</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    protected void onDestroy() &#123;</div><div class="line">        if(mRemoteBookManager != null &amp;&amp; mRemoteBookManager.asBinder().isBinderAlive()) &#123;</div><div class="line">            try &#123;</div><div class="line">                Log.e(&quot;----&gt;&quot;,&quot;unregister listener:&quot;+mOnNewBookArrivedListener);</div><div class="line">                mRemoteBookManager.unregisterListener(mOnNewBookArrivedListener);</div><div class="line">            &#125; catch (RemoteException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        unbindService(mConnection);</div><div class="line">        super.onDestroy();</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行程序，log如下所示：</p>
+<p><img src="http://img.blog.csdn.net/20160226154014339" alt=""></p>
+<p>从上面的代码可以看出，当BookManagerActivity关闭时，我们会在onDestory中去解除已经注册到服务端的listener。因此当我们按back键退出BookManagerActivity，log信息是这样的：</p>
+<p><img src="http://img.blog.csdn.net/20160226154305069" alt=""></p>
+<h3 id="一系列值得注意的地方："><a href="#一系列值得注意的地方：" class="headerlink" title="一系列值得注意的地方："></a>一系列值得注意的地方：</h3><h4 id="为什么会解注册失败？"><a href="#为什么会解注册失败？" class="headerlink" title="为什么会解注册失败？"></a>为什么会解注册失败？</h4><p>从上面的log可以看出，程序没有像我们所预期的那样执行。在解注册的过程中，服务端竟然无法找到我们之前注册的那个listener，在客户端我们注册和解注册时明明传递的是同一个listener！最终，服务端由于无法找到要解除的listener而宣告解注册失败!其实，这是必然的，这种解注册的处理方式在日常开发过程中时常使用到，但是放到多进程中却无法奏效，<strong>因为Binder会把客户端传递过来的对象重新转化并生成一个新的对象。虽然我们在注册和解注册过程中使用的是同一个客户端对象，但是通过Binder传递到服务端后，却会产生两个全新的对象，因为对象是不能跨进程直接传输的，对象的跨进程传输本质都是反序列化的过程，这就是为什么AIDL中的自定义对象都必须要实现Parcelable接口的原因</strong>。</p>
+<p><strong>那么到底该怎么做才能实现解注册功能呢？</strong>答案是使用RemoteCallbackList，这看起来很抽象，不过没关系，请看接下来的详细分析。</p>
+<p>RemoteCallbackList是系统专门提供的用于删除跨进程listener的接口。RemoteCallbackList是一个泛型，支持管理任意的AIDL接口，这点从它的声明就可以看出，因为所有的接口都继承自IInterface接口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public class RemoteCallbackList&lt;E extends IInterface&gt;</div></pre></td></tr></table></figure>
+<p>它的工作原理很简单，在它的内部有一个Map结构专门用来保存所有的AIDL回调，这个Map的key是IBinder类型，value是Callback类型，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ArrayMap&lt;IBinder, Callback&gt; mCallbacks = new ArrayMap&lt;IBinder, Callback&gt;();</div></pre></td></tr></table></figure>
+<p>其中Callback中封装了真正的远程listener。当客户端注册listener的时候，它会把这个listener的信息存入mCallbacks中，其中key和value分别通过下面的方式获得：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">IBinder binder = callback.asBinder();</div><div class="line">Callback cb = new Callback(callback, cookie);</div><div class="line"></div><div class="line">//存入到mCallbacks当中</div><div class="line">mCallbacks.put(binder, cb);</div></pre></td></tr></table></figure>
+<p>虽然说多次跨进程传输客户端的同一个对象会在服务端生成不同的对象，但是这些新生成的对象有一个共同点，那就是它们底层的Binder对象是同一个，利用这个特性，就可以实现上面我们无法实现的功能。当客户端解注册的时候，只要遍历服务端所有的listener，找出那个和解注册listener具有相同Binder对象的服务端listener并把它删除即可，这就是RemoteCallbackList为我们做的事情。同时RemoteCallbackList还有一个很有用的功能，那就是当客户端进程终止后，它能够自动移除客户端所注册的listener。另外，RemoteCallbackList内部自动实现了线程同步的功能，所以我们使用它来注册和解注册时，不需要做额外的线程同步工作。</p>
+<h4 id="下面就演示如何使用RemoteCallbackList来完成解注册："><a href="#下面就演示如何使用RemoteCallbackList来完成解注册：" class="headerlink" title="下面就演示如何使用RemoteCallbackList来完成解注册："></a>下面就演示如何使用RemoteCallbackList来完成解注册：</h4><p>修改一下BookManagerService，首先要创建一个RemoteCallbackList对象来替代之前的CopyOnWriteArrayList，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">private RemoteCallbackList&lt;IOnNewBookArrivedListener&gt; mListenerList = new RemoteCallbackList&lt;IOnNewBookArrivedListener&gt;();</div></pre></td></tr></table></figure>
+<p>然后修改registerListener和unregisterListener这两个接口的实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public void registerListener(IOnNewBookArrivedListener listener)</div><div class="line">        throws RemoteException &#123;</div><div class="line"></div><div class="line">    mListenerList.register(listener);</div><div class="line">    final int N = mListenerList.beginBroadcast();</div><div class="line">    mListenerList.finishBroadcast();</div><div class="line">    Log.d(&quot;----&gt;&quot;, &quot;registerListener, current size:&quot; + N);</div><div class="line">&#125;</div><div class="line"></div><div class="line">@Override</div><div class="line">public void unregisterListener(IOnNewBookArrivedListener unlistener)</div><div class="line">        throws RemoteException &#123;</div><div class="line"></div><div class="line">    boolean success = mListenerList.unregister(unlistener);</div><div class="line"></div><div class="line">    if (success) &#123;</div><div class="line">        Log.d(&quot;----&gt;&quot;, &quot;unregister success.&quot;);</div><div class="line">    &#125; else &#123;</div><div class="line">        Log.d(&quot;----&gt;&quot;, &quot;not found, can not unregister.&quot;);</div><div class="line">    &#125;</div><div class="line">    final int N = mListenerList.beginBroadcast();</div><div class="line">    mListenerList.finishBroadcast();</div><div class="line">    Log.d(&quot;----&gt;&quot;, &quot;unregisterListener, current size:&quot; + N);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>everybody，是不是很简单，接着要修改onNewBookArrived方法，当有新书的时候，就要通知所有已注册的listener，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">public void onNewBookArrived(Book newBook) throws RemoteException &#123;</div><div class="line">    mBookList.add(newBook);</div><div class="line">    final int N = mListenerList.beginBroadcast();</div><div class="line">    for (int i = 0; i &lt; N; i++) &#123;</div><div class="line">        IOnNewBookArrivedListener l = mListenerList.getBroadcastItem(i);</div><div class="line">        if (l != null) &#123;</div><div class="line">            try &#123;</div><div class="line">                l.onNewBookArrived(newBook);</div><div class="line">            &#125; catch (RemoteException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    mListenerList.finishBroadcast();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>BookManagerService修改完毕，我们一起验证程序的功能，查看log：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">02-27 22:39:24.171: D/-----&gt;(15702): register listener:com.zaenlove.androiddemo2.aidl.BookManagerActivity$3@425c10e0</div><div class="line">02-27 22:39:24.171: D/----&gt;(15719): registerListener, current size:1</div><div class="line">02-27 22:40:27.021: D/----&gt;(15702): unregister listener:com.zaenlove.androiddemo2.aidl.BookManagerActivity$3@425c10e0</div><div class="line">02-27 22:40:27.021: D/----&gt;(15719): unregister success.</div><div class="line">02-27 22:40:27.021: D/----&gt;(15719): unregisterListener, current size:0</div></pre></td></tr></table></figure>
+<p>分析log我们知道，使用RemoteCallbackList的确可以完成跨进程的解注册功能。</p>
+<p>使用RemoteCallbackList，有一点需要注意，我们无法像操作List一样去操作它，尽管它的名字中也带有List，但是它并不是一个List。遍历RemoteCallbackList，必须要按照下面的方式，其中beginBroadcast和finishBroadcast必须要配对使用，哪怕仅仅是想要获取RemoteCallbackList中的元素个数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">final int N = mListenerList.beginBroadcast();</div><div class="line">for (int i = 0; i &lt; N; i++) &#123;</div><div class="line">    IOnNewBookArrivedListener l = mListenerList.getBroadcastItem(i);</div><div class="line">    if (l != null) &#123;</div><div class="line">        //TODO handle l</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">mListenerList.finishBroadcast();</div></pre></td></tr></table></figure>
+<p>到这里，AIDL的基本使用方法已经介绍完了，但是有几点需要再说明一下：</p>
+<h4 id="导致ANR异常，以及如何解决ANR异常？"><a href="#导致ANR异常，以及如何解决ANR异常？" class="headerlink" title="导致ANR异常，以及如何解决ANR异常？"></a>导致ANR异常，以及如何解决ANR异常？</h4><p><strong>客户端调用远程服务的方法，被调用的方法运行在服务端的Binder线程中池中，同时客户端线程会被挂起，这个时候如果服务端方法执行比较耗时，就会导致客户端线程长时间地阻塞在这里，而如果这个客户端是UI线程的话，就会导致客户ANR</strong>。因此，如果我们明确知道某个远程方法是耗时的，那么就要避免在客户端的UI线程中去访问远程方法。<strong>由于客户端的onServiceConnected和onServiceDisconnected方法都运行在UI线程中，所以也不可以在它们里面直接调用服务端的耗时方法。另外，由于服务端的方法本身就运行在服务端的Binder线程池中，所以服务端方法本身就可以执行大量耗时操作，这个时候切记不要再服务端方法中开线程去进行异步任务。</strong></p>
+<p>下面稍微改造一下服务端的getBookList方法，假设这个方法是耗时的，那么服务端可以这样实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public List&lt;Book&gt; getBookList() throws RemoteException &#123;</div><div class="line">    SystemClock.sleep(5000);</div><div class="line">    return mBookList;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后在客户端中放一个按钮，单击它的时候就会调用服务端的getBookList方法，可以预知，连续单击几次，客户端就ANR了。代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">public void onButton1Click(View view) &#123;</div><div class="line">    Toast.makeText(this, &quot;click button1&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">    if (mRemoteBookManager != null) &#123;</div><div class="line">        try &#123;</div><div class="line">            List&lt;Book&gt; newList = mRemoteBookManager.getBookList();</div><div class="line">        &#125; catch (RemoteException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    /*new Thread(new Runnable() &#123;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void run() &#123;</div><div class="line">            if (mRemoteBookManager != null) &#123;</div><div class="line">                try &#123;</div><div class="line">                    List&lt;Book&gt; newList = mRemoteBookManager.getBookList();</div><div class="line">                &#125; catch (RemoteException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;).start();*/</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如图所示：</p>
+<p><img src="http://img.blog.csdn.net/20160228151537645" alt=""></p>
+<p>避免出现上诉这种ANR其实很简单，我们只需要把调用放在非UI线程即可，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public void onButton1Click(View view) &#123;</div><div class="line">    Toast.makeText(this, &quot;click button1&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">    new Thread(new Runnable() &#123;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void run() &#123;</div><div class="line">            if (mRemoteBookManager != null) &#123;</div><div class="line">                try &#123;</div><div class="line">                    List&lt;Book&gt; newList = mRemoteBookManager.getBookList();</div><div class="line">                &#125; catch (RemoteException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;).start();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>同理，当远程服务端需要调用客户端的listener中的方法时，被调用的方法也运行在Binder线程池中，只不过是客户端的线程池。所以，我们同样不可以在服务端中调用客户端的耗时方法。比如针对BookManagerService的onNewBookArrived方法，在其内部调用了客户端的IOnNewBOOKArrivedListener中的onNewBookArrived方法，如果客户端的这个onNewBookArrived方法比较耗时的话，那么请确保BookManagerService中的onNewBookArrived运行在非UI线程中，否则会导致服务端无法响应哦~</p>
+<p>另外，由于客户端的IOnNewBookArrivedListener中的onNewBookArrived方法运行在客户端的Binder线程池中，所以不能在它里面访问UI相关的内容，如果要访问UI，请使用Hnadler切换到UI线程，这一点上述的代码中已有所体现。</p>
+<h4 id="Binder意外死亡如何解决？"><a href="#Binder意外死亡如何解决？" class="headerlink" title="Binder意外死亡如何解决？"></a>Binder意外死亡如何解决？</h4><p>Binder是可能意外死亡的，这往往是由于服务端进程意外停止了，这时我们需要重新连接服务。有两种方法，第一种方法是给Binder设置DeathRecipient监听，当Binder死亡时，我们会收到binderDied方法的回调，在binderDied方法中我们可以重新远程服务，具体方法在Binder那一节中已经介绍过了，这里不再描述了。另一种方法是在onServiceDisconnected中重连远程服务。这两种方法的区别在于：onServiceDisconnected在客户端的UI线程中被回调，而binderDied在客户端的Binder线程池中被回调。也就是说，在binderDied方法中我们不能访问UI，这就是它们的区别。</p>
+<p>下面验证一下二者之间的区别，首先通过DDMS杀死服务端进程，接着在这两个方法中打印出当前线程的名称，如下所示：</p>
+<p><strong>方法一：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">private IBinder.DeathRecipient mDeathRecipient = new IBinder.DeathRecipient() &#123;</div><div class="line">    @Override</div><div class="line">    public void binderDied() &#123;</div><div class="line">        Log.d(&quot;----&gt;&quot;, &quot;binder died. tname:&quot; + Thread.currentThread().getName());</div><div class="line">        if (mRemoteBookManager == null)</div><div class="line">            return;</div><div class="line">        mRemoteBookManager.asBinder().unlinkToDeath(mDeathRecipient, 0);</div><div class="line">        mRemoteBookManager = null;</div><div class="line">        // TODO:这里重新绑定远程Service</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">private ServiceConnection mConnection = new ServiceConnection()&#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onServiceConnected(ComponentName name, IBinder service) &#123;</div><div class="line">        IBookManager bookManager = IBookManager.Stub.asInterface(service);</div><div class="line">        try &#123;</div><div class="line">            mRemoteBookManager = bookManager;</div><div class="line">            mRemoteBookManager.asBinder().linkToDeath(mDeathRecipient, 0);</div><div class="line">        &#125; catch (RemoteException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;；</div></pre></td></tr></table></figure>
+<p><strong>方法二：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">private ServiceConnection mConnection = new ServiceConnection()&#123;</div><div class="line"></div><div class="line">    ...</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onServiceDisconnected(ComponentName name) &#123;</div><div class="line">        mRemoteBookManager = null;</div><div class="line">        // TODO:这里重新绑定远程Service</div><div class="line">        Log.d(&quot;----&gt;&quot;, &quot;onServiceDisconnected. tname:&quot; + Thread.currentThread().getName());</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>运行程序，查看log：</p>
+<p><img src="http://img.blog.csdn.net/20160228211545117" alt=""></p>
+<p>从上面的log可以看出，onServiceDisconnected运行在main线程中，即UI线程，而binderDied运行在“Binder_3”这个线程中，很显然，它是Binder线程池中的一个线程。</p>
+<h4 id="如何在AIDL中使用权限验证功能？"><a href="#如何在AIDL中使用权限验证功能？" class="headerlink" title="如何在AIDL中使用权限验证功能？"></a>如何在AIDL中使用权限验证功能？</h4><p>默认情况下，我们的远程服务任何人都可以连接，但这应该不是我们愿意看到的，所以我们必须给服务加入权限验证功能，权限验证失败则无法调用服务中的方法。在AIDL中进行权限验证，这里介绍两种常用的方法。</p>
+<p><strong>第一种方法：</strong></p>
+<p>我们可以在服务端中的onBind中进行验证，验证不通过就直接返回null，这样验证失败的客户端直接无法绑定服务，至于验证方式可以有多种，比如使用permission验证。使用这样验证方式，我们要先在AndroidMenifest中声明所需的权限，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;permission </div><div class="line">    android:name=&quot;com.zaenlove.androiddemo2.permission.ACCESS_BOOK_SERVICE&quot;</div><div class="line">    android:protectionLevel=&quot;normal&quot;/&gt;</div></pre></td></tr></table></figure>
+<p>定义了权限以后，就可以在BookManagerService的onBind方法中做权限验证了，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public IBinder onBind(Intent intent) &#123;</div><div class="line">    int check = checkCallingOrSelfPermission(&quot;com.zaenlove.androiddemo2.permission.ACCESS_BOOK_SERVICE&quot;);</div><div class="line">    if(check == PackageManager.PERMISSION_DENIED) &#123;</div><div class="line">        Log.e(&quot;----&gt;&quot;,&quot;亲，您没有权限哦~请前往清单文件中添加权限...&quot;);</div><div class="line">        return null;</div><div class="line">    &#125;</div><div class="line">    return mBinder;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>还没完，如果我们自己内部的应用想绑定到我们的服务中，只需要在它的AndroidMenifest文件中采用如下方式使用permission即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;uses-permission android:name=&quot;com.zaenlove.androiddemo2.permission.ACCESS_BOOK_SERVICE&quot; /&gt;</div></pre></td></tr></table></figure>
+<p>这样就欧了，一个应用来绑定我们的服务时，会验证这个应用的权限，如果它没有使用这个权限，onBind方法就会直接返回null，最终结果是这个应用无法绑定到我们的服务，这样就达到了权限验证的效果，这种方法同样适合于Messenger。</p>
+<p>在MessengerService中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public IBinder onBind(Intent intent) &#123;</div><div class="line">    int check = checkCallingOrSelfPermission(&quot;com.zaenlove.androiddemo2.permission.ACCESS_BOOK_SERVICE&quot;);</div><div class="line">    if(check == PackageManager.PERMISSION_DENIED)&#123;</div><div class="line">        Log.e(&quot;----&gt;&quot;,&quot;亲，您没有权限哦~&quot;);</div><div class="line">        return null;</div><div class="line">    &#125;</div><div class="line">    return mMessenger.getBinder();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其余在清单文件定义权限和以上的方式一样一样的。</p>
+<p><strong>第二种方法：</strong></p>
+<p>可以在服务端的onTransact方法中进行权限验证，如果验证失败就直接返回false，这样服务端就不会终止执行AIDL中的方法从而达到保护服务端的效果，至于具体的验证方式有很多，可以采用permission验证，具体实现方式和第一种方法一样。还可以采用Uid和Pid来做验证，通过getCallingUid和getCallingPid可以拿到客户端所属应用的Uid和Pid，通过这两个参数我们可以做一些验证工作，比如验证包名。在下面的代码中，既验证了permission，又验证了包名。一个应用如果想用远程调用服务端中的方法，首先要使用我们的自定义权限“com.zaenlove.androiddemo2.permission.ACCESS_BOOK_SERVICE”，其次包名必须以“com.zaenlove”开始，否则调用服务端的方法会失败。</p>
+<p>在清单文件中加上如下代码，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;permission </div><div class="line">    android:name=&quot;com.zaenlove.androiddemo2.permission.ACCESS_BOOK_SERVICE&quot;</div><div class="line">    android:protectionLevel=&quot;normal&quot;/&gt;</div><div class="line">&lt;uses-permission android:name=&quot;com.zaenlove.androiddemo2.permission.ACCESS_BOOK_SERVICE&quot; /&gt;</div></pre></td></tr></table></figure>
+<p>在BookManagerService中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">private Binder mBinder = new IBookManager.Stub() &#123;</div><div class="line"></div><div class="line">    ...</div><div class="line"></div><div class="line">    public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws RemoteException &#123;</div><div class="line">        int check = checkCallingOrSelfPermission(&quot;com.zaenlove.androiddemo2.permission.ACCESS_BOOK_SERVICE&quot;);</div><div class="line">        if(check == PackageManager.PERMISSION_DENIED) &#123;</div><div class="line">            Log.e(&quot;----&gt;&quot;,&quot;亲，您没有权限哦~~~~&quot;);</div><div class="line">            return false;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        String packageName = null;</div><div class="line">        String[] packages = getPackageManager().getPackagesForUid(getCallingUid());</div><div class="line">        if(packages != null &amp;&amp; packages.length &gt; 0)&#123;</div><div class="line">            packageName = packages[0];</div><div class="line">        &#125;</div><div class="line">        if(!packageName.startsWith(&quot;com.zaenlove&quot;))&#123;</div><div class="line">            return false;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return super.onTransact(code, data, reply, flags);</div><div class="line">    &#125;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>上面介绍了两种AIDL中常用的权限验证方法，但是肯定还有其他方法可以做权限验证，比如为Service指定android:permission属性等。到这里为止，本节的内容就已经完毕了！敬请期待下节(IPC机制-Android中的IPC方式二-ContentProvider、Socket)</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat.jpeg" alt="Zane WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpeg" alt="Zane Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/06/10/IPC机制-IPC基础概念介绍/" rel="next" title="IPC机制-IPC基础概念介绍">
+                <i class="fa fa-chevron-left"></i> IPC机制-IPC基础概念介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/06/22/IPC机制-Android中的IPC方式二-ContentProvider、Socket/" rel="prev" title="IPC机制-Android中的IPC方式二-ContentProvider、Socket">
+                IPC机制-Android中的IPC方式二-ContentProvider、Socket <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/06/16/IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL/"
+           data-title="IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL" data-url="http://zanelove.github.io/2015/06/16/IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Zane" />
+          <p class="site-author-name" itemprop="name">Zane</p>
+          <p class="site-description motion-element" itemprop="description">记录当下，谱写未来</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ZaneLove" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              推荐阅读
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://go.kieran.top/" title="Kieran(树莓派)" target="_blank">Kieran(树莓派)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://baixin.io/#blog" title="潘柏信(IOS)" target="_blank">潘柏信(IOS)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://makaiqian.com/" title="小麻雀(前端)" target="_blank">小麻雀(前端)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://leancloud.cn/dashboard/login.html#/signin" title="LeanCloud(统计)" target="_blank">LeanCloud(统计)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://duoshuo.com/" title="多说(评论)" target="_blank">多说(评论)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" title="NexT(主题文档)" target="_blank">NexT(主题文档)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/iissnan/hexo-theme-next" title="NexT(博客主题)" target="_blank">NexT(博客主题)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://iissnan.com/progit/" title="Pro Git" target="_blank">Pro Git</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Bundle"><span class="nav-number">1.</span> <span class="nav-text">使用Bundle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用文件共享"><span class="nav-number">2.</span> <span class="nav-text">使用文件共享</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Messenger"><span class="nav-number">3.</span> <span class="nav-text">使用Messenger</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务端进程"><span class="nav-number">3.1.</span> <span class="nav-text">服务端进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端进程"><span class="nav-number">3.2.</span> <span class="nav-text">客户端进程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用AIDL"><span class="nav-number">4.</span> <span class="nav-text">使用AIDL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务端"><span class="nav-number">4.1.</span> <span class="nav-text">服务端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端"><span class="nav-number">4.2.</span> <span class="nav-text">客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AIDL接口的创建"><span class="nav-number">4.3.</span> <span class="nav-text">AIDL接口的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程服务端Service的实现"><span class="nav-number">4.4.</span> <span class="nav-text">远程服务端Service的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端的实现"><span class="nav-number">4.5.</span> <span class="nav-text">客户端的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一系列值得注意的地方："><span class="nav-number">4.6.</span> <span class="nav-text">一系列值得注意的地方：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么会解注册失败？"><span class="nav-number">4.6.1.</span> <span class="nav-text">为什么会解注册失败？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下面就演示如何使用RemoteCallbackList来完成解注册："><span class="nav-number">4.6.2.</span> <span class="nav-text">下面就演示如何使用RemoteCallbackList来完成解注册：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导致ANR异常，以及如何解决ANR异常？"><span class="nav-number">4.6.3.</span> <span class="nav-text">导致ANR异常，以及如何解决ANR异常？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Binder意外死亡如何解决？"><span class="nav-number">4.6.4.</span> <span class="nav-text">Binder意外死亡如何解决？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何在AIDL中使用权限验证功能？"><span class="nav-number">4.6.5.</span> <span class="nav-text">如何在AIDL中使用权限验证功能？</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zane</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zanelove-comment"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("jcj4FPhcIXVIEyoWyMqFgMDh-gzGzoHsz", "mkB0NxY7JUGJYx6Phuls50VA");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
