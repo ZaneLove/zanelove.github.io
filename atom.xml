@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zanelove.github.io/"/>
-  <updated>2017-06-08T12:01:45.000Z</updated>
+  <updated>2017-06-08T12:03:48.000Z</updated>
   <id>http://zanelove.github.io/</id>
   
   <author>
@@ -20,14 +20,14 @@
     <link href="http://zanelove.github.io/2015/07/17/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-%E5%BC%B9%E6%80%A7%E6%BB%91%E5%8A%A8/"/>
     <id>http://zanelove.github.io/2015/07/17/View的事件体系-弹性滑动/</id>
     <published>2015-07-17T11:59:38.000Z</published>
-    <updated>2017-06-08T12:01:45.000Z</updated>
+    <updated>2017-06-08T12:03:48.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;你的孤独，虽败犹荣&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;上一节讲到了&lt;a href=&quot;http://zanelove.github.io/2017/06/01/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%
+&lt;p&gt;上一节讲到了&lt;a href=&quot;http://zanelove.github.io/2017/06/01/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E6%BB%91%E5%8A%A8/&quot;&gt;View的滑动&lt;/a&gt;，我们还要知道如果实现View的弹性滑动，比较生硬地滑动过去，这种方式的用户体验实在太差了，因此我们要实现渐近式滑动。那么如何实现弹性滑动呢？其实实现方法有很多，但是它们都有一个共同思想：将一次大的滑动分成若干次小的滑动并在一个小时间段内完成，弹性滑动的具体的实现方式有很多，比如通过Scroller、Handler#postDelayed以及Thread#sleep等，下面一一进行介绍。&lt;/p&gt;
     
     </summary>
     
