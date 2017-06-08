@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zanelove.github.io/"/>
-  <updated>2017-06-02T11:31:40.000Z</updated>
+  <updated>2017-06-08T12:01:45.000Z</updated>
   <id>http://zanelove.github.io/</id>
   
   <author>
@@ -14,6 +14,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>View的事件体系-弹性滑动</title>
+    <link href="http://zanelove.github.io/2015/07/17/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-%E5%BC%B9%E6%80%A7%E6%BB%91%E5%8A%A8/"/>
+    <id>http://zanelove.github.io/2015/07/17/View的事件体系-弹性滑动/</id>
+    <published>2015-07-17T11:59:38.000Z</published>
+    <updated>2017-06-08T12:01:45.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;你的孤独，虽败犹荣&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;上一节讲到了&lt;a href=&quot;http://zanelove.github.io/2017/06/01/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%
+    
+    </summary>
+    
+      <category term="Android" scheme="http://zanelove.github.io/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="http://zanelove.github.io/tags/Android/"/>
+    
+  </entry>
   
   <entry>
     <title>View的事件体系-View的滑动</title>
