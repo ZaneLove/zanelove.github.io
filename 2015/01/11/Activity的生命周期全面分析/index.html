@@ -1,0 +1,1031 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Zane'Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="没错，我们可以选择躺在地上赖着不动：反正我的起点低，反正我家庭不如别人家，有无数个“反正”等着你，但是没有人会看你一眼，每个人都在前行；当别人在飞翔，你依然躺在地上，恐怕你一生的时间都只能用来数伤口了.
+
+本节将Activity的生命周期分为两部分内容，一部分是正常情况下的生命周期，另一部分是异常情况下的生命周期。所谓正常情况下的生命周期，是指在有用户参与的情况下，Activity所经过的生命周">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Activity的生命周期全面分析">
+<meta property="og:url" content="http://zanelove.github.io/2015/01/11/Activity的生命周期全面分析/index.html">
+<meta property="og:site_name" content="Zane'Blog">
+<meta property="og:description" content="没错，我们可以选择躺在地上赖着不动：反正我的起点低，反正我家庭不如别人家，有无数个“反正”等着你，但是没有人会看你一眼，每个人都在前行；当别人在飞翔，你依然躺在地上，恐怕你一生的时间都只能用来数伤口了.
+
+本节将Activity的生命周期分为两部分内容，一部分是正常情况下的生命周期，另一部分是异常情况下的生命周期。所谓正常情况下的生命周期，是指在有用户参与的情况下，Activity所经过的生命周">
+<meta property="og:image" content="http://img.blog.csdn.net/20151222152654583">
+<meta property="og:image" content="http://img.blog.csdn.net/20151222214118181">
+<meta property="og:image" content="http://img.blog.csdn.net/20151222215219200">
+<meta property="og:image" content="http://img.blog.csdn.net/20151223151423736">
+<meta property="og:image" content="http://img.blog.csdn.net/20151223163024848">
+<meta property="og:image" content="http://img.blog.csdn.net/20151223163337864">
+<meta property="og:image" content="http://img.blog.csdn.net/20151223202051300">
+<meta property="og:image" content="http://img.blog.csdn.net/20151224093107325">
+<meta property="og:updated_time" content="2017-06-13T12:13:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Activity的生命周期全面分析">
+<meta name="twitter:description" content="没错，我们可以选择躺在地上赖着不动：反正我的起点低，反正我家庭不如别人家，有无数个“反正”等着你，但是没有人会看你一眼，每个人都在前行；当别人在飞翔，你依然躺在地上，恐怕你一生的时间都只能用来数伤口了.
+
+本节将Activity的生命周期分为两部分内容，一部分是正常情况下的生命周期，另一部分是异常情况下的生命周期。所谓正常情况下的生命周期，是指在有用户参与的情况下，Activity所经过的生命周">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20151222152654583">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zanelove.github.io/2015/01/11/Activity的生命周期全面分析/"/>
+
+
+
+
+
+  <title> Activity的生命周期全面分析 | Zane'Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d73c1385ff615e566b07b11dac991e9c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Zane'Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">定目标，定执行</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://zanelove.github.io/2015/01/11/Activity的生命周期全面分析/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Zane">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zane'Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zane'Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Activity的生命周期全面分析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-01-11T22:06:04+08:00">
+                2015-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/01/11/Activity的生命周期全面分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/11/Activity的生命周期全面分析/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/01/11/Activity的生命周期全面分析/" class="leancloud_visitors" data-flag-title="Activity的生命周期全面分析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>没错，我们可以选择躺在地上赖着不动：反正我的起点低，反正我家庭不如别人家，有无数个“反正”等着你，但是没有人会看你一眼，每个人都在前行；当别人在飞翔，你依然躺在地上，恐怕你一生的时间都只能用来数伤口了.</p>
+</blockquote>
+<p>本节将Activity的生命周期分为两部分内容，一部分是正常情况下的生命周期，另一部分是异常情况下的生命周期。所谓正常情况下的生命周期，是指在有用户参与的情况下，Activity所经过的生命周期的改变；而异常情况下的生命周期是指Activity被系统回收或者由于当前设备的Configuration发生改变从而导致Activity被销毁重建，异常情况下的生命周期的关注点和正常情况下略有不同。</p>
+<a id="more"></a>
+<h2 id="1-正常情况下的生命周期分析"><a href="#1-正常情况下的生命周期分析" class="headerlink" title="1. 正常情况下的生命周期分析"></a>1. 正常情况下的生命周期分析</h2><p>在正常情况下，Activity会经历如下生命周期。</p>
+<p>（1）onCreate：表示Activity正在被创建，这是生命周期的第一个方法。在这个方法中，可以<strong>做一些初始化操作</strong>，比如调用setContentView方法去加载界面布局资源、初始化Activity所需数据等。（只可能调用一次）</p>
+<p>（2）onRestart：表示Activity正在重新启动。一般情况下，当<strong>当前Activity从不可见重新变为可见状态时，onRestart方法就会被调用</strong>。这种情形一般是用户行为所导致的，比如用户按Home键切换到桌面或者用户打开了一个新的Activity，这时当前的Activity就会暂停，也就是onPause和onStop方法被执行了，接着用户又回到了这个Activity，就会出现这种情况。<strong>（该方法可调用一次以上）</strong></p>
+<p>（3）onStart：表示Activity正在被启动，即将开始，这时<strong>Activity已经可见（显示）了，但是没有出现在前台</strong>，还无法和用户交互。这个时候其实可以理解为Activity已经显示出来了，但是我们还看不到。<strong>（该方法可调用一次以上）</strong></p>
+<p>（4）onResume：表示Activity已经可见了，并且出现在前台并开始活动。<strong>要注意onResume和onStart的对比，两者都表示Activity已经可见了，但是onStart的时候Activity还在后台，onResume的时候Activity才显示到前台。（该方法可调用一次以上）</strong></p>
+<p>（5）onPause：表示Activity正在停止，正常情况下，紧接着onStop方法就会被调用。在特殊情况下，如果这个时候快速地再回到当前Activity，那么onResume方法会被调用。笔者的理解是，这种情况下属于极端情况，用户操作很难重现这一场景。此时可以做一些存储数据、停止动画等工作，<strong>但是注意不能在onPause方法中做太耗时的操作，因为这会影响到新Activity的显示，onPause方法必须先执行完，新Activity中的onResume方法才会执行。（该方法可调用一次以上）</strong></p>
+<p>（6）onStop：表示Activity即将停止，<strong>可以做一些稍微重量级的回收工作，同样不能太耗时。（该方法可调用一次以上）</strong></p>
+<p>（7）onDestory：表示Activity即将被销毁，这是Activity生命周期中的最后一个回调，在这里，我们<strong>可以做一些回收工作和最终的资源释放。（只可能调用一次）</strong></p>
+<p>正常情况下，Activity的常用生命周期就只有上面7个，图1-1更详细地描述了Activity各种生命周期的切换过程。</p>
+<p><img src="http://img.blog.csdn.net/20151222152654583" alt=""></p>
+<p>针对图1-1，分如下几种情况：</p>
+<p>（1）针对一个特定的Activity，第一次启动，回调如下：onCreate –&gt; onStart –&gt; onResume。</p>
+<p>（2）当用户打开新的Activity或者切换到桌面的时候，回调如下：onPause –&gt; onStop。这里有一种特殊情况，如果新Activity采用了透明主题，那么当前Activity不会回调onStop。</p>
+<p>（3）当用户再次回到原Activity时，回调如下：onRestart –&gt; onStart –&gt; onResume。</p>
+<p>（4）当用户按back键回退时，回调如下：onPause –&gt; onStop –&gt; onDestroy。</p>
+<p>（5）当Activity被系统回收后再次打开，生命周期方法回调过程和（1）一样，<strong>注意只是生命周期方法一样，不代表所有过程都一样。</strong></p>
+<p>这个问题下节会详细说明。</p>
+<p>思考：</p>
+<p>问题一：onStart和onResume、onPause和onStop从描述上来看差不多，对我们来说有什么实质的不同呢？</p>
+<p>从生命周期上来分析，这两个配对的回调分别表示不同的意义，onStart和onStop是从Activity是否可见这个角度来回调的，而onResume和onPause是从Activity是否位于前台这个角度来回调的，除了这种区别，在实际使用中没有其他明显区别。</p>
+<p>问题二：假设当前Activity为A，如果这时用户打开一个新的ActivityB，那么B的onResume和A的onPause哪个现执行呢？</p>
+<p>这个问题可以从源码里得到解释，从Activity的启动过程来看，涉及Instrumentation、ActivityThread和ActivityManagerService。简单理解，启动Activity的请求会由Instrumentation来处理，然后它通过Binder向ActivityManagerService发送请求，ActivityManagerService内部维护着一个ActivityStack并负责栈内的Activity的状态同步，ActivityManagerService通过ActivityThread去同步Activity的状态从而完成生命周期方法的调用。在ActivityStack中的resumeTopActivityInnerLocked方法中，有这么一段代码：</p>
+<p><img src="http://img.blog.csdn.net/20151222214118181" alt=""></p>
+<p>从上述代码中可以看出，在新Activity启动之前，栈顶的Activity需要先onPause后，新Activity才能启动。最终，在ActivityStackSupervisor中的realStartActivityLocked方法会调用如下代码：</p>
+<p><img src="http://img.blog.csdn.net/20151222215219200" alt=""></p>
+<p>从上述代码中可以看出，app.thread的类型是IApplicationThread，而IApplicationThread的具体实现是ActivityThread中的ApplicationThread。所以，这段代码实际上调到了ActivityThread中的内部类ApplicationThread中的scheduleLaunchActivity方法，而scheduleLaunchActivity方法最终会完成新Activity的onCreate、onStart、onResume方法的调用过程。</p>
+<p>因此，得出结论：旧Activity先调用onPause，然后新Activity再启动。</p>
+<p>回答了第二个问题之后，大伙可能又要问了：ApplicationThread的scheduleLaunchActivity方法为什么会完成新Activity的onCreate、onStart、onResume的调用过程呢？</p>
+<p>因为在ApplicationThread的scheduleLaunchActivity方法中最终会调用如下方法，而如下方法的确会完成onCreate、onStart、onResume的调用过程。</p>
+<p><img src="http://img.blog.csdn.net/20151223151423736" alt=""></p>
+<p>到底是不是我所说的：“旧Activity先调用onPause，然后新Activity再启动”。我们通过例子验证一下！</p>
+<p><strong>MainActivity.java</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public class MainActivity extends Activity &#123;</div><div class="line"></div><div class="line">	private static final String TAG = &quot;MainActivity&quot;;</div><div class="line"></div><div class="line">	//省略</div><div class="line"></div><div class="line">	@Override</div><div class="line">	protected void onPause() &#123;</div><div class="line">		super.onPause();</div><div class="line">		Log.e(TAG,&quot;onPause&quot;);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	protected void onStop() &#123;</div><div class="line">		super.onStop();</div><div class="line">		Log.e(TAG,&quot;onStop&quot;);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	protected void onDestroy() &#123;</div><div class="line">		super.onDestroy();</div><div class="line">	   	Log.e(TAG,&quot;onDestroy&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>SecondActivity.java</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">public class SecondActivity extends Activity&#123;</div><div class="line"></div><div class="line">	private static final String TAG = &quot;SecondActivity&quot;;</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">		super.onCreate(savedInstanceState);</div><div class="line">		setContentView(R.layout.activity_main);</div><div class="line">		Log.e(TAG, &quot;onCreate&quot;);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	protected void onStart() &#123;</div><div class="line">		super.onStart();</div><div class="line">		Log.e(TAG, &quot;onStart&quot;);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	protected void onResume() &#123;</div><div class="line">		super.onResume();</div><div class="line">		Log.e(TAG, &quot;onResume&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>大伙来看一下log，是不是和上面分析的一样一样的，如图1-2：</p>
+<p><img src="http://img.blog.csdn.net/20151223163024848" alt=""></p>
+<p>扩展一下，那如果在MainActivity类中加入了一行调用finish()方法的代码呢？来看log：</p>
+<p><img src="http://img.blog.csdn.net/20151223163337864" alt=""></p>
+<p>一切如此这般！</p>
+<p>Android官方文档对onPause方法的解释有这么一句话：不能在onPause方法中做重要级的操作，因为必须在onPause方法执行完成以后新Activity才能Resume，从这一点也能间接证明我们的结论。通过分析这个问题，我们知道onPause方法和onStop方法都不能执行耗时的操作，尤其是onPause方法，这也意味着，我们应当尽量在onStop方法中做操作，从而使得新Activity尽快显示出来并切换到前台。</p>
+<h2 id="2-异常情况下的生命周期分析"><a href="#2-异常情况下的生命周期分析" class="headerlink" title="2. 异常情况下的生命周期分析"></a>2. 异常情况下的生命周期分析</h2><p>我们知道，Activity除了受用户操作所导致的正常的生命周期方法调度以外，还有一些异常情况，比如当资源相关的系统配置发生改变以及系统内存不足时，Activity就可能被kill。下面我们具体分析这两种情况。</p>
+<h3 id="2-1-情况1：资源相关的系统配置发生改变导致Activity被kill并重新创建"><a href="#2-1-情况1：资源相关的系统配置发生改变导致Activity被kill并重新创建" class="headerlink" title="2.1 情况1：资源相关的系统配置发生改变导致Activity被kill并重新创建"></a>2.1 情况1：资源相关的系统配置发生改变导致Activity被kill并重新创建</h3><p>那么这种情况比如说：当前Activity处于竖屏状态，如果突然旋转屏幕，由于系统配置发生了改变，在默认情况下，Activity就会被销毁并且重新创建，当然我们也可以阻止系统重新创建我们的Activity。</p>
+<p>在默认情况下，如果我们的Activity不做特殊处理，那么当系统配置发生改变后，Activity就会被销毁并重新创建，其生命周期如图1-3所示：</p>
+<p><img src="http://img.blog.csdn.net/20151223202051300" alt=""></p>
+<p>当系统配置发送改变后，Activity会被销毁，其onPause、onStop、onDestory均会被调用，同时由于Activity是在异常情况下终止的，系统会调用onSaveInstanceState来保存当前Activity的状态。<strong>这个方法的调用时机是在onStop之前，它和onPause没有既定的时序关系，它既可能在onPause之前调用，也可能在onPause之后调用。需要强调的一点是，这个方法只有出现在Activity被异常终止的情况下，正常情况下系统不会回调这个方法。</strong>当Activity被重新创建后，系统会调用onRestoreInstanceState，并且把Activity销毁时onSaveInstanceState方法所保存的Bundle对象作为参数同时传递给onRestoreInstanceState合onCreate方法。因此，我们通过这两个方法来判断Activity是否被重建了（判断Bundle是否为空，只需要在onCreate方法中进行判断即可，因为一旦onRestoreInstanceState被调用其Bundle值一定不为Null，这也是onRestoreInstanceState方法和onCreate方法的区别！但官方文档建议是采用onRestoreInstanceState去恢复数据），如果被重建了，那么我们就可以取出之前保存的数据并恢复，<strong>从时序上来说，onRestoreInstanceState的调用时机在onStart之后。</strong></p>
+<p><strong>关于保存和恢复View层次结构（数据），系统的工作流程是这样的：</strong>首先Activity被意外终止，Activity会调用onSaveInstanceState去保存数据，然后Activity会委托Window去保存数据，接着Window再委托它上面的顶级容器去保存数据。顶级容器是一个ViewGroup，一般来说它可能是DecorView。最后顶层容器再去一一通知它的子元素来保存各自数据，这样整个数据保存过程就完成了。可以发现，<strong>这是一种典型的委托思想，上层委托下层、父容器委托子元素去处理一件事情，这种思想在Android中有很多应用，比如View的绘制过程、事件分发等都是采用类似的思想</strong>。那么关于数据恢复过程也是类似的，这就不多说了。</p>
+<p>我们知道，当系统配置发送改变之后，Activity会被重新创建，那么有没有什么办法不重新创建呢？</p>
+<p>答案是：</p>
+<p>我们只需要在清单文件中，在对应的activity配置属性里面添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//如果想指定多个值，可以用“|”连接起来</div><div class="line">android:configChanges=”orientation|screenSize|keyboardHidden”</div></pre></td></tr></table></figure>
+<p>这样的话，Activity不会重新创建，并且也不会调用onSaveInstanceState和onRestoreInstanceState方法来存储和恢复数据，取而代之的是系统调用了Activity的onConfigurationChanged方法，这个时候我们就可以做一些自己的特殊处理了。</p>
+<p><img src="http://img.blog.csdn.net/20151224093107325" alt=""></p>
+<h3 id="2-2-情况2：资源内存不足导致低优先级的Activity被kill"><a href="#2-2-情况2：资源内存不足导致低优先级的Activity被kill" class="headerlink" title="2.2 情况2：资源内存不足导致低优先级的Activity被kill"></a>2.2 情况2：资源内存不足导致低优先级的Activity被kill</h3><p><strong>Activity按照优先级从高到底，可以分为如下三种情况：</strong></p>
+<p>（1）前台Activity —— 正在和用户交互的Activity，优先级最高。</p>
+<p>（2）可见但非前台Activity —— 比如Activity中弹出了一个对话框，导致Activity可见但是位于后台无法和用户直接交互。</p>
+<p>（3）后台Activity —— 已经被暂停的Activity，比如执行了onStop，优先级最低。</p>
+<p><strong>Android进程优先级顺序（由低到高）：</strong></p>
+<p>（1）空进程 —— 这是Android系统优先杀死的，因为此时该进程已经没有任何用途。</p>
+<p>（2）后台进程 —— 包含不可见的Activity，即跳转到其他activity后，由于资源不足，系统会将原来的activity杀死（即跳转的来源）</p>
+<p>（3）服务进程 —— 即Service，当系统资源不足时，系统可能会杀掉正在执行任务的Service。因此在Service执行比较耗时的操作，并不能保证一定能执行完毕。</p>
+<p>（4）可见进程 —— 当前屏幕上可以看到的activity，例如显示一个对话框的activity，那么对话框变成了前台进程，而调用他的activity是可见进程，但并不是前台的。</p>
+<p>（5）前台进程 —— 当前处于最前端的activity，也就是Android最后考虑杀死的对象。一般来说，前台进程Android系统是不会杀死的，只有当前4个都杀掉资源依旧不够才可能会发生。</p>
+<p>当系统内存不足时，系统就会按照上述优先级去杀死目标Activity所在的进程。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat.jpeg" alt="Zane WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpeg" alt="Zane Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/12/25/Hexo从0到1/" rel="next" title="Hexo从0到1">
+                <i class="fa fa-chevron-left"></i> Hexo从0到1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/01/27/Activity的启动模式/" rel="prev" title="Activity的启动模式">
+                Activity的启动模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/01/11/Activity的生命周期全面分析/"
+           data-title="Activity的生命周期全面分析" data-url="http://zanelove.github.io/2015/01/11/Activity的生命周期全面分析/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Zane" />
+          <p class="site-author-name" itemprop="name">Zane</p>
+          <p class="site-description motion-element" itemprop="description">记录当下，谱写未来</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ZaneLove" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              推荐阅读
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://go.kieran.top/" title="Kieran(树莓派)" target="_blank">Kieran(树莓派)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://baixin.io/#blog" title="潘柏信(IOS)" target="_blank">潘柏信(IOS)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://makaiqian.com/" title="小麻雀(前端)" target="_blank">小麻雀(前端)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://leancloud.cn/dashboard/login.html#/signin" title="LeanCloud(统计)" target="_blank">LeanCloud(统计)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://duoshuo.com/" title="多说(评论)" target="_blank">多说(评论)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" title="NexT(主题文档)" target="_blank">NexT(主题文档)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/iissnan/hexo-theme-next" title="NexT(博客主题)" target="_blank">NexT(博客主题)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://iissnan.com/progit/" title="Pro Git" target="_blank">Pro Git</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-正常情况下的生命周期分析"><span class="nav-number">1.</span> <span class="nav-text">1. 正常情况下的生命周期分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-异常情况下的生命周期分析"><span class="nav-number">2.</span> <span class="nav-text">2. 异常情况下的生命周期分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-情况1：资源相关的系统配置发生改变导致Activity被kill并重新创建"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 情况1：资源相关的系统配置发生改变导致Activity被kill并重新创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-情况2：资源内存不足导致低优先级的Activity被kill"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 情况2：资源内存不足导致低优先级的Activity被kill</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zane</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zanelove-comment"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("jcj4FPhcIXVIEyoWyMqFgMDh-gzGzoHsz", "mkB0NxY7JUGJYx6Phuls50VA");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,1192 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Zane'Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="对程序员而言，最好的简历就是个人博客和GitHub.
+
+一、瞧瞧兵器
+博客框架：Hexo 3，这是一款能快速、简洁且高效的博客框架，支持Markdown编辑，自动渲染出漂亮的静态页面。
+前端主题：Next，效果参考:http://zanelove.github.io
+域名购买：类似万网的平台都可以，你可以选购自己名字的域名，一年几十元左右，两杯咖啡的钱。
+SSL：CloudFlare">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo从0到1">
+<meta property="og:url" content="http://zanelove.github.io/2014/12/25/Hexo从0到1/index.html">
+<meta property="og:site_name" content="Zane'Blog">
+<meta property="og:description" content="对程序员而言，最好的简历就是个人博客和GitHub.
+
+一、瞧瞧兵器
+博客框架：Hexo 3，这是一款能快速、简洁且高效的博客框架，支持Markdown编辑，自动渲染出漂亮的静态页面。
+前端主题：Next，效果参考:http://zanelove.github.io
+域名购买：类似万网的平台都可以，你可以选购自己名字的域名，一年几十元左右，两杯咖啡的钱。
+SSL：CloudFlare">
+<meta property="og:image" content="http://img.blog.csdn.net/20151219124835978">
+<meta property="og:image" content="http://img.blog.csdn.net/20151219143049859">
+<meta property="og:image" content="http://img.blog.csdn.net/20151219150213597">
+<meta property="og:image" content="http://img.blog.csdn.net/20151219153039062">
+<meta property="og:image" content="http://img.blog.csdn.net/20151220110524959">
+<meta property="og:image" content="http://img.blog.csdn.net/20160122123251840">
+<meta property="og:image" content="http://img.blog.csdn.net/20160122112455291">
+<meta property="og:image" content="http://img.blog.csdn.net/20151219190231209">
+<meta property="og:image" content="http://img.blog.csdn.net/20151219190644759">
+<meta property="og:image" content="http://img.blog.csdn.net/20151219190820977">
+<meta property="og:image" content="http://img.blog.csdn.net/20151219191418372">
+<meta property="og:image" content="http://img.blog.csdn.net/20151219191332725">
+<meta property="og:updated_time" content="2017-06-13T12:13:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo从0到1">
+<meta name="twitter:description" content="对程序员而言，最好的简历就是个人博客和GitHub.
+
+一、瞧瞧兵器
+博客框架：Hexo 3，这是一款能快速、简洁且高效的博客框架，支持Markdown编辑，自动渲染出漂亮的静态页面。
+前端主题：Next，效果参考:http://zanelove.github.io
+域名购买：类似万网的平台都可以，你可以选购自己名字的域名，一年几十元左右，两杯咖啡的钱。
+SSL：CloudFlare">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20151219124835978">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zanelove.github.io/2014/12/25/Hexo从0到1/"/>
+
+
+
+
+
+  <title> Hexo从0到1 | Zane'Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d73c1385ff615e566b07b11dac991e9c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Zane'Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">定目标，定执行</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://zanelove.github.io/2014/12/25/Hexo从0到1/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Zane">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zane'Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zane'Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Hexo从0到1
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-12-25T20:13:40+08:00">
+                2014-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2014/12/25/Hexo从0到1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/25/Hexo从0到1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2014/12/25/Hexo从0到1/" class="leancloud_visitors" data-flag-title="Hexo从0到1">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>对程序员而言，最好的简历就是个人博客和GitHub.</p>
+</blockquote>
+<h2 id="一、瞧瞧兵器"><a href="#一、瞧瞧兵器" class="headerlink" title="一、瞧瞧兵器"></a>一、瞧瞧兵器</h2><ul>
+<li>博客框架：<a href="https://hexo.io/" target="_blank" rel="external">Hexo 3</a>，这是一款能快速、简洁且高效的博客框架，支持Markdown编辑，自动渲染出漂亮的静态页面。</li>
+<li>前端主题：<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">Next</a>，效果参考:<a href="http://zanelove.github.io">http://zanelove.github.io</a></li>
+<li>域名购买：类似万网的平台都可以，你可以选购自己名字的域名，一年几十元左右，两杯咖啡的钱。</li>
+<li>SSL：CloudFlare</li>
+</ul>
+<a id="more"></a>
+<h2 id="二、抄起家伙"><a href="#二、抄起家伙" class="headerlink" title="二、抄起家伙"></a>二、抄起家伙</h2><h3 id="GitHub-Pages"><a href="#GitHub-Pages" class="headerlink" title="GitHub Pages"></a>GitHub Pages</h3><p>在不购买服务器的前提下，我们的网站需要挂在GitHub Pages上！</p>
+<ol>
+<li><p>需要拥有一个<a href="https://github.com/" target="_blank" rel="external">GitHub账号</a></p>
+</li>
+<li><p>进入<a href="https://pages.github.com/" target="_blank" rel="external">GitHub Pages</a>，按照上面所说的步骤一步一步做，完成后就能在浏览器上打开像<a href="http://zanelove.github.io">http://zanelove.github.io</a>的网站了。</p>
+</li>
+</ol>
+<ul>
+<li><p>注意：(第二步Git命令需做修改)</p>
+<p>  命令修改前：</p>
+<p>  <img src="http://img.blog.csdn.net/20151219124835978" alt="命令修改前"></p>
+<p>  命令修改后：</p>
+<blockquote>
+<p>$ git clone git@github.com:username/username.github.io.git</p>
+</blockquote>
+</li>
+</ul>
+<p>至此，我们已经利用GitHub Pages搭建好了个人博客雏形了。下面要做的，就是个性化了。</p>
+<h3 id="安装Hexo博客框架"><a href="#安装Hexo博客框架" class="headerlink" title="安装Hexo博客框架"></a>安装Hexo博客框架</h3><p>经过上面步骤，我们已经拥有了一个初步域名：<a href="http://username.github.io" target="_blank" rel="external">http://username.github.io</a> 和 一个免费网络空间了，下面我们需要把空白的博客丰富起来。放心，不需要你手写一大堆html、css文件，也不用找jQuery来实现酷炫的页面效果。Hexo是一款博客框架，它会帮我们搭建。</p>
+<h4 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h4><p>1.1 前提：</p>
+<p>安装 Hexo 相当简单。然而在安装前，您必须检查电脑中是否已安装下列应用程序：</p>
+<ul>
+<li><a href="http://nodejs.org/" target="_blank" rel="external">Node.js</a></li>
+<li><a href="http://git-scm.com/" target="_blank" rel="external">Git</a></li>
+</ul>
+<p>如果您的电脑中已经安装上述必备程序，那么恭喜您！接下来只需要使用 npm 即可完成 Hexo 的安装。</p>
+<blockquote>
+<p>$ npm install -g hexo-cli</p>
+</blockquote>
+<p>1.2 注意：</p>
+<p>如何使用npm命令，你只需要在任意位置点击鼠标右键，选择Git bash即可！</p>
+<p>如果，你出现了以下的问题，如图：</p>
+<p><img src="http://img.blog.csdn.net/20151219143049859" alt=""></p>
+<p>请您放心，这不是问题，这是正常的现象！到此为止，Git、Node.js和Hexo就都安装成功了！</p>
+<h4 id="GitHub管理"><a href="#GitHub管理" class="headerlink" title="GitHub管理"></a>GitHub管理</h4><p>为了让自己未来的博客和代码处在git管理之下，我们要把刚刚在Github上博客项目拉到本地。首先，在本地创建文件夹，名字任意，进入该文件夹，把项目代码clone下来。</p>
+<blockquote>
+<p>$ git clone git@github.com:username/username.github.io.git</p>
+</blockquote>
+<p>好了，此时会在您创建的目录下自动创建子文件夹username.github.io,那里就是我们博客的代码，以后的操作都在git的管理之下了，此时默认的branch为master。</p>
+<h4 id="初始化Hexo"><a href="#初始化Hexo" class="headerlink" title="初始化Hexo"></a>初始化Hexo</h4><p>在目录下执行以下指令(在该目录内点击鼠标右键，选择Git bash)，Hexo 将会自动在目标文件夹建立网站所需要的所有文件。</p>
+<blockquote>
+<p>$ hexo init</p>
+</blockquote>
+<p>或者不在该目录下执行，而是任意地方执行该命令，但必须指定目录。</p>
+<blockquote>
+<p>$ hexo init</p>
+</blockquote>
+<p>接下来，就是安装依赖包：</p>
+<blockquote>
+<p>$ npm install</p>
+</blockquote>
+<p>最后，本地查看：现在我们已经搭建起本地的hexo博客了，执行以下命令(在您创建的目录下)，然后到浏览器输入localhost:4000看看。</p>
+<blockquote>
+<p>$ hexo generate</p>
+<p>$ hexo server</p>
+</blockquote>
+<h4 id="熟悉Hexo"><a href="#熟悉Hexo" class="headerlink" title="熟悉Hexo"></a>熟悉Hexo</h4><p>新建完成后，指定文件夹的目录如下：</p>
+<p><img src="http://img.blog.csdn.net/20151219150213597" alt=""></p>
+<ul>
+<li><p>_config.yml文件，是整体的配置文件，很多基础配置、插件配置等都需要在里面进行。要注意的是，该文件格式要求极为严格，缺少一个空格都会导致运行错误。小提示：不要用Tab缩进，用两个空格符。</p>
+</li>
+<li><p>package.json文件，应用程序的信息。<a href="http://embeddedjs.com/" target="_blank" rel="external">EJS</a>, <a href="http://learnboost.github.io/stylus/" target="_blank" rel="external">Stylus</a> 和 <a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="external">Markdown renderer</a> 已默认安装，您可以自由移除。</p>
+</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20151219153039062" alt=""></p>
+<ul>
+<li><p>scaffolds文件夹，<a href="https://hexo.io/zh-cn/docs/writing.html" target="_blank" rel="external">模版</a>文件夹。当您新建文章时，Hexo 会根据 scaffold 来建立文件。</p>
+</li>
+<li><p>source文件夹，资源文件夹是存放用户资源的地方。除 posts 文件夹之外，开头命名为 (下划线)的文件 / 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。</p>
+</li>
+<li><p>themes文件夹，<a href="https://hexo.io/zh-cn/docs/themes.html" target="_blank" rel="external">主题</a>文件夹。Hexo 会根据主题来生成静态页面。</p>
+</li>
+<li><p>ayout，包括draft(草稿)、page(页面)、post(文章)。这个就是三种文件的基本格式，其中post是你发表的文章，会显示在你的网站里，一篇post会包括title标题、date日期、tags标签等信息；draft是草稿，只有你在本地能看到，必须要publish后才能成为post，draft和post差别是date，因为draft没有发表，所以不需要指定日期。page是一个页面，对应一个新的html页面，比如<a href="http://wingjay.com/2015/12/06/说一说博客/" target="_blank" rel="external">博客内容展示页</a>是一个页面，<a href="http://wingjay.com/guestbook/" target="_blank" rel="external">留言本</a>也是一个页面。</p>
+</li>
+<li><p>public文件夹，这个文件夹是最终会发布到网站上的真实内容。怎么理解呢？我们可以把public文件夹当作是真正的被用户看到的，而其他的source、themes等都是为public服务的。Hexo里有一个很重要的指令hexo generate，这个指令就是利用所有代码里的配置信息、source里写的文章、themes里的样式，共同生成最终的静态html文件，存入public文件夹内。在我们执行了发布指令hexo deploy后，就会把public的内容部署到GitHub Pages上。当用户在访问我们的博客时，他们会看到public里生成的html文件。这个概念非常重要，即代码和真实静态页面是独立的。</p>
+</li>
+<li><p>generate和deploy，generate会把我们的配置、文章和主题结合起来生成一堆酷炫的html静态文件放在public里面。但此时用户还看不到本地public文件里的页面，我们必须用后一个指令deploy才能把静态文件部署到GitHub Pages上。不过，在部署前，需要配置让它自动部署到我们前面创建的Github项目中。</p>
+</li>
+<li><p>deploy相关配置。为了能够让项目自动把public文件夹的内容部署到GitHub项目中，我们可以按<a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">部署文档</a>进行配置，其中选择的branch为master。此后，每次运行deploy后，项目就会自动把public文件夹内容全部覆盖到当前的GitHub项目master分支上。</p>
+</li>
+<li><p>代码和静态文件分开管理。根据上面知道，每次部署后，public文件内容会覆盖掉项目整个master分支。这样可以实现网站静态文件的版本控制，但是，仔细对比这个master分支，我们会发现里面只剩下静态文件了，我们的代码比如source、themes统统没有了，这就导致无法对代码进行版本管理了。这意味着我换一台电脑，我就再也找不到代码了，只剩下一堆之前编译出来的静态文件。所以，为了对代码也进行版本控制，我们创建一个新的分支：code，然后在这个分支里进行代码控制，master里则保存部署的新的静态文件。大家可以自行比对这两个branch的内容差异。</p>
+</li>
+</ul>
+<h4 id="配置Hexo"><a href="#配置Hexo" class="headerlink" title="配置Hexo"></a>配置Hexo</h4><p>详情请参考<a href="https://hexo.io/zh-cn/docs/themes.html" target="_blank" rel="external">配置文档</a></p>
+<h4 id="部署Hexo"><a href="#部署Hexo" class="headerlink" title="部署Hexo"></a>部署Hexo</h4><p>1.1 编辑_config.yml(在跟目录下)。在部署时，要把下面的username都换成你的账号名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repository: https://github.com/username/username.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
+<p>1.2 执行下列指令即可完成部署。</p>
+<blockquote>
+<p>$ hexo generate</p>
+<p>$ hexo deploy</p>
+</blockquote>
+<p><strong>注意：</strong>有些新用户需要设置 ssh，否则上述命令会失败。ssh 的介绍和设置方法请看<a href="https://help.github.com/articles/generating-ssh-keys" target="_blank" rel="external">官方教程</a>，不用担心，很简单。</p>
+<p><strong>记住：</strong>每次修改本地文件后，需要hexo generate才能保存，需要hexo deploy才能部署到git上去。每次使用命令时，都要在您创建的目录下。</p>
+<p><strong>Okay，</strong>我们的博客已经完全搭建起来了，在浏览器访问username.github.io就能看到你的成就了！</p>
+<h3 id="配置NexT主题"><a href="#配置NexT主题" class="headerlink" title="配置NexT主题"></a>配置NexT主题</h3><p>Hexo主题非常多，可以参考丰富多彩的<a href="https://hexo.io/themes/" target="_blank" rel="external">Hexo主题</a>，本文选Next为主题，样式参考<a href="http://zanelove.github.io/">我的博客</a>。</p>
+<p>进入配置阶段，最好的文档还是NexT主题的官方文档，简单得不能再细致了。</p>
+<p>下面我还是提几点注意：</p>
+<ul>
+<li><p>第三方评论系统。评论系统很重要，你可以与读者进行更多交流，配置也简单，建议采用<a href="https://disqus.com/" target="_blank" rel="external">DISQUS</a>，更国际化一点的<a href="http://theme-next.iissnan.com/third-party-services.html#DISUQS" target="_blank" rel="external">配置</a>见此。另外，前期建议开启不登陆评论，即在<a href="https://disqus.com/" target="_blank" rel="external">Disqus</a>的Comment Rule里允许Guest comment。</p>
+</li>
+<li><p>创建留言板。熟悉page的创建与使用，<a href="http://www.arao.me/2015/hexo-next-theme-optimize-base/#为你的hexo网站NexT主题增加留言页" target="_blank" rel="external">参考这里</a>。</p>
+</li>
+<li><p>给自己博客做SEO。有好的SEO便于搜索引擎索引你的网站，随着以后读者增多，他们可以更好搜索到你的网站，<a href="http://www.arao.me/2015/hexo-next-theme-optimize-seo/" target="_blank" rel="external">具体方法见此</a>。</p>
+</li>
+</ul>
+<h3 id="专属域名"><a href="#专属域名" class="headerlink" title="专属域名"></a>专属域名</h3><h4 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h4><p>速速前往万网或相关域名购买网站，按自己名字挑选一个闪闪发光的个人域名吧！</p>
+<h4 id="域名解析-1"><a href="#域名解析-1" class="headerlink" title="域名解析_1"></a>域名解析_1</h4><p>以购买的域名wingjay.com为例，我们希望在访问这个域名时能自动进入Github Pages，所以我们要在万网建立一个CNAME纪录来帮我们做一个域名跳转：wingjay.com -&gt; wingjay.github.io，www.wingjay.com -&gt; wingjay.github.io。添加方法<a href="http://www.sudu.cn/service/detail/1/0/0/3/10036.html" target="_blank" rel="external">参考</a>这里，添加后可以看到两条记录：</p>
+<p><img src="http://img.blog.csdn.net/20151220110524959" alt=""></p>
+<p>然后万网会在世界各地的DNS服务器上添加这两条记录，当用户访问wingjay.com时会自动去访问wingjay.github.io。</p>
+<h4 id="域名解析-2"><a href="#域名解析-2" class="headerlink" title="域名解析_2"></a>域名解析_2</h4><p>但是，此时并不能成功访问，因为Github Pages是有限制的，它不允许任意域名都跳转过来，而是只限制一个域名，而且这个域名必须声明在CNAME文件中。</p>
+<p>所以，我们需要添加一个CNAME文件到项目的master中才行，<a href="https://help.github.com/articles/adding-a-cname-file-to-your-repository/" target="_blank" rel="external">参考这里</a>。读者可以<a href="https://github.com/wingjay/wingjay.github.io/blob/master/CNAME" target="_blank" rel="external">参考本人的CNAME文件内容</a>。</p>
+<p>不过，对于Hexo 3，这里有一个坑要注意：大家应该还记得上文说的，master分支里的内容都是自动生成的，而且会完全覆盖之前的内容。如果我们直接创建一个新文件CNAME，填好域名。但会发现在下一次部署后这个文件就消失了。不用惊讶，因为hexo并不会自动生成CNAME文件，所以在部署时被覆盖删除了。</p>
+<p>所以，我们就需要这个CNAME工具<a href="https://github.com/leecrossley/hexo-generator-cname" target="_blank" rel="external">hexo-generator-cname</a>，这时会自动在public里生成一个CNAME文件，把你的域名加进去再部署一下吧！</p>
+<h4 id="HTTP-gt-HTTPS"><a href="#HTTP-gt-HTTPS" class="headerlink" title="HTTP -&gt; HTTPS"></a>HTTP -&gt; HTTPS</h4><p>HTTPS是安全版的HTTP协议，它在http协议与TCP之间加入SSL层，采用端口443，不仅会对传输数据加密，还会进行身份验证。当然个人博客并没有强制性要求采用该协议，这也只是本人的好奇而为。</p>
+<p>目前Github Pages已经支持https了，但是不支持自定义证书。不过我们可以利用<a href="https://www.cloudflare.com/" target="_blank" rel="external">CloudFlare</a>来实现。具体实现可以<a href="https://www.benburwell.com/posts/configuring-cloudflare-universal-ssl/" target="_blank" rel="external">参考这里</a>。</p>
+<p>说明：po主网站的https正处在申请中</p>
+<h3 id="多说评论"><a href="#多说评论" class="headerlink" title="多说评论"></a>多说评论</h3><p>使用多说前需要先在<a href="http://duoshuo.com/" target="_blank" rel="external">多说</a>创建一个站点。具体步骤如下：</p>
+<ul>
+<li>登录后在首页选择 “我要安装”。</li>
+<li>创建站点，填写站点相关信息。（注意：多说域名这一栏填写的即是你的duoshuo_shortname）</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20160122123251840" alt=""></p>
+<ul>
+<li>编辑站点的_config.yml，添加duoshuo_shortname字段，设置如下:（注意：不是主题的_config.yml文件）</li>
+</ul>
+<blockquote>
+<p>duoshuo_shortname: your-duoshuo-shortname</p>
+</blockquote>
+<p>（注意：duoshuo_shortname: 你的多说二级域名要去掉.duoshuo.com 部分，如：duoshuo_shortname: zanelove-comment）</p>
+<ul>
+<li>创建站点成功之后，即可获取代码，将代码粘帖到您网页代码与间的任意位置。如果您的网站使用模板，请粘帖到模板代码中。（本人使用的是Next主题，因此本人将代码复制到themes\next\layout_partials\duoshuo-hot-articles.swig文件当中的模板代码中），如：（如果使用下面的代码，只需要替换模板代码即可）</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20160122112455291" alt=""></p>
+<h3 id="RSS订阅"><a href="#RSS订阅" class="headerlink" title="RSS订阅"></a>RSS订阅</h3><p>编辑 主题配置文件，将 rss 字段设置为：</p>
+<ul>
+<li><p>rss: false，这将会禁用Feed链接。</p>
+</li>
+<li><p>rss:，当值为空的时候，默认会使用站点的 Feed 链接。在此之前需要使用 <a href="https://github.com/hexojs/hexo-generator-feed" target="_blank" rel="external">hexo-generator-feed</a> 插件生成 Feed。</p>
+</li>
+</ul>
+<p>依照 hexo-generator-feed 插件的安装说明进行 Feed 生成：</p>
+<blockquote>
+<p>$ npm install hexo-generator-feed –save</p>
+</blockquote>
+<p>当配件配置完毕后，主题将自动显示 Feed 链接；同时在<strong>主题配置文件</strong>中添加如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">feed:</div><div class="line">  type: atom</div><div class="line">  path: atom.xml</div><div class="line">  limit: 20</div><div class="line">  hub:</div><div class="line">rss: http://your-feed-url，指定特定的链接地址，适用于已经烧制过 Feed 的情形。</div></pre></td></tr></table></figure>
+<h3 id="总结一些Bug"><a href="#总结一些Bug" class="headerlink" title="总结一些Bug"></a>总结一些Bug</h3><ul>
+<li>有童鞋反应右键菜单中没有git bash选项，可以进入开始菜单找到git bash，然后通过cd进入相应目录执行命令。</li>
+<li>在github部署完成之后，马上访问可能出现404错误，这是正常的，（最多）等待十分钟左右就可以访问了。如果还不行，那很可能是 github 发送给你的验证邮件你没有打开看，据多方反映，验证后就没问题了。</li>
+<li>如果在hexo d之后出现fatal: ‘username.github.io’ does not appear to be a git repository，一是检查 repo 的名字是否合乎规范、是否含有大写字母、config.yml 中的 deploy 配置是否正确，二是把 git bash 关掉，重新打开再执行命令。</li>
+<li>有的童鞋可能不是 IT 界的，或者对shell 命令不太了解。在要求输入密码时，你输入之后密码是不显示的，这是为了安全，并非是你没输上。</li>
+<li>出现乱码的，不要使用 windows 中的「记事本」打开并编辑文件，推荐使用 sublime text，很简单。如果已经在「记事本」中编辑过，需要使用 sublime text 转码为「utf8」。</li>
+<li>安装 hexo 时卡在那儿不动，很可能是网络不给力，能全局 break wall 就好了。</li>
+<li>遇到什么其他的问题，不妨删除.deploy 和db.json 再重新生成试一试。</li>
+<li>执行命令：npm install -g hexo，报错如下：</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20151219190231209" alt=""></p>
+<p>莫非是因为被墙了？换国内镜像源试试。</p>
+<blockquote>
+<p>$ npm config set registry=”<a href="http://registry.cnpmjs.org" target="_blank" rel="external">http://registry.cnpmjs.org</a>“</p>
+</blockquote>
+<p>然后再次执行下面的命令，成功！</p>
+<blockquote>
+<p>npm install -g hexo</p>
+</blockquote>
+<ul>
+<li>执行命令：hexo d，报错如下：</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20151219190644759" alt=""></p>
+<p>执行命令：npm install hexo-deployer-git –save，再次执行hexo d，如果再次报错：</p>
+<p><img src="http://img.blog.csdn.net/20151219190820977" alt=""></p>
+<p>估计必须要在GitHub上配置SSH，然后才可以上传文件。</p>
+<p><strong>配置SSH：</strong></p>
+<p>1、设置Git的user.name和user.email</p>
+<p>在第一次使用Git时，你需要告诉你的协同开发者，你是谁以及你的邮箱，在你提交的时候，Git需要这两个信息。具体通过以下命令设置：</p>
+<blockquote>
+<p>$ git config –global user.name “voidking”</p>
+<p>$ git config –global user.email “voidking@qq.com”</p>
+</blockquote>
+<p>需要注意的是，这里的name随意，邮箱是你的联系邮箱，与github完全无关。</p>
+<p>查看配置命令：</p>
+<blockquote>
+<p>$ git config –list</p>
+</blockquote>
+<p>2、生成SSH密钥</p>
+<blockquote>
+<p>$ ssh-keygen -t rsa -C “您的邮箱”</p>
+</blockquote>
+<p>按3个回车，密码为空。</p>
+<p><img src="http://img.blog.csdn.net/20151219191418372" alt=""></p>
+<p>在C:\Users\Administrator.ssh下，得到两个文件id_rsa和id_rsa.pub。需要注意的是，命令中的-C参数，后面跟的内容是注释。也就是说，内容随意，与github完全无关。</p>
+<p>3、在GitHub上添加SSH密钥</p>
+<p>打开id_rsa.pub，复制全文。<a href="https://github.com/settings/ssh" target="_blank" rel="external">https://github.com/settings/ssh</a> ，Add SSH key，粘贴进去。</p>
+<p>4、测试</p>
+<blockquote>
+<p>$ ssh git@github.com</p>
+</blockquote>
+<p>出现提示信息：</p>
+<p><img src="http://img.blog.csdn.net/20151219191332725" alt=""></p>
+<p>5、再次部署</p>
+<blockquote>
+<p>hexo d</p>
+</blockquote>
+<p>根据提示输入用户名和密码，等待一会儿便成功了！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat.jpeg" alt="Zane WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpeg" alt="Zane Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/11/24/hexoCommand/" rel="next" title="Hexo Command">
+                <i class="fa fa-chevron-left"></i> Hexo Command
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/01/11/Activity的生命周期全面分析/" rel="prev" title="Activity的生命周期全面分析">
+                Activity的生命周期全面分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2014/12/25/Hexo从0到1/"
+           data-title="Hexo从0到1" data-url="http://zanelove.github.io/2014/12/25/Hexo从0到1/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Zane" />
+          <p class="site-author-name" itemprop="name">Zane</p>
+          <p class="site-description motion-element" itemprop="description">记录当下，谱写未来</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ZaneLove" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              推荐阅读
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://go.kieran.top/" title="Kieran(树莓派)" target="_blank">Kieran(树莓派)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://baixin.io/#blog" title="潘柏信(IOS)" target="_blank">潘柏信(IOS)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://makaiqian.com/" title="小麻雀(前端)" target="_blank">小麻雀(前端)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://leancloud.cn/dashboard/login.html#/signin" title="LeanCloud(统计)" target="_blank">LeanCloud(统计)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://duoshuo.com/" title="多说(评论)" target="_blank">多说(评论)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" title="NexT(主题文档)" target="_blank">NexT(主题文档)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/iissnan/hexo-theme-next" title="NexT(博客主题)" target="_blank">NexT(博客主题)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://iissnan.com/progit/" title="Pro Git" target="_blank">Pro Git</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、瞧瞧兵器"><span class="nav-number">1.</span> <span class="nav-text">一、瞧瞧兵器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、抄起家伙"><span class="nav-number">2.</span> <span class="nav-text">二、抄起家伙</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub-Pages"><span class="nav-number">2.1.</span> <span class="nav-text">GitHub Pages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Hexo博客框架"><span class="nav-number">2.2.</span> <span class="nav-text">安装Hexo博客框架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Hexo"><span class="nav-number">2.2.1.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GitHub管理"><span class="nav-number">2.2.2.</span> <span class="nav-text">GitHub管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化Hexo"><span class="nav-number">2.2.3.</span> <span class="nav-text">初始化Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#熟悉Hexo"><span class="nav-number">2.2.4.</span> <span class="nav-text">熟悉Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置Hexo"><span class="nav-number">2.2.5.</span> <span class="nav-text">配置Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#部署Hexo"><span class="nav-number">2.2.6.</span> <span class="nav-text">部署Hexo</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置NexT主题"><span class="nav-number">2.3.</span> <span class="nav-text">配置NexT主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#专属域名"><span class="nav-number">2.4.</span> <span class="nav-text">专属域名</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#购买域名"><span class="nav-number">2.4.1.</span> <span class="nav-text">购买域名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#域名解析-1"><span class="nav-number">2.4.2.</span> <span class="nav-text">域名解析_1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#域名解析-2"><span class="nav-number">2.4.3.</span> <span class="nav-text">域名解析_2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP-gt-HTTPS"><span class="nav-number">2.4.4.</span> <span class="nav-text">HTTP -> HTTPS</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多说评论"><span class="nav-number">2.5.</span> <span class="nav-text">多说评论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RSS订阅"><span class="nav-number">2.6.</span> <span class="nav-text">RSS订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结一些Bug"><span class="nav-number">2.7.</span> <span class="nav-text">总结一些Bug</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zane</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zanelove-comment"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("jcj4FPhcIXVIEyoWyMqFgMDh-gzGzoHsz", "mkB0NxY7JUGJYx6Phuls50VA");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
