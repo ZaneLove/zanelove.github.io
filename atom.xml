@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zanelove.github.io/"/>
-  <updated>2017-06-13T12:18:25.000Z</updated>
+  <updated>2017-06-13T12:19:56.000Z</updated>
   <id>http://zanelove.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://zanelove.github.io/2015/07/13/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6/"/>
     <id>http://zanelove.github.io/2015/07/13/View的事件体系-View的事件分发机制/</id>
     <published>2015-07-13T11:57:10.000Z</published>
-    <updated>2017-06-13T12:18:25.000Z</updated>
+    <updated>2017-06-13T12:19:56.000Z</updated>
     
     <summary type="html">
     
@@ -28,7 +28,7 @@
 &lt;p&gt;有人靠天分逆袭，有人靠身份逆袭，如果你什么都没有，也行只要靠格局了。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;本节介绍View的一个核心知识点：事件分发机制。&lt;/p&gt;
-&lt;h2 id=&quot;点击事件的传递规则&quot;&gt;&lt;a href=&quot;#点击事件的传递规则&quot;
+&lt;h2 id=&quot;点击事件的传递规则&quot;&gt;&lt;a href=&quot;#点击事件的传递规则&quot; class=&quot;headerlink&quot; title=&quot;点击事件的传递规则&quot;&gt;&lt;/a&gt;点击事件的传递规则&lt;/h2&gt;&lt;p&gt;在介绍点击事件的传递规则之前，首先我们要明白这里要分析的对象就是MotionEvent，即点击事件，关于&lt;a href=&quot;http://zanelove.github.io/2015/07/04/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/&quot;&gt;MotionEvent&lt;/a&gt;已经进行了介绍。所谓点击事件的事件分发，其实就是对MotionEvent事件的分发过程，即当一个MotionEvent产生了以后，系统需要把这个事件传递给一个具体的View，而这个传递的过程就是分发过程。点击事件的分发过程由三个很重要的方法来共同完成：dispatchTouchEvent、onInterceptTouchEvent和onTouchEvent，下面先介绍一下这几个方法。&lt;/p&gt;
     
     </summary>
     
