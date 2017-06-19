@@ -1,0 +1,1024 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Zane'Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="放手一搏吧，别顾虑太多，这就是男人该有的性格
+
+Java JNI的本意是Java Native Interface（Java本地接口），它是为了方便Java调用C、C++等本地代码所封装的一层接口。我们知道，Java的优点是跨平台，但是作为优点的同时，其在本地交互的时候就出现了短板。Java的跨平台特性导致其本地交互的能力不够强大，一些和操作系统相关的特性Java无法完成，于是Java提供了JN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JNI和NDK编程">
+<meta property="og:url" content="http://zanelove.github.io/2017/06/19/JNI和NDK编程/index.html">
+<meta property="og:site_name" content="Zane'Blog">
+<meta property="og:description" content="放手一搏吧，别顾虑太多，这就是男人该有的性格
+
+Java JNI的本意是Java Native Interface（Java本地接口），它是为了方便Java调用C、C++等本地代码所封装的一层接口。我们知道，Java的优点是跨平台，但是作为优点的同时，其在本地交互的时候就出现了短板。Java的跨平台特性导致其本地交互的能力不够强大，一些和操作系统相关的特性Java无法完成，于是Java提供了JN">
+<meta property="og:image" content="http://img.blog.csdn.net/20170615144039367?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170615144505076?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170615145038504?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170615152039632?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170615152606619?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170615172251914?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170615172553478?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170615172618857?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-06-19T13:09:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JNI和NDK编程">
+<meta name="twitter:description" content="放手一搏吧，别顾虑太多，这就是男人该有的性格
+
+Java JNI的本意是Java Native Interface（Java本地接口），它是为了方便Java调用C、C++等本地代码所封装的一层接口。我们知道，Java的优点是跨平台，但是作为优点的同时，其在本地交互的时候就出现了短板。Java的跨平台特性导致其本地交互的能力不够强大，一些和操作系统相关的特性Java无法完成，于是Java提供了JN">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170615144039367?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zanelove.github.io/2017/06/19/JNI和NDK编程/"/>
+
+
+
+
+
+  <title> JNI和NDK编程 | Zane'Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d73c1385ff615e566b07b11dac991e9c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Zane'Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">定目标，定执行</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://zanelove.github.io/2017/06/19/JNI和NDK编程/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Zane">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zane'Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zane'Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JNI和NDK编程
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-19T21:07:57+08:00">
+                2017-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/19/JNI和NDK编程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/19/JNI和NDK编程/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/06/19/JNI和NDK编程/" class="leancloud_visitors" data-flag-title="JNI和NDK编程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>放手一搏吧，别顾虑太多，这就是男人该有的性格</p>
+</blockquote>
+<p>Java JNI的本意是Java Native Interface（Java本地接口），它是为了方便Java调用C、C++等本地代码所封装的一层接口。我们知道，Java的优点是跨平台，但是作为优点的同时，其在本地交互的时候就出现了短板。Java的跨平台特性导致其本地交互的能力不够强大，一些和操作系统相关的特性Java无法完成，于是Java提供了JNI专门用于和本地代码交互，这样就增强了Java语言的本地交互能力。通过Java JNI，用户可以调用C、C++所编写的本地代码。</p>
+<p>NDK是Android所提供的一个工具集合，通过NDK可以在Android中更加方便地通过JNI来访问本地代码，比如C或者C++。NDK还提供了交叉编译器，开发人员只需要简单地修改mk文件就可以生成特定CPU平台的动态库。</p>
+<p>使用NDK有如下好处：</p>
+<ul>
+<li>提交代码的安全性。由于so库反编译比较困难，因此NDK提高了Android程序的安全性。</li>
+<li>可以很方便地使用目前已有的C/C++开源库</li>
+<li>便于平台间的移植。通过C/C++实现的动态库可以很方便地在其他平台上使用。</li>
+<li>提高程序在某些特定情形下的执行效率，但是并不能明显提升Android程序的性能。</li>
+</ul>
+<a id="more"></a>
+<p>JNI和NDK开发所用到的动态库的格式是以.so为后缀的文件，下面统一简称为so库。JNI和NDK主要用于底层和嵌入式开发。</p>
+<h2 id="开发准备"><a href="#开发准备" class="headerlink" title="开发准备"></a>开发准备</h2><h3 id="下载NDK"><a href="#下载NDK" class="headerlink" title="下载NDK"></a>下载NDK</h3><p><a href="https://developer.android.com/ndk/downloads/index.html" target="_blank" rel="external">官网下载</a></p>
+<p><a href="http://pan.baidu.com/s/1hr7CwAC" target="_blank" rel="external">云盘下载</a> (密码：f8h5)</p>
+<h3 id="配置NDK"><a href="#配置NDK" class="headerlink" title="配置NDK"></a>配置NDK</h3><h4 id="设置NDK路径"><a href="#设置NDK路径" class="headerlink" title="设置NDK路径"></a>设置NDK路径</h4><p>选择File &gt; Project Structure &gt; SDK Location &gt; Android NDK location，指定NDK的路径。</p>
+<p><img src="http://img.blog.csdn.net/20170615144039367?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20170615144505076?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>也可以通过直接修改local.properties文件，在里面指定NDK的所在目录：</p>
+<blockquote>
+<p>ndk.dir=D\:\Development_Tools\AndroidStudio\android-ndk-r14b</p>
+</blockquote>
+<p><img src="http://img.blog.csdn.net/20170615145038504?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h3 id="JNI的开发流程"><a href="#JNI的开发流程" class="headerlink" title="JNI的开发流程"></a>JNI的开发流程</h3><p>JNI的开发流程有如下几步，首先需要在Java中声明native方法，接着用C或者C++实现native方法，然后就可以编译运行了。</p>
+<h4 id="声明native方法"><a href="#声明native方法" class="headerlink" title="声明native方法"></a>声明native方法</h4><p>创建一个类，这里叫做JniTest.java，代码如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class JniTest &#123;</div><div class="line">    static &#123;</div><div class="line">        System.loadLibrary(&quot;jni-test&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public native String get();</div><div class="line">    public native void set(String str);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看到上面的代码中，声明了两个native方法：get和set(String)，这两个就是需要在JNI中实现的方法。在JniTest类的代码中有一个加载动态库的过程，其中jni-test是so库的标识，so库完整的名称为libjni-test.so，这是加载so库的规范。</p>
+<h4 id="通过javah命令生成Java所对应的JNI头文件"><a href="#通过javah命令生成Java所对应的JNI头文件" class="headerlink" title="通过javah命令生成Java所对应的JNI头文件"></a>通过javah命令生成Java所对应的JNI头文件</h4><p>编译Java源文件得到class文件，然后通过javah命令导出JNI的头文件，具体的命令如下：</p>
+<blockquote>
+<p>cd app/src/main/java/</p>
+<p>javac io/github/zane/ndkdev/JniTest.java</p>
+<p>javah io.github.zane.ndkdev.JniTest</p>
+</blockquote>
+<p><img src="http://img.blog.csdn.net/20170615152039632?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>在当前目录下，会产生一个 io_github_zane_ndkdev_JniTest.h 的头文件，它是javah命令自动生成的，内容如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">/* DO NOT EDIT THIS FILE - it is machine generated */</div><div class="line">#include &lt;jni.h&gt;</div><div class="line">/* Header for class io_github_zane_ndkdev_JniTest */</div><div class="line"></div><div class="line">#ifndef _Included_io_github_zane_ndkdev_JniTest</div><div class="line">#define _Included_io_github_zane_ndkdev_JniTest</div><div class="line">#ifdef __cplusplus</div><div class="line">extern &quot;C&quot; &#123;</div><div class="line">#endif</div><div class="line">/*</div><div class="line"> * Class:     io_github_zane_ndkdev_JniTest</div><div class="line"> * Method:    get</div><div class="line"> * Signature: ()Ljava/lang/String;</div><div class="line"> */</div><div class="line">JNIEXPORT jstring JNICALL Java_io_github_zane_ndkdev_JniTest_get</div><div class="line">  (JNIEnv *, jobject);</div><div class="line"></div><div class="line">/*</div><div class="line"> * Class:     io_github_zane_ndkdev_JniTest</div><div class="line"> * Method:    set</div><div class="line"> * Signature: (Ljava/lang/String;)V</div><div class="line"> */</div><div class="line">JNIEXPORT void JNICALL Java_io_github_zane_ndkdev_JniTest_set</div><div class="line">  (JNIEnv *, jobject, jstring);</div><div class="line"></div><div class="line">#ifdef __cplusplus</div><div class="line">&#125;</div><div class="line">#endif</div><div class="line">#endif</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20170615152606619?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>上面的代码需要做一个说明，首先函数名的格式遵循如下规则：<strong>Java_包名_类名_方法名</strong>。比如JniTest中的set方法，到这里就变成了 JNICALL Java_io_github_zane_ndkdev_JniTest_set<br>  (JNIEnv *, jobject, jstring) ，其中 io_github_zane_ndkdev 是包名，JniTest是类名，jstring是代表的是set方法的String类型的参数。JNIEXPORT、JNICALL、JNIEnv和jobject都是JNI标准中所定义的类型或者宏，它们的含义如下：</p>
+<ul>
+<li>JNIEnv*：表示一个指向JNI环境的指针，可以通过它来访问JNI提供的接口方法；</li>
+<li>jobject：表示Java对象中的this；</li>
+<li>JNIEXPORT和JNICALL：它们是JNI中所定义的宏，可以在jni.h这个头文件中查找到。</li>
+</ul>
+<p>下面的宏定义是必需的，它指定extern “C”内部的函数采用C语言的命名风格来编译。否则当JNI采用C++来实现时，由于C和C++编译过程中函数的命名风格不同，这将导致JNI在链接时无法根据函数名查找到具体的函数，那么JNI调用就无法完成。更多的细节实际上是有关C和C++编译时的一些问题，这里就不再展开了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#ifdef __cplusplus</div><div class="line">extern &quot;C&quot; &#123;</div><div class="line">#endif</div></pre></td></tr></table></figure>
+<h4 id="实现JNI方法"><a href="#实现JNI方法" class="headerlink" title="实现JNI方法"></a>实现JNI方法</h4><p>JNI方法是指Java中声明的native方法，这里可以选择用C++或者C来实现，它们的实现过程是类似的，只有少量的区别，下面分别用C++和C来实现JNI方法。</p>
+<p>1、首先，在工程的主目录下创建一个子目录，名称随意，这里选择jni作为子目录的名称：</p>
+<p><img src="http://img.blog.csdn.net/20170615172251914?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>在New Android Component中，直接点击Finish按钮完成JNI目录创建：</p>
+<p><img src="http://img.blog.csdn.net/20170615172553478?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20170615172618857?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>2、然后，将之前通过javah生成的头文件 io_github_zane_ndkdev_JniTest.h 复制到jni目录下；</p>
+<p>3、接着在/jni目录下创建 test.cpp 或 test.c 文件，它们的实现如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">//test.cpp</div><div class="line">#include &quot;io_github_zane_ndkdev_JniTest.h&quot;</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line"></div><div class="line">/*</div><div class="line"> * Class:     io_github_zane_ndkdev_JniTest</div><div class="line"> * Method:    get</div><div class="line"> * Signature: ()Ljava/lang/String;</div><div class="line"> */</div><div class="line">JNIEXPORT jstring JNICALL Java_io_github_zane_ndkdev_JniTest_get (JNIEnv *env, jobject thiz) &#123;</div><div class="line">    printf(&quot;invoke get from C++\n&quot;);</div><div class="line">    return env-&gt;NewStringUTF(&quot;Hello from JNI !&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/*</div><div class="line"> * Class:     io_github_zane_ndkdev_JniTest</div><div class="line"> * Method:    set</div><div class="line"> * Signature: (Ljava/lang/String;)V</div><div class="line"> */</div><div class="line">JNIEXPORT void JNICALL Java_io_github_zane_ndkdev_JniTest_set (JNIEnv *env, jobject thiz, jstring string) &#123;</div><div class="line">    printf(&quot;invoke set from C++\n&quot;);</div><div class="line">    char* str = (char*) env-&gt;GetStringUTFChars(string, NULL);</div><div class="line">    printf(&quot;%s\n&quot;, str);</div><div class="line">    env-&gt;ReleaseStringUTFChars(string, str);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">//test.c</div><div class="line">#include &quot;io_github_zane_ndkdev_JniTest.h&quot;</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line"></div><div class="line">/*</div><div class="line"> * Class:     io_github_zane_ndkdev_JniTest</div><div class="line"> * Method:    get</div><div class="line"> * Signature: ()Ljava/lang/String;</div><div class="line"> */</div><div class="line">JNIEXPORT jstring JNICALL Java_io_github_zane_ndkdev_JniTest_get (JNIEnv *env, jobject thiz) &#123;</div><div class="line">    printf(&quot;invoke get from C\n&quot;);</div><div class="line">    return (*env)-&gt;NewStringUTF(env, &quot;Hello from Zane !&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/*</div><div class="line"> * Class:     io_github_zane_ndkdev_JniTest</div><div class="line"> * Method:    set</div><div class="line"> * Signature: (Ljava/lang/String;)V</div><div class="line"> */</div><div class="line">JNIEXPORT void JNICALL Java_io_github_zane_ndkdev_JniTest_set (JNIEnv *env, jobject thiz, jstring string) &#123;</div><div class="line">    printf(&quot;invoke set from C\n&quot;);</div><div class="line">    char* str = (char*) (*env)-&gt;GetStringUTFChars(env, string, NULL);</div><div class="line">    printf(&quot;%s\n&quot;, str);</div><div class="line">    (*env)-&gt;ReleaseStringUTFChars(env, string, str);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以发现，tet.cpp和test.c的实现很类似，但是它们对env的操作方式有所不同，因此用C++和C来实现同一个JNI方法，它们的区别主要集中在对env的操作上，其他都是类似的，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">C++：env-&gt;NewStringUTF(&quot;Hello from JNI !&quot;);</div><div class="line">C：(*env)-&gt;NewStringUTF(env, &quot;Hello from JNI !&quot;);</div></pre></td></tr></table></figure>
+<h4 id="编译so库并在Java中使用"><a href="#编译so库并在Java中使用" class="headerlink" title="编译so库并在Java中使用"></a>编译so库并在Java中使用</h4><p><strong>Mac、Linux环境下：</strong></p>
+<p>so库的编译这里采用gcc，切换到jni目录中，对于 test.cpp 和 test.c 来说，它们的编译指令如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">C++：gcc -shared -I /user/tools/jdk/include -fPIC test.cpp -o libjni-test.so</div><div class="line">C：gcc -shared -I /user/tools/jdk/include -fPIC test.c -o libjni-test.so</div></pre></td></tr></table></figure>
+<p>上面的编译命令中，/user/tools/jdk/include是本地的jdk的安装路径，在其他环境编译时将其指向本机的jdk路径即可。而libjni-test.so则是生成的so库的名字，在Java中可以通过如下方式加载：System.loadLibrary(“jni-test”)，其中so库名字中的”lib”和”.so”是不需要明确指出的。so库编译完成后，就可以在Java程序中调用so库了，这里通过Java指令来执行Java程序，切换到主目录，执行如下指令：java -Djava.library.path=jni io.github.zane.ndkdev.JniTest，其中-Djava.library.path=jni指明了so库的路径。</p>
+<p><strong>Window环境下：</strong></p>
+<p>辅助Android Studio开发工具</p>
+<p>1、修改build.gradle配置，在defaultConfig里面新增一下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">defaultConfig &#123;</div><div class="line"></div><div class="line">    ...</div><div class="line"></div><div class="line">    ndk&#123;</div><div class="line">        moduleName &quot;jni-test&quot;         //生成的so名字</div><div class="line">        abiFilters &quot;armeabi&quot;, &quot;armeabi-v7a&quot;, &quot;x86&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>2、选择 build -&gt; Rebuild Project</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat.jpeg" alt="Zane WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpeg" alt="Zane Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/28/View的事件体系-View的滑动冲突/" rel="next" title="View的事件体系View的滑动冲突">
+                <i class="fa fa-chevron-left"></i> View的事件体系View的滑动冲突
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/06/19/JNI和NDK编程/"
+           data-title="JNI和NDK编程" data-url="http://zanelove.github.io/2017/06/19/JNI和NDK编程/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Zane" />
+          <p class="site-author-name" itemprop="name">Zane</p>
+          <p class="site-description motion-element" itemprop="description">记录当下，谱写未来</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ZaneLove" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              推荐阅读
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://go.kieran.top/" title="Kieran(树莓派)" target="_blank">Kieran(树莓派)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://baixin.io/#blog" title="潘柏信(IOS)" target="_blank">潘柏信(IOS)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://makaiqian.com/" title="小麻雀(前端)" target="_blank">小麻雀(前端)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://leancloud.cn/dashboard/login.html#/signin" title="LeanCloud(统计)" target="_blank">LeanCloud(统计)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://duoshuo.com/" title="多说(评论)" target="_blank">多说(评论)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" title="NexT(主题文档)" target="_blank">NexT(主题文档)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/iissnan/hexo-theme-next" title="NexT(博客主题)" target="_blank">NexT(博客主题)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://iissnan.com/progit/" title="Pro Git" target="_blank">Pro Git</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开发准备"><span class="nav-number">1.</span> <span class="nav-text">开发准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载NDK"><span class="nav-number">1.1.</span> <span class="nav-text">下载NDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置NDK"><span class="nav-number">1.2.</span> <span class="nav-text">配置NDK</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置NDK路径"><span class="nav-number">1.2.1.</span> <span class="nav-text">设置NDK路径</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JNI的开发流程"><span class="nav-number">1.3.</span> <span class="nav-text">JNI的开发流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#声明native方法"><span class="nav-number">1.3.1.</span> <span class="nav-text">声明native方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过javah命令生成Java所对应的JNI头文件"><span class="nav-number">1.3.2.</span> <span class="nav-text">通过javah命令生成Java所对应的JNI头文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现JNI方法"><span class="nav-number">1.3.3.</span> <span class="nav-text">实现JNI方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编译so库并在Java中使用"><span class="nav-number">1.3.4.</span> <span class="nav-text">编译so库并在Java中使用</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zane</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zanelove-comment"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("jcj4FPhcIXVIEyoWyMqFgMDh-gzGzoHsz", "mkB0NxY7JUGJYx6Phuls50VA");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
