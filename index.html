@@ -424,7 +424,52 @@
       
         
           
-            
+            <blockquote>
+<p>我准备迎接一段美好的时光 沿着海岸 脚踩着沙滩</p>
+</blockquote>
+<p>NDK的开发流程是基于JNI的，其主要由如下几个步骤。</p>
+<h2 id="下载NDK"><a href="#下载NDK" class="headerlink" title="下载NDK"></a>下载NDK</h2><p><a href="https://developer.android.com/ndk/downloads/index.html" target="_blank" rel="external">官网下载</a></p>
+<p><a href="http://pan.baidu.com/s/1hr7CwAC" target="_blank" rel="external">云盘下载</a> (密码：f8h5)</p>
+<h2 id="配置NDK"><a href="#配置NDK" class="headerlink" title="配置NDK"></a>配置NDK</h2><h3 id="设置NDK路径"><a href="#设置NDK路径" class="headerlink" title="设置NDK路径"></a>设置NDK路径</h3><p>选择File &gt; Project Structure &gt; SDK Location &gt; Android NDK location，指定NDK的路径。</p>
+<p><img src="http://img.blog.csdn.net/20170615144039367?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20170615144505076?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>也可以通过直接修改local.properties文件，在里面指定NDK的所在目录：</p>
+<blockquote>
+<p>ndk.dir=D\:\Development_Tools\AndroidStudio\android-ndk-r14b</p>
+</blockquote>
+<p><img src="http://img.blog.csdn.net/20170615145038504?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>设置完环境变量后，ndk-build命令就可以使用了，通过ndk-build命令就可以编译产生so库。</p>
+<h2 id="Windows环境下的开发"><a href="#Windows环境下的开发" class="headerlink" title="Windows环境下的开发"></a>Windows环境下的开发</h2><p><strong>方式一：</strong></p>
+<p>1、在 jni 目录下创建 Android.mk 文件，编写内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">LOCAL_PATH := $(call my-dir)</div><div class="line">include $(CLEAR_VARS)</div><div class="line"></div><div class="line"># 要生成的.so库名称；java代码 System.loadLibrary(&quot;jni-test&quot;); 加载的就是它。</div><div class="line">LOCAL_MODULE := jni-test</div><div class="line"></div><div class="line"># C文件</div><div class="line">LOCAL_SRC_FILES := test.c</div><div class="line"></div><div class="line">include $(BUILD_SHARED_LIBRARY)</div></pre></td></tr></table></figure>
+<p>2、在 jni 目录下创建 Application.mk 文件，编写内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#目前支持：</div><div class="line">APP_ABI := armeabi armeabi-v7a x86</div><div class="line"></div><div class="line">#APP_ABI := armeabi armeabi-v7a x86 mips arm64-v8a mips64 x86_64</div></pre></td></tr></table></figure>
+<p>这里对Android.mk和Application.mk做一下简单的介绍。在Android.mk中，LOCAL_MODULE表示模块的名称，LOCAL_SRC_FILES表示需要参与编译的源文件。Application.mk中常用的配置项是APP_ABI，它表示CPU的架构平台的类型，目前市面上常见的架构平台有armeabi、x86和mips，其中在移动设备中占据主要地位的是armeabi，这也是大部分apk中只包含armeabi类型的so库的原因。默认情况下NDK会编译产生各个CPU平台的so库，通过APP_ABI选项即可指定so库的CPU平台的类型，比如armeabi，这样NDK就只会编译armeabi平台下的so库了，而all则表示编译所有CPU平台的so库。</p>
+<p>3、在Terminal中使用 cd 命令跳转到 jni 目录下，使用 ndk-build 命令编译C/C++文件生成.so文件。</p>
+<p><img src="http://img.blog.csdn.net/20170628172505826?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>生成的资源，如图所示：</p>
+<p><img src="http://img.blog.csdn.net/20170628172608929?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>4、引入.so文件，调试、运行</p>
+<p>首先，要注意ndk-build命令生成的.so文件默认在src/main/libs目录下，此目录非Android Studio 默认的.so库目录，直接调试/运行会报错。要么在src/main下创建jniLibs文件夹，将.so文件全部移动到src/main/jniLibs中去，jniLibs为默认目录。要么修改app目录下的build.gralde，在android节点下添加sourceSets部分，设置jni库的资源路径：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line"></div><div class="line">    ...</div><div class="line"></div><div class="line">    sourceSets.main &#123;</div><div class="line">        jniLibs.srcDirs = [&apos;src/main/libs&apos;]//默认为jniLibs</div><div class="line">    &#125;</div><div class="line"></div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后，运行起来看效果</p>
+<p><img src="http://img.blog.csdn.net/20170619214756246?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><strong>注意：</strong>如果使用方式一，那么每当修改了c/c++文件之后，都需要通过ndk-build命令，重新编译成.so文件。</p>
+<p><strong>方式二：</strong></p>
+<p>1、修改build.gradle配置，在defaultConfig里面新增一下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">defaultConfig &#123;</div><div class="line"></div><div class="line">    ...</div><div class="line"></div><div class="line">    ndk&#123;</div><div class="line">        moduleName &quot;jni-test&quot;         //生成的so名字</div><div class="line">        abiFilters &quot;armeabi&quot;, &quot;armeabi-v7a&quot;, &quot;x86&quot;  //生成CPU平台下的so库</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>2、选择 build -&gt; Rebuild Project，生成.so文件</p>
+<p><img src="http://img.blog.csdn.net/20170619211831184?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>3、代码已经编写完成，运行程序看看效果</p>
+<p><img src="http://img.blog.csdn.net/20170619214756246?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><p>1、编译错误Error: Your project contains C++ files but it is not using a supported native build system.</p>
+<p><img src="http://img.blog.csdn.net/20170619213011048?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>解决方法：</p>
+<p>在gradle.properties里面新增：</p>
+<blockquote>
+<p>android.useDeprecatedNdk=true</p>
+</blockquote>
+
           
         
       
