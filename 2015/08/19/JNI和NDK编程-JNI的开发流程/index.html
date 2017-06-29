@@ -119,7 +119,7 @@ Java JNI的本意是Java Native Interface（Java本地接口），它是为了�
 <meta property="og:image" content="http://img.blog.csdn.net/20170615172251914?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170615172553478?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170615172618857?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-06-29T06:16:32.000Z">
+<meta property="og:updated_time" content="2017-06-29T06:26:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JNI和NDK编程-JNI的开发流程">
 <meta name="twitter:description" content="放手一搏吧，别顾虑太多，这就是男人该有的性格
@@ -482,7 +482,7 @@ Java JNI的本意是Java Native Interface（Java本地接口），它是为了�
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">C++：gcc -shared -I /user/tools/jdk/include -fPIC test.cpp -o libjni-test.so</div><div class="line">C：gcc -shared -I /user/tools/jdk/include -fPIC test.c -o libjni-test.so</div></pre></td></tr></table></figure>
 <p>上面的编译命令中，/user/tools/jdk/include是本地的jdk的安装路径，在其他环境编译时将其指向本机的jdk路径即可。而libjni-test.so则是生成的so库的名字，在Java中可以通过如下方式加载：System.loadLibrary(“jni-test”)，其中so库名字中的”lib”和”.so”是不需要明确指出的。so库编译完成后，就可以在Java程序中调用so库了，这里通过Java指令来执行Java程序，切换到主目录，执行如下指令：java -Djava.library.path=jni io.github.zane.ndkdevdemo.JniTest，其中-Djava.library.path=jni指明了so库的路径。</p>
 <p><strong>Window环境下：</strong></p>
-<p>详情请看：<a href="http://zanelove.github.io/2017/06/29/JNI%E5%92%8CNDK%E7%BC%96%E7%A8%8B-NDK%E7%9A%84%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/">NDK的开发流程</a></p>
+<p>详情请看：<a href="http://zanelove.github.io/2015/08/29/JNI%E5%92%8CNDK%E7%BC%96%E7%A8%8B-NDK%E7%9A%84%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/">NDK的开发流程</a></p>
 
       
     </div>
