@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zanelove.github.io/"/>
-  <updated>2017-06-29T07:13:22.000Z</updated>
+  <updated>2017-07-05T12:36:34.000Z</updated>
   <id>http://zanelove.github.io/</id>
   
   <author>
@@ -14,6 +14,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JNI和NDK编程-JNI的数据类型和类型签名</title>
+    <link href="http://zanelove.github.io/2017/07/05/JNI%E5%92%8CNDK%E7%BC%96%E7%A8%8B-JNI%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E7%B1%BB%E5%9E%8B%E7%AD%BE%E5%90%8D/"/>
+    <id>http://zanelove.github.io/2017/07/05/JNI和NDK编程-JNI的数据类型和类型签名/</id>
+    <published>2017-07-05T12:19:23.000Z</published>
+    <updated>2017-07-05T12:36:34.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;So as long as I live I love you, Will heaven and hold you&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;JNI的数据类型包含两种：基本类型和引用类型。基本类型主要有jboolean、jchar、
+    
+    </summary>
+    
+      <category term="Android" scheme="http://zanelove.github.io/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="http://zanelove.github.io/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JNI和NDK编程-JNI调用Java方法的流程</title>
+    <link href="http://zanelove.github.io/2015/09/26/JNI%E5%92%8CNDK%E7%BC%96%E7%A8%8B-JNI%E8%B0%83%E7%94%A8Java%E6%96%B9%E6%B3%95%E7%9A%84%E6%B5%81%E7%A8%8B/"/>
+    <id>http://zanelove.github.io/2015/09/26/JNI和NDK编程-JNI调用Java方法的流程/</id>
+    <published>2015-09-26T12:10:36.000Z</published>
+    <updated>2017-07-05T12:17:49.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;举起酒杯庆祝 大肆谈论那惹人怜的和平世界&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;JNI调用Java方法的流程是先通过类名找到类，然后再根据方法名找到方法的id，最后就可以调用这个方法了。如果是调用Java中的非静态方法，那么需要构造出类的对象后
+    
+    </summary>
+    
+      <category term="Andorid" scheme="http://zanelove.github.io/categories/Andorid/"/>
+    
+    
+      <category term="Android" scheme="http://zanelove.github.io/tags/Android/"/>
+    
+  </entry>
   
   <entry>
     <title>JNI和NDK编程-NDK的开发流程</title>
