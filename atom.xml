@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zanelove.github.io/"/>
-  <updated>2017-07-05T12:36:34.000Z</updated>
+  <updated>2017-07-05T12:38:28.000Z</updated>
   <id>http://zanelove.github.io/</id>
   
   <author>
@@ -20,14 +20,15 @@
     <link href="http://zanelove.github.io/2017/07/05/JNI%E5%92%8CNDK%E7%BC%96%E7%A8%8B-JNI%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E7%B1%BB%E5%9E%8B%E7%AD%BE%E5%90%8D/"/>
     <id>http://zanelove.github.io/2017/07/05/JNI和NDK编程-JNI的数据类型和类型签名/</id>
     <published>2017-07-05T12:19:23.000Z</published>
-    <updated>2017-07-05T12:36:34.000Z</updated>
+    <updated>2017-07-05T12:38:28.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;So as long as I live I love you, Will heaven and hold you&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;JNI的数据类型包含两种：基本类型和引用类型。基本类型主要有jboolean、jchar、
+&lt;p&gt;JNI的数据类型包含两种：基本类型和引用类型。基本类型主要有jboolean、jchar、jint等，它们和Java中的数据类型的对应关系如表所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20170703104016477?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast&quot; alt=&quot;这里写图片描述&quot;&gt;&lt;/p&gt;
     
     </summary>
     
@@ -43,14 +44,16 @@
     <link href="http://zanelove.github.io/2015/09/26/JNI%E5%92%8CNDK%E7%BC%96%E7%A8%8B-JNI%E8%B0%83%E7%94%A8Java%E6%96%B9%E6%B3%95%E7%9A%84%E6%B5%81%E7%A8%8B/"/>
     <id>http://zanelove.github.io/2015/09/26/JNI和NDK编程-JNI调用Java方法的流程/</id>
     <published>2015-09-26T12:10:36.000Z</published>
-    <updated>2017-07-05T12:17:49.000Z</updated>
+    <updated>2017-07-05T12:39:10.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;举起酒杯庆祝 大肆谈论那惹人怜的和平世界&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;JNI调用Java方法的流程是先通过类名找到类，然后再根据方法名找到方法的id，最后就可以调用这个方法了。如果是调用Java中的非静态方法，那么需要构造出类的对象后
+&lt;p&gt;JNI调用Java方法的流程是先通过类名找到类，然后再根据方法名找到方法的id，最后就可以调用这个方法了。如果是调用Java中的非静态方法，那么需要构造出类的对象后才能调用它。下面的例子演示了如何在JNI中调用Java的静态方法，至于调用非静态方法只是多了一些构造对象的过程，这里就不再介绍了。&lt;/p&gt;
+&lt;p&gt;首先需要在Java中定义一个静态方法供JNI调用，如下所示：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;public static void methodCalledByJni(String msgFromJni) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	Log.d(&amp;quot;----&amp;gt;&amp;quot;, &amp;quot;methodCalledByJni,msg: &amp;quot; + msgFromJni);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     

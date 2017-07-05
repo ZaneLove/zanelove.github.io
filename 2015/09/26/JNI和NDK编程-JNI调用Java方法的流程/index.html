@@ -118,7 +118,7 @@ JNI调用Java方法的流程是先通过类名找到类，然后再根据方法�
 首先需要在Java中定义一个静态方法供JNI调用，如下所示">
 <meta property="og:image" content="http://img.blog.csdn.net/20170704160639869?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170704160840791?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-07-05T12:17:49.000Z">
+<meta property="og:updated_time" content="2017-07-05T12:39:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JNI和NDK编程-JNI调用Java方法的流程">
 <meta name="twitter:description" content="举起酒杯庆祝 大肆谈论那惹人怜的和平世界
@@ -436,6 +436,7 @@ JNI调用Java方法的流程是先通过类名找到类，然后再根据方法�
 <p>JNI调用Java方法的流程是先通过类名找到类，然后再根据方法名找到方法的id，最后就可以调用这个方法了。如果是调用Java中的非静态方法，那么需要构造出类的对象后才能调用它。下面的例子演示了如何在JNI中调用Java的静态方法，至于调用非静态方法只是多了一些构造对象的过程，这里就不再介绍了。</p>
 <p>首先需要在Java中定义一个静态方法供JNI调用，如下所示：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public static void methodCalledByJni(String msgFromJni) &#123;</div><div class="line">	Log.d(&quot;----&gt;&quot;, &quot;methodCalledByJni,msg: &quot; + msgFromJni);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>如图所示：</p>
 <p><img src="http://img.blog.csdn.net/20170704160639869?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
 <p>然后在JNI中调用上面定义的静态方法：(必须放在调用方法前面，不然会提示找不到此方法，请熟悉C代码的调用与被调用的语法规则)</p>

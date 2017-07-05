@@ -423,25 +423,18 @@
 
       
         
-          
-            <blockquote>
+          <blockquote>
 <p>So as long as I live I love you, Will heaven and hold you</p>
 </blockquote>
 <p>JNI的数据类型包含两种：基本类型和引用类型。基本类型主要有jboolean、jchar、jint等，它们和Java中的数据类型的对应关系如表所示：</p>
 <p><img src="http://img.blog.csdn.net/20170703104016477?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>JNI中的引用类型主要有类、对象和数组，它们和Java中的引用类型的对应关系如表所示：</p>
-<p><img src="http://img.blog.csdn.net/20170703110034027?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>JNI的类型签名标识了一个特定的Java类型，这个类型既可以是类和方法，也可以是数据类型。</p>
-<p>类的签名比较简单，它采用“L+包名+类名+;”的形式，只需要将其中的.替换为/即可。比如java.lang.String，它的签名为Ljava/lang/String;，注意末尾的;也是签名的一部分。</p>
-<p>基本数据类型的签名采用一系列大写字母来表示，如表所示：</p>
-<p><img src="http://img.blog.csdn.net/20170703111912235?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>从上述表中可以看出，基本数据类型的签名是有规律的，一般为首字母的大写，但是boolean除外，因为B已经被byte占用了，而long的签名之所以不是L，那是因为L表示的是类的签名。</p>
-<p>对象和数组的签名稍微复杂一些。对于对象来说，它的签名就是对象所属的类的签名，比如String对象，它的签名为Ljava/lang/String;。对于数组来说，它的签名为[+类型签名，比如int数组，其类型为int，而int的签名为I，所以int数组的签名就是[I，同理就可以得出如下的签名对应关系：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">char[] [C</div><div class="line"></div><div class="line">float[] [F</div><div class="line"></div><div class="line">double[] [D</div><div class="line"></div><div class="line">long[] [J</div><div class="line"></div><div class="line">String[] [Ljava/lang/String;</div><div class="line"></div><div class="line">Object[] [Ljava/lang/Object;</div></pre></td></tr></table></figure>
-<p>对于多维数组来说，它的签名为n个[+类型签名，其中n表示数组的维度，比如，int[][]的签名为[[I，其他情况可以依此类推。</p>
-<p>方法的签名为(参数类型签名)+返回值类型签名，这有点不好理解。举个例子，如下方法：boolean fun1(int a, double b, int[] c)，根据签名的规则可以知道，它的参数类型的签名连在一起是ID[I，返回值类型的签名为Z，所以整个方法的签名就是(ID[I)Z。再举个例子，下面的方法：boolean fun1(int a, String b, int[] c)，它的签名是(ILjava/lang/String;[I)Z。为了能够更好地理解方法的签名格式，下面再给出两个示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">int fun1()   签名为 ()I</div><div class="line"></div><div class="line">void fun1(int i)  签名为 (I)V</div></pre></td></tr></table></figure>
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/05/JNI和NDK编程-JNI的数据类型和类型签名/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -600,25 +593,19 @@
 
       
         
-          
-            <blockquote>
+          <blockquote>
 <p>举起酒杯庆祝 大肆谈论那惹人怜的和平世界</p>
 </blockquote>
 <p>JNI调用Java方法的流程是先通过类名找到类，然后再根据方法名找到方法的id，最后就可以调用这个方法了。如果是调用Java中的非静态方法，那么需要构造出类的对象后才能调用它。下面的例子演示了如何在JNI中调用Java的静态方法，至于调用非静态方法只是多了一些构造对象的过程，这里就不再介绍了。</p>
 <p>首先需要在Java中定义一个静态方法供JNI调用，如下所示：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public static void methodCalledByJni(String msgFromJni) &#123;</div><div class="line">	Log.d(&quot;----&gt;&quot;, &quot;methodCalledByJni,msg: &quot; + msgFromJni);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如图所示：</p>
-<p><img src="http://img.blog.csdn.net/20170704160639869?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>然后在JNI中调用上面定义的静态方法：(必须放在调用方法前面，不然会提示找不到此方法，请熟悉C代码的调用与被调用的语法规则)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">void callJavaMethod(JNIEnv *env, jobject thiz) &#123;</div><div class="line">    jclass clazz = (*env)-&gt;FindClass(env,&quot;io/github/zane/ndkdevdemo/MainActivity&quot;);</div><div class="line">    if(clazz == NULL) &#123;</div><div class="line">        printf(&quot;find class MainActivity error!&quot;);</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">    jmethodID id = (*env)-&gt;GetStaticMethodID(env, clazz, &quot;methodCalledByJni&quot;, &quot;(Ljava/lang/String;)V&quot;);</div><div class="line">    if(id == NULL) &#123;</div><div class="line">        printf(&quot;find method methodCalledByJni error!&quot;);</div><div class="line">    &#125;</div><div class="line">    jstring msg = (*env)-&gt;NewStringUTF(env, &quot;msg send by callJavaMethod in test.c!&quot;);</div><div class="line">    (*env)-&gt;CallStaticVoidMethod(env, clazz, id, msg);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>从callJavaMethod的实现可以看出，程序首先根据类名io/github/zane/ndkdevdemo/MainActivity找到类，然后在根据方法名methodCalledByJni找到方法，其中(Ljava/lang/String;)V是methodCalledByJni方法的签名，接着再调用JNIEnv对象的CallStaticVoidMethod方法来完成最终的调用过程。</p>
-<p>最后在Java_io_github_zane_ndkdevdemo_JniTest_get方法中调用callJavaMethod方法，如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">JNIEXPORT jstring JNICALL Java_io_github_zane_ndkdevdemo_JniTest_get (JNIEnv *env, jobject thiz) &#123;</div><div class="line">    printf(&quot;invoke get from C\n&quot;);</div><div class="line">    callJavaMethod(env, thiz);</div><div class="line">    return (*env)-&gt;NewStringUTF(env, &quot;Hello from Zane ouba1 !&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如图所示：</p>
-<p><img src="http://img.blog.csdn.net/20170704160840791?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>由于MainActivity会调用JNI中的Java_io_github_zane_ndkdevdemo_JniTest_get方法，Java_io_github_zane_ndkdevdemo_JniTest_get方法又会调用callJavaMethod方法，而callJavaMethod方法又会反过来调用MainActivity的methodCalledByJni方法，这样一来就完成了一次从Java调用JNI然后再从JNI中调用Java方法的过程。先ndk-build后，再安装运行程序，可以看到如下日志，这说明程序已经成功地从JNI中调用了Java中的methodCalledByJni方法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">07-04 15:58:17.056 441-441/io.github.zane.ndkdevdemo D/----&gt;: methodCalledByJni,msg: msg send by callJavaMethod in test.c!</div></pre></td></tr></table></figure>
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/09/26/JNI和NDK编程-JNI调用Java方法的流程/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
