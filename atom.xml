@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zanelove.github.io/"/>
-  <updated>2017-07-20T14:07:23.000Z</updated>
+  <updated>2017-07-20T14:11:43.000Z</updated>
   <id>http://zanelove.github.io/</id>
   
   <author>
@@ -14,6 +14,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AndroidStudio下对资源进行分包</title>
+    <link href="http://zanelove.github.io/2015/11/15/AndroidStudio%E4%B8%8B%E5%AF%B9%E8%B5%84%E6%BA%90%E8%BF%9B%E8%A1%8C%E5%88%86%E5%8C%85/"/>
+    <id>http://zanelove.github.io/2015/11/15/AndroidStudio下对资源进行分包/</id>
+    <published>2015-11-15T14:08:09.000Z</published>
+    <updated>2017-07-20T14:11:43.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;唯有相信，才有可能&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;也许你曾经用过这个&lt;a href=&quot;https://
+    
+    </summary>
+    
+      <category term="Android" scheme="http://zanelove.github.io/categories/Android/"/>
+    
+    
+      <category term="－ Android" scheme="http://zanelove.github.io/tags/%EF%BC%8D-Android/"/>
+    
+  </entry>
   
   <entry>
     <title>Android开发之版本统一规范</title>
@@ -461,29 +484,6 @@
 &lt;p&gt;人最难的是面对真实的自己，面对自己的差距时，很多人总是像鸵鸟一样，把头深深地埋下去，假装看不到外面的世界.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&quot;Activity的LaunchMode&quot;&gt;&lt;a href=&quot;#Activity的LaunchMode&quot; class=&quot;headerlink&quot; title=&quot;Activity的LaunchMode&quot;&gt;&lt;/a&gt;Activity的LaunchMode&lt;/h2&gt;&lt;p&gt;首先说一下Activity为什么需要任务栈。我们知道任务栈是一种“后进先出”的栈结构，当栈中无任何Activity的时候，系统就会回收这个任务栈。在默认情况下，我们可能会发现一个问题：多次启动同一个Activity，系统重复创建多个实例，这样不是很傻吗？因此，Android工程师在设计的时候不可能不考虑到这个问题，所以它提供了启动模式来修改系统的默认行为。目前有四种启动模式：standard、singleTop、singleTask和singleInstance。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="http://zanelove.github.io/categories/Android/"/>
-    
-    
-      <category term="Android" scheme="http://zanelove.github.io/tags/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Activity的生命周期全面分析</title>
-    <link href="http://zanelove.github.io/2015/01/11/Activity%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%85%A8%E9%9D%A2%E5%88%86%E6%9E%90/"/>
-    <id>http://zanelove.github.io/2015/01/11/Activity的生命周期全面分析/</id>
-    <published>2015-01-11T14:06:04.000Z</published>
-    <updated>2017-06-13T12:13:46.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;没错，我们可以选择躺在地上赖着不动：反正我的起点低，反正我家庭不如别人家，有无数个“反正”等着你，但是没有人会看你一眼，每个人都在前行；当别人在飞翔，你依然躺在地上，恐怕你一生的时间都只能用来数伤口了.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;本节将Activity的生命周期分为两部分内容，一部分是正常情况下的生命周期，另一部分是异常情况下的生命周期。所谓正常情况下的生命周期，是指在有用户参与的情况下，Activity所经过的生命周期的改变；而异常情况下的生命周期是指Activity被系统回收或者由于当前设备的Configuration发生改变从而导致Activity被销毁重建，异常情况下的生命周期的关注点和正常情况下略有不同。&lt;/p&gt;
     
     </summary>
     
