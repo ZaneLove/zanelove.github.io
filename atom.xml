@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zanelove.github.io/"/>
-  <updated>2017-07-05T12:43:59.000Z</updated>
+  <updated>2017-07-20T13:56:24.000Z</updated>
   <id>http://zanelove.github.io/</id>
   
   <author>
@@ -14,6 +14,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android Butterknife 8.4.0 使用方法总结</title>
+    <link href="http://zanelove.github.io/2015/10/10/Android-Butterknife-8-4-0-%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/"/>
+    <id>http://zanelove.github.io/2015/10/10/Android-Butterknife-8-4-0-使用方法总结/</id>
+    <published>2015-10-10T13:50:54.000Z</published>
+    <updated>2017-07-20T13:56:24.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;慢慢来，比较快&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;h3 id=&quot;ButterKnife简介&quot;&gt;&lt;a href=&quot;#ButterKnife简介&quot; class=&quot;headerlink&quot; title=&quot;ButterKnife简介&quot;&gt;&lt;/a&gt;ButterKnife简介&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/JakeWharton/butterknife&quot;&gt;ButterKnife&lt;/a&gt;是一个专注于Android系统的View注入框架，可以减少大量的findViewById以及setOnClickListener代码，可视化一键生成。&lt;/p&gt;
+&lt;h3 id=&quot;ButterKnife优势&quot;&gt;&lt;a href=&quot;#ButterKnife优势&quot; class=&quot;headerlink&quot; title=&quot;ButterKnife优势&quot;&gt;&lt;/a&gt;ButterKnife优势&lt;/h3&gt;&lt;p&gt;1、强大的View绑定和Click事件处理功能，简化代码，提升开发效率；&lt;/p&gt;
+&lt;p&gt;2、方便的处理Adapter里的ViewHolder绑定问题；&lt;/p&gt;
+&lt;p&gt;3、运行时不会影响APP效率，使用配置方便；&lt;/p&gt;
+&lt;p&gt;4、代码清晰，可读性强。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://zanelove.github.io/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="http://zanelove.github.io/tags/Android/"/>
+    
+  </entry>
   
   <entry>
     <title>JNI和NDK编程-JNI调用Java方法的流程</title>
@@ -462,28 +489,6 @@
 &lt;li&gt;域名购买：类似万网的平台都可以，你可以选购自己名字的域名，一年几十元左右，两杯咖啡的钱。&lt;/li&gt;
 &lt;li&gt;SSL：CloudFlare&lt;/li&gt;
 &lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="Hexo" scheme="http://zanelove.github.io/categories/Hexo/"/>
-    
-    
-      <category term="Hexo" scheme="http://zanelove.github.io/tags/Hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hexo Command</title>
-    <link href="http://zanelove.github.io/2014/11/24/hexoCommand/"/>
-    <id>http://zanelove.github.io/2014/11/24/hexoCommand/</id>
-    <published>2014-11-24T09:25:10.000Z</published>
-    <updated>2017-06-13T12:12:27.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     
