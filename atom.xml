@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zanelove.github.io/"/>
-  <updated>2017-07-20T14:06:05.000Z</updated>
+  <updated>2017-07-20T14:07:23.000Z</updated>
   <id>http://zanelove.github.io/</id>
   
   <author>
@@ -20,14 +20,14 @@
     <link href="http://zanelove.github.io/2015/10/28/Android%E5%BC%80%E5%8F%91%E4%B9%8B%E7%89%88%E6%9C%AC%E7%BB%9F%E4%B8%80%E8%A7%84%E8%8C%83/"/>
     <id>http://zanelove.github.io/2015/10/28/Android开发之版本统一规范/</id>
     <published>2015-10-28T14:01:57.000Z</published>
-    <updated>2017-07-20T14:06:05.000Z</updated>
+    <updated>2017-07-20T14:07:23.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;读书，正是为了遇见更好的自己&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;Android开发存在着众多版本的不同，比
+&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;Android开发存在着众多版本的不同，比如compileSdkVersion、minSdkVersion、targetSdkVersion以及项目中依赖第三方库的版本，不同的module及不同的开发人员都有不同的版本，所以需要一个统一版本规范的文件，现在我就来介绍一种方式：配置config.gradle文件。&lt;/p&gt;
     
     </summary>
     
