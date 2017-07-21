@@ -46,14 +46,13 @@
     <link href="http://zanelove.github.io/2017/02/17/Android%E4%B9%8B%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B%E4%BA%8C%E2%80%94%E2%80%94%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/"/>
     <id>http://zanelove.github.io/2017/02/17/Android之百度地图系列教程二——集成开发/</id>
     <published>2017-02-17T12:54:53.000Z</published>
-    <updated>2017-07-21T13:06:46.000Z</updated>
+    <updated>2017-07-21T13:15:40.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;贫穷不是不赚钱，而是丧失了从这个社会获取资源的能力&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;在AndroidManifest中添加开发密钥、所需权限等信息&quot;&gt;&lt;a href=&quot;#在AndroidManifest中添加开发密钥、所需权限等信息&quot; class=&quot;headerlink&quot; title=&quot;在AndroidManifest中添加开发密钥、所需权限等信息&quot;&gt;&lt;/a&gt;在AndroidManifest中添加开发密钥、所需权限等信息&lt;/h2&gt;&lt;h3 id=&quot;在application中添加开发密钥&quot;&gt;&lt;a href=&quot;#在application中添加开发密钥&quot; class=&quot;headerlink&quot; title=&quot;在application中添加开发密钥&quot;&gt;&lt;/a&gt;在application中添加开发密钥&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;!--百度地图Key--&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;meta-data&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    android:name=&amp;quot;com.baidu.lbsapi.API_KEY&amp;quot;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    android:value=&amp;quot;访问应用(AK)&amp;quot; /&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     
@@ -73,14 +72,13 @@
     <link href="http://zanelove.github.io/2017/01/21/Android%E4%B9%8B%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B%E4%B8%80%E2%80%94%E2%80%94%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83/"/>
     <id>http://zanelove.github.io/2017/01/21/Android之百度地图系列教程一——配置环境/</id>
     <published>2017-01-21T12:36:43.000Z</published>
-    <updated>2017-07-21T13:04:52.000Z</updated>
+    <updated>2017-07-21T13:16:03.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;人的成就，永远无法超越他的格局&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;登录百度地图开放平台&quot;&gt;&lt;a href=&quot;#登录百度地图开放平台&quot; class=&quot;headerlink&quot; title=&quot;登录百度地图开放平台&quot;&gt;&lt;/a&gt;登录百度地图开放平台&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://lbsyun.baidu.com/&quot;&gt;百度地图开放平台&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     
@@ -100,15 +98,13 @@
     <link href="http://zanelove.github.io/2016/12/16/Android%E5%A4%9A%E6%B8%A0%E9%81%93%E6%89%93%E5%8C%85/"/>
     <id>http://zanelove.github.io/2016/12/16/Android多渠道打包/</id>
     <published>2016-12-16T12:29:34.000Z</published>
-    <updated>2017-07-21T12:32:18.000Z</updated>
+    <updated>2017-07-21T13:14:57.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;见识负责发现机遇，判断负责抓住机遇&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;一、在AndroidManifest.xml里配置PlaceHolder&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;!--友盟多渠道打包--&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;meta-data&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    android:name=&amp;quot;UMENG_CHANNEL&amp;quot;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    android:value=&amp;quot;$&amp;#123;UMENG_CHANNEL_VALUE&amp;#125;&amp;quot; /&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     
@@ -124,14 +120,13 @@
     <link href="http://zanelove.github.io/2016/11/11/debug%E5%92%8Crelease%E7%89%88%E6%9C%AC%E4%B9%8BSHA1%E7%94%9F%E6%88%90%E8%AE%B0/"/>
     <id>http://zanelove.github.io/2016/11/11/debug和release版本之SHA1生成记/</id>
     <published>2016-11-11T12:08:57.000Z</published>
-    <updated>2017-07-21T12:20:34.000Z</updated>
+    <updated>2017-07-21T13:16:31.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;人笨没问题，但别懒&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;使用keytool之前，打开cmd，输入keytool，如果提示：’keytool’ 不是内部或外部命令,也不是可运行的程序，那么，请确保是否&lt;a href=&quot;http://jingyan.baidu.com/article/c85b7a6414f2ee003bac95d5.html&quot;&gt;正确配置了java环境变量&lt;/a&gt;(keytool为jdk自带工具)。&lt;/p&gt;
     
     </summary>
     
@@ -147,15 +142,13 @@
     <link href="http://zanelove.github.io/2016/10/21/Android%E7%AD%BE%E5%90%8D%E6%89%93%E5%8C%85/"/>
     <id>http://zanelove.github.io/2016/10/21/Android签名打包/</id>
     <published>2016-10-21T12:11:23.000Z</published>
-    <updated>2017-07-21T12:23:28.000Z</updated>
+    <updated>2017-07-21T13:15:26.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;到处都是有才华的穷人&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;Android签名文件生成&quot;&gt;&lt;a href=&quot;#Android签名文件生成&quot; class=&quot;headerlink&quot; title=&quot;Android签名文件生成&quot;&gt;&lt;/a&gt;Android签名文件生成&lt;/h2&gt;&lt;p&gt;1、Generate Signed APK&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20170719143416018?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast&quot; alt=&quot;这里写图片描述&quot;&gt;&lt;/p&gt;
     
     </summary>
     
@@ -171,14 +164,13 @@
     <link href="http://zanelove.github.io/2016/09/15/AndroidStudio%E4%B8%8B%E5%AF%B9%E8%B5%84%E6%BA%90%E8%BF%9B%E8%A1%8C%E5%88%86%E5%8C%85/"/>
     <id>http://zanelove.github.io/2016/09/15/AndroidStudio下对资源进行分包/</id>
     <published>2016-09-15T14:08:09.000Z</published>
-    <updated>2017-07-21T12:49:00.000Z</updated>
+    <updated>2017-07-21T13:16:18.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;唯有相信，才有可能&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;也许你曾经用过这个&lt;a href=&quot;https://github.com/dmytrodanylyk/folding-plugin&quot;&gt;插件&lt;/a&gt;来对资源文件layout进行分类，但如今随着AS版本的升高，该插件已经不再支持。&lt;/p&gt;
     
     </summary>
     
@@ -194,14 +186,13 @@
     <link href="http://zanelove.github.io/2016/08/28/Android%E5%BC%80%E5%8F%91%E4%B9%8B%E7%89%88%E6%9C%AC%E7%BB%9F%E4%B8%80%E8%A7%84%E8%8C%83/"/>
     <id>http://zanelove.github.io/2016/08/28/Android开发之版本统一规范/</id>
     <published>2016-08-28T14:01:57.000Z</published>
-    <updated>2017-07-21T11:58:27.000Z</updated>
+    <updated>2017-07-21T13:15:10.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;读书，正是为了遇见更好的自己&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;Android开发存在着众多版本的不同，比如compileSdkVersion、minSdkVersion、targetSdkVersion以及项目中依赖第三方库的版本，不同的module及不同的开发人员都有不同的版本，所以需要一个统一版本规范的文件，现在我就来介绍一种方式：配置config.gradle文件。&lt;/p&gt;
     
     </summary>
     
@@ -217,18 +208,13 @@
     <link href="http://zanelove.github.io/2016/07/10/Android-Butterknife-8-4-0-%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/"/>
     <id>http://zanelove.github.io/2016/07/10/Android-Butterknife-8-4-0-使用方法总结/</id>
     <published>2016-07-10T13:50:54.000Z</published>
-    <updated>2017-07-21T11:58:06.000Z</updated>
+    <updated>2017-07-21T13:14:39.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;慢慢来，比较快&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;h3 id=&quot;ButterKnife简介&quot;&gt;&lt;a href=&quot;#ButterKnife简介&quot; class=&quot;headerlink&quot; title=&quot;ButterKnife简介&quot;&gt;&lt;/a&gt;ButterKnife简介&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/JakeWharton/butterknife&quot;&gt;ButterKnife&lt;/a&gt;是一个专注于Android系统的View注入框架，可以减少大量的findViewById以及setOnClickListener代码，可视化一键生成。&lt;/p&gt;
-&lt;h3 id=&quot;ButterKnife优势&quot;&gt;&lt;a href=&quot;#ButterKnife优势&quot; class=&quot;headerlink&quot; title=&quot;ButterKnife优势&quot;&gt;&lt;/a&gt;ButterKnife优势&lt;/h3&gt;&lt;p&gt;1、强大的View绑定和Click事件处理功能，简化代码，提升开发效率；&lt;/p&gt;
-&lt;p&gt;2、方便的处理Adapter里的ViewHolder绑定问题；&lt;/p&gt;
-&lt;p&gt;3、运行时不会影响APP效率，使用配置方便；&lt;/p&gt;
-&lt;p&gt;4、代码清晰，可读性强。&lt;/p&gt;
     
     </summary>
     
@@ -244,16 +230,13 @@
     <link href="http://zanelove.github.io/2016/06/26/JNI%E5%92%8CNDK%E7%BC%96%E7%A8%8B-JNI%E8%B0%83%E7%94%A8Java%E6%96%B9%E6%B3%95%E7%9A%84%E6%B5%81%E7%A8%8B/"/>
     <id>http://zanelove.github.io/2016/06/26/JNI和NDK编程-JNI调用Java方法的流程/</id>
     <published>2016-06-26T12:10:36.000Z</published>
-    <updated>2017-07-21T11:57:43.000Z</updated>
+    <updated>2017-07-21T13:19:43.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;举起酒杯庆祝 大肆谈论那惹人怜的和平世界&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;JNI调用Java方法的流程是先通过类名找到类，然后再根据方法名找到方法的id，最后就可以调用这个方法了。如果是调用Java中的非静态方法，那么需要构造出类的对象后才能调用它。下面的例子演示了如何在JNI中调用Java的静态方法，至于调用非静态方法只是多了一些构造对象的过程，这里就不再介绍了。&lt;/p&gt;
-&lt;p&gt;首先需要在Java中定义一个静态方法供JNI调用，如下所示：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;public static void methodCalledByJni(String msgFromJni) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	Log.d(&amp;quot;----&amp;gt;&amp;quot;, &amp;quot;methodCalledByJni,msg: &amp;quot; + msgFromJni);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     
@@ -269,15 +252,13 @@
     <link href="http://zanelove.github.io/2016/05/15/JNI%E5%92%8CNDK%E7%BC%96%E7%A8%8B-JNI%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E7%B1%BB%E5%9E%8B%E7%AD%BE%E5%90%8D/"/>
     <id>http://zanelove.github.io/2016/05/15/JNI和NDK编程-JNI的数据类型和类型签名/</id>
     <published>2016-05-15T12:19:23.000Z</published>
-    <updated>2017-07-21T11:57:18.000Z</updated>
+    <updated>2017-07-21T13:19:27.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;So as long as I live I love you, Will heaven and hold you&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;JNI的数据类型包含两种：基本类型和引用类型。基本类型主要有jboolean、jchar、jint等，它们和Java中的数据类型的对应关系如表所示：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20170703104016477?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast&quot; alt=&quot;这里写图片描述&quot;&gt;&lt;/p&gt;
     
     </summary>
     
@@ -293,16 +274,13 @@
     <link href="http://zanelove.github.io/2016/04/29/JNI%E5%92%8CNDK%E7%BC%96%E7%A8%8B-NDK%E7%9A%84%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/"/>
     <id>http://zanelove.github.io/2016/04/29/JNI和NDK编程-NDK的开发流程/</id>
     <published>2016-04-29T06:01:42.000Z</published>
-    <updated>2017-07-21T11:56:48.000Z</updated>
+    <updated>2017-07-21T13:20:03.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;我准备迎接一段美好的时光 沿着海岸 脚踩着沙滩&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;NDK的开发流程是基于JNI的，其主要由如下几个步骤。&lt;/p&gt;
-&lt;h2 id=&quot;下载NDK&quot;&gt;&lt;a href=&quot;#下载NDK&quot; class=&quot;headerlink&quot; title=&quot;下载NDK&quot;&gt;&lt;/a&gt;下载NDK&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://developer.android.com/ndk/downloads/index.html&quot;&gt;官网下载&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://pan.baidu.com/s/1hr7CwAC&quot;&gt;云盘下载&lt;/a&gt; (密码：f8h5)&lt;/p&gt;
     
     </summary>
     
@@ -318,15 +296,13 @@
     <link href="http://zanelove.github.io/2016/03/19/JNI%E5%92%8CNDK%E7%BC%96%E7%A8%8B-JNI%E7%9A%84%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/"/>
     <id>http://zanelove.github.io/2016/03/19/JNI和NDK编程-JNI的开发流程/</id>
     <published>2016-03-19T06:01:33.000Z</published>
-    <updated>2017-07-21T11:56:18.000Z</updated>
+    <updated>2017-07-21T13:19:05.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;放手一搏吧，别顾虑太多，这就是男人该有的性格&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Java JNI的本意是Java Native Interface（Java本地接口），它是为了方便Java调用C、C++等本地代码所封装的一层接口。我们知道，Java的优点是跨平台，但是作为优点的同时，其在本地交互的时候就出现了短板。Java的跨平台特性导致其本地交互的能力不够强大，一些和操作系统相关的特性Java无法完成，于是Java提供了JNI专门用于和本地代码交互，这样就增强了Java语言的本地交互能力。通过Java JNI，用户可以调用C、C++所编写的本地代码。&lt;/p&gt;
-&lt;p&gt;NDK是Android所提供的一个工具集合，通过NDK可以在Android中更加方便地通过JNI来访问本地代码，比如C或者C++。NDK还提供了交叉编译器，开发人员只需要简单地修改mk文件就可以生成特定CPU平台的动态库。&lt;/p&gt;
     
     </summary>
     
@@ -342,20 +318,13 @@
     <link href="http://zanelove.github.io/2016/02/18/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E6%BB%91%E5%8A%A8%E5%86%B2%E7%AA%81/"/>
     <id>http://zanelove.github.io/2016/02/18/View的事件体系-View的滑动冲突/</id>
     <published>2016-02-18T14:05:17.000Z</published>
-    <updated>2017-07-21T12:02:59.000Z</updated>
+    <updated>2017-07-21T13:20:49.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;一屋不扫，何以扫天下&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;滑动冲突是如何产生的呢？其实在界面中只要外两层同时可以滑动，这个时候就会产生滑动冲突。如果解决滑动冲突呢？这既是一件困难的事又是一件简单的事，说困难是因为许多开发者面对滑动冲突都会显得束手无策，说简单是因为滑动冲突的解决有固定的套路，只要知道了这个固定套路问题就好解决了。通过本节的学习，滑动冲突将不再是个问题。&lt;/p&gt;
-&lt;h2 id=&quot;常见的滑动冲突场景&quot;&gt;&lt;a href=&quot;#常见的滑动冲突场景&quot; class=&quot;headerlink&quot; title=&quot;常见的滑动冲突场景&quot;&gt;&lt;/a&gt;常见的滑动冲突场景&lt;/h2&gt;&lt;p&gt;常见的滑动冲突场景可以简单分为如下三种：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;场景1：外部滑动方向和内部滑动方向不一致；&lt;/li&gt;
-&lt;li&gt;场景2：外部滑动方向和内部滑动方向一致；&lt;/li&gt;
-&lt;li&gt;场景3：上面两种情况的嵌套。&lt;/li&gt;
-&lt;/ul&gt;
     
     </summary>
     
@@ -371,15 +340,13 @@
     <link href="http://zanelove.github.io/2016/01/13/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6/"/>
     <id>http://zanelove.github.io/2016/01/13/View的事件体系-View的事件分发机制/</id>
     <published>2016-01-13T11:57:10.000Z</published>
-    <updated>2017-07-21T11:55:25.000Z</updated>
+    <updated>2017-07-21T13:21:30.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;有人靠天分逆袭，有人靠身份逆袭，如果你什么都没有，也行只要靠格局了。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;本节介绍View的一个核心知识点：事件分发机制。&lt;/p&gt;
-&lt;h2 id=&quot;点击事件的传递规则&quot;&gt;&lt;a href=&quot;#点击事件的传递规则&quot; class=&quot;headerlink&quot; title=&quot;点击事件的传递规则&quot;&gt;&lt;/a&gt;点击事件的传递规则&lt;/h2&gt;&lt;p&gt;在介绍点击事件的传递规则之前，首先我们要明白这里要分析的对象就是MotionEvent，即点击事件，关于&lt;a href=&quot;http://zanelove.github.io/2015/07/04/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/&quot;&gt;MotionEvent&lt;/a&gt;已经进行了介绍。所谓点击事件的事件分发，其实就是对MotionEvent事件的分发过程，即当一个MotionEvent产生了以后，系统需要把这个事件传递给一个具体的View，而这个传递的过程就是分发过程。点击事件的分发过程由三个很重要的方法来共同完成：dispatchTouchEvent、onInterceptTouchEvent和onTouchEvent，下面先介绍一下这几个方法。&lt;/p&gt;
     
     </summary>
     
@@ -395,14 +362,13 @@
     <link href="http://zanelove.github.io/2015/12/27/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-%E5%BC%B9%E6%80%A7%E6%BB%91%E5%8A%A8/"/>
     <id>http://zanelove.github.io/2015/12/27/View的事件体系-弹性滑动/</id>
     <published>2015-12-27T11:59:38.000Z</published>
-    <updated>2017-07-21T11:54:57.000Z</updated>
+    <updated>2017-07-21T13:20:21.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;你的孤独，虽败犹荣&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;上一节讲到了&lt;a href=&quot;http://zanelove.github.io/2017/06/01/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E6%BB%91%E5%8A%A8/&quot;&gt;View的滑动&lt;/a&gt;，我们还要知道如果实现View的弹性滑动，比较生硬地滑动过去，这种方式的用户体验实在太差了，因此我们要实现渐近式滑动。那么如何实现弹性滑动呢？其实实现方法有很多，但是它们都有一个共同思想：将一次大的滑动分成若干次小的滑动并在一个小时间段内完成，弹性滑动的具体的实现方式有很多，比如通过Scroller、Handler#postDelayed以及Thread#sleep等，下面一一进行介绍。&lt;/p&gt;
     
     </summary>
     
@@ -418,14 +384,13 @@
     <link href="http://zanelove.github.io/2015/11/10/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E6%BB%91%E5%8A%A8/"/>
     <id>http://zanelove.github.io/2015/11/10/View的事件体系-View的滑动/</id>
     <published>2015-11-10T14:00:54.000Z</published>
-    <updated>2017-07-21T11:54:34.000Z</updated>
+    <updated>2017-07-21T13:20:36.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;愿我所见之人，所历之事，哪怕因为我有一点点的好的改变，我就心满意足了&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;上一节介绍了View的一些基础知识和概念，本节开始介绍很重要的一个内容：&lt;strong&gt;View的滑动&lt;/strong&gt;。在移动端设备上，不管是Android还是Ios，滑动几乎是应用的标配，不管是下拉刷新还是侧拉滑动（SlidingMenu），它们的基础都是滑动。从另外一方面来说，Android手机由于屏幕比较小，为了给用户呈现更多的内容，就需要使用滑动来隐藏和显示一些内容。&lt;/p&gt;
     
     </summary>
     
@@ -441,14 +406,13 @@
     <link href="http://zanelove.github.io/2015/10/24/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     <id>http://zanelove.github.io/2015/10/24/View的事件体系-View的基础知识/</id>
     <published>2015-10-24T11:58:45.000Z</published>
-    <updated>2017-07-21T11:54:18.000Z</updated>
+    <updated>2017-07-21T13:21:10.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;If you lose your way, you ‘ll go against the wind from all the wrong directions. 如果失去了方向，那么所有方向吹过了的都是逆风&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;虽然说View不属于四大组件，但是它的作用堪比四大组件，甚至比Receiver和Provider的重要性都要大。在Android中，Activity承担着可视化的功能，同时Android系统提供了很多基础控件，常见的有Button、TextView、CheckBox等。很多时候仅仅使用系统提供的控件是不能满足需求的，因此我们就需要能够根据需求进行新控件的定义，而控件的自定义就需要对Android的View的体系有深入的理解，只有这样才能写出完美的&lt;strong&gt;自定义控件&lt;/strong&gt;。同时Android手机属于移动设备，移动设备的一个特点就是用户可以直接通过屏幕来进行一系列操作，一个典型的场景就是屏幕的滑动，用户可以通过滑动来切换到不同的界面。很多情况下我们的应用都需要支持滑动操作，当处于不同层级的View都可以响应用户的滑动操作时，就会带来一个问题，那就是&lt;strong&gt;滑动冲突&lt;/strong&gt;。如何解决该问题，就需要读者对 &lt;strong&gt;View的事件分发机制&lt;/strong&gt; 有一定的了解。上述内容就是接下来我要和大伙一起探讨的内容。&lt;/p&gt;
     
     </summary>
     
@@ -464,14 +428,13 @@
     <link href="http://zanelove.github.io/2015/09/18/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%B8%89-Binder%E8%BF%9E%E6%8E%A5%E6%B1%A0%E3%80%81%E9%80%89%E7%94%A8%E5%90%88%E9%80%82%E7%9A%84IPC%E6%96%B9%E5%BC%8F/"/>
     <id>http://zanelove.github.io/2015/09/18/IPC机制-Android中的IPC方式三-Binder连接池、选用合适的IPC方式/</id>
     <published>2015-09-18T12:00:59.000Z</published>
-    <updated>2017-07-21T11:53:53.000Z</updated>
+    <updated>2017-07-21T13:18:22.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;有人说，一个男人变老的两大标志是不断后退的发际线和不断增长的腰围；其实，一个人真正变老的标志是，他觉得人生一眼望得到头，不会再有改变，于是放弃了学习，放弃了提升自己&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;Binder连接池&quot;&gt;&lt;a href=&quot;#Binder连接池&quot; class=&quot;headerlink&quot; title=&quot;Binder连接池&quot;&gt;&lt;/a&gt;Binder连接池&lt;/h2&gt;&lt;p&gt;就IPC机制系列中，我们介绍了不同的IPC方式，不同的IPC方式有不同的特点和适用场景。在该节中我们再次介绍一下AIDL，原因是AIDL是一种最常见的进程间通信方式，是日常开发中涉及进程间通信时的首选，所以我们需要额外强调一下它。&lt;/p&gt;
     
     </summary>
     
@@ -487,15 +450,13 @@
     <link href="http://zanelove.github.io/2015/08/30/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%BA%8C-ContentProvider%E3%80%81Socket/"/>
     <id>http://zanelove.github.io/2015/08/30/IPC机制-Android中的IPC方式二-ContentProvider、Socket/</id>
     <published>2015-08-30T12:03:50.000Z</published>
-    <updated>2017-07-21T11:53:31.000Z</updated>
+    <updated>2017-07-21T13:18:08.000Z</updated>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;我们生活在这个孤独的蓝色星球，无论经历怎样的欢欣与苦痛，在这世界上你永远不是孤身一人，有爱、有梦、有朋友，还有这么美好的世界！&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;本节继续讲解Android中的IPC方式，在上一节&lt;a href=&quot;http://zanelove.github.io/2017/05/16/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%B8%80-Bundle%E3%80%81%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E3%80%81Messenger%E3%80%81AIDL/&quot;&gt;IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL&lt;/a&gt;当中我们已经讲解了如何使用Bundle、文件共享、Messenger以及AIDL来完成跨进程间通信，未阅读该节的读者，不妨进去瞧瞧。&lt;/p&gt;
-&lt;p&gt;那么，接下来我将继续为大家讲解上节未完成的内容。&lt;/p&gt;
     
     </summary>
     

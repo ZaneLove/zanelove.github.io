@@ -104,23 +104,17 @@
 
 
 
-<meta name="description" content="贫穷不是不赚钱，而是丧失了从这个社会获取资源的能力
-
-在AndroidManifest中添加开发密钥、所需权限等信息在application中添加开发密钥1234&amp;lt;!--百度地图Key--&amp;gt;&amp;lt;meta-data    android:name=&amp;quot;com.baidu.lbsapi.API_KEY&amp;quot;    android:value=&amp;quot;访问应用(AK)">
+<meta name="description" content="贫穷不是不赚钱，而是丧失了从这个社会获取资源的能力">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android之百度地图系列教程二：集成开发">
 <meta property="og:url" content="http://zanelove.github.io/2017/02/17/Android之百度地图系列教程二——集成开发/index.html">
 <meta property="og:site_name" content="Zane'Blog">
-<meta property="og:description" content="贫穷不是不赚钱，而是丧失了从这个社会获取资源的能力
-
-在AndroidManifest中添加开发密钥、所需权限等信息在application中添加开发密钥1234&amp;lt;!--百度地图Key--&amp;gt;&amp;lt;meta-data    android:name=&amp;quot;com.baidu.lbsapi.API_KEY&amp;quot;    android:value=&amp;quot;访问应用(AK)">
+<meta property="og:description" content="贫穷不是不赚钱，而是丧失了从这个社会获取资源的能力">
 <meta property="og:image" content="http://img.blog.csdn.net/20170719142152971?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-07-21T13:06:46.000Z">
+<meta property="og:updated_time" content="2017-07-21T13:15:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android之百度地图系列教程二：集成开发">
-<meta name="twitter:description" content="贫穷不是不赚钱，而是丧失了从这个社会获取资源的能力
-
-在AndroidManifest中添加开发密钥、所需权限等信息在application中添加开发密钥1234&amp;lt;!--百度地图Key--&amp;gt;&amp;lt;meta-data    android:name=&amp;quot;com.baidu.lbsapi.API_KEY&amp;quot;    android:value=&amp;quot;访问应用(AK)">
+<meta name="twitter:description" content="贫穷不是不赚钱，而是丧失了从这个社会获取资源的能力">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20170719142152971?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
@@ -440,8 +434,8 @@
         <blockquote>
 <p>贫穷不是不赚钱，而是丧失了从这个社会获取资源的能力</p>
 </blockquote>
-<h2 id="在AndroidManifest中添加开发密钥、所需权限等信息"><a href="#在AndroidManifest中添加开发密钥、所需权限等信息" class="headerlink" title="在AndroidManifest中添加开发密钥、所需权限等信息"></a>在AndroidManifest中添加开发密钥、所需权限等信息</h2><h3 id="在application中添加开发密钥"><a href="#在application中添加开发密钥" class="headerlink" title="在application中添加开发密钥"></a>在application中添加开发密钥</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!--百度地图Key--&gt;</div><div class="line">&lt;meta-data</div><div class="line">    android:name=&quot;com.baidu.lbsapi.API_KEY&quot;</div><div class="line">    android:value=&quot;访问应用(AK)&quot; /&gt;</div></pre></td></tr></table></figure>
 <a id="more"></a>
+<h2 id="在AndroidManifest中添加开发密钥、所需权限等信息"><a href="#在AndroidManifest中添加开发密钥、所需权限等信息" class="headerlink" title="在AndroidManifest中添加开发密钥、所需权限等信息"></a>在AndroidManifest中添加开发密钥、所需权限等信息</h2><h3 id="在application中添加开发密钥"><a href="#在application中添加开发密钥" class="headerlink" title="在application中添加开发密钥"></a>在application中添加开发密钥</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!--百度地图Key--&gt;</div><div class="line">&lt;meta-data</div><div class="line">    android:name=&quot;com.baidu.lbsapi.API_KEY&quot;</div><div class="line">    android:value=&quot;访问应用(AK)&quot; /&gt;</div></pre></td></tr></table></figure>
 <h3 id="添加所需权限"><a href="#添加所需权限" class="headerlink" title="添加所需权限"></a>添加所需权限</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot;/&gt;</div><div class="line">&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;</div><div class="line">&lt;uses-permission android:name=&quot;com.android.launcher.permission.READ_SETTINGS&quot; /&gt;</div><div class="line">&lt;uses-permission android:name=&quot;android.permission.WAKE_LOCK&quot;/&gt;</div><div class="line">&lt;uses-permission android:name=&quot;android.permission.CHANGE_WIFI_STATE&quot; /&gt;</div><div class="line">&lt;uses-permission android:name=&quot;android.permission.ACCESS_WIFI_STATE&quot; /&gt;</div><div class="line">&lt;uses-permission android:name=&quot;android.permission.GET_TASKS&quot; /&gt;</div><div class="line">&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;</div><div class="line">&lt;uses-permission android:name=&quot;android.permission.WRITE_SETTINGS&quot; /&gt;</div></pre></td></tr></table></figure>
 <h2 id="在布局xml文件中添加地图控件"><a href="#在布局xml文件中添加地图控件" class="headerlink" title="在布局xml文件中添加地图控件"></a>在布局xml文件中添加地图控件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;com.baidu.mapapi.map.MapView</div><div class="line">    android:id=&quot;@+id/bmapView&quot;</div><div class="line">    android:layout_width=&quot;fill_parent&quot;</div><div class="line">    android:layout_height=&quot;fill_parent&quot;</div><div class="line">    android:clickable=&quot;true&quot; /&gt;</div></pre></td></tr></table></figure>
 <h2 id="在应用程序创建时初始化SDK引用的Context-全局变量"><a href="#在应用程序创建时初始化SDK引用的Context-全局变量" class="headerlink" title="在应用程序创建时初始化SDK引用的Context 全局变量"></a>在应用程序创建时初始化SDK引用的Context 全局变量</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 在SDK各功能组件使用之前都需要调用SDKInitializer.initialize(getApplicationContext());</div><div class="line"> * 因此建议该方法放在Application的初始化方法中</div><div class="line"> * Created by zane on 2017/3/31.</div><div class="line"> */</div><div class="line">public class DevApplication extends Application &#123;</div><div class="line">    @Override</div><div class="line">    public void onCreate() &#123;</div><div class="line">        super.onCreate();</div><div class="line"></div><div class="line">        //在使用SDK各组件之前初始化context信息，传入ApplicationContext</div><div class="line">        //注意该方法要再setContentView方法之前实现</div><div class="line">        SDKInitializer.initialize(getApplicationContext());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>

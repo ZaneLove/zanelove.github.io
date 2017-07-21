@@ -104,24 +104,18 @@
 
 
 
-<meta name="description" content="真正的成功，是点亮更多人的人生
-
-本节主要介绍IPC中的一些基础概念，主要包含三个方面的内容：Serializable接口、Parcelable接口以及Binder，只有熟悉了这三个方面的内容后，才能更好地理解跨进程通信的各种方式。Serializable和Parcelable接口可以完成对象的序列化过程，当我们需要通过Intent和Binder传递对象时就需要使用Serializable或Pa">
+<meta name="description" content="真正的成功，是点亮更多人的人生">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IPC机制-IPC基础概念介绍">
 <meta property="og:url" content="http://zanelove.github.io/2015/06/29/IPC机制-IPC基础概念介绍/index.html">
 <meta property="og:site_name" content="Zane'Blog">
-<meta property="og:description" content="真正的成功，是点亮更多人的人生
-
-本节主要介绍IPC中的一些基础概念，主要包含三个方面的内容：Serializable接口、Parcelable接口以及Binder，只有熟悉了这三个方面的内容后，才能更好地理解跨进程通信的各种方式。Serializable和Parcelable接口可以完成对象的序列化过程，当我们需要通过Intent和Binder传递对象时就需要使用Serializable或Pa">
+<meta property="og:description" content="真正的成功，是点亮更多人的人生">
 <meta property="og:image" content="http://img.blog.csdn.net/20160113161542722">
 <meta property="og:image" content="http://img.blog.csdn.net/20160120105036983">
-<meta property="og:updated_time" content="2017-07-21T11:52:53.000Z">
+<meta property="og:updated_time" content="2017-07-21T13:18:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IPC机制-IPC基础概念介绍">
-<meta name="twitter:description" content="真正的成功，是点亮更多人的人生
-
-本节主要介绍IPC中的一些基础概念，主要包含三个方面的内容：Serializable接口、Parcelable接口以及Binder，只有熟悉了这三个方面的内容后，才能更好地理解跨进程通信的各种方式。Serializable和Parcelable接口可以完成对象的序列化过程，当我们需要通过Intent和Binder传递对象时就需要使用Serializable或Pa">
+<meta name="twitter:description" content="真正的成功，是点亮更多人的人生">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20160113161542722">
 
 
@@ -430,8 +424,8 @@
         <blockquote>
 <p>真正的成功，是点亮更多人的人生</p>
 </blockquote>
-<p>本节主要介绍IPC中的一些基础概念，主要包含三个方面的内容：Serializable接口、Parcelable接口以及Binder，只有熟悉了这三个方面的内容后，才能更好地理解跨进程通信的各种方式。Serializable和Parcelable接口可以完成对象的序列化过程，当我们需要通过Intent和Binder传递对象时就需要使用Serializable或Parcelable。</p>
 <a id="more"></a>
+<p>本节主要介绍IPC中的一些基础概念，主要包含三个方面的内容：Serializable接口、Parcelable接口以及Binder，只有熟悉了这三个方面的内容后，才能更好地理解跨进程通信的各种方式。Serializable和Parcelable接口可以完成对象的序列化过程，当我们需要通过Intent和Binder传递对象时就需要使用Serializable或Parcelable。</p>
 <h2 id="Serializable接口"><a href="#Serializable接口" class="headerlink" title="Serializable接口"></a>Serializable接口</h2><p>Serializable是Java所提供的一个序列化接口，它是一个空接口，为对象提供标准的序列化和反序列化操作。使用Serializable来实现序列化很简单，只需要在类的声明中指定一个类似下面的标识即可自动实现默认的序列化过程。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">private static final long serialVersionUID = 1190198271573730969L;</div></pre></td></tr></table></figure>
 <p>上面提到，想让一个对象实现序列化，只需要这个类实现Serializable接口并声明一个serialVersionUID即可，实际上，甚至这个serialVersionUID也不是必需的，我们不声明这个serialVersionUID同样也可以实现序列化，但是这将会对反序列化过程产生影响，具体什么影响后面在介绍。</p>

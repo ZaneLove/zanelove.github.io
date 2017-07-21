@@ -104,28 +104,22 @@
 
 
 
-<meta name="description" content="“当下”稍纵即逝，刚刚说出的话立刻就成了过去，很多要说的话却还在未来；活在当下是一个悖论，对时间掐头去尾后，你会发现几乎什么都不会剩下.
-
-启动Activity分为两种，显示调用和隐式调用。二者的区别简单来说就是：显示调用需要明确地指定被启动对象的组价信息，包括包名和类名；而隐式调用则不需要明确指定组件信息。原则上来说，一个Intent不应该既是显示调用又是隐式调用，如果二者共存的话以显示调用为">
+<meta name="description" content="“当下”稍纵即逝，刚刚说出的话立刻就成了过去，很多要说的话却还在未来；活在当下是一个悖论，对时间掐头去尾后，你会发现几乎什么都不会剩下.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IntentFilter的匹配规则">
 <meta property="og:url" content="http://zanelove.github.io/2015/03/13/IntentFilter的匹配规则/index.html">
 <meta property="og:site_name" content="Zane'Blog">
-<meta property="og:description" content="“当下”稍纵即逝，刚刚说出的话立刻就成了过去，很多要说的话却还在未来；活在当下是一个悖论，对时间掐头去尾后，你会发现几乎什么都不会剩下.
-
-启动Activity分为两种，显示调用和隐式调用。二者的区别简单来说就是：显示调用需要明确地指定被启动对象的组价信息，包括包名和类名；而隐式调用则不需要明确指定组件信息。原则上来说，一个Intent不应该既是显示调用又是隐式调用，如果二者共存的话以显示调用为">
+<meta property="og:description" content="“当下”稍纵即逝，刚刚说出的话立刻就成了过去，很多要说的话却还在未来；活在当下是一个悖论，对时间掐头去尾后，你会发现几乎什么都不会剩下.">
 <meta property="og:image" content="http://img.blog.csdn.net/20151226142652256">
 <meta property="og:image" content="http://img.blog.csdn.net/20151226152132554">
 <meta property="og:image" content="http://img.blog.csdn.net/20151226153651801">
 <meta property="og:image" content="http://img.blog.csdn.net/20151227165601469">
 <meta property="og:image" content="http://img.blog.csdn.net/20151227173150509">
 <meta property="og:image" content="http://img.blog.csdn.net/20151227174044927">
-<meta property="og:updated_time" content="2017-07-21T11:50:41.000Z">
+<meta property="og:updated_time" content="2017-07-21T13:17:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IntentFilter的匹配规则">
-<meta name="twitter:description" content="“当下”稍纵即逝，刚刚说出的话立刻就成了过去，很多要说的话却还在未来；活在当下是一个悖论，对时间掐头去尾后，你会发现几乎什么都不会剩下.
-
-启动Activity分为两种，显示调用和隐式调用。二者的区别简单来说就是：显示调用需要明确地指定被启动对象的组价信息，包括包名和类名；而隐式调用则不需要明确指定组件信息。原则上来说，一个Intent不应该既是显示调用又是隐式调用，如果二者共存的话以显示调用为">
+<meta name="twitter:description" content="“当下”稍纵即逝，刚刚说出的话立刻就成了过去，很多要说的话却还在未来；活在当下是一个悖论，对时间掐头去尾后，你会发现几乎什么都不会剩下.">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20151226142652256">
 
 
@@ -434,8 +428,8 @@
         <blockquote>
 <p>“当下”稍纵即逝，刚刚说出的话立刻就成了过去，很多要说的话却还在未来；活在当下是一个悖论，对时间掐头去尾后，你会发现几乎什么都不会剩下.</p>
 </blockquote>
-<p>启动Activity分为两种，显示调用和隐式调用。二者的区别简单来说就是：<strong>显示调用需要明确地指定被启动对象的组价信息，包括包名和类名；而隐式调用则不需要明确指定组件信息</strong>。原则上来说，一个Intent不应该既是显示调用又是隐式调用，如果二者共存的话以显示调用为主。显示调用很简单，这里主要介绍隐式调用。隐式调用需要Intent能够匹配目标组件的IntentFilter中所设置的过滤信息，如果不匹配将无法启动目标Activity。IntentFilter中的过滤信息有action、category、data。</p>
 <a id="more"></a>
+<p>启动Activity分为两种，显示调用和隐式调用。二者的区别简单来说就是：<strong>显示调用需要明确地指定被启动对象的组价信息，包括包名和类名；而隐式调用则不需要明确指定组件信息</strong>。原则上来说，一个Intent不应该既是显示调用又是隐式调用，如果二者共存的话以显示调用为主。显示调用很简单，这里主要介绍隐式调用。隐式调用需要Intent能够匹配目标组件的IntentFilter中所设置的过滤信息，如果不匹配将无法启动目标Activity。IntentFilter中的过滤信息有action、category、data。</p>
 <p>示例如下：</p>
 <p><img src="http://img.blog.csdn.net/20151226142652256" alt=""></p>
 <p>示例答案会在下面给大家展示出来！</p>

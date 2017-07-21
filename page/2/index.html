@@ -426,8 +426,6 @@
           <blockquote>
 <p>So as long as I live I love you, Will heaven and hold you</p>
 </blockquote>
-<p>JNI的数据类型包含两种：基本类型和引用类型。基本类型主要有jboolean、jchar、jint等，它们和Java中的数据类型的对应关系如表所示：</p>
-<p><img src="http://img.blog.csdn.net/20170703104016477?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/05/15/JNI和NDK编程-JNI的数据类型和类型签名/#more" rel="contents">
@@ -596,9 +594,6 @@
           <blockquote>
 <p>我准备迎接一段美好的时光 沿着海岸 脚踩着沙滩</p>
 </blockquote>
-<p>NDK的开发流程是基于JNI的，其主要由如下几个步骤。</p>
-<h2 id="下载NDK"><a href="#下载NDK" class="headerlink" title="下载NDK"></a>下载NDK</h2><p><a href="https://developer.android.com/ndk/downloads/index.html">官网下载</a></p>
-<p><a href="http://pan.baidu.com/s/1hr7CwAC">云盘下载</a> (密码：f8h5)</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/04/29/JNI和NDK编程-NDK的开发流程/#more" rel="contents">
@@ -767,8 +762,6 @@
           <blockquote>
 <p>放手一搏吧，别顾虑太多，这就是男人该有的性格</p>
 </blockquote>
-<p>Java JNI的本意是Java Native Interface（Java本地接口），它是为了方便Java调用C、C++等本地代码所封装的一层接口。我们知道，Java的优点是跨平台，但是作为优点的同时，其在本地交互的时候就出现了短板。Java的跨平台特性导致其本地交互的能力不够强大，一些和操作系统相关的特性Java无法完成，于是Java提供了JNI专门用于和本地代码交互，这样就增强了Java语言的本地交互能力。通过Java JNI，用户可以调用C、C++所编写的本地代码。</p>
-<p>NDK是Android所提供的一个工具集合，通过NDK可以在Android中更加方便地通过JNI来访问本地代码，比如C或者C++。NDK还提供了交叉编译器，开发人员只需要简单地修改mk文件就可以生成特定CPU平台的动态库。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/03/19/JNI和NDK编程-JNI的开发流程/#more" rel="contents">
@@ -937,13 +930,6 @@
           <blockquote>
 <p>一屋不扫，何以扫天下</p>
 </blockquote>
-<p>滑动冲突是如何产生的呢？其实在界面中只要外两层同时可以滑动，这个时候就会产生滑动冲突。如果解决滑动冲突呢？这既是一件困难的事又是一件简单的事，说困难是因为许多开发者面对滑动冲突都会显得束手无策，说简单是因为滑动冲突的解决有固定的套路，只要知道了这个固定套路问题就好解决了。通过本节的学习，滑动冲突将不再是个问题。</p>
-<h2 id="常见的滑动冲突场景"><a href="#常见的滑动冲突场景" class="headerlink" title="常见的滑动冲突场景"></a>常见的滑动冲突场景</h2><p>常见的滑动冲突场景可以简单分为如下三种：</p>
-<ul>
-<li>场景1：外部滑动方向和内部滑动方向不一致；</li>
-<li>场景2：外部滑动方向和内部滑动方向一致；</li>
-<li>场景3：上面两种情况的嵌套。</li>
-</ul>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/02/18/View的事件体系-View的滑动冲突/#more" rel="contents">
@@ -1112,8 +1098,6 @@
           <blockquote>
 <p>有人靠天分逆袭，有人靠身份逆袭，如果你什么都没有，也行只要靠格局了。</p>
 </blockquote>
-<p>本节介绍View的一个核心知识点：事件分发机制。</p>
-<h2 id="点击事件的传递规则"><a href="#点击事件的传递规则" class="headerlink" title="点击事件的传递规则"></a>点击事件的传递规则</h2><p>在介绍点击事件的传递规则之前，首先我们要明白这里要分析的对象就是MotionEvent，即点击事件，关于<a href="http://zanelove.github.io/2015/07/04/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">MotionEvent</a>已经进行了介绍。所谓点击事件的事件分发，其实就是对MotionEvent事件的分发过程，即当一个MotionEvent产生了以后，系统需要把这个事件传递给一个具体的View，而这个传递的过程就是分发过程。点击事件的分发过程由三个很重要的方法来共同完成：dispatchTouchEvent、onInterceptTouchEvent和onTouchEvent，下面先介绍一下这几个方法。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/01/13/View的事件体系-View的事件分发机制/#more" rel="contents">
@@ -1282,7 +1266,6 @@
           <blockquote>
 <p>你的孤独，虽败犹荣</p>
 </blockquote>
-<p>上一节讲到了<a href="http://zanelove.github.io/2017/06/01/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E6%BB%91%E5%8A%A8/">View的滑动</a>，我们还要知道如果实现View的弹性滑动，比较生硬地滑动过去，这种方式的用户体验实在太差了，因此我们要实现渐近式滑动。那么如何实现弹性滑动呢？其实实现方法有很多，但是它们都有一个共同思想：将一次大的滑动分成若干次小的滑动并在一个小时间段内完成，弹性滑动的具体的实现方式有很多，比如通过Scroller、Handler#postDelayed以及Thread#sleep等，下面一一进行介绍。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2015/12/27/View的事件体系-弹性滑动/#more" rel="contents">
@@ -1451,7 +1434,6 @@
           <blockquote>
 <p>愿我所见之人，所历之事，哪怕因为我有一点点的好的改变，我就心满意足了</p>
 </blockquote>
-<p>上一节介绍了View的一些基础知识和概念，本节开始介绍很重要的一个内容：<strong>View的滑动</strong>。在移动端设备上，不管是Android还是Ios，滑动几乎是应用的标配，不管是下拉刷新还是侧拉滑动（SlidingMenu），它们的基础都是滑动。从另外一方面来说，Android手机由于屏幕比较小，为了给用户呈现更多的内容，就需要使用滑动来隐藏和显示一些内容。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2015/11/10/View的事件体系-View的滑动/#more" rel="contents">
@@ -1620,7 +1602,6 @@
           <blockquote>
 <p>If you lose your way, you ‘ll go against the wind from all the wrong directions. 如果失去了方向，那么所有方向吹过了的都是逆风</p>
 </blockquote>
-<p>虽然说View不属于四大组件，但是它的作用堪比四大组件，甚至比Receiver和Provider的重要性都要大。在Android中，Activity承担着可视化的功能，同时Android系统提供了很多基础控件，常见的有Button、TextView、CheckBox等。很多时候仅仅使用系统提供的控件是不能满足需求的，因此我们就需要能够根据需求进行新控件的定义，而控件的自定义就需要对Android的View的体系有深入的理解，只有这样才能写出完美的<strong>自定义控件</strong>。同时Android手机属于移动设备，移动设备的一个特点就是用户可以直接通过屏幕来进行一系列操作，一个典型的场景就是屏幕的滑动，用户可以通过滑动来切换到不同的界面。很多情况下我们的应用都需要支持滑动操作，当处于不同层级的View都可以响应用户的滑动操作时，就会带来一个问题，那就是<strong>滑动冲突</strong>。如何解决该问题，就需要读者对 <strong>View的事件分发机制</strong> 有一定的了解。上述内容就是接下来我要和大伙一起探讨的内容。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2015/10/24/View的事件体系-View的基础知识/#more" rel="contents">
@@ -1789,7 +1770,6 @@
           <blockquote>
 <p>有人说，一个男人变老的两大标志是不断后退的发际线和不断增长的腰围；其实，一个人真正变老的标志是，他觉得人生一眼望得到头，不会再有改变，于是放弃了学习，放弃了提升自己</p>
 </blockquote>
-<h2 id="Binder连接池"><a href="#Binder连接池" class="headerlink" title="Binder连接池"></a>Binder连接池</h2><p>就IPC机制系列中，我们介绍了不同的IPC方式，不同的IPC方式有不同的特点和适用场景。在该节中我们再次介绍一下AIDL，原因是AIDL是一种最常见的进程间通信方式，是日常开发中涉及进程间通信时的首选，所以我们需要额外强调一下它。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2015/09/18/IPC机制-Android中的IPC方式三-Binder连接池、选用合适的IPC方式/#more" rel="contents">
@@ -1958,8 +1938,6 @@
           <blockquote>
 <p>我们生活在这个孤独的蓝色星球，无论经历怎样的欢欣与苦痛，在这世界上你永远不是孤身一人，有爱、有梦、有朋友，还有这么美好的世界！</p>
 </blockquote>
-<p>本节继续讲解Android中的IPC方式，在上一节<a href="http://zanelove.github.io/2017/05/16/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%B8%80-Bundle%E3%80%81%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E3%80%81Messenger%E3%80%81AIDL/">IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL</a>当中我们已经讲解了如何使用Bundle、文件共享、Messenger以及AIDL来完成跨进程间通信，未阅读该节的读者，不妨进去瞧瞧。</p>
-<p>那么，接下来我将继续为大家讲解上节未完成的内容。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2015/08/30/IPC机制-Android中的IPC方式二-ContentProvider、Socket/#more" rel="contents">

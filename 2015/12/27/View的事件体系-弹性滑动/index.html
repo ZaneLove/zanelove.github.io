@@ -104,22 +104,16 @@
 
 
 
-<meta name="description" content="你的孤独，虽败犹荣
-
-上一节讲到了View的滑动，我们还要知道如果实现View的弹性滑动，比较生硬地滑动过去，这种方式的用户体验实在太差了，因此我们要实现渐近式滑动。那么如何实现弹性滑动呢？其实实现方法有很多，但是它们都有一个共同思想：将一次大的滑动分成若干次小的滑动并在一个小时间段内完成，弹性滑动的具体的实现方式有很多，比如通过Scroller、Handler#postDelayed以及Thr">
+<meta name="description" content="你的孤独，虽败犹荣">
 <meta property="og:type" content="article">
 <meta property="og:title" content="View的事件体系-弹性滑动">
 <meta property="og:url" content="http://zanelove.github.io/2015/12/27/View的事件体系-弹性滑动/index.html">
 <meta property="og:site_name" content="Zane'Blog">
-<meta property="og:description" content="你的孤独，虽败犹荣
-
-上一节讲到了View的滑动，我们还要知道如果实现View的弹性滑动，比较生硬地滑动过去，这种方式的用户体验实在太差了，因此我们要实现渐近式滑动。那么如何实现弹性滑动呢？其实实现方法有很多，但是它们都有一个共同思想：将一次大的滑动分成若干次小的滑动并在一个小时间段内完成，弹性滑动的具体的实现方式有很多，比如通过Scroller、Handler#postDelayed以及Thr">
-<meta property="og:updated_time" content="2017-07-21T11:54:57.000Z">
+<meta property="og:description" content="你的孤独，虽败犹荣">
+<meta property="og:updated_time" content="2017-07-21T13:20:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="View的事件体系-弹性滑动">
-<meta name="twitter:description" content="你的孤独，虽败犹荣
-
-上一节讲到了View的滑动，我们还要知道如果实现View的弹性滑动，比较生硬地滑动过去，这种方式的用户体验实在太差了，因此我们要实现渐近式滑动。那么如何实现弹性滑动呢？其实实现方法有很多，但是它们都有一个共同思想：将一次大的滑动分成若干次小的滑动并在一个小时间段内完成，弹性滑动的具体的实现方式有很多，比如通过Scroller、Handler#postDelayed以及Thr">
+<meta name="twitter:description" content="你的孤独，虽败犹荣">
 
 
 
@@ -427,8 +421,8 @@
         <blockquote>
 <p>你的孤独，虽败犹荣</p>
 </blockquote>
-<p>上一节讲到了<a href="http://zanelove.github.io/2017/06/01/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E6%BB%91%E5%8A%A8/">View的滑动</a>，我们还要知道如果实现View的弹性滑动，比较生硬地滑动过去，这种方式的用户体验实在太差了，因此我们要实现渐近式滑动。那么如何实现弹性滑动呢？其实实现方法有很多，但是它们都有一个共同思想：将一次大的滑动分成若干次小的滑动并在一个小时间段内完成，弹性滑动的具体的实现方式有很多，比如通过Scroller、Handler#postDelayed以及Thread#sleep等，下面一一进行介绍。</p>
 <a id="more"></a>
+<p>上一节讲到了<a href="http://zanelove.github.io/2017/06/01/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E6%BB%91%E5%8A%A8/">View的滑动</a>，我们还要知道如果实现View的弹性滑动，比较生硬地滑动过去，这种方式的用户体验实在太差了，因此我们要实现渐近式滑动。那么如何实现弹性滑动呢？其实实现方法有很多，但是它们都有一个共同思想：将一次大的滑动分成若干次小的滑动并在一个小时间段内完成，弹性滑动的具体的实现方式有很多，比如通过Scroller、Handler#postDelayed以及Thread#sleep等，下面一一进行介绍。</p>
 <h2 id="使用Scroller"><a href="#使用Scroller" class="headerlink" title="使用Scroller"></a>使用Scroller</h2><p>Scroller的使用方法在<a href="http://zanelove.github.io/2015/07/04/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">上一篇文章1.4.3.3节</a>当中进行了介绍，下面我们来分析一下它的源码，从而探索为什么它能实现View的弹性滑动。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">Scroller scroller = new Scroller(mContext);</div><div class="line"></div><div class="line">//缓慢滚动到指定位置</div><div class="line">private void smoothScrollTo(int destX, int destY) &#123;</div><div class="line">    int scrollX = getScrollX();</div><div class="line">    int delta = destX - scrollX;</div><div class="line">    //1000ms内滑向destX，效果就是慢慢滑动</div><div class="line">    mScroller.startScroll(scrollX, 0, delta, 0, 1000);</div><div class="line">    invalidate();</div><div class="line">&#125;</div><div class="line"></div><div class="line">public void computeScroll() &#123;</div><div class="line">    if(mScroller.computeScrollOffset()) &#123;</div><div class="line">        scrollTo(mScroller.getCurrX(), mScroller.getCurrY());</div><div class="line">        postInvalidate();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上面是Scroller的典型的使用方法，这里先描述它的工作原理：当我们构造一个Scroller对象并且调用它的startScroll方法时，Scroller内容其实什么也没做，它只是保存了我们传递的几个参数，这几个参数从startScroll的源码上就可以看出来，如下所示：</p>

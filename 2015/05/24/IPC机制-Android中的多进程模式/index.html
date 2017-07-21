@@ -104,28 +104,19 @@
 
 
 
-<meta name="description" content="世界如此之大，做一个什么样的自己完全取决于你的选择
-
-通过给四大组件指定android:process属性，我们可以轻易地开启多进程模式，这看起来很简单，但是实际使用过程中却暗藏杀机，有时候我们通过多进程得到的好处甚至都不足以弥补使用多进程所带来的代码层面的负面影响。
-开启多进程模式首先，在Android中使用多进程只有一种方法，那就是通过给四大组件（Activity、Service、Recei">
+<meta name="description" content="世界如此之大，做一个什么样的自己完全取决于你的选择">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IPC机制-Android中的多进程模式">
 <meta property="og:url" content="http://zanelove.github.io/2015/05/24/IPC机制-Android中的多进程模式/index.html">
 <meta property="og:site_name" content="Zane'Blog">
-<meta property="og:description" content="世界如此之大，做一个什么样的自己完全取决于你的选择
-
-通过给四大组件指定android:process属性，我们可以轻易地开启多进程模式，这看起来很简单，但是实际使用过程中却暗藏杀机，有时候我们通过多进程得到的好处甚至都不足以弥补使用多进程所带来的代码层面的负面影响。
-开启多进程模式首先，在Android中使用多进程只有一种方法，那就是通过给四大组件（Activity、Service、Recei">
+<meta property="og:description" content="世界如此之大，做一个什么样的自己完全取决于你的选择">
 <meta property="og:image" content="http://img.blog.csdn.net/20160112130725566">
 <meta property="og:image" content="http://img.blog.csdn.net/20160112150814530">
 <meta property="og:image" content="http://img.blog.csdn.net/20160112165045733">
-<meta property="og:updated_time" content="2017-07-21T11:52:28.000Z">
+<meta property="og:updated_time" content="2017-07-21T13:17:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IPC机制-Android中的多进程模式">
-<meta name="twitter:description" content="世界如此之大，做一个什么样的自己完全取决于你的选择
-
-通过给四大组件指定android:process属性，我们可以轻易地开启多进程模式，这看起来很简单，但是实际使用过程中却暗藏杀机，有时候我们通过多进程得到的好处甚至都不足以弥补使用多进程所带来的代码层面的负面影响。
-开启多进程模式首先，在Android中使用多进程只有一种方法，那就是通过给四大组件（Activity、Service、Recei">
+<meta name="twitter:description" content="世界如此之大，做一个什么样的自己完全取决于你的选择">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20160112130725566">
 
 
@@ -434,9 +425,9 @@
         <blockquote>
 <p>世界如此之大，做一个什么样的自己完全取决于你的选择</p>
 </blockquote>
+<a id="more"></a>
 <p>通过给四大组件指定android:process属性，我们可以轻易地开启多进程模式，这看起来很简单，但是实际使用过程中却暗藏杀机，有时候我们通过多进程得到的好处甚至都不足以弥补使用多进程所带来的代码层面的负面影响。</p>
 <h2 id="开启多进程模式"><a href="#开启多进程模式" class="headerlink" title="开启多进程模式"></a>开启多进程模式</h2><p>首先，<strong>在Android中使用多进程只有一种方法，那就是通过给四大组件（Activity、Service、Receiver、ContentProvider）在AndroidMenifest.xml中指定android:process属性</strong>，除此之外没有其他办法，也就是说我们无法给一个进程或一个实体类指定其运行时所在的进程。<strong>其实还有另一种非常规的多进程方法，那就是通过JNI在native层去fork一个新的进程。</strong></p>
-<a id="more"></a>
 <p>code示例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;activity</div><div class="line">    android:name=&quot;com.zaenlove.androiddemo2.MainActivity&quot;</div><div class="line">    android:configChanges=&quot;orientation|screenSize&quot;&gt;</div><div class="line">    &lt;intent-filter&gt;</div><div class="line">        &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;</div><div class="line">        &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;</div><div class="line">    &lt;/intent-filter&gt;</div><div class="line">&lt;/activity&gt;</div><div class="line">&lt;activity</div><div class="line">    android:name=&quot;com.zaenlove.androiddemo2.SecondActivity&quot;</div><div class="line">    android:configChanges=&quot;screenLayout&quot;</div><div class="line">    android:process=&quot;:remote&quot;/&gt;</div><div class="line">&lt;activity</div><div class="line">    android:name=&quot;com.zaenlove.androiddemo2.ThirdActivity&quot;</div><div class="line">    android:configChanges=&quot;screenLayout&quot;</div><div class="line">    android:process=&quot;com.zanelove.remote&quot;/&gt;</div></pre></td></tr></table></figure>
 <p>上面的示例分别为SecondActivity和ThirdActivity指定了process属性，并且它们的属性值不同，这意味着当前应用又增加了两个新进程。假设当前应用的包名为“com.zaenlove.androiddemo2”，当SecondActivity启动时，系统会为它创建一个单独的进程，进程名为“com.zaenlove.androiddemo2:remote”；当ThirdActivity启动时，系统会为它创建一个单独的进程，进程名为“com.zanelove.remote”。<strong>同时入口Activity是MainActivity，没有为它指定process属性，那么它运行在默认进程中，默认进程的进程名是包名。</strong></p>

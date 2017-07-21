@@ -104,27 +104,21 @@
 
 
 
-<meta name="description" content="放手一搏吧，别顾虑太多，这就是男人该有的性格
-
-Java JNI的本意是Java Native Interface（Java本地接口），它是为了方便Java调用C、C++等本地代码所封装的一层接口。我们知道，Java的优点是跨平台，但是作为优点的同时，其在本地交互的时候就出现了短板。Java的跨平台特性导致其本地交互的能力不够强大，一些和操作系统相关的特性Java无法完成，于是Java提供了JN">
+<meta name="description" content="放手一搏吧，别顾虑太多，这就是男人该有的性格">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JNI和NDK编程-JNI的开发流程">
 <meta property="og:url" content="http://zanelove.github.io/2016/03/19/JNI和NDK编程-JNI的开发流程/index.html">
 <meta property="og:site_name" content="Zane'Blog">
-<meta property="og:description" content="放手一搏吧，别顾虑太多，这就是男人该有的性格
-
-Java JNI的本意是Java Native Interface（Java本地接口），它是为了方便Java调用C、C++等本地代码所封装的一层接口。我们知道，Java的优点是跨平台，但是作为优点的同时，其在本地交互的时候就出现了短板。Java的跨平台特性导致其本地交互的能力不够强大，一些和操作系统相关的特性Java无法完成，于是Java提供了JN">
+<meta property="og:description" content="放手一搏吧，别顾虑太多，这就是男人该有的性格">
 <meta property="og:image" content="http://img.blog.csdn.net/20170628164333564?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170628164437665?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170615172251914?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170615172553478?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170615172618857?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-07-21T11:56:18.000Z">
+<meta property="og:updated_time" content="2017-07-21T13:19:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JNI和NDK编程-JNI的开发流程">
-<meta name="twitter:description" content="放手一搏吧，别顾虑太多，这就是男人该有的性格
-
-Java JNI的本意是Java Native Interface（Java本地接口），它是为了方便Java调用C、C++等本地代码所封装的一层接口。我们知道，Java的优点是跨平台，但是作为优点的同时，其在本地交互的时候就出现了短板。Java的跨平台特性导致其本地交互的能力不够强大，一些和操作系统相关的特性Java无法完成，于是Java提供了JN">
+<meta name="twitter:description" content="放手一搏吧，别顾虑太多，这就是男人该有的性格">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20170628164333564?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
@@ -433,9 +427,9 @@ Java JNI的本意是Java Native Interface（Java本地接口），它是为了�
         <blockquote>
 <p>放手一搏吧，别顾虑太多，这就是男人该有的性格</p>
 </blockquote>
+<a id="more"></a>
 <p>Java JNI的本意是Java Native Interface（Java本地接口），它是为了方便Java调用C、C++等本地代码所封装的一层接口。我们知道，Java的优点是跨平台，但是作为优点的同时，其在本地交互的时候就出现了短板。Java的跨平台特性导致其本地交互的能力不够强大，一些和操作系统相关的特性Java无法完成，于是Java提供了JNI专门用于和本地代码交互，这样就增强了Java语言的本地交互能力。通过Java JNI，用户可以调用C、C++所编写的本地代码。</p>
 <p>NDK是Android所提供的一个工具集合，通过NDK可以在Android中更加方便地通过JNI来访问本地代码，比如C或者C++。NDK还提供了交叉编译器，开发人员只需要简单地修改mk文件就可以生成特定CPU平台的动态库。</p>
-<a id="more"></a>
 <p>使用NDK有如下好处：</p>
 <ul>
 <li>提交代码的安全性。由于so库反编译比较困难，因此NDK提高了Android程序的安全性。</li>

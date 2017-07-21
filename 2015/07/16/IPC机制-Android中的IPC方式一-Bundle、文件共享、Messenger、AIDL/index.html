@@ -104,16 +104,12 @@
 
 
 
-<meta name="description" content="每一段往上的路都是辛苦的，我们也都有累到想休息的时候，但如果我们就此停下来，甚至往回走，我们就永远到不了山顶了
-
-本节开始详细分析各种跨进程通信（IPC）方式。具体方式有很多，比如可以通过在Intent中附加extras来传递信息（使用Bundle），或者通过共享文件来共享数据，还可以采用Binder方式来跨进程通信，另外，ContentProvider天生就是支持跨进程访问的，因此我们也可以采">
+<meta name="description" content="每一段往上的路都是辛苦的，我们也都有累到想休息的时候，但如果我们就此停下来，甚至往回走，我们就永远到不了山顶了">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL">
 <meta property="og:url" content="http://zanelove.github.io/2015/07/16/IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL/index.html">
 <meta property="og:site_name" content="Zane'Blog">
-<meta property="og:description" content="每一段往上的路都是辛苦的，我们也都有累到想休息的时候，但如果我们就此停下来，甚至往回走，我们就永远到不了山顶了
-
-本节开始详细分析各种跨进程通信（IPC）方式。具体方式有很多，比如可以通过在Intent中附加extras来传递信息（使用Bundle），或者通过共享文件来共享数据，还可以采用Binder方式来跨进程通信，另外，ContentProvider天生就是支持跨进程访问的，因此我们也可以采">
+<meta property="og:description" content="每一段往上的路都是辛苦的，我们也都有累到想休息的时候，但如果我们就此停下来，甚至往回走，我们就永远到不了山顶了">
 <meta property="og:image" content="http://img.blog.csdn.net/20160214153121368">
 <meta property="og:image" content="http://img.blog.csdn.net/20160214214609449">
 <meta property="og:image" content="http://img.blog.csdn.net/20160214214622215">
@@ -127,12 +123,10 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20160226154305069">
 <meta property="og:image" content="http://img.blog.csdn.net/20160228151537645">
 <meta property="og:image" content="http://img.blog.csdn.net/20160228211545117">
-<meta property="og:updated_time" content="2017-07-21T11:53:17.000Z">
+<meta property="og:updated_time" content="2017-07-21T13:18:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL">
-<meta name="twitter:description" content="每一段往上的路都是辛苦的，我们也都有累到想休息的时候，但如果我们就此停下来，甚至往回走，我们就永远到不了山顶了
-
-本节开始详细分析各种跨进程通信（IPC）方式。具体方式有很多，比如可以通过在Intent中附加extras来传递信息（使用Bundle），或者通过共享文件来共享数据，还可以采用Binder方式来跨进程通信，另外，ContentProvider天生就是支持跨进程访问的，因此我们也可以采">
+<meta name="twitter:description" content="每一段往上的路都是辛苦的，我们也都有累到想休息的时候，但如果我们就此停下来，甚至往回走，我们就永远到不了山顶了">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20160214153121368">
 
 
@@ -441,8 +435,8 @@
         <blockquote>
 <p>每一段往上的路都是辛苦的，我们也都有累到想休息的时候，但如果我们就此停下来，甚至往回走，我们就永远到不了山顶了</p>
 </blockquote>
-<p>本节开始详细分析各种跨进程通信（IPC）方式。具体方式有很多，比如可以通过在Intent中附加extras来传递信息（使用Bundle），或者通过共享文件来共享数据，还可以采用Binder方式来跨进程通信，另外，ContentProvider天生就是支持跨进程访问的，因此我们也可以采用它来进行IPC。另外，通过网络通信也是可以实现数据传递的，所以Socket也可以实现IPC。下面会一一进行展开。</p>
 <a id="more"></a>
+<p>本节开始详细分析各种跨进程通信（IPC）方式。具体方式有很多，比如可以通过在Intent中附加extras来传递信息（使用Bundle），或者通过共享文件来共享数据，还可以采用Binder方式来跨进程通信，另外，ContentProvider天生就是支持跨进程访问的，因此我们也可以采用它来进行IPC。另外，通过网络通信也是可以实现数据传递的，所以Socket也可以实现IPC。下面会一一进行展开。</p>
 <h2 id="使用Bundle"><a href="#使用Bundle" class="headerlink" title="使用Bundle"></a>使用Bundle</h2><p>四大组件中的三大组件（Activity、Service、BroadcastReceiver）都是支持在Intent中传递Bundle数据的，由于Bundle实现了Parcelable接口，所以它可以方便地在不同的进程间传输。基于这一点，当我们在一个进程中启动另一个进程的Activity、Service、Receiver，我们就可以在Bundle中附加我们需要传输给远程进程的信息并通过Intent发送出去。当然，我们传输的数据必须能够被序列化，比如基本类型、实现了Parcelable接口的对象、实现了Serializable接口的对象以及一些Android支持的特殊对象，具体内容可以参看Bundle这个类，就可以看到所有它支持的类型。Bundle不支持的类型我们无法通过它在进程间传递数据。这是一种最简单的进程间通信方式。</p>
 <p><strong>解决Bundle不支持携带的数据进行跨进程通信的问题？</strong></p>
 <p>除了直接传递数据这种典型的使用场景，它还有一种特殊的使用场景。比如A进程正在进行一个计算，计算完成之后它要启动B进程的一个组件并把计算结果传递给B进程，可是遗憾的是这个计算结果不支持放入Bundle中，因此无法通过Intent来传递，这个时候如果我们用其他IPC方式就会略显复杂。可以考虑如下方式：我们通过Intent启动进程B的一个Service组件（比如IntentService），让Service也运行在B进程中，所以目标组件就可以不用跨进程方式来获取计算结果（可以使用SharedPreferences等方式）了，这样一来就轻松解决了跨进程的问题。这种方式的核心思想在于将原来需要在A进程的计算任务转移到B进程的后台Service中去执行，这样就成功地避免了进程间通信问题，而且只用了很小的代价。</p>
