@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zanelove.github.io/"/>
-  <updated>2017-07-21T13:06:46.000Z</updated>
+  <updated>2017-07-21T13:10:23.000Z</updated>
   <id>http://zanelove.github.io/</id>
   
   <author>
@@ -14,6 +14,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android之百度地图系列教程三——定位</title>
+    <link href="http://zanelove.github.io/2017/03/20/Android%E4%B9%8B%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B%E4%B8%89%E2%80%94%E2%80%94%E5%AE%9A%E4%BD%8D/"/>
+    <id>http://zanelove.github.io/2017/03/20/Android之百度地图系列教程三——定位/</id>
+    <published>2017-03-20T13:07:46.000Z</published>
+    <updated>2017-07-21T13:10:23.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;如果你很在意别人的评价，要么是你站得不够高，要么你是在做淘宝&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://zanelove.github.io/categories/Android/"/>
+    
+      <category term="百度地图" scheme="http://zanelove.github.io/categories/Android/%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE/"/>
+    
+    
+      <category term="Android" scheme="http://zanelove.github.io/tags/Android/"/>
+    
+      <category term="百度地图" scheme="http://zanelove.github.io/tags/%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE/"/>
+    
+  </entry>
   
   <entry>
     <title>Android之百度地图系列教程二：集成开发</title>
@@ -470,29 +496,6 @@
 &lt;/blockquote&gt;
 &lt;p&gt;本节继续讲解Android中的IPC方式，在上一节&lt;a href=&quot;http://zanelove.github.io/2017/05/16/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%B8%80-Bundle%E3%80%81%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E3%80%81Messenger%E3%80%81AIDL/&quot;&gt;IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL&lt;/a&gt;当中我们已经讲解了如何使用Bundle、文件共享、Messenger以及AIDL来完成跨进程间通信，未阅读该节的读者，不妨进去瞧瞧。&lt;/p&gt;
 &lt;p&gt;那么，接下来我将继续为大家讲解上节未完成的内容。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="http://zanelove.github.io/categories/Android/"/>
-    
-    
-      <category term="Android" scheme="http://zanelove.github.io/tags/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL</title>
-    <link href="http://zanelove.github.io/2015/07/16/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%B8%80-Bundle%E3%80%81%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E3%80%81Messenger%E3%80%81AIDL/"/>
-    <id>http://zanelove.github.io/2015/07/16/IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL/</id>
-    <published>2015-07-16T14:21:13.000Z</published>
-    <updated>2017-07-21T11:53:17.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;每一段往上的路都是辛苦的，我们也都有累到想休息的时候，但如果我们就此停下来，甚至往回走，我们就永远到不了山顶了&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;本节开始详细分析各种跨进程通信（IPC）方式。具体方式有很多，比如可以通过在Intent中附加extras来传递信息（使用Bundle），或者通过共享文件来共享数据，还可以采用Binder方式来跨进程通信，另外，ContentProvider天生就是支持跨进程访问的，因此我们也可以采用它来进行IPC。另外，通过网络通信也是可以实现数据传递的，所以Socket也可以实现IPC。下面会一一进行展开。&lt;/p&gt;
     
     </summary>
     
