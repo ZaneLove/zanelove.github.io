@@ -1,0 +1,1019 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Zane'Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="我们生活在这个孤独的蓝色星球，无论经历怎样的欢欣与苦痛，在这世界上你永远不是孤身一人，有爱、有梦、有朋友，还有这么美好的世界！
+
+本节继续讲解Android中的IPC方式，在上一节IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL当中我们已经讲解了如何使用Bundle、文件共享、Messenger以及AIDL来完成跨进程间通信，未阅读该节的读者，不妨">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IPC机制-Android中的IPC方式二-ContentProvider、Socket">
+<meta property="og:url" content="http://zanelove.github.io/2015/08/30/IPC机制-Android中的IPC方式二-ContentProvider、Socket/index.html">
+<meta property="og:site_name" content="Zane'Blog">
+<meta property="og:description" content="我们生活在这个孤独的蓝色星球，无论经历怎样的欢欣与苦痛，在这世界上你永远不是孤身一人，有爱、有梦、有朋友，还有这么美好的世界！
+
+本节继续讲解Android中的IPC方式，在上一节IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL当中我们已经讲解了如何使用Bundle、文件共享、Messenger以及AIDL来完成跨进程间通信，未阅读该节的读者，不妨">
+<meta property="og:image" content="http://img.blog.csdn.net/20160302195846702">
+<meta property="og:image" content="http://img.blog.csdn.net/20160305212303211">
+<meta property="og:image" content="http://img.blog.csdn.net/20160306215124047">
+<meta property="og:updated_time" content="2017-07-21T11:53:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IPC机制-Android中的IPC方式二-ContentProvider、Socket">
+<meta name="twitter:description" content="我们生活在这个孤独的蓝色星球，无论经历怎样的欢欣与苦痛，在这世界上你永远不是孤身一人，有爱、有梦、有朋友，还有这么美好的世界！
+
+本节继续讲解Android中的IPC方式，在上一节IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL当中我们已经讲解了如何使用Bundle、文件共享、Messenger以及AIDL来完成跨进程间通信，未阅读该节的读者，不妨">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20160302195846702">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zanelove.github.io/2015/08/30/IPC机制-Android中的IPC方式二-ContentProvider、Socket/"/>
+
+
+
+
+
+  <title> IPC机制-Android中的IPC方式二-ContentProvider、Socket | Zane'Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d73c1385ff615e566b07b11dac991e9c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Zane'Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">定目标，定执行</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://zanelove.github.io/2015/08/30/IPC机制-Android中的IPC方式二-ContentProvider、Socket/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Zane">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zane'Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zane'Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                IPC机制-Android中的IPC方式二-ContentProvider、Socket
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-08-30T20:03:50+08:00">
+                2015-08-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/08/30/IPC机制-Android中的IPC方式二-ContentProvider、Socket/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/30/IPC机制-Android中的IPC方式二-ContentProvider、Socket/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/08/30/IPC机制-Android中的IPC方式二-ContentProvider、Socket/" class="leancloud_visitors" data-flag-title="IPC机制-Android中的IPC方式二-ContentProvider、Socket">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>我们生活在这个孤独的蓝色星球，无论经历怎样的欢欣与苦痛，在这世界上你永远不是孤身一人，有爱、有梦、有朋友，还有这么美好的世界！</p>
+</blockquote>
+<p>本节继续讲解Android中的IPC方式，在上一节<a href="http://zanelove.github.io/2017/05/16/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%B8%80-Bundle%E3%80%81%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E3%80%81Messenger%E3%80%81AIDL/">IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL</a>当中我们已经讲解了如何使用Bundle、文件共享、Messenger以及AIDL来完成跨进程间通信，未阅读该节的读者，不妨进去瞧瞧。</p>
+<p>那么，接下来我将继续为大家讲解上节未完成的内容。</p>
+<a id="more"></a>
+<h2 id="使用ContentProvider"><a href="#使用ContentProvider" class="headerlink" title="使用ContentProvider"></a>使用ContentProvider</h2><p>ContentProvider是Android中提供的专门用于不同应用间进行数据共享的方式，从这一点来看，它天生就适合进程间通信。和Messenger一样，ContentProvider的底层实现同样也是Binder，由此可见，Binder在Android系统中是何等的重要。</p>
+<p>ContentProvider虽然使用起来很简单，但它的细节还是相当多，比如CRUD操作，防止SQL注入和权限控制等。在本节中，不对ContentProvider的使用细节以及工作机制进行详细分析，在这里只介绍采用ContentProvider进行跨进程通信的主要流程，至于使用细节和内部工作机制请阅读。</p>
+<p>系统预置了许多ContentProvider，比如通讯录信息，日程表信息等，要跨进程访问这些信息，只需要通过ContentProvider的query、update、insert和delete方法即可。接下来，我们实现一个自定义的ContentProvider，并演示如何在其他应用中获取ContentProvider中的数据从而实现进程间通信这一目的。</p>
+<p>首先，创建一个类继承自ContentProvider，同时实现其6个抽象方法：onCreate、query、update、insert、delete和getType。其中，onCreate代表ContentProvider的创建，在该方法中做一些初始化工作；getType用来返回一个Uri请求所对应的MIME类型（媒体类型），比如图片、视频等，如果我们的应用不关注这个选项，可以直接在这个方法中返回null或者 <em>/</em>；剩下的四个方法对应于CRUD操作。根据Binder的工作原理，这6个方法均运行在ContentProvider的进程中，除了onCreate有系统回调并运行在主线程里，其他5个方法均由外界回调并运行在Binder线程池中。</p>
+<p>ContentProvider主要以表格的形式来组织数据，并且可以包含多个表，对于每个表格来说，它们都具有行和列的层次性，行往往对应一条记录，而列对应一条记录中的一个字段，这点和数据很类似。除了表格的形式，<strong>ContentProvider还支持文件数据，比如图片、视频等</strong>。文件数据和表格数据的结构不同，因此处理这类数据时可以在ContentProvider中返回文件的句柄给外界从而让文件来访问ContentProvider中的文件信息。Android系统中所提供的MediaStore功能就是文件类型的ContentProvider。<strong>虽然ContentProvider的底层数据看起来很像一个SQLite数据库，但是ContentProvider对底层的数据存储方式没有任何要求，我们既可以使用SQLite数据库，也可以使用普通的文件，甚至可以采用内存中的一个对象来进行数据的存储，这一点在这里有介绍哦~</strong></p>
+<p>下面看一个最简单的示例：</p>
+<p>首先，创建一个类（BookProvider）继承自ContentProvider，同时实现其6个抽象方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">public class BookProvider extends ContentProvider&#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean onCreate() &#123;</div><div class="line">        Log.e(&quot;----&gt;&quot;, &quot;onCreate, current thread:&quot;+Thread.currentThread().getName());</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) &#123;</div><div class="line">        Log.e(&quot;----&gt;&quot;, &quot;query, current thread:&quot;+Thread.currentThread().getName());</div><div class="line"></div><div class="line">        return null;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public String getType(Uri uri) &#123;</div><div class="line"></div><div class="line">        return null;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public Uri insert(Uri uri, ContentValues values) &#123;</div><div class="line"></div><div class="line">        return null;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int delete(Uri uri, String selection, String[] selectionArgs) &#123;</div><div class="line"></div><div class="line">        return 0;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) &#123;</div><div class="line"></div><div class="line">        return 0;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>记得在清单文件中进行注册哦~因为ContentProvider也是四大组件之一。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;provider </div><div class="line">        android:name=&quot;.provider.BookProvider&quot;</div><div class="line">        android:authorities=&quot;com.zaenlove.book.provider&quot;</div><div class="line">        android:process=&quot;:provider&quot;</div><div class="line">        android:permission=&quot;com.zaenlove.PROVIDER&quot;</div><div class="line">        /&gt;</div></pre></td></tr></table></figure>
+<p>其中android:authorities是ContentProvider的唯一标识，通过这个属性外部应用就可以访问我们的BookProvider，因此，android:authorities必须是唯一的，这里建议读者在命名的时候加上包名前缀。为了演示进程间通信，我们让BookProvider运行在独立的进程中并给它添加了权限，这样外界应用如果想访问BookProvider，就必须声明“com.zaenlove.PROVIDER”这个权限。ContentProvider的权限可以细分为读权限和写权限，分别对应android:readPermission和android:writePermission属性，如果分别声明了读权限和写权限，那么外界应用也必须依次声明相应的权限才可以进行读/写操作，否则外界应用会异常终止。</p>
+<p>注册了ContentProvider以后，我们就可以在外部应用中访问它了，为了方便演示，这里仍然选择在同一个应用的其他进程中去访问这个BookProvider，至于在单独的应用中去访问这个BookProvider和同一个应用中访问的效果是一样的（注意要声明对应权限）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public class ProviderActivity extends Activity&#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line"></div><div class="line">        setContentView(R.layout.activity_provider);</div><div class="line"></div><div class="line">        Uri uri = Uri.parse(&quot;content://com.zaenlove.book.provider&quot;);</div><div class="line">        getContentResolver().query(uri, null, null, null, null);</div><div class="line">        getContentResolver().query(uri, null, null, null, null);</div><div class="line">        getContentResolver().query(uri, null, null, null, null);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在上面的代码中，我们通过ContentResolver对象的query方法去查询BookProvider中的数据，其中“content://com.zaenlove.book.provider”唯一标识了BookProvider，而这个标识正是我们前面为BookProvider的android:authorities属性所指定的值。</p>
+<p>运行程序，查看log：</p>
+<p><img src="http://img.blog.csdn.net/20160302195846702" alt=""></p>
+<p>从上面的log可以看出，BookProvider中的query方法被调用了三次，并且这三次调用不在同一个线程中。可以看出，它们运行在一个Binder线程中，前面提到update、insert和delete方法同样也运行在Binder线程中。另外，onCreate运行在main线程中，也就是UI线程，所以我们不能在onCreate中做耗时的操作。</p>
+<p>到这里，整个ContentProvider的流程我们已经跑通了。接下来，在上面的基础上，我们继续完善BookProvider，从而使其能够对外部应用提供数据。现在外部应用可以通过BookProvider来访问图书信息，为了更好地演示ContentProvider的使用，用户还可以通过BookProvider访问到用户信息。为了完成上述功能，我们需要一个数据库来管理图书和用户信息，这个数据库不难实现，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">public class DbOpenHelper extends SQLiteOpenHelper&#123;</div><div class="line"></div><div class="line">    private static final String DB_NAME = &quot;book_provider.db&quot;;</div><div class="line">    private static final String BOOK_TABLE_NAME = &quot;book&quot;;</div><div class="line">    private static final String USER_TABLE_NAME = &quot;user&quot;;</div><div class="line">    private static final int DB_VERSION = 1;</div><div class="line">    private static final String CREATE_BOOK_TABLE = </div><div class="line">            &quot;CREATE TABLE IF NOT EXISTS &quot;+BOOK_TABLE_NAME+&quot; (_id INTEGER PRIMARY KEY, name TEXT)&quot;;</div><div class="line">    private static final String CREATE_USER_TABLE = </div><div class="line">            &quot;CREATE TABLE IF NOT EXISTS &quot;+USER_TABLE_NAME+&quot; (_id INTEGER PRIMARY KEY, name TEXT, sex INT)&quot;;</div><div class="line"></div><div class="line">    public DbOpenHelper(Context context)&#123;</div><div class="line">        super(context, DB_NAME, null, DB_VERSION);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onCreate(SQLiteDatabase db) &#123;</div><div class="line">        db.execSQL(CREATE_BOOK_TABLE);</div><div class="line">        db.execSQL(CREATE_USER_TABLE);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上述代码是一个简单的数据库的实现，我们借助SQLiteOpenHelper来管理数据库的创建、升级和降级。下面通过BookProvider向外界提供上述数据库中的信息了。我们知道，ContentProvider通过Uri来区分外界要访问的数据集合，在本例中支持外界对BookProvider中的book表和user表进行访问，为了知道外界要访问的是哪个表，我们需要为它们定义单独的Uri和Uri_Code，并将Uri和对应的Uri_Code相关联，我们可以使用UriMatcher的addUri方法将Uri和Uri_Code关联到一起。这样，当外界请求访问BookProvider时，我们就可以根据请求的Uri来得到Uri_Code，有了Uri_Code我们就可以知道外界想要访问哪个表，然后就可以进行相应的数据操作了，具体代码如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public class BookProvider extends ContentProvider&#123;</div><div class="line"></div><div class="line">    public static final String AUTHORITY = &quot;com.zaenlove.book.provider&quot;;</div><div class="line">    public static final Uri BOOK_CONTENT_URI = Uri.parse(&quot;content://&quot;+AUTHORITY+&quot;/book&quot;);</div><div class="line">    public static final Uri USER_CONTENT_URI = Uri.parse(&quot;content://&quot;+AUTHORITY+&quot;/user&quot;);</div><div class="line">    public static final int BOOK_URI_CODE = 0;</div><div class="line">    public static final int USER_URI_CODE = 1;</div><div class="line">    private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);</div><div class="line"></div><div class="line">    static&#123;</div><div class="line">        sUriMatcher.addURI(AUTHORITY, &quot;book&quot;, BOOK_URI_CODE);</div><div class="line">        sUriMatcher.addURI(AUTHORITY, &quot;user&quot;, USER_URI_CODE);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>从上面代码可以看出，我们分别为book表和user表指定了Uri，分别为 “content://com.zaenlove.book.provider/book” 和 “content://com.zaenlove.book.provider/user”，这两个Uri所关联的Uri_Code分别为0和1。这个关联过程是通过下面的语句来完成的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sUriMatcher.addURI(AUTHORITY, &quot;book&quot;, BOOK_URI_CODE);</div><div class="line">sUriMatcher.addURI(AUTHORITY, &quot;user&quot;, USER_URI_CODE);</div></pre></td></tr></table></figure>
+<p>将Uri和Uri_Code管理之后，我们就可以通过如下方式来获取外界所要访问的数据源，根据Uri先取出Uri_Code，根据Uri_Code再得到数据表的名称，知道了外界要访问额表，接下来就可以响应外界的增删改查请求了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">private String getTableName(Uri uri)&#123;</div><div class="line">    String tableName = null;</div><div class="line">    switch(sUriMatcher.match(uri))&#123;</div><div class="line">    case BOOK_URI_CODE :</div><div class="line">        tableName = DbOpenHelper.BOOK_TABLE_NAME;</div><div class="line">        break;</div><div class="line">    case USER_URI_CODE :</div><div class="line">        tableName = DbOpenHelper.USER_TABLE_NAME;</div><div class="line">        break;</div><div class="line">    &#125;</div><div class="line">    return tableName;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接着，我们就可以实现query、update、insert、delete方法了。如下是query方法的实现，首先我们要从Uri中取出外界要访问的表的名称，然后根据外界传递的查询参数就可以进行数据库的查询操作了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) &#123;</div><div class="line">    Log.e(&quot;----&gt;&quot;, &quot;query, current thread:&quot;+Thread.currentThread().getName());</div><div class="line">    String table = getTableName(uri);</div><div class="line">    if(table == null) &#123;</div><div class="line">        throw new IllegalArgumentException(&quot;Unsupported URI: &quot;+Thread.currentThread().getName());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return mDb.query(table, projection, selection, selectionArgs, null, null, sortOrder, null);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>另外三个方法的实现思想和query是类似的，只有一点不同，那就是update、insert和delete方法会引起数据源的改变，这个时候我们需要通过ContentResolver的notifyChange方法来通知外界当前ContentProvider中的数据已经发生了改变。要观察一个ContentProvider中的数据改变情况，可以通过ContentResolver的registerContentObserver方法来注册观察者，通过unregisterContentObserver方法来解除观察者。对于这三个方法，这里不再详细解释了，下面是BookProvider的完整代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div></pre></td><td class="code"><pre><div class="line">public class BookProvider extends ContentProvider&#123;</div><div class="line"></div><div class="line">    public static final String AUTHORITY = &quot;com.zaenlove.book.provider&quot;;</div><div class="line">    public static final Uri BOOK_CONTENT_URI = Uri.parse(&quot;content://&quot;+AUTHORITY+&quot;/book&quot;);</div><div class="line">    public static final Uri USER_CONTENT_URI = Uri.parse(&quot;content://&quot;+AUTHORITY+&quot;/user&quot;);</div><div class="line">    public static final int BOOK_URI_CODE = 0;</div><div class="line">    public static final int USER_URI_CODE = 1;</div><div class="line">    private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);</div><div class="line"></div><div class="line">    static&#123;</div><div class="line">        sUriMatcher.addURI(AUTHORITY, &quot;book&quot;, BOOK_URI_CODE);</div><div class="line">        sUriMatcher.addURI(AUTHORITY, &quot;user&quot;, USER_URI_CODE);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private SQLiteDatabase mDb;</div><div class="line">    private Context mContext;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean onCreate() &#123;</div><div class="line">        Log.e(&quot;----&gt;&quot;, &quot;onCreate, current thread:&quot;+Thread.currentThread().getName());</div><div class="line"></div><div class="line">        mContext = getContext();</div><div class="line"></div><div class="line">        //ContentProvider 创建时，初始化数据库。注意：这里仅仅是为了演示，实际使用中不推荐在主线程中进行耗时的数据库操作</div><div class="line">        initProviderData();</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void initProviderData() &#123;</div><div class="line">        mDb = new DbOpenHelper(mContext).getWritableDatabase();</div><div class="line">        mDb.execSQL(&quot;delete from &quot;+DbOpenHelper.BOOK_TABLE_NAME);</div><div class="line">        mDb.execSQL(&quot;delete from &quot;+DbOpenHelper.USER_TABLE_NAME);</div><div class="line">        mDb.execSQL(&quot;insert into book values(3, &apos;Android&apos;);&quot;);</div><div class="line">        mDb.execSQL(&quot;insert into book values(4, &apos;Ios&apos;);&quot;);</div><div class="line">        mDb.execSQL(&quot;insert into book values(5, &apos;Html5&apos;);&quot;);</div><div class="line">        mDb.execSQL(&quot;insert into user values(1, &apos;jake&apos;, 1);&quot;);</div><div class="line">        mDb.execSQL(&quot;insert into user values(2, &apos;jasmine&apos;, 0);&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) &#123;</div><div class="line">        Log.e(&quot;----&gt;&quot;, &quot;query, current thread:&quot;+Thread.currentThread().getName());</div><div class="line">        String table = getTableName(uri);</div><div class="line">        if(table == null) &#123;</div><div class="line">            throw new IllegalArgumentException(&quot;Unsupported URI: &quot;+Thread.currentThread().getName());</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return mDb.query(table, projection, selection, selectionArgs, null, null, sortOrder, null);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public String getType(Uri uri) &#123;</div><div class="line">        return null;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public Uri insert(Uri uri, ContentValues values) &#123;</div><div class="line">        String table = getTableName(uri);</div><div class="line">        if(table == null) &#123;</div><div class="line">            throw new IllegalArgumentException(&quot;Unsupported URI: &quot;+Thread.currentThread().getName());</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        mDb.insert(table, null, values);</div><div class="line">        mContext.getContentResolver().notifyChange(uri, null);</div><div class="line">        return uri;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int delete(Uri uri, String selection, String[] selectionArgs) &#123;</div><div class="line">        String table = getTableName(uri);</div><div class="line">        if(table == null) &#123;</div><div class="line">            throw new IllegalArgumentException(&quot;Unsupported URI: &quot;+Thread.currentThread().getName());</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        int count = mDb.delete(table, selection, selectionArgs);</div><div class="line">        if(count &gt; 0) &#123;</div><div class="line">            mContext.getContentResolver().notifyChange(uri, null);</div><div class="line">        &#125;</div><div class="line">        return count;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) &#123;</div><div class="line">        String table = getTableName(uri);</div><div class="line">        if(table == null) &#123;</div><div class="line">            throw new IllegalArgumentException(&quot;Unsupported URI: &quot;+Thread.currentThread().getName());</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        int row = mDb.update(table, values, selection, selectionArgs);</div><div class="line">        if(row &gt; 0) &#123;</div><div class="line">            mContext.getContentResolver().notifyChange(uri, null);</div><div class="line">        &#125;</div><div class="line">        return row;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private String getTableName(Uri uri)&#123;</div><div class="line">        String tableName = null;</div><div class="line">        switch(sUriMatcher.match(uri))&#123;</div><div class="line">        case BOOK_URI_CODE :</div><div class="line">            tableName = DbOpenHelper.BOOK_TABLE_NAME;</div><div class="line">            break;</div><div class="line">        case USER_URI_CODE :</div><div class="line">            tableName = DbOpenHelper.USER_TABLE_NAME;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        return tableName;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>需要注意的是，query、update、insert、delete四大方法是存在多线程并发访问的，因此方法内部要做好线程同步。在本例中，由于采用的SQLite并且只有一个SQLiteDatabase的连接，所以可以正确应对多线程的情况。具体原因是SQLiteDatabase内部对数据库的操作是有同步处理的，但是如果通过多个SQLiteDatabase对象来操作数据库就无法保证线程同步，因为SQLiteDatabase对象之间无法进行线程同步。如果ContentProvider的底层数据集是一块内存的话，比如是List，在这种情况下同List的遍历、插入、删除操作就需要进行线程同步，否则就会引起并发错误，这点是尤其需要注意的。到这里BookProvider已经实现完了，接着我们在外部访问一下它。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">public class ProviderActivity extends Activity&#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line"></div><div class="line">        setContentView(R.layout.activity_provider);</div><div class="line"></div><div class="line">        /*Uri uri = Uri.parse(&quot;content://com.zaenlove.book.provider&quot;);</div><div class="line">        getContentResolver().query(uri, null, null, null, null);</div><div class="line">        getContentResolver().query(uri, null, null, null, null);</div><div class="line">        getContentResolver().query(uri, null, null, null, null);*/</div><div class="line"></div><div class="line">        Uri bookUri = Uri.parse(&quot;content://com.zaenlove.book.provider/book&quot;);</div><div class="line">        ContentValues values = new ContentValues();</div><div class="line">        values.put(&quot;_id&quot;, 6);</div><div class="line">        values.put(&quot;name&quot;, &quot;JavaScript&quot;);</div><div class="line">        getContentResolver().insert(bookUri, values);</div><div class="line">        Cursor bookCursor = getContentResolver().query(bookUri, new String[]&#123;&quot;_id&quot;,&quot;name&quot;&#125;, null, null, null);</div><div class="line">        while(bookCursor.moveToNext())&#123;</div><div class="line">            Book book = new Book();</div><div class="line">            book.bookId = bookCursor.getInt(0);</div><div class="line">            book.bookName = bookCursor.getString(1);</div><div class="line">            Log.e(&quot;---&gt;&quot;, &quot;query book: &quot;+book.toString());</div><div class="line">        &#125;</div><div class="line">        bookCursor.close();</div><div class="line"></div><div class="line">        Uri userUri = Uri.parse(&quot;content://com.zaenlove.book.provider/user&quot;);</div><div class="line">        Cursor userCoursor = getContentResolver().query(userUri, new String[]&#123;&quot;_id&quot;,&quot;name&quot;,&quot;sex&quot;&#125;, null, null, null);</div><div class="line">        while(userCoursor.moveToNext())&#123;</div><div class="line">            User user = new User();</div><div class="line">            user.userId = userCoursor.getInt(0);</div><div class="line">            user.userName = userCoursor.getString(1);</div><div class="line">            user.isMale = userCoursor.getInt(2) == 1;</div><div class="line">            Log.e(&quot;---&gt;&quot;, &quot;query user: &quot;+user.toString());</div><div class="line">        &#125;</div><div class="line">        userCoursor.close();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行程序，查看log：</p>
+<p><img src="http://img.blog.csdn.net/20160305212303211" alt=""></p>
+<p>由于ProviderActivity和BookProvider运行在两个不同的进程中，因此，这也构成了进程间的通信。ContentProvider除了支持对数据源的增删改查这四个操作，还支持自定义调用，这个过程是通过ContentProvider的Call方法和ContentResolver的Call方法来完成的。</p>
+<p>关于使用ContentProvider来进行IPC就介绍到这里，不过ContentProvider都在后续的Blog中还会进一步的讲解，主要包括细节问题和工作原理。敬请期待！</p>
+<h2 id="使用Socket"><a href="#使用Socket" class="headerlink" title="使用Socket"></a>使用Socket</h2><p>下面我们来讲解使用Socket来实现进程间的通信。<strong>Socekt也称为“套接字”，是网络通信中的概念，它分为流式套接字和用户数据报套接字两种，分别对应于网络的传输控制层中的TCP和UDP协议。TCP协议是面向连接的协议，提供稳定的双向通信功能，TCP连接的建立需要经过“三次握手”才能完成，为了提供稳定的数据传输功能，其本身提供了超时重传机制，因此具有很高的稳定性；而UDP是无连接的，提供不稳定的单向通信功能，当然UDP也可以实现双向通信功能。在性能上，UDP具有更好的效率，其缺点是不保证数据一定能够正确传输，尤其是在网络拥塞的情况下。</strong></p>
+<p>接下来，我们演示一个跨进程的聊天程序，两个进程可以通过Socket来实现信息的传输，Socket本身可以支持传输任意字节流，这里为了简单起见，仅仅传输文本信息。</p>
+<p>使用Socket来进行通信，有两点需要注意，首先需要声明权限：</p>
+<p><uses-permission android:name="android.permission.INTERNET"></uses-permission></p>
+<p><uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"><br>其次要注意不能在主线程中访问网络，因为这会导致我们的程序无法在Android4.0及其以上的设备中运行，会抛出这个异常：android.os.NetworkOnMainThreadException。而且进行网络操作很可能是耗时的，如果放在主线程中会影响程序的响应效率，从这方面来说也不应该在主线程中访问网络。</uses-permission></p>
+<p>下面就开始设计我们的聊天程序了，首先在远程Service建立一个TCP服务，然后在主界面中连接TCP服务，连接上了以后，就可以给服务端发消息。对于我们发送的每一条文本消息，服务端都会随机地回应我们一句话，为了更好地展示Socket的工作机制，在服务端我们做了处理，使其能够和多个客户端同时建立连接并相应。</p>
+<p>先看一下服务端的设计，当Service启动时，会在线程中建立TCP服务，这里监听的是8688端口，然后就可以等待客户端的连接请求。当有客户端连接时，就会生成一个新的Socket，通过每次新创建的Socket就可以分别和不同的客户端通信了。服务端每收到一次客户端的消息就会随机回复一句话给客户端。当客户端断开连接时，服务端这边也会相应的关闭对应Socket并结束通话线程，这点是如何做到的呢？方法有很多，这里是通过判断服务端输入流的返回值来确定的，当客户端断开连接后，服务端这边的输入流就会返回null，这个时候我们就知道客户端退出了。服务端的示例代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line">public class TCPServerService extends Service&#123;</div><div class="line"></div><div class="line">    private boolean mIsServiceDestoryed = false;</div><div class="line">    private String[] mDefinedMessages = new String[]&#123;</div><div class="line">            &quot;你好啊，哈哈&quot;,</div><div class="line">            &quot;请问你叫什么名字呀？&quot;,</div><div class="line">            &quot;今天北京天气不错啊，shy&quot;,</div><div class="line">            &quot;你知道吗？我可是可以和多个人同时聊天的哦&quot;,</div><div class="line">            &quot;给你讲个笑话吧：据说爱笑的人运气不会太差哦~&quot;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public IBinder onBind(Intent intent) &#123;</div><div class="line">        return null;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onCreate() &#123;</div><div class="line">        new Thread(new TcpServer()).start();</div><div class="line">        super.onCreate();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onDestroy() &#123;</div><div class="line">        mIsServiceDestoryed = true;</div><div class="line">        super.onDestroy();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private class TcpServer implements Runnable &#123;</div><div class="line"></div><div class="line">        @SuppressWarnings(&quot;resource&quot;)</div><div class="line">        @Override</div><div class="line">        public void run() &#123;</div><div class="line">            ServerSocket serverSocket = null;</div><div class="line">            try &#123;</div><div class="line">                //监听本地8688端口</div><div class="line">                serverSocket = new ServerSocket(8688);</div><div class="line">            &#125; catch (IOException e) &#123;</div><div class="line">                System.out.println(&quot;establish tcp server failed, post:8688&quot;);</div><div class="line">                e.printStackTrace();</div><div class="line">                return;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            while(!mIsServiceDestoryed) &#123;</div><div class="line">                try &#123;</div><div class="line">                    //接收客户端请求</div><div class="line">                    final Socket client = serverSocket.accept();</div><div class="line">                    System.out.println(&quot;accept&quot;);</div><div class="line">                    new Thread()&#123;</div><div class="line">                        public void run() &#123;</div><div class="line">                            try &#123;</div><div class="line">                                responseClient(client);</div><div class="line">                            &#125; catch (IOException e) &#123;</div><div class="line">                                e.printStackTrace();</div><div class="line">                            &#125;</div><div class="line">                        &#125;;</div><div class="line">                    &#125;.start();</div><div class="line">                &#125; catch (IOException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        protected void responseClient(Socket client) throws IOException &#123;</div><div class="line">            //用于接收客户端消息</div><div class="line">            BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));</div><div class="line">            //用于向客户端发送消息</div><div class="line">            PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(client.getOutputStream())),true);</div><div class="line">            out.println(&quot;欢迎来到聊天室&quot;);</div><div class="line">            while(!mIsServiceDestoryed) &#123;</div><div class="line">                String str = in.readLine();</div><div class="line">                System.out.println(&quot;msg from client :&quot;+str);</div><div class="line">                if(str == null) &#123;</div><div class="line">                    //客户端断开连接</div><div class="line">                    break;</div><div class="line">                &#125;</div><div class="line">                int i = new Random().nextInt(mDefinedMessages.length);</div><div class="line">                String msg = mDefinedMessages[i];</div><div class="line">                out.println(msg);</div><div class="line">                System.out.println(&quot;send: &quot;+msg);</div><div class="line">            &#125;</div><div class="line">            System.out.println(&quot;client quit.&quot;);</div><div class="line">            //关闭流</div><div class="line">            MyUtils.close(out);</div><div class="line">            MyUtils.close(in);</div><div class="line">            client.close();</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接着看一下客户端，客户端Activity启动时，会在onCreate中开启一个线程去连接服务端Socket，至于为什么用线程在前面已经做了介绍。为了确定能够连接成功，这里采用了超时重连的策略，每次连接失败后都会重新建立尝试建立连接。当然为了降低重试机制的开销，我们加入了休眠机制，即每次重试的时间间隔为1000毫秒。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Socket socket = null;</div><div class="line">while(socket == null) &#123;</div><div class="line">    try &#123;</div><div class="line">        socket = new Socket(&quot;localhost&quot;, 8688);</div><div class="line">        mClientSocket = socket;</div><div class="line">        mPrintWriter = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);</div><div class="line">        mHandler.sendEmptyMessage(MESSAGE_SOCKET_CONNEVTED);</div><div class="line">        System.out.println(&quot;connect server success.&quot;);</div><div class="line">    &#125; catch (UnknownHostException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125; catch (IOException e) &#123;</div><div class="line">        SystemClock.sleep(1000);</div><div class="line">        System.out.println(&quot;connect tcp server failed, retry...&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>服务端连接成功后，就可以和服务端进行通信了。下面的代码在线程中通过while循环不断地去读取服务端发送过来的消息，同时当Activity退出时，就退出循环并终止线程。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// 接收服务器端的消息</div><div class="line">BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));</div><div class="line">while (!TCPClientActivity.this.isFinishing()) &#123;</div><div class="line">    String msg = br.readLine();</div><div class="line">    System.out.println(&quot;receive :&quot; + msg);</div><div class="line">    if (msg != null) &#123;</div><div class="line">        String time = formatDateTime(System.currentTimeMillis());</div><div class="line">        final String showedMsg = &quot;server &quot; + time + &quot;:&quot; + msg+ &quot;\n&quot;;</div><div class="line">        mHandler.obtainMessage(MESSAGE_RECEIVE_NEW_MSG, showedMsg).sendToTarget();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">System.out.println(&quot;quit...&quot;);</div><div class="line">MyUtils.close(mPrintWriter);</div><div class="line">MyUtils.close(br);</div><div class="line">socket.close();</div></pre></td></tr></table></figure>
+<p>同时，当Activity退出时，还要关闭当前的Socket，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void onDestroy() &#123;</div><div class="line">    if(mClientSocket != null) &#123;</div><div class="line">        try &#123;</div><div class="line">            mClientSocket.shutdownInput();</div><div class="line">            mClientSocket.close();</div><div class="line">        &#125; catch (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    super.onDestroy();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接着是发送消息的过程，代码如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">String msg = mMessageEditText.getText().toString();</div><div class="line">if(!TextUtils.isEmpty(msg) &amp;&amp; mPrintWriter != null) &#123;</div><div class="line">    mPrintWriter.println(msg);</div><div class="line">    mMessageEditText.setText(&quot;&quot;);</div><div class="line">    String time = formatDateTime(System.currentTimeMillis());</div><div class="line">    String showedMsg = &quot;self &quot;+ time + &quot;:&quot;+msg+&quot;\n&quot;;</div><div class="line">    mMessageTextView.setText(mMessageTextView.getText()+showedMsg);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>客户端完整代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div></pre></td><td class="code"><pre><div class="line">public class TCPClientActivity extends Activity implements OnClickListener &#123;</div><div class="line"></div><div class="line">    private static final int MESSAGE_RECEIVE_NEW_MSG = 1;</div><div class="line">    private static final int MESSAGE_SOCKET_CONNEVTED = 2;</div><div class="line"></div><div class="line">    private TextView mMessageTextView;</div><div class="line">    private Button mSendButton;</div><div class="line">    private EditText mMessageEditText;</div><div class="line"></div><div class="line">    private Socket mClientSocket;</div><div class="line">    private PrintWriter mPrintWriter;</div><div class="line"></div><div class="line">    private Handler mHandler = new Handler()&#123;</div><div class="line">        @Override</div><div class="line">        public void handleMessage(Message msg) &#123;</div><div class="line">            super.handleMessage(msg);</div><div class="line">            switch(msg.what) &#123;</div><div class="line">            case MESSAGE_RECEIVE_NEW_MSG:</div><div class="line">                mMessageTextView.setText(mMessageTextView.getText()+(String)msg.obj);</div><div class="line">                break;</div><div class="line">            case MESSAGE_SOCKET_CONNEVTED:</div><div class="line">                mSendButton.setEnabled(true);</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_tcpclient);</div><div class="line"></div><div class="line">        mMessageTextView = (TextView) findViewById(R.id.msg_container);</div><div class="line">        mSendButton = (Button) findViewById(R.id.send);</div><div class="line">        mMessageEditText = (EditText) findViewById(R.id.msg);</div><div class="line">        mSendButton.setOnClickListener(this);</div><div class="line"></div><div class="line">        Intent service = new Intent(this,TCPServerService.class);</div><div class="line">        startService(service);</div><div class="line"></div><div class="line">        new Thread()&#123;</div><div class="line">            public void run() &#123;</div><div class="line">                connectTCPServer();</div><div class="line">            &#125;</div><div class="line">        &#125;.start();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    protected void connectTCPServer() &#123;</div><div class="line">        Socket socket = null;</div><div class="line">        while(socket == null) &#123;</div><div class="line">            try &#123;</div><div class="line">                socket = new Socket(&quot;localhost&quot;, 8688);</div><div class="line">                mClientSocket = socket;</div><div class="line">                mPrintWriter = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);</div><div class="line">                mHandler.sendEmptyMessage(MESSAGE_SOCKET_CONNEVTED);</div><div class="line">                System.out.println(&quot;connect server success.&quot;);</div><div class="line">            &#125; catch (UnknownHostException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125; catch (IOException e) &#123;</div><div class="line">                SystemClock.sleep(1000);</div><div class="line">                System.out.println(&quot;connect tcp server failed, retry...&quot;);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        try &#123;</div><div class="line">            // 接收服务器端的消息</div><div class="line">            BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));</div><div class="line">            while (!TCPClientActivity.this.isFinishing()) &#123;</div><div class="line">                String msg = br.readLine();</div><div class="line">                System.out.println(&quot;receive :&quot; + msg);</div><div class="line">                if (msg != null) &#123;</div><div class="line">                    String time = formatDateTime(System.currentTimeMillis());</div><div class="line">                    final String showedMsg = &quot;server &quot; + time + &quot;:&quot; + msg+ &quot;\n&quot;;</div><div class="line">                    mHandler.obtainMessage(MESSAGE_RECEIVE_NEW_MSG, showedMsg).sendToTarget();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            System.out.println(&quot;quit...&quot;);</div><div class="line">            MyUtils.close(mPrintWriter);</div><div class="line">            MyUtils.close(br);</div><div class="line">            socket.close();</div><div class="line">        &#125; catch (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onClick(View v) &#123;</div><div class="line">        if(v == mSendButton) &#123;</div><div class="line">            String msg = mMessageEditText.getText().toString();</div><div class="line">            if(!TextUtils.isEmpty(msg) &amp;&amp; mPrintWriter != null) &#123;</div><div class="line">                mPrintWriter.println(msg);</div><div class="line">                mMessageEditText.setText(&quot;&quot;);</div><div class="line">                String time = formatDateTime(System.currentTimeMillis());</div><div class="line">                String showedMsg = &quot;self &quot;+ time + &quot;:&quot;+msg+&quot;\n&quot;;</div><div class="line">                mMessageTextView.setText(mMessageTextView.getText()+showedMsg);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @SuppressLint(&quot;SimpleDateFormat&quot;)</div><div class="line">    private String formatDateTime(long time) &#123;</div><div class="line">        return new SimpleDateFormat(&quot;(HH:mm:ss)&quot;).format(new Date(time));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onDestroy() &#123;</div><div class="line">        if(mClientSocket != null) &#123;</div><div class="line">            try &#123;</div><div class="line">                mClientSocket.shutdownInput();</div><div class="line">                mClientSocket.close();</div><div class="line">            &#125; catch (IOException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        super.onDestroy();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上述就是通过Socket来进行进程间通信的实例，除了采用TCP套接字，还可以采用UDP套接字。另外，上面的例子仅仅是一个示例，实际上通过Socket不仅仅能实现进程间的通信，还可以实现设备间的通信，当然前提是这些设备之间的IP地址互相可见，这里就不再深究了。</p>
+<p>运行上述程序，查看效果：</p>
+<p><img src="http://img.blog.csdn.net/20160306215124047" alt=""></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat.jpeg" alt="Zane WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpeg" alt="Zane Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/16/IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL/" rel="next" title="IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL">
+                <i class="fa fa-chevron-left"></i> IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/09/18/IPC机制-Android中的IPC方式三-Binder连接池、选用合适的IPC方式/" rel="prev" title="IPC机制-Android中的IPC方式三-Binder连接池、选用合适的IPC方式">
+                IPC机制-Android中的IPC方式三-Binder连接池、选用合适的IPC方式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/08/30/IPC机制-Android中的IPC方式二-ContentProvider、Socket/"
+           data-title="IPC机制-Android中的IPC方式二-ContentProvider、Socket" data-url="http://zanelove.github.io/2015/08/30/IPC机制-Android中的IPC方式二-ContentProvider、Socket/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Zane" />
+          <p class="site-author-name" itemprop="name">Zane</p>
+          <p class="site-description motion-element" itemprop="description">记录当下，谱写未来</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ZaneLove" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              推荐阅读
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://go.kieran.top/" title="Kieran(树莓派)" target="_blank">Kieran(树莓派)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://baixin.io/#blog" title="潘柏信(IOS)" target="_blank">潘柏信(IOS)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://makaiqian.com/" title="小麻雀(前端)" target="_blank">小麻雀(前端)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://leancloud.cn/dashboard/login.html#/signin" title="LeanCloud(统计)" target="_blank">LeanCloud(统计)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://duoshuo.com/" title="多说(评论)" target="_blank">多说(评论)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" title="NexT(主题文档)" target="_blank">NexT(主题文档)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/iissnan/hexo-theme-next" title="NexT(博客主题)" target="_blank">NexT(博客主题)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://iissnan.com/progit/" title="Pro Git" target="_blank">Pro Git</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用ContentProvider"><span class="nav-number">1.</span> <span class="nav-text">使用ContentProvider</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Socket"><span class="nav-number">2.</span> <span class="nav-text">使用Socket</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zane</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zanelove-comment"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("jcj4FPhcIXVIEyoWyMqFgMDh-gzGzoHsz", "mkB0NxY7JUGJYx6Phuls50VA");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

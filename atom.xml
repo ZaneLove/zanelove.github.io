@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zanelove.github.io/"/>
-  <updated>2017-07-20T14:12:35.000Z</updated>
+  <updated>2017-07-21T11:58:51.000Z</updated>
   <id>http://zanelove.github.io/</id>
   
   <author>
@@ -17,10 +17,10 @@
   
   <entry>
     <title>AndroidStudio下对资源进行分包</title>
-    <link href="http://zanelove.github.io/2015/11/15/AndroidStudio%E4%B8%8B%E5%AF%B9%E8%B5%84%E6%BA%90%E8%BF%9B%E8%A1%8C%E5%88%86%E5%8C%85/"/>
-    <id>http://zanelove.github.io/2015/11/15/AndroidStudio下对资源进行分包/</id>
-    <published>2015-11-15T14:08:09.000Z</published>
-    <updated>2017-07-20T14:12:35.000Z</updated>
+    <link href="http://zanelove.github.io/2016/09/15/AndroidStudio%E4%B8%8B%E5%AF%B9%E8%B5%84%E6%BA%90%E8%BF%9B%E8%A1%8C%E5%88%86%E5%8C%85/"/>
+    <id>http://zanelove.github.io/2016/09/15/AndroidStudio下对资源进行分包/</id>
+    <published>2016-09-15T14:08:09.000Z</published>
+    <updated>2017-07-21T11:58:51.000Z</updated>
     
     <summary type="html">
     
@@ -40,10 +40,10 @@
   
   <entry>
     <title>Android开发之版本统一规范</title>
-    <link href="http://zanelove.github.io/2015/10/28/Android%E5%BC%80%E5%8F%91%E4%B9%8B%E7%89%88%E6%9C%AC%E7%BB%9F%E4%B8%80%E8%A7%84%E8%8C%83/"/>
-    <id>http://zanelove.github.io/2015/10/28/Android开发之版本统一规范/</id>
-    <published>2015-10-28T14:01:57.000Z</published>
-    <updated>2017-07-20T14:07:23.000Z</updated>
+    <link href="http://zanelove.github.io/2016/08/28/Android%E5%BC%80%E5%8F%91%E4%B9%8B%E7%89%88%E6%9C%AC%E7%BB%9F%E4%B8%80%E8%A7%84%E8%8C%83/"/>
+    <id>http://zanelove.github.io/2016/08/28/Android开发之版本统一规范/</id>
+    <published>2016-08-28T14:01:57.000Z</published>
+    <updated>2017-07-21T11:58:27.000Z</updated>
     
     <summary type="html">
     
@@ -63,10 +63,10 @@
   
   <entry>
     <title>Android Butterknife 8.4.0 使用方法总结</title>
-    <link href="http://zanelove.github.io/2015/10/10/Android-Butterknife-8-4-0-%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/"/>
-    <id>http://zanelove.github.io/2015/10/10/Android-Butterknife-8-4-0-使用方法总结/</id>
-    <published>2015-10-10T13:50:54.000Z</published>
-    <updated>2017-07-20T13:56:24.000Z</updated>
+    <link href="http://zanelove.github.io/2016/07/10/Android-Butterknife-8-4-0-%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/"/>
+    <id>http://zanelove.github.io/2016/07/10/Android-Butterknife-8-4-0-使用方法总结/</id>
+    <published>2016-07-10T13:50:54.000Z</published>
+    <updated>2017-07-21T11:58:06.000Z</updated>
     
     <summary type="html">
     
@@ -90,10 +90,10 @@
   
   <entry>
     <title>JNI和NDK编程-JNI调用Java方法的流程</title>
-    <link href="http://zanelove.github.io/2015/09/26/JNI%E5%92%8CNDK%E7%BC%96%E7%A8%8B-JNI%E8%B0%83%E7%94%A8Java%E6%96%B9%E6%B3%95%E7%9A%84%E6%B5%81%E7%A8%8B/"/>
-    <id>http://zanelove.github.io/2015/09/26/JNI和NDK编程-JNI调用Java方法的流程/</id>
-    <published>2015-09-26T12:10:36.000Z</published>
-    <updated>2017-07-05T12:43:59.000Z</updated>
+    <link href="http://zanelove.github.io/2016/06/26/JNI%E5%92%8CNDK%E7%BC%96%E7%A8%8B-JNI%E8%B0%83%E7%94%A8Java%E6%96%B9%E6%B3%95%E7%9A%84%E6%B5%81%E7%A8%8B/"/>
+    <id>http://zanelove.github.io/2016/06/26/JNI和NDK编程-JNI调用Java方法的流程/</id>
+    <published>2016-06-26T12:10:36.000Z</published>
+    <updated>2017-07-21T11:57:43.000Z</updated>
     
     <summary type="html">
     
@@ -115,10 +115,10 @@
   
   <entry>
     <title>JNI和NDK编程-JNI的数据类型和类型签名</title>
-    <link href="http://zanelove.github.io/2015/09/05/JNI%E5%92%8CNDK%E7%BC%96%E7%A8%8B-JNI%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E7%B1%BB%E5%9E%8B%E7%AD%BE%E5%90%8D/"/>
-    <id>http://zanelove.github.io/2015/09/05/JNI和NDK编程-JNI的数据类型和类型签名/</id>
-    <published>2015-09-05T12:19:23.000Z</published>
-    <updated>2017-07-05T12:48:48.000Z</updated>
+    <link href="http://zanelove.github.io/2016/05/15/JNI%E5%92%8CNDK%E7%BC%96%E7%A8%8B-JNI%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E7%B1%BB%E5%9E%8B%E7%AD%BE%E5%90%8D/"/>
+    <id>http://zanelove.github.io/2016/05/15/JNI和NDK编程-JNI的数据类型和类型签名/</id>
+    <published>2016-05-15T12:19:23.000Z</published>
+    <updated>2017-07-21T11:57:18.000Z</updated>
     
     <summary type="html">
     
@@ -139,10 +139,10 @@
   
   <entry>
     <title>JNI和NDK编程-NDK的开发流程</title>
-    <link href="http://zanelove.github.io/2015/08/29/JNI%E5%92%8CNDK%E7%BC%96%E7%A8%8B-NDK%E7%9A%84%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/"/>
-    <id>http://zanelove.github.io/2015/08/29/JNI和NDK编程-NDK的开发流程/</id>
-    <published>2015-08-29T06:01:42.000Z</published>
-    <updated>2017-06-29T07:13:22.000Z</updated>
+    <link href="http://zanelove.github.io/2016/04/29/JNI%E5%92%8CNDK%E7%BC%96%E7%A8%8B-NDK%E7%9A%84%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/"/>
+    <id>http://zanelove.github.io/2016/04/29/JNI和NDK编程-NDK的开发流程/</id>
+    <published>2016-04-29T06:01:42.000Z</published>
+    <updated>2017-07-21T11:56:48.000Z</updated>
     
     <summary type="html">
     
@@ -164,10 +164,10 @@
   
   <entry>
     <title>JNI和NDK编程-JNI的开发流程</title>
-    <link href="http://zanelove.github.io/2015/08/19/JNI%E5%92%8CNDK%E7%BC%96%E7%A8%8B-JNI%E7%9A%84%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/"/>
-    <id>http://zanelove.github.io/2015/08/19/JNI和NDK编程-JNI的开发流程/</id>
-    <published>2015-08-19T06:01:33.000Z</published>
-    <updated>2017-06-29T06:26:33.000Z</updated>
+    <link href="http://zanelove.github.io/2016/03/19/JNI%E5%92%8CNDK%E7%BC%96%E7%A8%8B-JNI%E7%9A%84%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/"/>
+    <id>http://zanelove.github.io/2016/03/19/JNI和NDK编程-JNI的开发流程/</id>
+    <published>2016-03-19T06:01:33.000Z</published>
+    <updated>2017-07-21T11:56:18.000Z</updated>
     
     <summary type="html">
     
@@ -188,10 +188,10 @@
   
   <entry>
     <title>View的事件体系View的滑动冲突</title>
-    <link href="http://zanelove.github.io/2015/07/28/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E6%BB%91%E5%8A%A8%E5%86%B2%E7%AA%81/"/>
-    <id>http://zanelove.github.io/2015/07/28/View的事件体系-View的滑动冲突/</id>
-    <published>2015-07-28T14:05:17.000Z</published>
-    <updated>2017-06-14T14:08:42.000Z</updated>
+    <link href="http://zanelove.github.io/2016/02/18/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E6%BB%91%E5%8A%A8%E5%86%B2%E7%AA%81/"/>
+    <id>http://zanelove.github.io/2016/02/18/View的事件体系-View的滑动冲突/</id>
+    <published>2016-02-18T14:05:17.000Z</published>
+    <updated>2017-07-21T11:55:48.000Z</updated>
     
     <summary type="html">
     
@@ -217,10 +217,10 @@
   
   <entry>
     <title>View的事件体系-View的事件分发机制</title>
-    <link href="http://zanelove.github.io/2015/07/13/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6/"/>
-    <id>http://zanelove.github.io/2015/07/13/View的事件体系-View的事件分发机制/</id>
-    <published>2015-07-13T11:57:10.000Z</published>
-    <updated>2017-06-13T12:19:56.000Z</updated>
+    <link href="http://zanelove.github.io/2016/01/13/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6/"/>
+    <id>http://zanelove.github.io/2016/01/13/View的事件体系-View的事件分发机制/</id>
+    <published>2016-01-13T11:57:10.000Z</published>
+    <updated>2017-07-21T11:55:25.000Z</updated>
     
     <summary type="html">
     
@@ -241,10 +241,10 @@
   
   <entry>
     <title>View的事件体系-弹性滑动</title>
-    <link href="http://zanelove.github.io/2015/06/27/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-%E5%BC%B9%E6%80%A7%E6%BB%91%E5%8A%A8/"/>
-    <id>http://zanelove.github.io/2015/06/27/View的事件体系-弹性滑动/</id>
-    <published>2015-06-27T11:59:38.000Z</published>
-    <updated>2017-06-13T12:18:10.000Z</updated>
+    <link href="http://zanelove.github.io/2015/12/27/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-%E5%BC%B9%E6%80%A7%E6%BB%91%E5%8A%A8/"/>
+    <id>http://zanelove.github.io/2015/12/27/View的事件体系-弹性滑动/</id>
+    <published>2015-12-27T11:59:38.000Z</published>
+    <updated>2017-07-21T11:54:57.000Z</updated>
     
     <summary type="html">
     
@@ -264,10 +264,10 @@
   
   <entry>
     <title>View的事件体系-View的滑动</title>
-    <link href="http://zanelove.github.io/2015/06/10/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E6%BB%91%E5%8A%A8/"/>
-    <id>http://zanelove.github.io/2015/06/10/View的事件体系-View的滑动/</id>
-    <published>2015-06-10T14:00:54.000Z</published>
-    <updated>2017-06-13T12:17:55.000Z</updated>
+    <link href="http://zanelove.github.io/2015/11/10/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E6%BB%91%E5%8A%A8/"/>
+    <id>http://zanelove.github.io/2015/11/10/View的事件体系-View的滑动/</id>
+    <published>2015-11-10T14:00:54.000Z</published>
+    <updated>2017-07-21T11:54:34.000Z</updated>
     
     <summary type="html">
     
@@ -287,10 +287,10 @@
   
   <entry>
     <title>View的事件体系-View的基础知识</title>
-    <link href="http://zanelove.github.io/2015/05/24/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    <id>http://zanelove.github.io/2015/05/24/View的事件体系-View的基础知识/</id>
-    <published>2015-05-24T11:58:45.000Z</published>
-    <updated>2017-06-13T12:17:38.000Z</updated>
+    <link href="http://zanelove.github.io/2015/10/24/View%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB-View%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <id>http://zanelove.github.io/2015/10/24/View的事件体系-View的基础知识/</id>
+    <published>2015-10-24T11:58:45.000Z</published>
+    <updated>2017-07-21T11:54:18.000Z</updated>
     
     <summary type="html">
     
@@ -310,10 +310,10 @@
   
   <entry>
     <title>IPC机制-Android中的IPC方式三-Binder连接池、选用合适的IPC方式</title>
-    <link href="http://zanelove.github.io/2015/05/08/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%B8%89-Binder%E8%BF%9E%E6%8E%A5%E6%B1%A0%E3%80%81%E9%80%89%E7%94%A8%E5%90%88%E9%80%82%E7%9A%84IPC%E6%96%B9%E5%BC%8F/"/>
-    <id>http://zanelove.github.io/2015/05/08/IPC机制-Android中的IPC方式三-Binder连接池、选用合适的IPC方式/</id>
-    <published>2015-05-08T12:00:59.000Z</published>
-    <updated>2017-06-13T12:17:17.000Z</updated>
+    <link href="http://zanelove.github.io/2015/09/18/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%B8%89-Binder%E8%BF%9E%E6%8E%A5%E6%B1%A0%E3%80%81%E9%80%89%E7%94%A8%E5%90%88%E9%80%82%E7%9A%84IPC%E6%96%B9%E5%BC%8F/"/>
+    <id>http://zanelove.github.io/2015/09/18/IPC机制-Android中的IPC方式三-Binder连接池、选用合适的IPC方式/</id>
+    <published>2015-09-18T12:00:59.000Z</published>
+    <updated>2017-07-21T11:53:53.000Z</updated>
     
     <summary type="html">
     
@@ -333,10 +333,10 @@
   
   <entry>
     <title>IPC机制-Android中的IPC方式二-ContentProvider、Socket</title>
-    <link href="http://zanelove.github.io/2015/04/30/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%BA%8C-ContentProvider%E3%80%81Socket/"/>
-    <id>http://zanelove.github.io/2015/04/30/IPC机制-Android中的IPC方式二-ContentProvider、Socket/</id>
-    <published>2015-04-30T12:03:50.000Z</published>
-    <updated>2017-06-13T12:16:53.000Z</updated>
+    <link href="http://zanelove.github.io/2015/08/30/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%BA%8C-ContentProvider%E3%80%81Socket/"/>
+    <id>http://zanelove.github.io/2015/08/30/IPC机制-Android中的IPC方式二-ContentProvider、Socket/</id>
+    <published>2015-08-30T12:03:50.000Z</published>
+    <updated>2017-07-21T11:53:31.000Z</updated>
     
     <summary type="html">
     
@@ -357,10 +357,10 @@
   
   <entry>
     <title>IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL</title>
-    <link href="http://zanelove.github.io/2015/04/16/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%B8%80-Bundle%E3%80%81%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E3%80%81Messenger%E3%80%81AIDL/"/>
-    <id>http://zanelove.github.io/2015/04/16/IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL/</id>
-    <published>2015-04-16T14:21:13.000Z</published>
-    <updated>2017-06-13T12:16:33.000Z</updated>
+    <link href="http://zanelove.github.io/2015/07/16/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84IPC%E6%96%B9%E5%BC%8F%E4%B8%80-Bundle%E3%80%81%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E3%80%81Messenger%E3%80%81AIDL/"/>
+    <id>http://zanelove.github.io/2015/07/16/IPC机制-Android中的IPC方式一-Bundle、文件共享、Messenger、AIDL/</id>
+    <published>2015-07-16T14:21:13.000Z</published>
+    <updated>2017-07-21T11:53:17.000Z</updated>
     
     <summary type="html">
     
@@ -380,10 +380,10 @@
   
   <entry>
     <title>IPC机制-IPC基础概念介绍</title>
-    <link href="http://zanelove.github.io/2015/03/29/IPC%E6%9C%BA%E5%88%B6-IPC%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D/"/>
-    <id>http://zanelove.github.io/2015/03/29/IPC机制-IPC基础概念介绍/</id>
-    <published>2015-03-29T14:15:46.000Z</published>
-    <updated>2017-06-13T12:16:02.000Z</updated>
+    <link href="http://zanelove.github.io/2015/06/29/IPC%E6%9C%BA%E5%88%B6-IPC%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D/"/>
+    <id>http://zanelove.github.io/2015/06/29/IPC机制-IPC基础概念介绍/</id>
+    <published>2015-06-29T14:15:46.000Z</published>
+    <updated>2017-07-21T11:52:53.000Z</updated>
     
     <summary type="html">
     
@@ -403,10 +403,10 @@
   
   <entry>
     <title>IPC机制-Android中的多进程模式</title>
-    <link href="http://zanelove.github.io/2015/03/14/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84%E5%A4%9A%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F/"/>
-    <id>http://zanelove.github.io/2015/03/14/IPC机制-Android中的多进程模式/</id>
-    <published>2015-03-14T14:19:00.000Z</published>
-    <updated>2017-06-13T12:15:35.000Z</updated>
+    <link href="http://zanelove.github.io/2015/05/24/IPC%E6%9C%BA%E5%88%B6-Android%E4%B8%AD%E7%9A%84%E5%A4%9A%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://zanelove.github.io/2015/05/24/IPC机制-Android中的多进程模式/</id>
+    <published>2015-05-24T14:19:00.000Z</published>
+    <updated>2017-07-21T11:52:28.000Z</updated>
     
     <summary type="html">
     
@@ -427,10 +427,10 @@
   
   <entry>
     <title>IPC机制-Android IPC简介</title>
-    <link href="http://zanelove.github.io/2015/02/28/IPC%E6%9C%BA%E5%88%B6-Android-IPC%E7%AE%80%E4%BB%8B/"/>
-    <id>http://zanelove.github.io/2015/02/28/IPC机制-Android-IPC简介/</id>
-    <published>2015-02-28T14:23:51.000Z</published>
-    <updated>2017-06-13T12:15:10.000Z</updated>
+    <link href="http://zanelove.github.io/2015/04/18/IPC%E6%9C%BA%E5%88%B6-Android-IPC%E7%AE%80%E4%BB%8B/"/>
+    <id>http://zanelove.github.io/2015/04/18/IPC机制-Android-IPC简介/</id>
+    <published>2015-04-18T14:23:51.000Z</published>
+    <updated>2017-07-21T11:52:02.000Z</updated>
     
     <summary type="html">
     
@@ -450,10 +450,10 @@
   
   <entry>
     <title>IntentFilter的匹配规则</title>
-    <link href="http://zanelove.github.io/2015/02/13/IntentFilter%E7%9A%84%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99/"/>
-    <id>http://zanelove.github.io/2015/02/13/IntentFilter的匹配规则/</id>
-    <published>2015-02-13T01:18:01.000Z</published>
-    <updated>2017-06-13T12:14:44.000Z</updated>
+    <link href="http://zanelove.github.io/2015/03/13/IntentFilter%E7%9A%84%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99/"/>
+    <id>http://zanelove.github.io/2015/03/13/IntentFilter的匹配规则/</id>
+    <published>2015-03-13T01:18:01.000Z</published>
+    <updated>2017-07-21T11:50:41.000Z</updated>
     
     <summary type="html">
     
@@ -473,10 +473,10 @@
   
   <entry>
     <title>Activity的启动模式</title>
-    <link href="http://zanelove.github.io/2015/01/27/Activity%E7%9A%84%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/"/>
-    <id>http://zanelove.github.io/2015/01/27/Activity的启动模式/</id>
-    <published>2015-01-27T14:12:58.000Z</published>
-    <updated>2017-06-13T12:14:12.000Z</updated>
+    <link href="http://zanelove.github.io/2015/02/17/Activity%E7%9A%84%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://zanelove.github.io/2015/02/17/Activity的启动模式/</id>
+    <published>2015-02-17T14:12:58.000Z</published>
+    <updated>2017-07-21T11:49:38.000Z</updated>
     
     <summary type="html">
     

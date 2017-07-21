@@ -1,0 +1,1013 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Zane'Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="一屋不扫，何以扫天下
+
+滑动冲突是如何产生的呢？其实在界面中只要外两层同时可以滑动，这个时候就会产生滑动冲突。如果解决滑动冲突呢？这既是一件困难的事又是一件简单的事，说困难是因为许多开发者面对滑动冲突都会显得束手无策，说简单是因为滑动冲突的解决有固定的套路，只要知道了这个固定套路问题就好解决了。通过本节的学习，滑动冲突将不再是个问题。
+常见的滑动冲突场景常见的滑动冲突场景可以简单分为如下三种：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="View的事件体系View的滑动冲突">
+<meta property="og:url" content="http://zanelove.github.io/2016/02/18/View的事件体系-View的滑动冲突/index.html">
+<meta property="og:site_name" content="Zane'Blog">
+<meta property="og:description" content="一屋不扫，何以扫天下
+
+滑动冲突是如何产生的呢？其实在界面中只要外两层同时可以滑动，这个时候就会产生滑动冲突。如果解决滑动冲突呢？这既是一件困难的事又是一件简单的事，说困难是因为许多开发者面对滑动冲突都会显得束手无策，说简单是因为滑动冲突的解决有固定的套路，只要知道了这个固定套路问题就好解决了。通过本节的学习，滑动冲突将不再是个问题。
+常见的滑动冲突场景常见的滑动冲突场景可以简单分为如下三种：">
+<meta property="og:image" content="http://img.blog.csdn.net/20170613101503104?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170613150507019?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-07-21T11:55:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="View的事件体系View的滑动冲突">
+<meta name="twitter:description" content="一屋不扫，何以扫天下
+
+滑动冲突是如何产生的呢？其实在界面中只要外两层同时可以滑动，这个时候就会产生滑动冲突。如果解决滑动冲突呢？这既是一件困难的事又是一件简单的事，说困难是因为许多开发者面对滑动冲突都会显得束手无策，说简单是因为滑动冲突的解决有固定的套路，只要知道了这个固定套路问题就好解决了。通过本节的学习，滑动冲突将不再是个问题。
+常见的滑动冲突场景常见的滑动冲突场景可以简单分为如下三种：">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170613101503104?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zanelove.github.io/2016/02/18/View的事件体系-View的滑动冲突/"/>
+
+
+
+
+
+  <title> View的事件体系View的滑动冲突 | Zane'Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d73c1385ff615e566b07b11dac991e9c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Zane'Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">定目标，定执行</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://zanelove.github.io/2016/02/18/View的事件体系-View的滑动冲突/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Zane">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zane'Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zane'Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                View的事件体系View的滑动冲突
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-18T22:05:17+08:00">
+                2016-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/02/18/View的事件体系-View的滑动冲突/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/18/View的事件体系-View的滑动冲突/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/02/18/View的事件体系-View的滑动冲突/" class="leancloud_visitors" data-flag-title="View的事件体系View的滑动冲突">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>一屋不扫，何以扫天下</p>
+</blockquote>
+<p>滑动冲突是如何产生的呢？其实在界面中只要外两层同时可以滑动，这个时候就会产生滑动冲突。如果解决滑动冲突呢？这既是一件困难的事又是一件简单的事，说困难是因为许多开发者面对滑动冲突都会显得束手无策，说简单是因为滑动冲突的解决有固定的套路，只要知道了这个固定套路问题就好解决了。通过本节的学习，滑动冲突将不再是个问题。</p>
+<h2 id="常见的滑动冲突场景"><a href="#常见的滑动冲突场景" class="headerlink" title="常见的滑动冲突场景"></a>常见的滑动冲突场景</h2><p>常见的滑动冲突场景可以简单分为如下三种：</p>
+<ul>
+<li>场景1：外部滑动方向和内部滑动方向不一致；</li>
+<li>场景2：外部滑动方向和内部滑动方向一致；</li>
+<li>场景3：上面两种情况的嵌套。</li>
+</ul>
+<a id="more"></a>
+<p><img src="http://img.blog.csdn.net/20170613101503104?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>先说场景1，主要是将ViewPager和Fragment配合使用所组成的页面滑动效果，主流应用几乎都会使用这个效果。在这种效果中，可以通过左右滑动来切换页面，而每个页面内部往往又是一个ListView。本来这种情况下是有滑动冲突的，但是ViewPager内部处理了这种滑动冲突，因此采用ViewPager时我们无须关注这个问题，如果我们采用的不是ViewPager而是ScrollView等，那就必须手动处理滑动冲突了，否则造成的后果就是内外两层只能有一层能够滑动，这是因为两者之间的滑动事件有冲突。除了这种典型情况外，还存在其他情况，比如外部上下滑动、内部左右滑动等，但是它们属于同一类滑动冲突。</p>
+<p>再说说场景2，这种情况就稍微复杂一些，当内外两层都在同一个方向可以滑动的时候，显然存在逻辑问题。因为当手指开始滑动的时候，系统无法知道用户到底是想让哪一层滑动，所以当手指滑动的时候就会出现问题，要么只有一层能滑动，要么就是内部两层都滑动得很卡顿。在实际的开发中，这种场景只要是指内外两层同时能上下滑动或者内外两层同时能左右滑动。</p>
+<p>最后说说场景3，场景3是场景1和场景2两种情况的嵌套，因此场景3的滑动冲突看起来就更加复杂了。比如在许多应用中会有这么一个效果：内层有一个场景1中的滑动效果，然后外层又有一个场景2中的滑动效果。具体说就是，外部有一个SlideMenu效果，然后内部有一个ViewPager，ViewPager的每一个页面中又是一个ListView。虽然说场景3的滑动冲突看起来更复杂，但是它是几个单一的滑动冲突的叠加，因此只需要分别处理内层和中层、中层和外层之间的滑动冲突即可，而具体的处理方法其实是和场景1、场景2相同的。</p>
+<p>从本质上来说，这三种滑动冲突场景的复杂度其实是相同的，因为它们的区别仅仅是滑动策略的不同，至于解决滑动冲突的方法，它们几个是通用的。</p>
+<h2 id="滑动冲突的处理规则"><a href="#滑动冲突的处理规则" class="headerlink" title="滑动冲突的处理规则"></a>滑动冲突的处理规则</h2><p>一般来说，不管滑动冲突多么复杂，它都有既定的规则，根据这些规则我们就可以选择合适的方法去处理。</p>
+<p>对于场景1，它的处理规则是：当用户左右滑动时，需要让外部的View拦截点击事件，当用户上下滑动时，需要让内部View拦截点击事件。这个时候我们就可以根据它们的特征来解决滑动冲突，具体来说是：根据滑动是水平滑动还是竖直滑动来判断到底由谁来拦截事件，如下图所示，根据滑动过程中两个点之间的坐标就可以得出到底是水平滑动还是竖直滑动。如何根据坐标来得到滑动的方向呢？这个很简单，有很多可以参考，比如可以依据滑动路径和水平方向所形成的夹角，也可以依据水平方向和竖直方向上的距离差来判断，某些特殊时候还可以依据水平和竖直方向的速度差来做判断。这里我们可以通过水平和竖直方向的距离差来判断，比如竖直方向滑动的距离大就判断为竖直滑动，否则判断为水平滑动。根据这个规则就可以进行下一步的解决方法制定了。</p>
+<p>对于场景2来说，比较特殊，它无法根据滑动的角度、距离差以及速度差来做判断，但是这个时候一般都能在业务上找到突破点，比如业务上有规定：当处于某种状态时需要外部View响应用户的滑动，而处于另外一种状态时则需要内部View来响应View的滑动，根据这种业务上的需求我们也能得出相应的处理规则，有了处理规则同样可以进行下一步处理。这种场景通过文字描述可能比较抽象，在下面会通过实际的例子来演示这种情况的解决方案，那时就容易理解了，这里先有这个概念即可。</p>
+<p><img src="http://img.blog.csdn.net/20170613150507019?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>对于场景3来说，它的滑动规则就更复杂了，和场景2一样，它也无法直接根据滑动的角度、距离差以及速度差来做判断，同样还是只能从业务上找到突破点，具体方法和场景2一样，都是从业务的需求上得出相应的处理规则，在下面会通过实际的例子来演示这种情况的解决方案。</p>
+<h2 id="滑动冲突的解决方式"><a href="#滑动冲突的解决方式" class="headerlink" title="滑动冲突的解决方式"></a>滑动冲突的解决方式</h2><p>上面说过，针对场景1中的滑动，我们可以根据滑动的距离差来进行判断，这个距离差就是所谓的滑动规则。如果用ViewPager去实现场景1中的效果，我们不需要手动处理滑动冲突，因为ViewPager已经帮我们做了，但是这里为了更好地演示滑动冲突的解决思想，没有采用ViewPager。其实在滑动过程中得到滑动的角度这个是相当简单的，但是到底要怎么做才能将点击事件交给合适的View去处理呢？这时就要用到上一篇所讲述的事件分发机制了。针对滑动冲突，这里给出两种解决冲突的方式：外部拦截法和内部拦截法。</p>
+<h3 id="外部拦截法"><a href="#外部拦截法" class="headerlink" title="外部拦截法"></a>外部拦截法</h3><p>所谓外部拦截法是指点击事件都先经过父容器的拦截处理，如果父容器需要此事件就拦截，如果不需要此事件就不拦截，这样就可以解决滑动冲突的问题，这种方法比较符合点击事件的分发机制。外部拦截法需要重写父容器的onInterceptTouchEvent方法，在内部做相应的拦截即可，这种方法的伪代码如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">public boolean onInterceptTouchEvent(MotionEvent event) &#123;</div><div class="line">	boolean intercepted = false;</div><div class="line">	int x = (int) event.getX();</div><div class="line">	int y = (int) event.getY();</div><div class="line">	switch (event.getAction()) &#123;</div><div class="line">	case MotionEvent.ACTION_DOWN: &#123;</div><div class="line">		intercepted = false;</div><div class="line">		break;</div><div class="line">	&#125;</div><div class="line">	case MotionEvent.ACTION_MOVE: &#123;</div><div class="line">		if(父容器需要当前点击事件) &#123;</div><div class="line">			intercepted = true;</div><div class="line">		&#125; else &#123;</div><div class="line">			intercepted = false;</div><div class="line">		&#125;</div><div class="line">		break;</div><div class="line">	&#125;</div><div class="line">	case MotionEvent.ACTION_UP: &#123;</div><div class="line">		intercepted = false;</div><div class="line">		break;</div><div class="line">	&#125;</div><div class="line">	default:</div><div class="line">		break;</div><div class="line">	&#125;</div><div class="line">	mLastXIntercept = x;</div><div class="line">	mLastYIntercept = y;</div><div class="line">	return intercepted;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上述代码是外部拦截法的典型逻辑，针对不同的滑动冲突，只需要修改父容器需要当前点击事件这个条件即可，其他均不需做修改并且也不能修改。这里对上述代码再描述一下，在onInterceptTouchEvent方法中，首先是ACTION_DOWN这个事件，父容器必须返回false，即不拦截ACTION_DOWN事件，这是因为一旦父容器拦截了ACTION_DOWN，那么后续的ACTION_MOVE和ACTION_UP事件都会直接交由父容器处理，这个时候事件没法再传递给子元素了；其次是ACTION_MOVE事件，这个事件可以根据需要来决定是否拦截，如果父容器需要拦截就返回true，否则返回false；最后是ACTION_UP事件，这里必须要返回false，因为ACTION_UP事件本身没有太多意义。</p>
+<p>考虑一种情况，假设事件交由子元素处理，如果父容器在ACTION_UP时返回了true，就会导致子元素无法接收到ACTION_UP事件，这个时候子元素中的onClick事件就无法触发，但是父容器比较特殊，一旦它开始拦截任何一个事件，那么后续的事件都会交给它来处理，而ACTION_UP作为最后一个事件也必定可以传递给父容器，即便父容器的onInterceptTouchEvent方法在ACTION_UP时返回了false。</p>
+<h3 id="内部拦截法"><a href="#内部拦截法" class="headerlink" title="内部拦截法"></a>内部拦截法</h3><p>内部拦截法是指父容器不拦截任何事件，所有的事件都传递给子元素，如果子元素需要此事件就直接消耗掉，否则就交由父容器进行处理，这种方法和Android中的事件分发机制不一致，需要配合requestDisallowInterceptTouchEvent方法才能正常工作，使用起来较外部拦截法稍显复杂。它的伪代码如下，我们需要重写子元素的dispatchTouchEvent方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">public boolean dispatchTouchEvent(MotionEvent event) &#123;</div><div class="line">	int x = (int) event.getX();</div><div class="line">	int y = (int) event.getY();</div><div class="line">	</div><div class="line">	switch (event.getAction()) &#123;</div><div class="line">	case MotionEvent.ACTION_DOWN: &#123;</div><div class="line">		parent.requestDisallowInterceptTouchEvent(true);</div><div class="line">		break;</div><div class="line">	&#125;</div><div class="line">	case MotionEvent.ACTION_MOVE: &#123;</div><div class="line">		int deltaX = x - mLastX;</div><div class="line">		int deltaY = y - mLastY;</div><div class="line">		if(父容器需要此类点击事件) &#123;</div><div class="line">			parent.requestDisallowInterceptTouchEvent(false);</div><div class="line">		&#125;</div><div class="line">		break;</div><div class="line"> 	&#125;</div><div class="line">	case MotionEvent.ACTION_UP: &#123;</div><div class="line">		break;</div><div class="line">	&#125;</div><div class="line">	default:</div><div class="line">		break;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	mLastX = x;</div><div class="line">	mLastY = y;</div><div class="line">	return super.dispatchTouchEvent(event);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上述代码是内部拦截法的典型代码，当面对不同的滑动策略时只需要修改里面的条件即可，其他不需要做改动而且也不能有改动。除了子元素需要做处理以外，父元素也要默认拦截除了ACTION_DOWN以外的其他事件，这样当子元素调用parent.requestDisallowInterceptTouchEvent(false)方法时，父元素才能继续拦截所需的事件。</p>
+<p>为什么父容器不能拦截ACTION_DOWN事件呢？那是因为ACTION_DOWN事件并不受FLAG_DISALLOW_INTERCEPT这个标记位的控制，所以一旦父容器拦截ACTION_DOWN事件，那么所有的事件都无法传递到子元素中去，这样内部拦截就无法起作用了。父元素所做的修改如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public boolean onInterceptTouchEvent(MotionEvent event) &#123;</div><div class="line">	int action = event.getAction();</div><div class="line">	if(action == MotionEvent.ACTION_DOWN) &#123;</div><div class="line">		return false;</div><div class="line">	&#125; else &#123;</div><div class="line">		return true;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>下面通过一个实例来分别介绍这两种方法。我们来实现一个类似于ViewPager中嵌套ListView的效果，为了制造滑动冲突，我们写一个类似于ViewPager的控件即可，名字就叫HorizontalScrollViewEx，这个控件的具体实现思想会在以后进行详细介绍，这里只讲述滑动冲突的部分。</p>
+<p>为了实现ViewPager的效果，我们定义了一个类似于水平的LinearLayout的东西，只不过它可以水平滑动，初始化时我们在它的内部添加若干个ListView，这样一来，由于它内部的ListView可以竖直滑动。而它本身又可以水平滑动，因此一个典型的滑动冲突场景就出现了，并且这种冲突属于类型1的冲突。根据滑动策略，我们可以选择水平和竖直的滑动距离差来解决滑动冲突。</p>
+<p>首先来看一下Activity中的初始化代码，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">public class TestActivity extends Activity&#123;</div><div class="line">	private static final String TAG = &quot;TestActivity&quot;;</div><div class="line">	private HorizontalScrollVeiwEx mListContainer;</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">		super.onCreate(savedInstanceState);</div><div class="line">		</div><div class="line">		setContentView(R.layout.test_activity);</div><div class="line">		Log.d(TAG, &quot;onCreate&quot;);</div><div class="line">		initView();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	private void initView() &#123;</div><div class="line">		LayoutInflater inflater = getLayoutInflater();</div><div class="line">		mListContainer = (HorizontalScrollVeiwEx) findViewById(R.id.container);</div><div class="line">		final int screenWidth = MyUtils.getScreenMetrics(this).widthPixels;</div><div class="line">		final int screenHeight = MyUtils.getScreenMetrics(this).heightPixels;</div><div class="line">		for(int i = 0; i &lt; 3; i++) &#123;</div><div class="line">			ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.content_layout, mListContainer, false);</div><div class="line">			layout.getLayoutParams().width = screenWidth;</div><div class="line">			TextView textView = (TextView) layout.findViewById(R.id.title);</div><div class="line">			textView.setText(&quot;page &quot; + (i + 1));</div><div class="line">			layout.setBackgroundColor(Color.rgb(255/(i+1), 255/(i+1), 0));</div><div class="line">			createList(layout);</div><div class="line">			mListContainer.addView(layout);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	private void createList(ViewGroup layout) &#123;</div><div class="line">		ListView listView = (ListView) layout.findViewById(R.id.list);</div><div class="line">		ArrayList&lt;String&gt; datas = new ArrayList&lt;String&gt;();</div><div class="line">		for(int i = 0; i &lt; 50; i++) &#123;</div><div class="line">			datas.add(&quot;name &quot; + i);</div><div class="line">		&#125;</div><div class="line">		ArrayAdapter&lt;String&gt; adapter = new ArrayAdapter&lt;String&gt;(this, R.layout.content_list_item, R.id.name, datas);</div><div class="line">		listView.setAdapter(adapter);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上述初始化代码很简单，就是创建了3个ListView并且把ListView加入到我们自定义的HorizontalScrollViewEx中，这里HorizontalScrollViewEx是父容器，而ListView则是子元素。</p>
+<p>首先采用外部拦截法来解决这个问题，按照前面的分析，我们只需要修改父容器需要拦截事件的条件即可。对于本例来说，父容器的拦截条件就是滑动过程中水平距离差比竖直距离差大，在这种情况下，父容器就拦截当前点击事件，根据这一条件进行相应修改，修改后的HorizontalScrollViewEx的onInterceptTouchEvent方法如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public boolean onInterceptTouchEvent(MotionEvent ev) &#123;</div><div class="line">	boolean intercepted = false;</div><div class="line">	int x = (int) ev.getX();</div><div class="line">	int y = (int) ev.getY();</div><div class="line">	</div><div class="line">	switch(ev.getAction()) &#123;</div><div class="line">	case MotionEvent.ACTION_DOWN: &#123;</div><div class="line">		intercepted = false;</div><div class="line">		if(!mScroller.isFinished()) &#123;</div><div class="line">			mScroller.abortAnimation();</div><div class="line">			intercepted = true;</div><div class="line">		&#125;</div><div class="line">		break;</div><div class="line">	&#125;</div><div class="line">	case MotionEvent.ACTION_MOVE: &#123;</div><div class="line">		int deltaX = x - mLastXIntercept;</div><div class="line">		int deltaY = y - mLastYIntercept;</div><div class="line">		if(Math.abs(deltaX) &gt; Math.abs(deltaY)) &#123;</div><div class="line">			intercepted = true;</div><div class="line">		&#125;else &#123;</div><div class="line">			intercepted = false;</div><div class="line">		&#125;</div><div class="line">		break;</div><div class="line">	&#125;</div><div class="line">	case MotionEvent.ACTION_UP: &#123;</div><div class="line">		intercepted = false;</div><div class="line">		break;</div><div class="line">	&#125;</div><div class="line">	default: </div><div class="line">		break;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	Log.d(TAG, &quot;intercepted=&quot; + intercepted);</div><div class="line">	mLastXIntercept = x;</div><div class="line">	mLastYIntercept = y;</div><div class="line">	</div><div class="line">	return intercepted;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>从上面的代码来看，它和外部拦截法的伪代码的差别很小，只是把父容器的拦截条件换成了具体的逻辑。在滑动过程中，当水平方向的距离大时就判断为水平滑动，为了能够水平滑动所以让父容器拦截事件：而竖直距离大时父容器就不拦截事件，于是事件就传递给了ListView，所以ListView也能上下滑动，如此这般滑动冲突就解决了。至于mScroller.abortAnimation()这一句话主要是为了优化滑动体验而加入的。</p>
+<p>考虑一种情况，如果此时用户正在水平滑动，但是在水平滑动停止之前如果用户再迅速进行竖直滑动，就会导致界面在水平方向无法滑动到终点从而处于一种中间状态。为了避免这种不好的体验，当水平方向正在滑动时，下一个序列的点击事件仍然交给父容器处理，这样水平方向就不会停留在中间状态了。</p>
+<p>下面是HorizontalScrollViewEx的具体实现，只展示了和滑动冲突相关的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div></pre></td><td class="code"><pre><div class="line">public class HorizontalScrollViewEx extends ViewGroup &#123;</div><div class="line">    private static final String TAG = &quot;HorizontalScrollViewEx&quot;;</div><div class="line"></div><div class="line">    private int mChildrenSize;</div><div class="line">    private int mChildWidth;</div><div class="line">    private int mChildIndex;</div><div class="line"></div><div class="line">    // 分别记录上次滑动的坐标</div><div class="line">    private int mLastX = 0;</div><div class="line">    private int mLastY = 0;</div><div class="line">    // 分别记录上次滑动的坐标(onInterceptTouchEvent)</div><div class="line">    private int mLastXIntercept = 0;</div><div class="line">    private int mLastYIntercept = 0;</div><div class="line"></div><div class="line">    private Scroller mScroller;</div><div class="line">    private VelocityTracker mVelocityTracker;</div><div class="line"></div><div class="line">	//构造方法，调用init()</div><div class="line">    ...</div><div class="line"></div><div class="line">    private void init() &#123;</div><div class="line">        if (mScroller == null) &#123;</div><div class="line">            mScroller = new Scroller(getContext());</div><div class="line">            mVelocityTracker = VelocityTracker.obtain();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean onInterceptTouchEvent(MotionEvent event) &#123;</div><div class="line">        boolean intercepted = false;</div><div class="line">        int x = (int) event.getX();</div><div class="line">        int y = (int) event.getY();</div><div class="line"></div><div class="line">        switch (event.getAction()) &#123;</div><div class="line">        case MotionEvent.ACTION_DOWN: &#123;</div><div class="line">            intercepted = false;</div><div class="line">            if (!mScroller.isFinished()) &#123;</div><div class="line">                mScroller.abortAnimation();</div><div class="line">                intercepted = true;</div><div class="line">            &#125;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        case MotionEvent.ACTION_MOVE: &#123;</div><div class="line">            int deltaX = x - mLastXIntercept;</div><div class="line">            int deltaY = y - mLastYIntercept;</div><div class="line">            if (Math.abs(deltaX) &gt; Math.abs(deltaY)) &#123;</div><div class="line">                intercepted = true;</div><div class="line">            &#125; else &#123;</div><div class="line">                intercepted = false;</div><div class="line">            &#125;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        case MotionEvent.ACTION_UP: &#123;</div><div class="line">            intercepted = false;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        default:</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        Log.d(TAG, &quot;intercepted=&quot; + intercepted);</div><div class="line">        mLastX = x;</div><div class="line">        mLastY = y;</div><div class="line">        mLastXIntercept = x;</div><div class="line">        mLastYIntercept = y;</div><div class="line"></div><div class="line">        return intercepted;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean onTouchEvent(MotionEvent event) &#123;</div><div class="line">        mVelocityTracker.addMovement(event);</div><div class="line">        int x = (int) event.getX();</div><div class="line">        int y = (int) event.getY();</div><div class="line">        switch (event.getAction()) &#123;</div><div class="line">        case MotionEvent.ACTION_DOWN: &#123;</div><div class="line">            if (!mScroller.isFinished()) &#123;</div><div class="line">                mScroller.abortAnimation();</div><div class="line">            &#125;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        case MotionEvent.ACTION_MOVE: &#123;</div><div class="line">            int deltaX = x - mLastX;</div><div class="line">            int deltaY = y - mLastY;</div><div class="line">            scrollBy(-deltaX, 0);</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        case MotionEvent.ACTION_UP: &#123;</div><div class="line">            int scrollX = getScrollX();</div><div class="line">            mVelocityTracker.computeCurrentVelocity(1000);</div><div class="line">            float xVelocity = mVelocityTracker.getXVelocity();</div><div class="line">            if (Math.abs(xVelocity) &gt;= 50) &#123;</div><div class="line">                mChildIndex = xVelocity &gt; 0 ? mChildIndex - 1 : mChildIndex + 1;</div><div class="line">            &#125; else &#123;</div><div class="line">                mChildIndex = (scrollX + mChildWidth / 2) / mChildWidth;</div><div class="line">            &#125;</div><div class="line">            mChildIndex = Math.max(0, Math.min(mChildIndex, mChildrenSize - 1));</div><div class="line">            int dx = mChildIndex * mChildWidth - scrollX;</div><div class="line">            smoothScrollBy(dx, 0);</div><div class="line">            mVelocityTracker.clear();</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        default:</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        mLastX = x;</div><div class="line">        mLastY = y;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">	private void smoothScrollBy(int dx, int dy) &#123;</div><div class="line">        mScroller.startScroll(getScrollX(), 0, dx, 0, 500);</div><div class="line">        invalidate();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void computeScroll() &#123;</div><div class="line">        if (mScroller.computeScrollOffset()) &#123;</div><div class="line">            scrollTo(mScroller.getCurrX(), mScroller.getCurrY());</div><div class="line">            postInvalidate();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果采用内部拦截法也是可以的，按照前面对内部拦截法的分析，我们只需要修改ListView的dispatchTouchEvent方法中的父容器的拦截逻辑，同时让父容器拦截ACTION_MOVE和ACTION_UP事件即可。为了重写ListView的dispatchTouchEvent方法，我们必须自定义一个ListView，称为ListViewEx，然后对内部拦截法的模版代码进行修改，根据需要，ListViewEx的实现如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">public class ListViewEx extends ListView &#123;</div><div class="line">    private static final String TAG = &quot;ListViewEx&quot;;</div><div class="line"></div><div class="line">    private HorizontalScrollViewEx2 mHorizontalScrollViewEx2;</div><div class="line"></div><div class="line">    // 分别记录上次滑动的坐标</div><div class="line">    private int mLastX = 0;</div><div class="line">    private int mLastY = 0;</div><div class="line"></div><div class="line">	//构造方法</div><div class="line">    ...</div><div class="line"></div><div class="line">    public void setHorizontalScrollViewEx2(</div><div class="line">            HorizontalScrollViewEx2 horizontalScrollViewEx2) &#123;</div><div class="line">        mHorizontalScrollViewEx2 = horizontalScrollViewEx2;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean dispatchTouchEvent(MotionEvent event) &#123;</div><div class="line">        int x = (int) event.getX();</div><div class="line">        int y = (int) event.getY();</div><div class="line"></div><div class="line">        switch (event.getAction()) &#123;</div><div class="line">        case MotionEvent.ACTION_DOWN: &#123;</div><div class="line">            mHorizontalScrollViewEx2.requestDisallowInterceptTouchEvent(true);</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        case MotionEvent.ACTION_MOVE: &#123;</div><div class="line">            int deltaX = x - mLastX;</div><div class="line">            int deltaY = y - mLastY;</div><div class="line">            Log.d(TAG, &quot;dx:&quot; + deltaX + &quot; dy:&quot; + deltaY);</div><div class="line">            if (Math.abs(deltaX) &gt; Math.abs(deltaY)) &#123;</div><div class="line">                mHorizontalScrollViewEx2.requestDisallowInterceptTouchEvent(false);</div><div class="line">            &#125;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        case MotionEvent.ACTION_UP: &#123;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        default:</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        mLastX = x;</div><div class="line">        mLastY = y;</div><div class="line">        return super.dispatchTouchEvent(event);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>除了上面对ListView所做的修改，我们还需要修改HorizontalScrollViewEx的onInterceptTouchEvent方法，修改后的类暂且叫做HorizontalScrollViewEx2，其onInterceptTouchEvent方法如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public boolean onInterceptTouchEvent(MotionEvent event) &#123;</div><div class="line">    int x = (int) event.getX();</div><div class="line">    int y = (int) event.getY();</div><div class="line">    int action = event.getAction();</div><div class="line">    if (action == MotionEvent.ACTION_DOWN) &#123;</div><div class="line">        mLastX = x;</div><div class="line">        mLastY = y;</div><div class="line">        if (!mScroller.isFinished()) &#123;</div><div class="line">            mScroller.abortAnimation();</div><div class="line">            return true;</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125; else &#123;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面的代码就是内部拦截法的示例，其中mScroll.adbortAnimation()这一句不是必须的，在当前这种情形下主要是为了优化滑动体验。从实现上来看，内部拦截法的操作要稍微复杂一些，因此推荐采用外部拦截法来解决常见的滑动冲突。</p>
+<p>下面通过一个实际的例子来分析场景2，首先我们提供一个可以上下滑动的父容器，这里就叫StickyLayout，它看起来就像是可以上下滑动的竖直的LinearLayout，然后在它的内部分别放一个Header和一个ListView，这样内外两层都能上下滑动，于是就形成了场景2中的滑动冲突了。当然这个StickyLayout是有滑动规则的：当Header显示时或者ListView滑动到顶部时，由StickyLayout拦截事件；当Header隐藏时，这要分情况了，如果ListView已经滑动到顶部并且当前手势是向下滑动的话，这个时候还是StickyLayout拦截事件，其他情况则由ListView拦截事件。这种滑动规则看起来有点复杂，为了解决它们之间的滑动冲突，我们还是需要重写父容器StickyLayout的onInterceptTouchEvent方法，至于ListView则不用做任何修改，我们来看一下StickyLayout的具体实现，滑动冲突相关的主要代码如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div></pre></td><td class="code"><pre><div class="line">public class StickyLayout extends LinearLayout&#123;</div><div class="line"></div><div class="line">	private static final String TAG = &quot;StickyLayout&quot;;</div><div class="line">	private int mTouchSlop;</div><div class="line">	//分别记录上次滑动的坐标</div><div class="line">	private int mLastX = 0;</div><div class="line">	private int mLastY = 0;</div><div class="line">	//分别记录上次滑动的坐标(onInterceptTouchEvent)</div><div class="line">	private int mLastXIntercept = 0;</div><div class="line">	private int mLastYIntercept = 0;</div><div class="line">	</div><div class="line">	//构造方法</div><div class="line">	...</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	public boolean onInterceptTouchEvent(MotionEvent event) &#123;</div><div class="line">		int intercepted = 0;</div><div class="line">		int x = (int) event.getX();</div><div class="line">		int y = (int) event.getY();</div><div class="line">		</div><div class="line">		switch(event.getAction()) &#123;</div><div class="line">		case MotionEvent.ACTION_DOWN: &#123;</div><div class="line">			mLastXIntercept = x;</div><div class="line">			mLastYIntercept = y;</div><div class="line">			mLastX = x;</div><div class="line">			mLastY = y;</div><div class="line">			intercepted = 0;</div><div class="line">			break;</div><div class="line">		&#125;</div><div class="line">		case MotionEvent.ACTION_MOVE: &#123;</div><div class="line">			int deltaX = x - mLastXIntercept;</div><div class="line">			int deltaY = y - mLastYIntercept;</div><div class="line">			if(mDisallowInterceptTouchOnHeader &amp;&amp; y &lt;= getHeaderHeight()) &#123;</div><div class="line">				intercepted = 0;</div><div class="line">			&#125;else if(Math.abs(deltaY) &lt;= Math.abs(deltaX)) &#123;</div><div class="line">				intercepted = 0;</div><div class="line">			&#125;else if(mStatus == STATUS_EXPANDED &amp;&amp; deltaY &lt;= -mTouchSlop) &#123;</div><div class="line">				intercepted = 1;</div><div class="line">			&#125;else if(mGiveUpTouchEventListener != null) &#123;</div><div class="line">				if(mGiveUpTouchEventListener.giveUpTouchEvent(event) &amp;&amp; deltaY &gt;= mTouchSlop) &#123;</div><div class="line">					intercepted = 1;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			break;</div><div class="line">		&#125;</div><div class="line">		case MotionEvent.ACTION_UP: &#123;</div><div class="line">			intercepted = 0;</div><div class="line">			mLastXIntercept = mLastYIntercept = 0;</div><div class="line">			break;</div><div class="line">		&#125;</div><div class="line">		default: </div><div class="line">			break;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		if(DEBUG) &#123;</div><div class="line">			Log.d(TAG, &quot;intercepted=&quot; + intercepted);</div><div class="line">		&#125;</div><div class="line">		return intercepted != 0 &amp;&amp; mIsSticky;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	public boolean onTouchEvent(MotionEvent event) &#123;</div><div class="line">		if(!mIsSticky) &#123;</div><div class="line">			return true;</div><div class="line">		&#125;</div><div class="line">		int x = (int) event.getX();</div><div class="line">		int y = (int) event.getY();</div><div class="line">		switch(event.getAction()) &#123;</div><div class="line">		case MotionEvent.ACTION_DOWN: &#123;</div><div class="line">			break;</div><div class="line">		&#125;</div><div class="line">		case MotionEvent.ACTION_MOVE: &#123;</div><div class="line">			int deltaX = x - mLastX;</div><div class="line">			int deltaY = y - mLastY;</div><div class="line">			mHeaderHeight += deltaY;</div><div class="line">			setHeaderHeight(mHeaderHeight);</div><div class="line">			break;</div><div class="line">		&#125;</div><div class="line">		case MotionEvent.ACTION_UP: &#123;</div><div class="line">			//这里做了一个判断，当松开手的时候，会自动向两边滑动，具体想那边滑，要看当前所处的位置</div><div class="line">			int destHeight = 0;</div><div class="line">			if(mHeaderHeight &lt;= mOriginalHeaderHeight * 0.5) &#123;</div><div class="line">				destHeight = 0;</div><div class="line">				mStatus = STATUS_COLLAPSED;</div><div class="line">			&#125;else &#123;</div><div class="line">				destHeight = mOriginalHeaderHeight;</div><div class="line">				mStatus = STATUS_EXPANDED;</div><div class="line">			&#125;</div><div class="line">			//慢慢滑向终点</div><div class="line">			this.smoothSetHeaderHeight(mHeaderHeight, destHeight, 500);</div><div class="line">			break;</div><div class="line">		&#125;</div><div class="line">		default:</div><div class="line">			break;</div><div class="line">		&#125;</div><div class="line">		mLastX = x;</div><div class="line">		mLastY = y;</div><div class="line">		return true;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>从上面的代码来看，这个StickyLayout的实现有点复杂，下面我们主要看它的onInterceptTouchEvent方法中对ACTION_MOVE的处理，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">case MotionEvent.ACTION_MOVE: &#123;</div><div class="line">	int deltaX = x - mLastXIntercept;</div><div class="line">	int deltaY = y - mLastYIntercept;</div><div class="line">	if(mDisallowInterceptTouchOnHeader &amp;&amp; y &lt;= getHeaderHeight()) &#123;</div><div class="line">		intercepted = 0;</div><div class="line">	&#125;else if(Math.abs(deltaY) &lt;= Math.abs(deltaX)) &#123;</div><div class="line">		intercepted = 0;</div><div class="line">	&#125;else if(mStatus == STATUS_EXPANDED &amp;&amp; deltaY &lt;= -mTouchSlop) &#123;</div><div class="line">		intercepted = 1;</div><div class="line">	&#125;else if(mGiveUpTouchEventListener != null) &#123;</div><div class="line">		if(mGiveUpTouchEventListener.giveUpTouchEvent(event) &amp;&amp; deltaY &gt;= mTouchSlop) &#123;</div><div class="line">			intercepted = 1;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	break;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们来分析上面这段代码的逻辑，这里的父容器是StickyLayout，子元素是ListView。首先，当事件落在Header上面时父容器不会拦截事件；接着，如果竖直距离差小于水平距离差，那么父容器也不会拦截事件；然后，当Header是展开状态并且向上滑动时父容器拦截事件。另外一种情况，当ListView滑动到顶部了并且向下滑动时，父容器也会拦截事件，经过这些层层判断就可以达到我们想要的效果了。另外，giveUpTouchEvent是一个接口方法， 由外部实现，在本例中主要是用来判断ListView是否滑动到顶部，它的具体实现如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public boolean giveUpTouchEvent(MotionEvent event) &#123;</div><div class="line">	if(expandableListView.getFirstVisiblePosition() == 0) &#123;</div><div class="line">		View view = expandableListView.getChildAt(0);</div><div class="line">		if(view != null &amp;&amp; view.getTop() &gt;= 0) &#123;</div><div class="line">			return true;</div><div class="line">		&#125;	</div><div class="line">	&#125;</div><div class="line">	return false;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面这个例子比较复杂，需要读者多多体会其中的思想。到这里滑动冲突的解决方法就介绍完毕了，至于场景3中的滑动冲突，利用本节所给出的通用的方法是可以轻松解决的，可以自己练练手哦~</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat.jpeg" alt="Zane WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpeg" alt="Zane Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/13/View的事件体系-View的事件分发机制/" rel="next" title="View的事件体系-View的事件分发机制">
+                <i class="fa fa-chevron-left"></i> View的事件体系-View的事件分发机制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/19/JNI和NDK编程-JNI的开发流程/" rel="prev" title="JNI和NDK编程-JNI的开发流程">
+                JNI和NDK编程-JNI的开发流程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/02/18/View的事件体系-View的滑动冲突/"
+           data-title="View的事件体系View的滑动冲突" data-url="http://zanelove.github.io/2016/02/18/View的事件体系-View的滑动冲突/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Zane" />
+          <p class="site-author-name" itemprop="name">Zane</p>
+          <p class="site-description motion-element" itemprop="description">记录当下，谱写未来</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ZaneLove" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              推荐阅读
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://go.kieran.top/" title="Kieran(树莓派)" target="_blank">Kieran(树莓派)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://baixin.io/#blog" title="潘柏信(IOS)" target="_blank">潘柏信(IOS)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://makaiqian.com/" title="小麻雀(前端)" target="_blank">小麻雀(前端)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://leancloud.cn/dashboard/login.html#/signin" title="LeanCloud(统计)" target="_blank">LeanCloud(统计)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://duoshuo.com/" title="多说(评论)" target="_blank">多说(评论)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" title="NexT(主题文档)" target="_blank">NexT(主题文档)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/iissnan/hexo-theme-next" title="NexT(博客主题)" target="_blank">NexT(博客主题)</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://iissnan.com/progit/" title="Pro Git" target="_blank">Pro Git</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的滑动冲突场景"><span class="nav-number">1.</span> <span class="nav-text">常见的滑动冲突场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#滑动冲突的处理规则"><span class="nav-number">2.</span> <span class="nav-text">滑动冲突的处理规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#滑动冲突的解决方式"><span class="nav-number">3.</span> <span class="nav-text">滑动冲突的解决方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#外部拦截法"><span class="nav-number">3.1.</span> <span class="nav-text">外部拦截法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内部拦截法"><span class="nav-number">3.2.</span> <span class="nav-text">内部拦截法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zane</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zanelove-comment"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("jcj4FPhcIXVIEyoWyMqFgMDh-gzGzoHsz", "mkB0NxY7JUGJYx6Phuls50VA");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
