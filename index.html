@@ -423,27 +423,17 @@
 
       
         
-          
-            <blockquote>
+          <blockquote>
 <p>人笨没问题，但别懒</p>
 </blockquote>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>使用keytool之前，打开cmd，输入keytool，如果提示：’keytool’ 不是内部或外部命令,也不是可运行的程序，那么，请确保是否<a href="http://jingyan.baidu.com/article/c85b7a6414f2ee003bac95d5.html" target="_blank" rel="external">正确配置了java环境变量</a>(keytool为jdk自带工具)。</p>
-<h2 id="生成debug版本SHA1"><a href="#生成debug版本SHA1" class="headerlink" title="生成debug版本SHA1"></a>生成debug版本SHA1</h2><p>1、运行进入控制台</p>
-<p><img src="http://img.blog.csdn.net/20170719152011920?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>2、定位到.android文件夹下，输入cd .android</p>
-<p><img src="http://img.blog.csdn.net/20170719152040972?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>3、输入keytool -list -v -keystore debug.keystore，会得到三种指纹证书，选取SHA1类型的证书（密钥口令是android）</p>
-<p><img src="http://img.blog.csdn.net/20170719152101857?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p><img src="http://img.blog.csdn.net/20170719152125084?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="生成release版本SHA1"><a href="#生成release版本SHA1" class="headerlink" title="生成release版本SHA1"></a>生成release版本SHA1</h2><p>前提：执行操作<a href="">Android签名打包中的（一、Android签名文件生成）</a></p>
-<p>1、打开AS中的Terminal</p>
-<p>2、执行keytool -exportcert -list -v -alias <your-key-name> -keystore <path-to-production-keystore>命令行<br>其中<your-key-name>替换为自己发布版签名文件中key的别名（非必需，如果不知道别名去掉-alias <your-key-name>即可），<path-to-production-keystore>替换为自己发布版签名文件的完整路径，例如我的keystore文件存放在D:\ReleaseApp.jks（Windows操作系统），key别名为androidrelease，在Android Studio中的Terminal中输入：<br>keytool -exportcert -list -v -alias androidrelease -keystore D:\ReleaseApp.jks</path-to-production-keystore></your-key-name></your-key-name></path-to-production-keystore></your-key-name></p>
-<p>3、执行结果，如图</p>
-<p><img src="http://img.blog.csdn.net/20170719152250754?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://bbs.lbsyun.baidu.com/forum.php?mod=viewthread&amp;tid=112007" target="_blank" rel="external">http://bbs.lbsyun.baidu.com/forum.php?mod=viewthread&amp;tid=112007</a></p>
-<p><a href="http://blog.csdn.net/yayun0516/article/details/51591062" target="_blank" rel="external">http://blog.csdn.net/yayun0516/article/details/51591062</a></p>
-
-          
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>使用keytool之前，打开cmd，输入keytool，如果提示：’keytool’ 不是内部或外部命令,也不是可运行的程序，那么，请确保是否<a href="http://jingyan.baidu.com/article/c85b7a6414f2ee003bac95d5.html">正确配置了java环境变量</a>(keytool为jdk自带工具)。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/11/11/debug和release版本之SHA1生成记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
