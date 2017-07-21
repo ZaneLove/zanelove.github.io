@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android," />
+  <meta name="keywords" content="Android,百度地图," />
 
 
 
@@ -104,22 +104,31 @@
 
 
 
-<meta name="description" content="失败之事十有八九，成与败的区别，就在于如何面对这十有八九的失败，被失败打败的，成了失败者，把失败打败的，成了成功者
+<meta name="description" content="人的成就，永远无法超越他的格局
 
-IPC（Inter-Process Communication），含义为进程间通信或者跨进程通信，是指两个进程之间进行数据交换的过程。那么，什么是进程又什么是线程？按照操作系统中的描述，线程是CPU调度的最小单元，同时线程是一种有限的系统资源；而进程一般是指一个执行单元，在PC和">
+登录百度地图开放平台百度地图开放平台">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IPC机制-Android IPC简介">
-<meta property="og:url" content="http://zanelove.github.io/2015/04/18/IPC机制-Android-IPC简介/index.html">
+<meta property="og:title" content="Android之百度地图系列教程一——配置环境">
+<meta property="og:url" content="http://zanelove.github.io/2017/01/21/Android之百度地图系列教程一——配置环境/index.html">
 <meta property="og:site_name" content="Zane'Blog">
-<meta property="og:description" content="失败之事十有八九，成与败的区别，就在于如何面对这十有八九的失败，被失败打败的，成了失败者，把失败打败的，成了成功者
+<meta property="og:description" content="人的成就，永远无法超越他的格局
 
-IPC（Inter-Process Communication），含义为进程间通信或者跨进程通信，是指两个进程之间进行数据交换的过程。那么，什么是进程又什么是线程？按照操作系统中的描述，线程是CPU调度的最小单元，同时线程是一种有限的系统资源；而进程一般是指一个执行单元，在PC和">
-<meta property="og:updated_time" content="2017-07-21T11:52:02.000Z">
+登录百度地图开放平台百度地图开放平台">
+<meta property="og:image" content="http://img.blog.csdn.net/20170719135218023?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170719135313417?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170719135412273?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170719135905193?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170719140021087?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170719140217840?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170719140246839?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170719140702948?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-07-21T12:43:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="IPC机制-Android IPC简介">
-<meta name="twitter:description" content="失败之事十有八九，成与败的区别，就在于如何面对这十有八九的失败，被失败打败的，成了失败者，把失败打败的，成了成功者
+<meta name="twitter:title" content="Android之百度地图系列教程一——配置环境">
+<meta name="twitter:description" content="人的成就，永远无法超越他的格局
 
-IPC（Inter-Process Communication），含义为进程间通信或者跨进程通信，是指两个进程之间进行数据交换的过程。那么，什么是进程又什么是线程？按照操作系统中的描述，线程是CPU调度的最小单元，同时线程是一种有限的系统资源；而进程一般是指一个执行单元，在PC和">
+登录百度地图开放平台百度地图开放平台">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170719135218023?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
 
@@ -147,13 +156,13 @@ IPC（Inter-Process Communication），含义为进程间通信或者跨进程�
 
 
 
-  <link rel="canonical" href="http://zanelove.github.io/2015/04/18/IPC机制-Android-IPC简介/"/>
+  <link rel="canonical" href="http://zanelove.github.io/2017/01/21/Android之百度地图系列教程一——配置环境/"/>
 
 
 
 
 
-  <title> IPC机制-Android IPC简介 | Zane'Blog </title>
+  <title> Android之百度地图系列教程一——配置环境 | Zane'Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -306,7 +315,7 @@ IPC（Inter-Process Communication），含义为进程间通信或者跨进程�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://zanelove.github.io/2015/04/18/IPC机制-Android-IPC简介/">
+  <link itemprop="mainEntityOfPage" href="http://zanelove.github.io/2017/01/21/Android之百度地图系列教程一——配置环境/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Zane">
@@ -330,7 +339,7 @@ IPC（Inter-Process Communication），含义为进程间通信或者跨进程�
             
             
               
-                IPC机制-Android IPC简介
+                Android之百度地图系列教程一——配置环境
               
             
           </h1>
@@ -345,8 +354,8 @@ IPC（Inter-Process Communication），含义为进程间通信或者跨进程�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-04-18T22:23:51+08:00">
-                2015-04-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-21T20:36:43+08:00">
+                2017-01-21
               </time>
             
 
@@ -386,8 +395,8 @@ IPC（Inter-Process Communication），含义为进程间通信或者跨进程�
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2015/04/18/IPC机制-Android-IPC简介/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/18/IPC机制-Android-IPC简介/" itemprop="commentCount"></span>
+                <a href="/2017/01/21/Android之百度地图系列教程一——配置环境/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/21/Android之百度地图系列教程一——配置环境/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -397,7 +406,7 @@ IPC（Inter-Process Communication），含义为进程间通信或者跨进程�
 
           
           
-             <span id="/2015/04/18/IPC机制-Android-IPC简介/" class="leancloud_visitors" data-flag-title="IPC机制-Android IPC简介">
+             <span id="/2017/01/21/Android之百度地图系列教程一——配置环境/" class="leancloud_visitors" data-flag-title="Android之百度地图系列教程一——配置环境">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -425,12 +434,35 @@ IPC（Inter-Process Communication），含义为进程间通信或者跨进程�
 
       
         <blockquote>
-<p>失败之事十有八九，成与败的区别，就在于如何面对这十有八九的失败，被失败打败的，成了失败者，把失败打败的，成了成功者</p>
+<p>人的成就，永远无法超越他的格局</p>
 </blockquote>
-<p>IPC（Inter-Process Communication），含义为进程间通信或者跨进程通信，是指两个进程之间进行数据交换的过程。那么，什么是进程又什么是线程？按照操作系统中的描述，线程是CPU调度的最小单元，同时线程是一种有限的系统资源；而进程一般是指一个执行单元，在PC和移动设备上指一个程序或者一个应用。一个进程可以包含多个线程，因此进程和线程是包含与被包含的关系。当然，最简单的情况下，一个进程中可以只有一个线程，即主线程（Android中称为UI线程），在UI线程中才能操作界面元素。很多时候，一个进程中需要执行大量的耗时的任务，如果这些任务放在主线程中去执行就会造成界面无法响应（ANR，Application Not Responding – 应用无响应）。解决这个问题就需要用到线程，把一些耗时的任务放在线程（除UI线程）中即可。</p>
+<h2 id="登录百度地图开放平台"><a href="#登录百度地图开放平台" class="headerlink" title="登录百度地图开放平台"></a>登录百度地图开放平台</h2><p><a href="http://lbsyun.baidu.com/" target="_blank" rel="external">百度地图开放平台</a></p>
 <a id="more"></a>
-<p>IPC不是Android中所独有的，任何一个操作系统都需要有相应的IPC机制。对于Android来说，它是一种基于Linux内核的移动操作系统，它的进程间通信方式并不能完全继承自Linux，相反，它有自己的进程间通信方式。在Android中最具有特色的进程间通信方式就是Binder了，通过Binder可以轻松地实现进程间通信。除了Binder，Android还支持Socket，通过Socket也可以实现任意两个终端之间的通信，当然同一个设备上的两个进程通过Socket通信自然也是可以的。</p>
-<p>说到IPC的使用场景就必须提到多进程，只有面对多进程这种场景下，才需要考虑进程间通信。如果只有一个进程在运行，又何谈多进程呢？多进程的情况分两种：第一种情况是一个应用因为某些原因自身需要采用多进程模式来实现，比如有些模块由于特殊原因需要运行在单独的进程中，又或者为了加大一个应用可使用的内存所以需要通过多进程来获取多份内存空间。另一种情况是当前应用需要向其他应用获取数据，由于是两个应用，所以必须采用跨进程的方式来获取所需的数据，甚至我们通过系统提供的ContentProvider去查询数据的时候，其实也是一种进程间通信，只不过通信细节被系统屏蔽了，我们无法感知而已。</p>
+<h2 id="登录成功之后，点击API控制台"><a href="#登录成功之后，点击API控制台" class="headerlink" title="登录成功之后，点击API控制台"></a>登录成功之后，点击API控制台</h2><p><img src="http://img.blog.csdn.net/20170719135218023?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="进入API控制台，点击创建应用"><a href="#进入API控制台，点击创建应用" class="headerlink" title="进入API控制台，点击创建应用"></a>进入API控制台，点击创建应用</h2><p><img src="http://img.blog.csdn.net/20170719135313417?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="创建应用"><a href="#创建应用" class="headerlink" title="创建应用"></a>创建应用</h2><p><img src="http://img.blog.csdn.net/20170719135412273?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>1、输入应用名称；</p>
+<p>2、选择应用类型，该篇写的是Android版开发，因此选择Android SDK；</p>
+<p>3、启用服务，根据项目开发需求，选择最合适的服务；</p>
+<p>4、发布版SHA1，分为两种：一种是未发布App之前的debug版本的SHA1，另一种是已发布App的release版本的SHA1；针对两者的SHA1生成，请查看<strong>debug和release版本之SHA1生成记（上线时，一定要替换成release版的SHA1）</strong></p>
+<p>5、包名，请与您项目下的AndroidMenifest.xml中的package一致。</p>
+<h2 id="提交，查看访问应用（AK）"><a href="#提交，查看访问应用（AK）" class="headerlink" title="提交，查看访问应用（AK）"></a>提交，查看访问应用（AK）</h2><p><img src="http://img.blog.csdn.net/20170719135905193?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="在AndroidMenifest-xml配置AK"><a href="#在AndroidMenifest-xml配置AK" class="headerlink" title="在AndroidMenifest.xml配置AK"></a>在AndroidMenifest.xml配置AK</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;meta-data</div><div class="line">    android:name=&quot;com.baidu.lbsapi.API_KEY&quot;</div><div class="line">    android:value=&quot;访问应用（AK）&quot; /&gt;</div></pre></td></tr></table></figure>
+<h2 id="下载百度地图SDK，并集成到项目中"><a href="#下载百度地图SDK，并集成到项目中" class="headerlink" title="下载百度地图SDK，并集成到项目中"></a>下载百度地图SDK，并集成到项目中</h2><p>1、下载：<a href="http://lbsyun.baidu.com/index.php?title=androidsdk/sdkandev-download" target="_blank" rel="external">http://lbsyun.baidu.com/index.php?title=androidsdk/sdkandev-download</a>（根据开发需求，下载相应功能的开发资源）</p>
+<p><img src="http://img.blog.csdn.net/20170719140021087?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>2、集成百度地图SDK到项目</p>
+<p>a) 将下载好的压缩包解压到本地，打开libs目录，如下图所示：</p>
+<p><img src="http://img.blog.csdn.net/20170719140217840?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>b) 将armeabi目录和BaiduLBS_Android.jar，复制到项目工程app/libs目录下</p>
+<p><img src="http://img.blog.csdn.net/20170719140246839?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>PS：BaiduLBS_Android.jar记得Add As Library</p>
+<p>c) 在src/main下创建jniLibs目录，将armeabi目录复制到jniLibs目录下</p>
+<p><img src="http://img.blog.csdn.net/20170719140702948?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>d) 配置app目录下的build.gradle</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">	...</div><div class="line">	sourceSets &#123;</div><div class="line">    main &#123;</div><div class="line">           /*百度JNI*/</div><div class="line">        	jniLibs.srcDirs = [&apos;libs&apos;]</div><div class="line">        &#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>e) 应用混淆，集成地图SDK的应用，在打包混淆的时候，需要注意与地图SDK相关的方法不可被混淆。混淆方法如下：（保证百度类不能被混淆，否则会出现网络不可用等运行时异常）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-keep class com.baidu.** &#123;*;&#125;</div><div class="line">-keep class vi.com.** &#123;*;&#125;    </div><div class="line">-dontwarn com.baidu.**</div></pre></td></tr></table></figure>
+<p>PS：在项目下的proguard-rules.pro中配置，请查看<strong>Android签名打包</strong></p>
 
       
     </div>
@@ -477,6 +509,8 @@ IPC（Inter-Process Communication），含义为进程间通信或者跨进程�
           
             <a href="/tags/Android/" rel="tag"># Android</a>
           
+            <a href="/tags/百度地图/" rel="tag"># 百度地图</a>
+          
         </div>
       
 
@@ -484,8 +518,8 @@ IPC（Inter-Process Communication），含义为进程间通信或者跨进程�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/03/13/IntentFilter的匹配规则/" rel="next" title="IntentFilter的匹配规则">
-                <i class="fa fa-chevron-left"></i> IntentFilter的匹配规则
+              <a href="/2016/12/16/Android多渠道打包/" rel="next" title="Android多渠道打包">
+                <i class="fa fa-chevron-left"></i> Android多渠道打包
               </a>
             
           </div>
@@ -493,10 +527,6 @@ IPC（Inter-Process Communication），含义为进程间通信或者跨进程�
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/05/24/IPC机制-Android中的多进程模式/" rel="prev" title="IPC机制-Android中的多进程模式">
-                IPC机制-Android中的多进程模式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -522,8 +552,8 @@ IPC（Inter-Process Communication），含义为进程间通信或者跨进程�
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/04/18/IPC机制-Android-IPC简介/"
-           data-title="IPC机制-Android IPC简介" data-url="http://zanelove.github.io/2015/04/18/IPC机制-Android-IPC简介/">
+      <div class="ds-thread" data-thread-key="2017/01/21/Android之百度地图系列教程一——配置环境/"
+           data-title="Android之百度地图系列教程一——配置环境" data-url="http://zanelove.github.io/2017/01/21/Android之百度地图系列教程一——配置环境/">
       </div>
     
   </div>
@@ -547,8 +577,17 @@ IPC（Inter-Process Communication），含义为进程间通信或者跨进程�
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -664,6 +703,22 @@ IPC（Inter-Process Communication），含义为进程间通信或者跨进程�
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#登录百度地图开放平台"><span class="nav-number">1.</span> <span class="nav-text">登录百度地图开放平台</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登录成功之后，点击API控制台"><span class="nav-number">2.</span> <span class="nav-text">登录成功之后，点击API控制台</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进入API控制台，点击创建应用"><span class="nav-number">3.</span> <span class="nav-text">进入API控制台，点击创建应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建应用"><span class="nav-number">4.</span> <span class="nav-text">创建应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提交，查看访问应用（AK）"><span class="nav-number">5.</span> <span class="nav-text">提交，查看访问应用（AK）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在AndroidMenifest-xml配置AK"><span class="nav-number">6.</span> <span class="nav-text">在AndroidMenifest.xml配置AK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载百度地图SDK，并集成到项目中"><span class="nav-number">7.</span> <span class="nav-text">下载百度地图SDK，并集成到项目中</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
