@@ -117,7 +117,7 @@
 一、在AndroidManifest.xml里配置PlaceHolder
 1234&amp;lt;!--友盟多渠道打包--&amp;gt;&amp;lt;meta-data    android:name=&amp;quot;UMENG_CHANNEL&amp;quot;    android:value=&amp;quot;$&amp;#123;UMENG_CHANNEL_VALUE&amp;#125;&amp;quot; /">
 <meta property="og:image" content="http://img.blog.csdn.net/20170719151455255?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemFuZWxvdmU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-07-21T12:31:35.000Z">
+<meta property="og:updated_time" content="2017-07-21T12:32:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android多渠道打包">
 <meta name="twitter:description" content="见识负责发现机遇，判断负责抓住机遇
@@ -434,6 +434,7 @@
 </blockquote>
 <p>一、在AndroidManifest.xml里配置PlaceHolder</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!--友盟多渠道打包--&gt;</div><div class="line">&lt;meta-data</div><div class="line">    android:name=&quot;UMENG_CHANNEL&quot;</div><div class="line">    android:value=&quot;$&#123;UMENG_CHANNEL_VALUE&#125;&quot; /&gt;</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>二、在build.gradle设置productFlavors</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    ...</div><div class="line">    defaultConfig &#123;</div><div class="line">        ....</div><div class="line">        // 默认是umeng的渠道</div><div class="line">        manifestPlaceholders = [UMENG_CHANNEL_VALUE: &quot;umeng&quot;]</div><div class="line">    &#125;</div><div class="line">    productFlavors &#123;</div><div class="line">        xiaomi &#123;&#125;</div><div class="line">        _360 &#123;&#125;</div><div class="line">        baidu &#123;&#125;</div><div class="line">        wandoujia &#123;&#125;</div><div class="line">    &#125;</div><div class="line">    productFlavors.all &#123;</div><div class="line">        flavor -&gt; flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>三、在AS中的Terminal中执行如下命令：gradlew assembleRelease</p>
